@@ -1,8 +1,8 @@
 """
 Veritas Baseball Index — Rating Engine
-----------------------------------
-Reads games.json produced by scraper.py,
-runs the Colley Matrix, and writes rankings.json.
+----------------------------------------
+Reads games.json and team_conferences.json,
+runs the Colley Matrix, writes rankings.json.
 
 Usage:
     python rate.py
@@ -12,15 +12,23 @@ import json
 import numpy as np
 from collections import defaultdict, Counter
 from datetime import date
-from conferences import get_conference
+import os
 
 GAMES_FILE  = "games.json"
+CONF_FILE   = "team_conferences.json"
 OUTPUT_FILE = "rankings.json"
 
 HOME_WEIGHT    = 0.9
 AWAY_WEIGHT    = 1.1
 NEUTRAL_WEIGHT = 1.0
 MIN_GAMES      = 10
+
+
+def load_conferences():
+    if os.path.exists(CONF_FILE):
+        with open(CONF_FILE) as f:
+            return json.load(f)
+    return {}
 
 
 def build_ratings(games):
@@ -55,7 +63,7 @@ def build_ratings(games):
             C[i][j] -= count
 
     ratings_vec = np.linalg.solve(C, b)
-    return {team: float(ratings_vec[idx[team]]) for team in teams}, wins, losses
+    return {team: float(ratings_vec[idx[team]]) for team in teams}
 
 
 if __name__ == "__main__":
@@ -64,14 +72,17 @@ if __name__ == "__main__":
 
     print(f"Loaded {len(games)} games...")
 
-    # Build unweighted win/loss counts for display
+    conferences = load_conferences()
+    print(f"Loaded conferences for {len(conferences)} teams")
+
+    # Raw win/loss counts
     raw_wins   = defaultdict(int)
     raw_losses = defaultdict(int)
     for g in games:
         raw_wins[g["winner"]]  += 1
         raw_losses[g["loser"]] += 1
 
-    # Filter out teams with fewer than MIN_GAMES games
+    # Filter teams with fewer than MIN_GAMES
     game_counts = Counter()
     for g in games:
         game_counts[g["winner"]] += 1
@@ -82,15 +93,13 @@ if __name__ == "__main__":
              and game_counts[g["loser"]] >= MIN_GAMES]
 
     remaining = len(set(t for g in games for t in [g["winner"], g["loser"]]))
-    print(f"After filtering (<{MIN_GAMES} games removed): {remaining} teams")
+    print(f"After filtering (<{MIN_GAMES} games): {remaining} teams")
 
-    ratings, _, _ = build_ratings(games)
-
-    # Sort by rating descending
-    ranked = sorted(ratings.items(), key=lambda x: x[1], reverse=True)
+    ratings = build_ratings(games)
+    ranked  = sorted(ratings.items(), key=lambda x: x[1], reverse=True)
 
     output = {
-        "generated": str(date.today()),
+        "generated":   str(date.today()),
         "total_games": len(games),
         "rankings": [
             {
@@ -99,7 +108,7 @@ if __name__ == "__main__":
                 "rating": round(rating, 4),
                 "wins":   raw_wins[team],
                 "losses": raw_losses[team],
-                "conf":   get_conference(team),
+                "conf":   conferences.get(team, "Other"),
             }
             for i, (team, rating) in enumerate(ranked)
         ]
@@ -111,4 +120,4 @@ if __name__ == "__main__":
     print(f"Rankings written to {OUTPUT_FILE}")
     print(f"\nTop 10:")
     for entry in output["rankings"][:10]:
-        print(f"  {entry['rank']:>3}. {entry['team']:<30} {entry['wins']}-{entry['losses']}  {entry['conf']:<10}  {entry['rating']:.4f}")
+        print(f"  {entry['rank']:>3}. {entry['team']:<30} {entry['wins']}-{entry['losses']}  {entry['conf']:<15}  {entry['rating']:.4f}")

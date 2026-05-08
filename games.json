@@ -40414,5 +40414,287 @@
     "loser": "San Francisco",
     "location": "home",
     "date": "2026-05-06"
+  },
+  {
+    "winner": "SFA",
+    "loser": "UIW",
+    "location": "away",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "Florida A&M",
+    "loser": "Alabama A&M",
+    "location": "away",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "McNeese",
+    "loser": "Northwestern St.",
+    "location": "home",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "Southeastern La.",
+    "loser": "Nicholls",
+    "location": "home",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "Lipscomb",
+    "loser": "Bellarmine",
+    "location": "home",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "Texas Tech",
+    "loser": "BYU",
+    "location": "home",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "Miami (FL)",
+    "loser": "Louisville",
+    "location": "home",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "Lamar University",
+    "loser": "Houston Christian",
+    "location": "away",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "New Orleans",
+    "loser": "A&M-Corpus Christi",
+    "location": "home",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "Mississippi St.",
+    "loser": "Auburn",
+    "location": "home",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "Southern California",
+    "loser": "Nevada",
+    "location": "home",
+    "date": "2026-05-07"
+  },
+  {
+    "winner": "Le Moyne",
+    "loser": "UMES",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Hofstra",
+    "loser": "Monmouth",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "LIU",
+    "loser": "Stonehill",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Quinnipiac",
+    "loser": "Rider",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "VCU",
+    "loser": "Saint Joseph's",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Siena",
+    "loser": "Iona",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "New Haven",
+    "loser": "Delaware St.",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Youngstown St.",
+    "loser": "Milwaukee",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Georgia St.",
+    "loser": "Ga. Southern",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Missouri St.",
+    "loser": "New Mexico St.",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "The Citadel",
+    "loser": "Samford",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Yale",
+    "loser": "Dartmouth",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "SIUE",
+    "loser": "Eastern Ill.",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "South Dakota St.",
+    "loser": "St. Thomas (MN)",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Washington",
+    "loser": "Penn St.",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Northeastern",
+    "loser": "Stony Brook",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Saint Louis",
+    "loser": "Fordham",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Canisius",
+    "loser": "Sacred Heart",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Delaware St.",
+    "loser": "New Haven",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Dayton",
+    "loser": "George Mason",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Norfolk St.",
+    "loser": "FDU",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "UMBC",
+    "loser": "Bryant",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Richmond",
+    "loser": "George Washington",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "St. John's (NY)",
+    "loser": "Villanova",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Wagner",
+    "loser": "Coppin St.",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Binghamton",
+    "loser": "UAlbany",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Miami (OH)",
+    "loser": "Massachusetts",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "La Salle",
+    "loser": "St. Bonaventure",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Central Conn. St.",
+    "loser": "Mercyhurst",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Fairfield",
+    "loser": "Marist",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Central Mich.",
+    "loser": "Akron",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Monmouth",
+    "loser": "Hofstra",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Rider",
+    "loser": "Quinnipiac",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Lindenwood",
+    "loser": "Tennessee Tech",
+    "location": "home",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "UMass Lowell",
+    "loser": "Maine",
+    "location": "away",
+    "date": "2026-05-08"
+  },
+  {
+    "winner": "Lipscomb",
+    "loser": "Bellarmine",
+    "location": "home",
+    "date": "2026-05-08"
   }
 ]
