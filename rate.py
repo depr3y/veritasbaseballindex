@@ -74,6 +74,14 @@ if __name__ == "__main__":
         raw_wins[g["winner"]]  += 1
         raw_losses[g["loser"]] += 1
 
+# Filter out teams with fewer than 10 games
+from collections import Counter
+game_counts = Counter()
+for g in games:
+    game_counts[g["winner"]] += 1
+    game_counts[g["loser"]] += 1
+games = [g for g in games if game_counts[g["winner"]] >= 10 and game_counts[g["loser"]] >= 10]
+print(f"Games after filtering small samples: {len(games)}")
     ratings, _, _ = build_ratings(games)
 
     # Sort by rating descending
