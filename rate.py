@@ -5,12 +5,12 @@ Reads games.json produced by scraper.py,
 runs the Colley Matrix, and writes rankings.json.
 
 Usage:
-    python3 rate.py
+    python rate.py
 """
 
 import json
 import numpy as np
-from collections import defaultdict
+from collections import defaultdict, Counter
 from datetime import date
 
 GAMES_FILE  = "games.json"
@@ -19,6 +19,7 @@ OUTPUT_FILE = "rankings.json"
 HOME_WEIGHT    = 0.9
 AWAY_WEIGHT    = 1.1
 NEUTRAL_WEIGHT = 1.0
+MIN_GAMES      = 10
 
 
 def build_ratings(games):
@@ -31,7 +32,7 @@ def build_ratings(games):
     matchups = defaultdict(float)
 
     for g in games:
-        w, l = g["winner"], g["loser"]
+        w, l  = g["winner"], g["loser"]
         loc   = g.get("location", "neutral")
         weight = {"home": HOME_WEIGHT, "away": AWAY_WEIGHT, "neutral": NEUTRAL_WEIGHT}.get(loc, 1.0)
 
@@ -56,11 +57,6 @@ def build_ratings(games):
     return {team: float(ratings_vec[idx[team]]) for team in teams}, wins, losses
 
 
-def compute_record(wins, losses, team):
-    """Return integer win/loss counts (unweighted) from raw games list."""
-    return wins[team], losses[team]
-
-
 if __name__ == "__main__":
     with open(GAMES_FILE) as f:
         games = json.load(f)
@@ -68,20 +64,25 @@ if __name__ == "__main__":
     print(f"Loaded {len(games)} games...")
 
     # Build unweighted win/loss counts for display
-    raw_wins    = defaultdict(int)
-    raw_losses  = defaultdict(int)
+    raw_wins  = defaultdict(int)
+    raw_losses = defaultdict(int)
     for g in games:
         raw_wins[g["winner"]]  += 1
         raw_losses[g["loser"]] += 1
 
-# Filter out teams with fewer than 10 games
-from collections import Counter
-game_counts = Counter()
-for g in games:
-    game_counts[g["winner"]] += 1
-    game_counts[g["loser"]] += 1
-games = [g for g in games if game_counts[g["winner"]] >= 10 and game_counts[g["loser"]] >= 10]
-print(f"Games after filtering small samples: {len(games)}")
+    # Filter out teams with fewer than MIN_GAMES games
+    game_counts = Counter()
+    for g in games:
+        game_counts[g["winner"]] += 1
+        game_counts[g["loser"]]  += 1
+
+    games = [g for g in games
+             if game_counts[g["winner"]] >= MIN_GAMES
+             and game_counts[g["loser"]] >= MIN_GAMES]
+
+    remaining = len(set(t for g in games for t in [g["winner"], g["loser"]]))
+    print(f"After filtering (<{MIN_GAMES} games removed): {remaining} teams")
+
     ratings, _, _ = build_ratings(games)
 
     # Sort by rating descending
