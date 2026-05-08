@@ -23,6 +23,28 @@ AWAY_WEIGHT    = 1.1
 NEUTRAL_WEIGHT = 1.0
 MIN_GAMES      = 10
 
+D1_CONFERENCES = {
+    "acc", "america-east", "american", "asun", "atlantic-10",
+    "big-12", "big-east", "big-south", "big-ten", "big-west",
+    "caa", "cusa", "di-independent", "horizon", "ivy-league",
+    "maac", "mac", "mvc", "mountain-west", "nec", "ovc",
+    "patriot", "sec", "socon", "southland", "summit-league",
+    "sun-belt", "swac", "wac", "wcc"
+}
+
+# Pretty display names for the website
+CONF_DISPLAY = {
+    "acc": "ACC", "america-east": "America East", "american": "American",
+    "asun": "ASUN", "atlantic-10": "A-10", "big-12": "Big 12",
+    "big-east": "Big East", "big-south": "Big South", "big-ten": "Big Ten",
+    "big-west": "Big West", "caa": "CAA", "cusa": "CUSA",
+    "di-independent": "Ind", "horizon": "Horizon", "ivy-league": "Ivy",
+    "maac": "MAAC", "mac": "MAC", "mvc": "MVC", "mountain-west": "MWC",
+    "nec": "NEC", "ovc": "OVC", "patriot": "Patriot", "sec": "SEC",
+    "socon": "SoCon", "southland": "Southland", "summit-league": "Summit",
+    "sun-belt": "Sun Belt", "swac": "SWAC", "wac": "WAC", "wcc": "WCC"
+}
+
 
 def load_conferences():
     if os.path.exists(CONF_FILE):
@@ -75,6 +97,13 @@ if __name__ == "__main__":
     conferences = load_conferences()
     print(f"Loaded conferences for {len(conferences)} teams")
 
+    # Filter out non-D1 teams
+    before = len(games)
+    games = [g for g in games
+             if conferences.get(g["winner"], "") in D1_CONFERENCES
+             and conferences.get(g["loser"], "") in D1_CONFERENCES]
+    print(f"After D1 filter: {len(games)} games (removed {before - len(games)})")
+
     # Raw win/loss counts
     raw_wins   = defaultdict(int)
     raw_losses = defaultdict(int)
@@ -93,7 +122,7 @@ if __name__ == "__main__":
              and game_counts[g["loser"]] >= MIN_GAMES]
 
     remaining = len(set(t for g in games for t in [g["winner"], g["loser"]]))
-    print(f"After filtering (<{MIN_GAMES} games): {remaining} teams")
+    print(f"After min games filter: {remaining} teams")
 
     ratings = build_ratings(games)
     ranked  = sorted(ratings.items(), key=lambda x: x[1], reverse=True)
@@ -108,7 +137,7 @@ if __name__ == "__main__":
                 "rating": round(rating, 4),
                 "wins":   raw_wins[team],
                 "losses": raw_losses[team],
-                "conf":   conferences.get(team, "Other"),
+                "conf":   CONF_DISPLAY.get(conferences.get(team, ""), "Other"),
             }
             for i, (team, rating) in enumerate(ranked)
         ]

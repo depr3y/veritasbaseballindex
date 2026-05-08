@@ -8,7 +8,7 @@
       "rating": 1.004,
       "wins": 43,
       "losses": 4,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 2,
@@ -16,7 +16,7 @@
       "rating": 0.9499,
       "wins": 36,
       "losses": 8,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 3,
@@ -24,7 +24,7 @@
       "rating": 0.9403,
       "wins": 35,
       "losses": 10,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 4,
@@ -32,7 +32,7 @@
       "rating": 0.9019,
       "wins": 33,
       "losses": 9,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 5,
@@ -40,7 +40,7 @@
       "rating": 0.8936,
       "wins": 36,
       "losses": 12,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 6,
@@ -48,7 +48,7 @@
       "rating": 0.8902,
       "wins": 28,
       "losses": 14,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 7,
@@ -56,7 +56,7 @@
       "rating": 0.8842,
       "wins": 35,
       "losses": 11,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 8,
@@ -64,7 +64,7 @@
       "rating": 0.8824,
       "wins": 34,
       "losses": 9,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 9,
@@ -72,7 +72,7 @@
       "rating": 0.8686,
       "wins": 38,
       "losses": 12,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 10,
@@ -80,7 +80,7 @@
       "rating": 0.8683,
       "wins": 37,
       "losses": 10,
-      "conf": "di-independent"
+      "conf": "Ind"
     },
     {
       "rank": 11,
@@ -88,7 +88,7 @@
       "rating": 0.8623,
       "wins": 30,
       "losses": 15,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 12,
@@ -96,7 +96,7 @@
       "rating": 0.8597,
       "wins": 36,
       "losses": 11,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 13,
@@ -104,7 +104,7 @@
       "rating": 0.8525,
       "wins": 33,
       "losses": 13,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 14,
@@ -112,7 +112,7 @@
       "rating": 0.8399,
       "wins": 31,
       "losses": 16,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 15,
@@ -120,7 +120,7 @@
       "rating": 0.8367,
       "wins": 31,
       "losses": 14,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 16,
@@ -128,7 +128,7 @@
       "rating": 0.8255,
       "wins": 37,
       "losses": 9,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 17,
@@ -136,7 +136,7 @@
       "rating": 0.8237,
       "wins": 30,
       "losses": 17,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 18,
@@ -144,7 +144,7 @@
       "rating": 0.8189,
       "wins": 31,
       "losses": 14,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 19,
@@ -152,7 +152,7 @@
       "rating": 0.8138,
       "wins": 33,
       "losses": 12,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 20,
@@ -160,7 +160,7 @@
       "rating": 0.8134,
       "wins": 30,
       "losses": 12,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 21,
@@ -168,7 +168,7 @@
       "rating": 0.7871,
       "wins": 31,
       "losses": 16,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 22,
@@ -176,7 +176,7 @@
       "rating": 0.784,
       "wins": 31,
       "losses": 17,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 23,
@@ -184,7 +184,7 @@
       "rating": 0.7821,
       "wins": 32,
       "losses": 14,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 24,
@@ -192,7 +192,7 @@
       "rating": 0.7811,
       "wins": 28,
       "losses": 16,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 25,
@@ -200,7 +200,7 @@
       "rating": 0.7769,
       "wins": 31,
       "losses": 15,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 26,
@@ -208,7 +208,7 @@
       "rating": 0.7756,
       "wins": 33,
       "losses": 14,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 27,
@@ -216,7 +216,7 @@
       "rating": 0.7755,
       "wins": 30,
       "losses": 17,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 28,
@@ -224,7 +224,7 @@
       "rating": 0.77,
       "wins": 31,
       "losses": 16,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 29,
@@ -232,7 +232,7 @@
       "rating": 0.7684,
       "wins": 29,
       "losses": 16,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 30,
@@ -240,7 +240,7 @@
       "rating": 0.7657,
       "wins": 32,
       "losses": 15,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 31,
@@ -248,7 +248,7 @@
       "rating": 0.7606,
       "wins": 33,
       "losses": 16,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 32,
@@ -256,7 +256,7 @@
       "rating": 0.754,
       "wins": 30,
       "losses": 15,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 33,
@@ -264,7 +264,7 @@
       "rating": 0.7448,
       "wins": 29,
       "losses": 17,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 34,
@@ -272,7 +272,7 @@
       "rating": 0.7425,
       "wins": 27,
       "losses": 16,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 35,
@@ -280,7 +280,7 @@
       "rating": 0.739,
       "wins": 37,
       "losses": 10,
-      "conf": "wac"
+      "conf": "WAC"
     },
     {
       "rank": 36,
@@ -288,15 +288,15 @@
       "rating": 0.7356,
       "wins": 31,
       "losses": 15,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 37,
       "team": "Purdue",
       "rating": 0.7353,
-      "wins": 31,
+      "wins": 30,
       "losses": 14,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 38,
@@ -304,7 +304,7 @@
       "rating": 0.7337,
       "wins": 25,
       "losses": 16,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 39,
@@ -312,7 +312,7 @@
       "rating": 0.7257,
       "wins": 26,
       "losses": 17,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 40,
@@ -320,7 +320,7 @@
       "rating": 0.7165,
       "wins": 29,
       "losses": 17,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 41,
@@ -328,7 +328,7 @@
       "rating": 0.7143,
       "wins": 35,
       "losses": 13,
-      "conf": "socon"
+      "conf": "SoCon"
     },
     {
       "rank": 42,
@@ -336,7 +336,7 @@
       "rating": 0.7122,
       "wins": 29,
       "losses": 17,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 43,
@@ -344,7 +344,7 @@
       "rating": 0.7045,
       "wins": 31,
       "losses": 13,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 44,
@@ -352,7 +352,7 @@
       "rating": 0.7022,
       "wins": 33,
       "losses": 13,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 45,
@@ -360,7 +360,7 @@
       "rating": 0.7014,
       "wins": 28,
       "losses": 18,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 46,
@@ -368,7 +368,7 @@
       "rating": 0.6991,
       "wins": 28,
       "losses": 18,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 47,
@@ -376,7 +376,7 @@
       "rating": 0.6976,
       "wins": 27,
       "losses": 18,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 48,
@@ -384,7 +384,7 @@
       "rating": 0.6945,
       "wins": 29,
       "losses": 16,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 49,
@@ -392,7 +392,7 @@
       "rating": 0.6941,
       "wins": 24,
       "losses": 21,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 50,
@@ -400,7 +400,7 @@
       "rating": 0.6917,
       "wins": 26,
       "losses": 20,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 51,
@@ -408,7 +408,7 @@
       "rating": 0.6903,
       "wins": 25,
       "losses": 17,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 52,
@@ -416,7 +416,7 @@
       "rating": 0.6884,
       "wins": 26,
       "losses": 17,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 53,
@@ -424,7 +424,7 @@
       "rating": 0.6871,
       "wins": 28,
       "losses": 20,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 54,
@@ -432,7 +432,7 @@
       "rating": 0.6864,
       "wins": 26,
       "losses": 17,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 55,
@@ -440,15 +440,15 @@
       "rating": 0.6856,
       "wins": 27,
       "losses": 20,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 56,
       "team": "Kent St.",
       "rating": 0.6836,
-      "wins": 32,
+      "wins": 31,
       "losses": 11,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 57,
@@ -456,7 +456,7 @@
       "rating": 0.6836,
       "wins": 27,
       "losses": 21,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 58,
@@ -464,15 +464,15 @@
       "rating": 0.6761,
       "wins": 28,
       "losses": 18,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 59,
       "team": "Iowa",
       "rating": 0.6716,
-      "wins": 29,
+      "wins": 26,
       "losses": 17,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 60,
@@ -480,7 +480,7 @@
       "rating": 0.6696,
       "wins": 30,
       "losses": 17,
-      "conf": "socon"
+      "conf": "SoCon"
     },
     {
       "rank": 61,
@@ -488,7 +488,7 @@
       "rating": 0.6685,
       "wins": 27,
       "losses": 18,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 62,
@@ -496,7 +496,7 @@
       "rating": 0.6674,
       "wins": 25,
       "losses": 22,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 63,
@@ -504,7 +504,7 @@
       "rating": 0.6667,
       "wins": 24,
       "losses": 18,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 64,
@@ -512,7 +512,7 @@
       "rating": 0.6585,
       "wins": 29,
       "losses": 16,
-      "conf": "wac"
+      "conf": "WAC"
     },
     {
       "rank": 65,
@@ -520,7 +520,7 @@
       "rating": 0.6577,
       "wins": 31,
       "losses": 15,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 66,
@@ -528,7 +528,7 @@
       "rating": 0.6541,
       "wins": 23,
       "losses": 18,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 67,
@@ -536,7 +536,7 @@
       "rating": 0.6532,
       "wins": 28,
       "losses": 17,
-      "conf": "big-south"
+      "conf": "Big South"
     },
     {
       "rank": 68,
@@ -544,7 +544,7 @@
       "rating": 0.6518,
       "wins": 23,
       "losses": 22,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 69,
@@ -552,7 +552,7 @@
       "rating": 0.6513,
       "wins": 25,
       "losses": 17,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 70,
@@ -560,7 +560,7 @@
       "rating": 0.6447,
       "wins": 23,
       "losses": 22,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 71,
@@ -568,7 +568,7 @@
       "rating": 0.6424,
       "wins": 27,
       "losses": 21,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 72,
@@ -576,7 +576,7 @@
       "rating": 0.6362,
       "wins": 27,
       "losses": 15,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 73,
@@ -584,7 +584,7 @@
       "rating": 0.6342,
       "wins": 26,
       "losses": 21,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 74,
@@ -592,15 +592,15 @@
       "rating": 0.6338,
       "wins": 26,
       "losses": 19,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 75,
       "team": "Southeastern La.",
       "rating": 0.6335,
-      "wins": 29,
+      "wins": 28,
       "losses": 18,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 76,
@@ -608,7 +608,7 @@
       "rating": 0.6311,
       "wins": 25,
       "losses": 20,
-      "conf": "socon"
+      "conf": "SoCon"
     },
     {
       "rank": 77,
@@ -616,7 +616,7 @@
       "rating": 0.6302,
       "wins": 23,
       "losses": 23,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 78,
@@ -624,7 +624,7 @@
       "rating": 0.6254,
       "wins": 26,
       "losses": 20,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 79,
@@ -632,7 +632,7 @@
       "rating": 0.6243,
       "wins": 23,
       "losses": 23,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 80,
@@ -640,15 +640,15 @@
       "rating": 0.6215,
       "wins": 26,
       "losses": 23,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 81,
       "team": "Saint Joseph's",
       "rating": 0.6181,
       "wins": 30,
-      "losses": 15,
-      "conf": "atlantic-10"
+      "losses": 14,
+      "conf": "A-10"
     },
     {
       "rank": 82,
@@ -656,7 +656,7 @@
       "rating": 0.6156,
       "wins": 29,
       "losses": 19,
-      "conf": "mountain-west"
+      "conf": "MWC"
     },
     {
       "rank": 83,
@@ -664,7 +664,7 @@
       "rating": 0.61,
       "wins": 25,
       "losses": 19,
-      "conf": "big-east"
+      "conf": "Big East"
     },
     {
       "rank": 84,
@@ -672,7 +672,7 @@
       "rating": 0.608,
       "wins": 29,
       "losses": 16,
-      "conf": "socon"
+      "conf": "SoCon"
     },
     {
       "rank": 85,
@@ -680,15 +680,15 @@
       "rating": 0.6076,
       "wins": 27,
       "losses": 13,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 86,
       "team": "Illinois",
       "rating": 0.6046,
-      "wins": 24,
+      "wins": 23,
       "losses": 22,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 87,
@@ -696,7 +696,7 @@
       "rating": 0.603,
       "wins": 22,
       "losses": 21,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 88,
@@ -704,7 +704,7 @@
       "rating": 0.6011,
       "wins": 25,
       "losses": 18,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 89,
@@ -712,7 +712,7 @@
       "rating": 0.6009,
       "wins": 23,
       "losses": 20,
-      "conf": "socon"
+      "conf": "SoCon"
     },
     {
       "rank": 90,
@@ -720,7 +720,7 @@
       "rating": 0.6,
       "wins": 24,
       "losses": 22,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 91,
@@ -728,7 +728,7 @@
       "rating": 0.5984,
       "wins": 22,
       "losses": 22,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 92,
@@ -736,7 +736,7 @@
       "rating": 0.5965,
       "wins": 28,
       "losses": 17,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 93,
@@ -744,7 +744,7 @@
       "rating": 0.5959,
       "wins": 27,
       "losses": 21,
-      "conf": "big-east"
+      "conf": "Big East"
     },
     {
       "rank": 94,
@@ -752,7 +752,7 @@
       "rating": 0.5939,
       "wins": 28,
       "losses": 17,
-      "conf": "summit-league"
+      "conf": "Summit"
     },
     {
       "rank": 95,
@@ -760,7 +760,7 @@
       "rating": 0.5936,
       "wins": 25,
       "losses": 17,
-      "conf": "socon"
+      "conf": "SoCon"
     },
     {
       "rank": 96,
@@ -768,7 +768,7 @@
       "rating": 0.5935,
       "wins": 20,
       "losses": 23,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 97,
@@ -776,7 +776,7 @@
       "rating": 0.5922,
       "wins": 28,
       "losses": 18,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 98,
@@ -784,7 +784,7 @@
       "rating": 0.5899,
       "wins": 21,
       "losses": 21,
-      "conf": "acc"
+      "conf": "ACC"
     },
     {
       "rank": 99,
@@ -792,7 +792,7 @@
       "rating": 0.5898,
       "wins": 29,
       "losses": 17,
-      "conf": "big-south"
+      "conf": "Big South"
     },
     {
       "rank": 100,
@@ -800,7 +800,7 @@
       "rating": 0.58,
       "wins": 25,
       "losses": 22,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 101,
@@ -808,15 +808,15 @@
       "rating": 0.5798,
       "wins": 26,
       "losses": 20,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 102,
       "team": "Hawaii",
       "rating": 0.5782,
-      "wins": 23,
+      "wins": 20,
       "losses": 18,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 103,
@@ -824,7 +824,7 @@
       "rating": 0.5776,
       "wins": 22,
       "losses": 24,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 104,
@@ -832,7 +832,7 @@
       "rating": 0.5749,
       "wins": 20,
       "losses": 22,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 105,
@@ -840,7 +840,7 @@
       "rating": 0.5739,
       "wins": 24,
       "losses": 20,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 106,
@@ -848,7 +848,7 @@
       "rating": 0.5736,
       "wins": 29,
       "losses": 17,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 107,
@@ -856,7 +856,7 @@
       "rating": 0.5718,
       "wins": 26,
       "losses": 20,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 108,
@@ -864,7 +864,7 @@
       "rating": 0.5716,
       "wins": 25,
       "losses": 20,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 109,
@@ -872,7 +872,7 @@
       "rating": 0.5713,
       "wins": 24,
       "losses": 22,
-      "conf": "mountain-west"
+      "conf": "MWC"
     },
     {
       "rank": 110,
@@ -880,7 +880,7 @@
       "rating": 0.5676,
       "wins": 24,
       "losses": 22,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 111,
@@ -888,7 +888,7 @@
       "rating": 0.5661,
       "wins": 22,
       "losses": 26,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 112,
@@ -896,7 +896,7 @@
       "rating": 0.5659,
       "wins": 19,
       "losses": 26,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 113,
@@ -904,7 +904,7 @@
       "rating": 0.5648,
       "wins": 20,
       "losses": 23,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 114,
@@ -912,7 +912,7 @@
       "rating": 0.5641,
       "wins": 24,
       "losses": 23,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 115,
@@ -920,7 +920,7 @@
       "rating": 0.5601,
       "wins": 26,
       "losses": 21,
-      "conf": "big-east"
+      "conf": "Big East"
     },
     {
       "rank": 116,
@@ -928,7 +928,7 @@
       "rating": 0.5591,
       "wins": 22,
       "losses": 18,
-      "conf": "horizon"
+      "conf": "Horizon"
     },
     {
       "rank": 117,
@@ -936,7 +936,7 @@
       "rating": 0.5582,
       "wins": 20,
       "losses": 24,
-      "conf": "sec"
+      "conf": "SEC"
     },
     {
       "rank": 118,
@@ -944,7 +944,7 @@
       "rating": 0.5552,
       "wins": 21,
       "losses": 27,
-      "conf": "big-east"
+      "conf": "Big East"
     },
     {
       "rank": 119,
@@ -952,15 +952,15 @@
       "rating": 0.5522,
       "wins": 21,
       "losses": 25,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 120,
       "team": "Utah Tech",
       "rating": 0.5494,
-      "wins": 26,
-      "losses": 18,
-      "conf": "wac"
+      "wins": 24,
+      "losses": 17,
+      "conf": "WAC"
     },
     {
       "rank": 121,
@@ -968,7 +968,7 @@
       "rating": 0.5471,
       "wins": 24,
       "losses": 25,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 122,
@@ -976,7 +976,7 @@
       "rating": 0.5468,
       "wins": 24,
       "losses": 22,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 123,
@@ -984,7 +984,7 @@
       "rating": 0.5455,
       "wins": 23,
       "losses": 24,
-      "conf": "big-south"
+      "conf": "Big South"
     },
     {
       "rank": 124,
@@ -992,7 +992,7 @@
       "rating": 0.5443,
       "wins": 24,
       "losses": 23,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 125,
@@ -1000,7 +1000,7 @@
       "rating": 0.544,
       "wins": 19,
       "losses": 25,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 126,
@@ -1008,7 +1008,7 @@
       "rating": 0.5425,
       "wins": 20,
       "losses": 25,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 127,
@@ -1016,7 +1016,7 @@
       "rating": 0.5422,
       "wins": 21,
       "losses": 25,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 128,
@@ -1024,7 +1024,7 @@
       "rating": 0.54,
       "wins": 27,
       "losses": 21,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 129,
@@ -1032,7 +1032,7 @@
       "rating": 0.5399,
       "wins": 18,
       "losses": 27,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 130,
@@ -1040,15 +1040,15 @@
       "rating": 0.5397,
       "wins": 26,
       "losses": 20,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 131,
       "team": "Wichita St.",
       "rating": 0.5388,
-      "wins": 22,
+      "wins": 21,
       "losses": 22,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 132,
@@ -1056,7 +1056,7 @@
       "rating": 0.5372,
       "wins": 23,
       "losses": 23,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 133,
@@ -1064,7 +1064,7 @@
       "rating": 0.5367,
       "wins": 24,
       "losses": 21,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 134,
@@ -1072,7 +1072,7 @@
       "rating": 0.5366,
       "wins": 23,
       "losses": 21,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 135,
@@ -1080,7 +1080,7 @@
       "rating": 0.5334,
       "wins": 19,
       "losses": 27,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 136,
@@ -1088,7 +1088,7 @@
       "rating": 0.5333,
       "wins": 27,
       "losses": 17,
-      "conf": "mvc"
+      "conf": "MVC"
     },
     {
       "rank": 137,
@@ -1096,15 +1096,15 @@
       "rating": 0.5331,
       "wins": 21,
       "losses": 24,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 138,
       "team": "Lindenwood",
       "rating": 0.5326,
-      "wins": 26,
+      "wins": 25,
       "losses": 20,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 139,
@@ -1112,7 +1112,7 @@
       "rating": 0.5306,
       "wins": 24,
       "losses": 23,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 140,
@@ -1120,7 +1120,7 @@
       "rating": 0.5296,
       "wins": 24,
       "losses": 22,
-      "conf": "mvc"
+      "conf": "MVC"
     },
     {
       "rank": 141,
@@ -1128,7 +1128,7 @@
       "rating": 0.5239,
       "wins": 25,
       "losses": 20,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 142,
@@ -1136,7 +1136,7 @@
       "rating": 0.5228,
       "wins": 17,
       "losses": 28,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 143,
@@ -1144,7 +1144,7 @@
       "rating": 0.5224,
       "wins": 22,
       "losses": 27,
-      "conf": "american"
+      "conf": "American"
     },
     {
       "rank": 144,
@@ -1152,15 +1152,15 @@
       "rating": 0.5223,
       "wins": 27,
       "losses": 20,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 145,
       "team": "Washington",
       "rating": 0.5194,
-      "wins": 22,
+      "wins": 21,
       "losses": 26,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 146,
@@ -1168,7 +1168,7 @@
       "rating": 0.5183,
       "wins": 22,
       "losses": 26,
-      "conf": "wac"
+      "conf": "WAC"
     },
     {
       "rank": 147,
@@ -1176,7 +1176,7 @@
       "rating": 0.5178,
       "wins": 23,
       "losses": 23,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 148,
@@ -1184,7 +1184,7 @@
       "rating": 0.5167,
       "wins": 24,
       "losses": 19,
-      "conf": "big-south"
+      "conf": "Big South"
     },
     {
       "rank": 149,
@@ -1192,23 +1192,23 @@
       "rating": 0.5128,
       "wins": 24,
       "losses": 15,
-      "conf": "america-east"
+      "conf": "America East"
     },
     {
       "rank": 150,
       "team": "McNeese",
       "rating": 0.5102,
-      "wins": 25,
+      "wins": 23,
       "losses": 23,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 151,
       "team": "Nevada",
       "rating": 0.5068,
-      "wins": 22,
+      "wins": 20,
       "losses": 21,
-      "conf": "mountain-west"
+      "conf": "MWC"
     },
     {
       "rank": 152,
@@ -1216,7 +1216,7 @@
       "rating": 0.5027,
       "wins": 21,
       "losses": 24,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 153,
@@ -1224,7 +1224,7 @@
       "rating": 0.5012,
       "wins": 22,
       "losses": 19,
-      "conf": "big-south"
+      "conf": "Big South"
     },
     {
       "rank": 154,
@@ -1232,7 +1232,7 @@
       "rating": 0.501,
       "wins": 22,
       "losses": 25,
-      "conf": "wac"
+      "conf": "WAC"
     },
     {
       "rank": 155,
@@ -1240,7 +1240,7 @@
       "rating": 0.4984,
       "wins": 25,
       "losses": 21,
-      "conf": "mountain-west"
+      "conf": "MWC"
     },
     {
       "rank": 156,
@@ -1248,7 +1248,7 @@
       "rating": 0.4984,
       "wins": 21,
       "losses": 20,
-      "conf": "big-south"
+      "conf": "Big South"
     },
     {
       "rank": 157,
@@ -1256,15 +1256,15 @@
       "rating": 0.4976,
       "wins": 25,
       "losses": 18,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 158,
       "team": "Nicholls",
       "rating": 0.4967,
-      "wins": 22,
+      "wins": 19,
       "losses": 22,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 159,
@@ -1272,7 +1272,7 @@
       "rating": 0.493,
       "wins": 17,
       "losses": 29,
-      "conf": "big-12"
+      "conf": "Big 12"
     },
     {
       "rank": 160,
@@ -1280,7 +1280,7 @@
       "rating": 0.4883,
       "wins": 20,
       "losses": 25,
-      "conf": "socon"
+      "conf": "SoCon"
     },
     {
       "rank": 161,
@@ -1288,7 +1288,7 @@
       "rating": 0.4858,
       "wins": 24,
       "losses": 15,
-      "conf": "patriot"
+      "conf": "Patriot"
     },
     {
       "rank": 162,
@@ -1296,7 +1296,7 @@
       "rating": 0.4853,
       "wins": 21,
       "losses": 22,
-      "conf": "mountain-west"
+      "conf": "MWC"
     },
     {
       "rank": 163,
@@ -1304,7 +1304,7 @@
       "rating": 0.4786,
       "wins": 22,
       "losses": 20,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 164,
@@ -1312,7 +1312,7 @@
       "rating": 0.4774,
       "wins": 26,
       "losses": 19,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 165,
@@ -1320,15 +1320,15 @@
       "rating": 0.4766,
       "wins": 25,
       "losses": 16,
-      "conf": "swac"
+      "conf": "SWAC"
     },
     {
       "rank": 166,
       "team": "New Mexico",
       "rating": 0.4748,
-      "wins": 21,
+      "wins": 20,
       "losses": 19,
-      "conf": "mountain-west"
+      "conf": "MWC"
     },
     {
       "rank": 167,
@@ -1336,7 +1336,7 @@
       "rating": 0.4728,
       "wins": 16,
       "losses": 26,
-      "conf": "wac"
+      "conf": "WAC"
     },
     {
       "rank": 168,
@@ -1344,7 +1344,7 @@
       "rating": 0.4697,
       "wins": 19,
       "losses": 28,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 169,
@@ -1352,15 +1352,15 @@
       "rating": 0.4678,
       "wins": 20,
       "losses": 24,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 170,
       "team": "SFA",
       "rating": 0.4674,
-      "wins": 24,
+      "wins": 23,
       "losses": 24,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 171,
@@ -1368,7 +1368,7 @@
       "rating": 0.4674,
       "wins": 20,
       "losses": 27,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 172,
@@ -1376,7 +1376,7 @@
       "rating": 0.4666,
       "wins": 25,
       "losses": 17,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 173,
@@ -1384,7 +1384,7 @@
       "rating": 0.4655,
       "wins": 20,
       "losses": 24,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 174,
@@ -1392,7 +1392,7 @@
       "rating": 0.4632,
       "wins": 22,
       "losses": 13,
-      "conf": "ivy-league"
+      "conf": "Ivy"
     },
     {
       "rank": 175,
@@ -1400,7 +1400,7 @@
       "rating": 0.4609,
       "wins": 19,
       "losses": 26,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 176,
@@ -1408,7 +1408,7 @@
       "rating": 0.4609,
       "wins": 22,
       "losses": 23,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 177,
@@ -1416,15 +1416,15 @@
       "rating": 0.4602,
       "wins": 22,
       "losses": 19,
-      "conf": "socon"
+      "conf": "SoCon"
     },
     {
       "rank": 178,
       "team": "Murray St.",
       "rating": 0.4594,
-      "wins": 23,
+      "wins": 22,
       "losses": 21,
-      "conf": "mvc"
+      "conf": "MVC"
     },
     {
       "rank": 179,
@@ -1432,7 +1432,7 @@
       "rating": 0.4594,
       "wins": 23,
       "losses": 22,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 180,
@@ -1440,7 +1440,7 @@
       "rating": 0.4589,
       "wins": 23,
       "losses": 19,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 181,
@@ -1448,7 +1448,7 @@
       "rating": 0.4562,
       "wins": 22,
       "losses": 24,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 182,
@@ -1456,7 +1456,7 @@
       "rating": 0.4558,
       "wins": 23,
       "losses": 24,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 183,
@@ -1464,7 +1464,7 @@
       "rating": 0.4549,
       "wins": 22,
       "losses": 22,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 184,
@@ -1472,7 +1472,7 @@
       "rating": 0.4541,
       "wins": 21,
       "losses": 24,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 185,
@@ -1480,7 +1480,7 @@
       "rating": 0.4492,
       "wins": 22,
       "losses": 20,
-      "conf": "america-east"
+      "conf": "America East"
     },
     {
       "rank": 186,
@@ -1488,7 +1488,7 @@
       "rating": 0.4476,
       "wins": 20,
       "losses": 14,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 187,
@@ -1496,7 +1496,7 @@
       "rating": 0.4471,
       "wins": 22,
       "losses": 28,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 188,
@@ -1504,7 +1504,7 @@
       "rating": 0.4471,
       "wins": 22,
       "losses": 18,
-      "conf": "patriot"
+      "conf": "Patriot"
     },
     {
       "rank": 189,
@@ -1512,7 +1512,7 @@
       "rating": 0.445,
       "wins": 16,
       "losses": 27,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 190,
@@ -1520,7 +1520,7 @@
       "rating": 0.4433,
       "wins": 19,
       "losses": 16,
-      "conf": "ivy-league"
+      "conf": "Ivy"
     },
     {
       "rank": 191,
@@ -1528,7 +1528,7 @@
       "rating": 0.4426,
       "wins": 19,
       "losses": 28,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 192,
@@ -1536,7 +1536,7 @@
       "rating": 0.4413,
       "wins": 23,
       "losses": 20,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 193,
@@ -1544,7 +1544,7 @@
       "rating": 0.4411,
       "wins": 18,
       "losses": 22,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 194,
@@ -1552,15 +1552,15 @@
       "rating": 0.4392,
       "wins": 19,
       "losses": 25,
-      "conf": "mountain-west"
+      "conf": "MWC"
     },
     {
       "rank": 195,
       "team": "New Mexico St.",
       "rating": 0.437,
-      "wins": 19,
+      "wins": 17,
       "losses": 28,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 196,
@@ -1568,7 +1568,7 @@
       "rating": 0.4362,
       "wins": 18,
       "losses": 27,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 197,
@@ -1576,7 +1576,7 @@
       "rating": 0.4316,
       "wins": 19,
       "losses": 23,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 198,
@@ -1584,7 +1584,7 @@
       "rating": 0.43,
       "wins": 22,
       "losses": 16,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 199,
@@ -1592,7 +1592,7 @@
       "rating": 0.428,
       "wins": 17,
       "losses": 25,
-      "conf": "mvc"
+      "conf": "MVC"
     },
     {
       "rank": 200,
@@ -1600,23 +1600,23 @@
       "rating": 0.4265,
       "wins": 23,
       "losses": 19,
-      "conf": "swac"
+      "conf": "SWAC"
     },
     {
       "rank": 201,
       "team": "Southern U.",
       "rating": 0.4244,
-      "wins": 23,
+      "wins": 21,
       "losses": 17,
-      "conf": "swac"
+      "conf": "SWAC"
     },
     {
       "rank": 202,
       "team": "UT Martin",
       "rating": 0.4231,
-      "wins": 22,
+      "wins": 21,
       "losses": 22,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 203,
@@ -1624,7 +1624,7 @@
       "rating": 0.4197,
       "wins": 16,
       "losses": 28,
-      "conf": "mountain-west"
+      "conf": "MWC"
     },
     {
       "rank": 204,
@@ -1632,7 +1632,7 @@
       "rating": 0.4196,
       "wins": 19,
       "losses": 24,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 205,
@@ -1640,15 +1640,15 @@
       "rating": 0.4191,
       "wins": 19,
       "losses": 27,
-      "conf": "big-south"
+      "conf": "Big South"
     },
     {
       "rank": 206,
       "team": "Northern Ky.",
       "rating": 0.4183,
-      "wins": 23,
+      "wins": 22,
       "losses": 22,
-      "conf": "horizon"
+      "conf": "Horizon"
     },
     {
       "rank": 207,
@@ -1656,7 +1656,7 @@
       "rating": 0.4131,
       "wins": 15,
       "losses": 19,
-      "conf": "ivy-league"
+      "conf": "Ivy"
     },
     {
       "rank": 208,
@@ -1664,7 +1664,7 @@
       "rating": 0.4119,
       "wins": 13,
       "losses": 28,
-      "conf": "big-ten"
+      "conf": "Big Ten"
     },
     {
       "rank": 209,
@@ -1672,15 +1672,15 @@
       "rating": 0.4114,
       "wins": 15,
       "losses": 21,
-      "conf": "ivy-league"
+      "conf": "Ivy"
     },
     {
       "rank": 210,
       "team": "CSU Bakersfield",
       "rating": 0.4114,
-      "wins": 20,
+      "wins": 18,
       "losses": 28,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 211,
@@ -1688,7 +1688,7 @@
       "rating": 0.4105,
       "wins": 20,
       "losses": 25,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 212,
@@ -1696,7 +1696,7 @@
       "rating": 0.4099,
       "wins": 23,
       "losses": 17,
-      "conf": "patriot"
+      "conf": "Patriot"
     },
     {
       "rank": 213,
@@ -1704,7 +1704,7 @@
       "rating": 0.4082,
       "wins": 20,
       "losses": 24,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 214,
@@ -1712,7 +1712,7 @@
       "rating": 0.4081,
       "wins": 19,
       "losses": 20,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 215,
@@ -1720,15 +1720,15 @@
       "rating": 0.4049,
       "wins": 17,
       "losses": 28,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 216,
       "team": "Maine",
       "rating": 0.4018,
-      "wins": 16,
+      "wins": 15,
       "losses": 24,
-      "conf": "america-east"
+      "conf": "America East"
     },
     {
       "rank": 217,
@@ -1736,7 +1736,7 @@
       "rating": 0.3983,
       "wins": 18,
       "losses": 26,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 218,
@@ -1744,7 +1744,7 @@
       "rating": 0.3977,
       "wins": 18,
       "losses": 26,
-      "conf": "big-east"
+      "conf": "Big East"
     },
     {
       "rank": 219,
@@ -1752,7 +1752,7 @@
       "rating": 0.3975,
       "wins": 22,
       "losses": 20,
-      "conf": "swac"
+      "conf": "SWAC"
     },
     {
       "rank": 220,
@@ -1760,7 +1760,7 @@
       "rating": 0.3962,
       "wins": 14,
       "losses": 34,
-      "conf": "sun-belt"
+      "conf": "Sun Belt"
     },
     {
       "rank": 221,
@@ -1768,7 +1768,7 @@
       "rating": 0.3957,
       "wins": 22,
       "losses": 19,
-      "conf": "america-east"
+      "conf": "America East"
     },
     {
       "rank": 222,
@@ -1776,7 +1776,7 @@
       "rating": 0.3945,
       "wins": 17,
       "losses": 28,
-      "conf": "southland"
+      "conf": "Southland"
     },
     {
       "rank": 223,
@@ -1784,7 +1784,7 @@
       "rating": 0.3925,
       "wins": 17,
       "losses": 27,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 224,
@@ -1792,7 +1792,7 @@
       "rating": 0.3908,
       "wins": 19,
       "losses": 24,
-      "conf": "mvc"
+      "conf": "MVC"
     },
     {
       "rank": 225,
@@ -1800,7 +1800,7 @@
       "rating": 0.3899,
       "wins": 21,
       "losses": 25,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 226,
@@ -1808,7 +1808,7 @@
       "rating": 0.3878,
       "wins": 18,
       "losses": 28,
-      "conf": "horizon"
+      "conf": "Horizon"
     },
     {
       "rank": 227,
@@ -1816,7 +1816,7 @@
       "rating": 0.3869,
       "wins": 17,
       "losses": 29,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 228,
@@ -1824,7 +1824,7 @@
       "rating": 0.3864,
       "wins": 18,
       "losses": 20,
-      "conf": "patriot"
+      "conf": "Patriot"
     },
     {
       "rank": 229,
@@ -1832,7 +1832,7 @@
       "rating": 0.3845,
       "wins": 17,
       "losses": 28,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 230,
@@ -1840,15 +1840,15 @@
       "rating": 0.3841,
       "wins": 14,
       "losses": 32,
-      "conf": "cusa"
+      "conf": "CUSA"
     },
     {
       "rank": 231,
       "team": "South Dakota St.",
       "rating": 0.3822,
-      "wins": 18,
+      "wins": 14,
       "losses": 25,
-      "conf": "summit-league"
+      "conf": "Summit"
     },
     {
       "rank": 232,
@@ -1856,23 +1856,23 @@
       "rating": 0.3802,
       "wins": 23,
       "losses": 23,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 233,
       "team": "Seattle U",
       "rating": 0.3767,
-      "wins": 17,
+      "wins": 15,
       "losses": 23,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 234,
       "team": "Ball St.",
       "rating": 0.3754,
-      "wins": 20,
+      "wins": 18,
       "losses": 26,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 235,
@@ -1880,15 +1880,15 @@
       "rating": 0.3741,
       "wins": 15,
       "losses": 21,
-      "conf": "summit-league"
+      "conf": "Summit"
     },
     {
       "rank": 236,
       "team": "Bowling Green",
       "rating": 0.3718,
-      "wins": 16,
-      "losses": 27,
-      "conf": "mac"
+      "wins": 14,
+      "losses": 26,
+      "conf": "MAC"
     },
     {
       "rank": 237,
@@ -1896,15 +1896,15 @@
       "rating": 0.3673,
       "wins": 22,
       "losses": 24,
-      "conf": "big-east"
+      "conf": "Big East"
     },
     {
       "rank": 238,
       "team": "Western Ill.",
       "rating": 0.3605,
-      "wins": 17,
+      "wins": 15,
       "losses": 26,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 239,
@@ -1912,7 +1912,7 @@
       "rating": 0.3594,
       "wins": 13,
       "losses": 22,
-      "conf": "ivy-league"
+      "conf": "Ivy"
     },
     {
       "rank": 240,
@@ -1920,7 +1920,7 @@
       "rating": 0.3531,
       "wins": 28,
       "losses": 16,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 241,
@@ -1928,7 +1928,7 @@
       "rating": 0.3516,
       "wins": 20,
       "losses": 23,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 242,
@@ -1936,7 +1936,7 @@
       "rating": 0.3495,
       "wins": 17,
       "losses": 27,
-      "conf": "mvc"
+      "conf": "MVC"
     },
     {
       "rank": 243,
@@ -1944,7 +1944,7 @@
       "rating": 0.3492,
       "wins": 10,
       "losses": 24,
-      "conf": "summit-league"
+      "conf": "Summit"
     },
     {
       "rank": 244,
@@ -1952,7 +1952,7 @@
       "rating": 0.3474,
       "wins": 16,
       "losses": 32,
-      "conf": "ovc"
+      "conf": "OVC"
     },
     {
       "rank": 245,
@@ -1960,15 +1960,15 @@
       "rating": 0.3424,
       "wins": 20,
       "losses": 24,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 246,
       "team": "Central Mich.",
       "rating": 0.3418,
-      "wins": 18,
+      "wins": 16,
       "losses": 26,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 247,
@@ -1976,7 +1976,7 @@
       "rating": 0.3405,
       "wins": 15,
       "losses": 25,
-      "conf": "big-east"
+      "conf": "Big East"
     },
     {
       "rank": 248,
@@ -1984,7 +1984,7 @@
       "rating": 0.3349,
       "wins": 14,
       "losses": 29,
-      "conf": "big-west"
+      "conf": "Big West"
     },
     {
       "rank": 249,
@@ -1992,15 +1992,15 @@
       "rating": 0.3329,
       "wins": 15,
       "losses": 23,
-      "conf": "big-east"
+      "conf": "Big East"
     },
     {
       "rank": 250,
       "team": "Ark.-Pine Bluff",
       "rating": 0.3293,
-      "wins": 19,
+      "wins": 18,
       "losses": 26,
-      "conf": "swac"
+      "conf": "SWAC"
     },
     {
       "rank": 251,
@@ -2008,7 +2008,7 @@
       "rating": 0.3276,
       "wins": 24,
       "losses": 18,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 252,
@@ -2016,7 +2016,7 @@
       "rating": 0.3274,
       "wins": 14,
       "losses": 30,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 253,
@@ -2024,15 +2024,15 @@
       "rating": 0.3252,
       "wins": 16,
       "losses": 28,
-      "conf": "mvc"
+      "conf": "MVC"
     },
     {
       "rank": 254,
       "team": "Akron",
       "rating": 0.3247,
-      "wins": 18,
+      "wins": 17,
       "losses": 25,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 255,
@@ -2040,7 +2040,7 @@
       "rating": 0.3226,
       "wins": 15,
       "losses": 28,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 256,
@@ -2048,7 +2048,7 @@
       "rating": 0.3204,
       "wins": 12,
       "losses": 33,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 257,
@@ -2056,7 +2056,7 @@
       "rating": 0.3188,
       "wins": 17,
       "losses": 28,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 258,
@@ -2064,7 +2064,7 @@
       "rating": 0.3163,
       "wins": 15,
       "losses": 21,
-      "conf": "ivy-league"
+      "conf": "Ivy"
     },
     {
       "rank": 259,
@@ -2072,7 +2072,7 @@
       "rating": 0.3161,
       "wins": 17,
       "losses": 28,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 260,
@@ -2080,7 +2080,7 @@
       "rating": 0.3159,
       "wins": 13,
       "losses": 30,
-      "conf": "mountain-west"
+      "conf": "MWC"
     },
     {
       "rank": 261,
@@ -2088,7 +2088,7 @@
       "rating": 0.3144,
       "wins": 16,
       "losses": 26,
-      "conf": "america-east"
+      "conf": "America East"
     },
     {
       "rank": 262,
@@ -2096,7 +2096,7 @@
       "rating": 0.3142,
       "wins": 12,
       "losses": 37,
-      "conf": "wcc"
+      "conf": "WCC"
     },
     {
       "rank": 263,
@@ -2104,7 +2104,7 @@
       "rating": 0.3122,
       "wins": 20,
       "losses": 24,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 264,
@@ -2112,15 +2112,15 @@
       "rating": 0.3048,
       "wins": 10,
       "losses": 25,
-      "conf": "ivy-league"
+      "conf": "Ivy"
     },
     {
       "rank": 265,
       "team": "Texas Southern",
       "rating": 0.3046,
-      "wins": 19,
-      "losses": 18,
-      "conf": "swac"
+      "wins": 18,
+      "losses": 17,
+      "conf": "SWAC"
     },
     {
       "rank": 266,
@@ -2128,7 +2128,7 @@
       "rating": 0.3023,
       "wins": 21,
       "losses": 15,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 267,
@@ -2136,15 +2136,15 @@
       "rating": 0.2979,
       "wins": 16,
       "losses": 29,
-      "conf": "big-south"
+      "conf": "Big South"
     },
     {
       "rank": 268,
       "team": "Canisius",
       "rating": 0.2928,
       "wins": 15,
-      "losses": 21,
-      "conf": "maac"
+      "losses": 20,
+      "conf": "MAAC"
     },
     {
       "rank": 269,
@@ -2152,15 +2152,15 @@
       "rating": 0.2877,
       "wins": 11,
       "losses": 23,
-      "conf": "ivy-league"
+      "conf": "Ivy"
     },
     {
       "rank": 270,
       "team": "Utah Valley",
       "rating": 0.2848,
-      "wins": 13,
-      "losses": 30,
-      "conf": "wac"
+      "wins": 10,
+      "losses": 29,
+      "conf": "WAC"
     },
     {
       "rank": 271,
@@ -2168,7 +2168,7 @@
       "rating": 0.2843,
       "wins": 15,
       "losses": 25,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 272,
@@ -2176,7 +2176,7 @@
       "rating": 0.2779,
       "wins": 12,
       "losses": 32,
-      "conf": "caa"
+      "conf": "CAA"
     },
     {
       "rank": 273,
@@ -2184,23 +2184,23 @@
       "rating": 0.2778,
       "wins": 19,
       "losses": 21,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 274,
       "team": "Eastern Ky.",
       "rating": 0.2767,
-      "wins": 13,
+      "wins": 12,
       "losses": 34,
-      "conf": "asun"
+      "conf": "ASUN"
     },
     {
       "rank": 275,
       "team": "Jackson St.",
       "rating": 0.2748,
-      "wins": 21,
+      "wins": 19,
       "losses": 22,
-      "conf": "swac"
+      "conf": "SWAC"
     },
     {
       "rank": 276,
@@ -2208,15 +2208,15 @@
       "rating": 0.2695,
       "wins": 17,
       "losses": 28,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 277,
       "team": "Grambling",
       "rating": 0.269,
       "wins": 17,
-      "losses": 25,
-      "conf": "swac"
+      "losses": 24,
+      "conf": "SWAC"
     },
     {
       "rank": 278,
@@ -2224,7 +2224,7 @@
       "rating": 0.2534,
       "wins": 16,
       "losses": 25,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 279,
@@ -2232,15 +2232,15 @@
       "rating": 0.2532,
       "wins": 13,
       "losses": 29,
-      "conf": "summit-league"
+      "conf": "Summit"
     },
     {
       "rank": 280,
       "team": "Oakland",
       "rating": 0.2514,
-      "wins": 10,
+      "wins": 9,
       "losses": 29,
-      "conf": "horizon"
+      "conf": "Horizon"
     },
     {
       "rank": 281,
@@ -2248,7 +2248,7 @@
       "rating": 0.2497,
       "wins": 10,
       "losses": 31,
-      "conf": "mvc"
+      "conf": "MVC"
     },
     {
       "rank": 282,
@@ -2256,7 +2256,7 @@
       "rating": 0.2463,
       "wins": 9,
       "losses": 33,
-      "conf": "summit-league"
+      "conf": "Summit"
     },
     {
       "rank": 283,
@@ -2264,7 +2264,7 @@
       "rating": 0.2431,
       "wins": 17,
       "losses": 25,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 284,
@@ -2272,15 +2272,15 @@
       "rating": 0.2409,
       "wins": 13,
       "losses": 26,
-      "conf": "america-east"
+      "conf": "America East"
     },
     {
       "rank": 285,
       "team": "Lehigh",
       "rating": 0.2342,
-      "wins": 14,
+      "wins": 13,
       "losses": 26,
-      "conf": "patriot"
+      "conf": "Patriot"
     },
     {
       "rank": 286,
@@ -2288,7 +2288,7 @@
       "rating": 0.234,
       "wins": 18,
       "losses": 22,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 287,
@@ -2296,7 +2296,7 @@
       "rating": 0.233,
       "wins": 8,
       "losses": 37,
-      "conf": "big-south"
+      "conf": "Big South"
     },
     {
       "rank": 288,
@@ -2304,7 +2304,7 @@
       "rating": 0.2227,
       "wins": 14,
       "losses": 24,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 289,
@@ -2312,7 +2312,7 @@
       "rating": 0.2215,
       "wins": 14,
       "losses": 24,
-      "conf": "america-east"
+      "conf": "America East"
     },
     {
       "rank": 290,
@@ -2320,7 +2320,7 @@
       "rating": 0.2203,
       "wins": 16,
       "losses": 21,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 291,
@@ -2328,7 +2328,7 @@
       "rating": 0.216,
       "wins": 12,
       "losses": 27,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 292,
@@ -2336,7 +2336,7 @@
       "rating": 0.2029,
       "wins": 10,
       "losses": 30,
-      "conf": "atlantic-10"
+      "conf": "A-10"
     },
     {
       "rank": 293,
@@ -2344,7 +2344,7 @@
       "rating": 0.2021,
       "wins": 9,
       "losses": 27,
-      "conf": "patriot"
+      "conf": "Patriot"
     },
     {
       "rank": 294,
@@ -2352,7 +2352,7 @@
       "rating": 0.2005,
       "wins": 9,
       "losses": 33,
-      "conf": "horizon"
+      "conf": "Horizon"
     },
     {
       "rank": 295,
@@ -2360,7 +2360,7 @@
       "rating": 0.2002,
       "wins": 9,
       "losses": 35,
-      "conf": "mac"
+      "conf": "MAC"
     },
     {
       "rank": 296,
@@ -2368,23 +2368,23 @@
       "rating": 0.1869,
       "wins": 9,
       "losses": 38,
-      "conf": "mvc"
+      "conf": "MVC"
     },
     {
       "rank": 297,
       "team": "Mississippi Val.",
       "rating": 0.168,
       "wins": 10,
-      "losses": 28,
-      "conf": "swac"
+      "losses": 27,
+      "conf": "SWAC"
     },
     {
       "rank": 298,
       "team": "Norfolk St.",
       "rating": 0.1351,
-      "wins": 18,
+      "wins": 17,
       "losses": 23,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 299,
@@ -2392,7 +2392,7 @@
       "rating": 0.1334,
       "wins": 15,
       "losses": 23,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 300,
@@ -2400,39 +2400,39 @@
       "rating": 0.0849,
       "wins": 12,
       "losses": 24,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 301,
       "team": "New Haven",
       "rating": 0.0736,
-      "wins": 11,
+      "wins": 10,
       "losses": 29,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 302,
       "team": "Prairie View",
       "rating": 0.0641,
-      "wins": 9,
-      "losses": 34,
-      "conf": "swac"
+      "wins": 7,
+      "losses": 33,
+      "conf": "SWAC"
     },
     {
       "rank": 303,
       "team": "Alabama A&M",
       "rating": 0.0375,
-      "wins": 10,
+      "wins": 7,
       "losses": 37,
-      "conf": "swac"
+      "conf": "SWAC"
     },
     {
       "rank": 304,
       "team": "Alcorn",
       "rating": 0.0038,
-      "wins": 7,
+      "wins": 4,
       "losses": 35,
-      "conf": "swac"
+      "conf": "SWAC"
     },
     {
       "rank": 305,
@@ -2440,7 +2440,7 @@
       "rating": -0.0161,
       "wins": 9,
       "losses": 34,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 306,
@@ -2448,7 +2448,7 @@
       "rating": -0.0246,
       "wins": 5,
       "losses": 36,
-      "conf": "maac"
+      "conf": "MAAC"
     },
     {
       "rank": 307,
@@ -2456,7 +2456,7 @@
       "rating": -0.0659,
       "wins": 8,
       "losses": 33,
-      "conf": "nec"
+      "conf": "NEC"
     },
     {
       "rank": 308,
@@ -2464,7 +2464,7 @@
       "rating": -0.0942,
       "wins": 5,
       "losses": 31,
-      "conf": "nec"
+      "conf": "NEC"
     }
   ]
 }
