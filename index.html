@@ -218,76 +218,75 @@
 </footer>
 
 <script>
-  const SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_0LY7T_F7UOuAWCWJ3a4GbA_Bu57UXGf";
+const SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co";
+const SUPABASE_KEY = "sb_publishable_0LY7T_F7UOuAWCWJ3a4GbA_Bu57UXGf";
 
-  let allTeams = [];
-  let confFilter = "";
+let allTeams = [];
+let confFilter = "";
 
-  async function loadRankings() {
-    try {
-     const res = await fetch(
-  `${SUPABASE_URL}/rest/v1/rankings?select=*&order=rank.asc`,
-  {
-    headers: {
-      "apikey": SUPABASE_KEY,
-      "Authorization": `Bearer ${SUPABASE_KEY}`,
-      "Content-Type": "application/json"
-    }
-  }
-);
-const text = await res.text();
-console.log("Response:", text);
-allTeams = JSON.parse(text);
-      allTeams = await res.json();
-      document.getElementById("loading").style.display = "none";
-      document.getElementById("table").style.display = "table";
-      document.getElementById("team-count").textContent = allTeams.length;
-      if (allTeams.length > 0) {
-        document.getElementById("updated").textContent = allTeams[0].updated_at;
+async function loadRankings() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/rankings?select=*&order=rank.asc`,
+      {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`
+        }
       }
-      render();
-    } catch (e) {
-      document.getElementById("loading").textContent = "Error loading rankings. Please refresh.";
+    );
+    const text = await res.text();
+    console.log("Response:", text.substring(0, 200));
+    allTeams = JSON.parse(text);
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("table").style.display = "table";
+    document.getElementById("team-count").textContent = allTeams.length;
+    if (allTeams.length > 0) {
+      document.getElementById("updated").textContent = allTeams[0].updated_at;
     }
-  }
-
-  function setConf(conf, btn) {
-    confFilter = conf;
-    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
     render();
+  } catch (e) {
+    console.log("Error:", e);
+    document.getElementById("loading").textContent = "Error: " + e.message;
   }
+}
 
-  function render() {
-    const search = document.getElementById("search").value.toLowerCase();
-    const maxRating = Math.max(...allTeams.map(t => t.rating));
+function setConf(conf, btn) {
+  confFilter = conf;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  render();
+}
 
-    const filtered = allTeams.filter(t => {
-      const matchSearch = t.team.toLowerCase().includes(search);
-      const matchConf = !confFilter || (t.conf || "").includes(confFilter);
-      return matchSearch && matchConf;
-    });
+function render() {
+  const search = document.getElementById("search").value.toLowerCase();
+  const maxRating = Math.max(...allTeams.map(t => t.rating));
 
-    document.getElementById("tbody").innerHTML = filtered.map(t => {
-      const pct = ((t.rating / maxRating) * 100).toFixed(1);
-      const top = t.rank <= 25 ? " top25" : "";
-      return `<tr class="${top}">
-        <td class="td-rank">${t.rank}</td>
-        <td class="td-team">${t.team}</td>
-        <td class="td-conf">${t.conf || "—"}</td>
-        <td class="td-record">${t.wins}–${t.losses}</td>
-        <td class="td-rating">
-          <div class="bar-wrap">
-            <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
-            ${t.rating.toFixed(4)}
-          </div>
-        </td>
-      </tr>`;
-    }).join("");
-  }
+  const filtered = allTeams.filter(t => {
+    const matchSearch = t.team.toLowerCase().includes(search);
+    const matchConf = !confFilter || (t.conf || "").includes(confFilter);
+    return matchSearch && matchConf;
+  });
 
-  loadRankings();
+  document.getElementById("tbody").innerHTML = filtered.map(t => {
+    const pct = ((t.rating / maxRating) * 100).toFixed(1);
+    const top = t.rank <= 25 ? " top25" : "";
+    return `<tr class="${top}">
+      <td class="td-rank">${t.rank}</td>
+      <td class="td-team">${t.team}</td>
+      <td class="td-conf">${t.conf || "—"}</td>
+      <td class="td-record">${t.wins}–${t.losses}</td>
+      <td class="td-rating">
+        <div class="bar-wrap">
+          <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+          ${t.rating.toFixed(4)}
+        </div>
+      </td>
+    </tr>`;
+  }).join("");
+}
+
+loadRankings();
 </script>
 </body>
 </html>
