@@ -1,9 +1,10 @@
 import json
 import requests
+import os
 from datetime import date
 
-SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjaXB4dGRjeXhlcnl0eGZyemhmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODE4NzM3MSwiZXhwIjoyMDkzNzYzMzcxfQ.x9Hs11sVHdX_6WkIrD872EKPJ8eTk72M1BET12HnJj4"
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://fcipxtdcyxerytxfrzhf.supabase.co")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "REPLACE_WITH_YOUR_KEY")
 
 def upload_rankings():
     with open("rankings.json") as f:
@@ -12,7 +13,6 @@ def upload_rankings():
     rankings = data["rankings"]
     today = str(date.today())
 
-    # Add today's date to each row
     for r in rankings:
         r["updated_at"] = today
 
@@ -23,7 +23,7 @@ def upload_rankings():
         "Prefer": "resolution=merge-duplicates"
     }
 
-    # Clear old rankings first
+    # Clear old rankings
     requests.delete(
         f"{SUPABASE_URL}/rest/v1/rankings",
         headers=headers,

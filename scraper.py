@@ -109,7 +109,7 @@ def scrape_date(target_date, known_confs, existing_game_ids, fetch_boxes=False):
             if team and team not in known_confs:
                 confs = side.get("conferences", [])
                 real_confs = [c["conferenceSeo"] for c in confs
-              if c.get("conferenceSeo") not in ("top-25", "")]
+                              if c.get("conferenceSeo") not in ("top-25", "")]
                 if real_confs:
                     known_confs[team] = real_confs[0]
 
