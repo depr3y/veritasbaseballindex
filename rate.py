@@ -1,5 +1,5 @@
 """
-True Earned Rank — Rating Engine
+Veritas Baseball Index — Rating Engine
 ----------------------------------
 Reads games.json produced by scraper.py,
 runs the Colley Matrix, and writes rankings.json.
@@ -12,6 +12,7 @@ import json
 import numpy as np
 from collections import defaultdict, Counter
 from datetime import date
+from conferences import get_conference
 
 GAMES_FILE  = "games.json"
 OUTPUT_FILE = "rankings.json"
@@ -64,7 +65,7 @@ if __name__ == "__main__":
     print(f"Loaded {len(games)} games...")
 
     # Build unweighted win/loss counts for display
-    raw_wins  = defaultdict(int)
+    raw_wins   = defaultdict(int)
     raw_losses = defaultdict(int)
     for g in games:
         raw_wins[g["winner"]]  += 1
@@ -98,6 +99,7 @@ if __name__ == "__main__":
                 "rating": round(rating, 4),
                 "wins":   raw_wins[team],
                 "losses": raw_losses[team],
+                "conf":   get_conference(team),
             }
             for i, (team, rating) in enumerate(ranked)
         ]
@@ -109,4 +111,4 @@ if __name__ == "__main__":
     print(f"Rankings written to {OUTPUT_FILE}")
     print(f"\nTop 10:")
     for entry in output["rankings"][:10]:
-        print(f"  {entry['rank']:>3}. {entry['team']:<30} {entry['wins']}-{entry['losses']}  {entry['rating']:.4f}")
+        print(f"  {entry['rank']:>3}. {entry['team']:<30} {entry['wins']}-{entry['losses']}  {entry['conf']:<10}  {entry['rating']:.4f}")
