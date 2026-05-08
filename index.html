@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>True Earned Rank — D1 College Baseball Rankings</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #F7F6F2;
+      color: #1a1a18;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e0ded8;
+    }
+
+    .logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .logo span { color: #b5a642; }
+
+    nav { display: flex; gap: 1.5rem; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #888880; }
+
+    .hero {
+      padding: 2.5rem 2rem 1.5rem;
+      border-bottom: 1px solid #e0ded8;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #888880;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h1 {
+      font-size: 26px;
+      font-weight: 300;
+      line-height: 1.3;
+    }
+
+    .hero h1 strong { font-weight: 500; }
+
+    .hero-meta {
+      margin-top: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: #888880;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta b { color: #1a1a18; font-weight: 500; }
+
+    .controls {
+      padding: 1rem 2rem;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid #e0ded8;
+    }
+
+    input[type="text"] {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 6px 12px;
+      border: 1px solid #d4d2cc;
+      border-radius: 4px;
+      background: #fff;
+      color: #1a1a18;
+      width: 200px;
+      outline: none;
+    }
+
+    input[type="text"]:focus { border-color: #b5a642; }
+
+    .filter-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      padding: 6px 12px;
+      border: 1px solid #d4d2cc;
+      border-radius: 4px;
+      background: #fff;
+      color: #888880;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+    }
+
+    .filter-btn.active {
+      background: #1a1a18;
+      color: #F7F6F2;
+      border-color: #1a1a18;
+    }
+
+    .table-wrap { padding: 0 2rem 3rem; overflow-x: auto; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 500px; }
+
+    thead th {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888880;
+      font-weight: 400;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #d4d2cc;
+    }
+
+    thead th.r { text-align: right; }
+
+    tbody tr { border-bottom: 1px solid #eceae4; cursor: pointer; transition: background 0.1s; }
+    tbody tr:hover { background: #fff; }
+    tbody tr.top25 td:first-child { border-left: 2px solid #b5a642; }
+
+    td { padding: 10px 12px; color: #1a1a18; }
+
+    .td-rank { font-family: 'DM Mono', monospace; font-size: 12px; color: #888880; width: 44px; }
+    .td-team { font-weight: 500; font-size: 14px; }
+    .td-conf { font-size: 12px; color: #888880; font-family: 'DM Mono', monospace; }
+    .td-record { font-family: 'DM Mono', monospace; font-size: 12px; text-align: right; }
+    .td-rating { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; text-align: right; }
+
+    .bar-wrap { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+    .bar-bg { width: 56px; height: 3px; background: #e0ded8; border-radius: 2px; overflow: hidden; }
+    .bar-fill { height: 100%; background: #b5a642; border-radius: 2px; }
+
+    .loading {
+      text-align: center;
+      padding: 4rem 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: #888880;
+      letter-spacing: 0.08em;
+    }
+
+    footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid #e0ded8;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #aaa89e;
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">True<span>Earned</span>Rank</div>
+  <nav>
+    <span>Rankings</span>
+    <span>About</span>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">D1 College Baseball · 2026 Season</div>
+<div>
+  <div style="font-family:'DM Mono',monospace; font-size:20px; font-weight:500; letter-spacing:0.06em;">Rankings Built on Wins Alone.</div>
+  <div style="font-family:'DM Mono',monospace; font-size:12px; letter-spacing:0.12em; color:#b5a642; margin-top:4px;">By Matt DePrey</div>
+</div>
+  <div class="hero-meta">
+    <span>Updated <b id="updated">—</b></span>
+    <span>Teams <b id="team-count">—</b></span>
+    <span>Method <b>Colley Matrix</b></span>
+  </div>
+</div>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search team..." oninput="render()" />
+  <button class="filter-btn active" onclick="setConf('', this)">All</button>
+  <button class="filter-btn" onclick="setConf('SEC', this)">SEC</button>
+  <button class="filter-btn" onclick="setConf('ACC', this)">ACC</button>
+  <button class="filter-btn" onclick="setConf('Big 12', this)">Big 12</button>
+  <button class="filter-btn" onclick="setConf('Pac-12', this)">Pac-12</button>
+  <button class="filter-btn" onclick="setConf('Big Ten', this)">Big Ten</button>
+</div>
+
+<div class="table-wrap">
+  <div class="loading" id="loading">Loading rankings...</div>
+  <table id="table" style="display:none">
+    <thead>
+      <tr>
+        <th>Rk</th>
+        <th>Team</th>
+        <th>Conf</th>
+        <th class="r">Record</th>
+        <th class="r">TER Rating</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<footer>
+  True Earned Rank &nbsp;·&nbsp; Colley Matrix method &nbsp;·&nbsp; Win/loss only &nbsp;·&nbsp; Updated daily &nbsp;·&nbsp; 2026
+</footer>
+
+<script>
+  const SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_0LY7T_F7UOuAWCWJ3a4GbA_Bu57UXGf";
+
+  let allTeams = [];
+  let confFilter = "";
+
+  async function loadRankings() {
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/rankings?select=*&order=rank.asc`,
+        {
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`
+          }
+        }
+      );
+      allTeams = await res.json();
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("table").style.display = "table";
+      document.getElementById("team-count").textContent = allTeams.length;
+      if (allTeams.length > 0) {
+        document.getElementById("updated").textContent = allTeams[0].updated_at;
+      }
+      render();
+    } catch (e) {
+      document.getElementById("loading").textContent = "Error loading rankings. Please refresh.";
+    }
+  }
+
+  function setConf(conf, btn) {
+    confFilter = conf;
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    render();
+  }
+
+  function render() {
+    const search = document.getElementById("search").value.toLowerCase();
+    const maxRating = Math.max(...allTeams.map(t => t.rating));
+
+    const filtered = allTeams.filter(t => {
+      const matchSearch = t.team.toLowerCase().includes(search);
+      const matchConf = !confFilter || (t.conf || "").includes(confFilter);
+      return matchSearch && matchConf;
+    });
+
+    document.getElementById("tbody").innerHTML = filtered.map(t => {
+      const pct = ((t.rating / maxRating) * 100).toFixed(1);
+      const top = t.rank <= 25 ? " top25" : "";
+      return `<tr class="${top}">
+        <td class="td-rank">${t.rank}</td>
+        <td class="td-team">${t.team}</td>
+        <td class="td-conf">${t.conf || "—"}</td>
+        <td class="td-record">${t.wins}–${t.losses}</td>
+        <td class="td-rating">
+          <div class="bar-wrap">
+            <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+            ${t.rating.toFixed(4)}
+          </div>
+        </td>
+      </tr>`;
+    }).join("");
+  }
+
+  loadRankings();
+</script>
+</body>
+</html>
