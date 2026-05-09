@@ -760,72 +760,82 @@ function initMap() {
     attribution:"© OpenStreetMap © CARTO", maxZoom:18
   }).addTo(m);
 
-  // Top 16 from allTeams (already sorted by rank)
-  const top16 = allTeams.filter(t => TEAM_COORDS[t.team]).slice(0, 16);
-  const ordinals = ['1st','2nd','3rd','4th','5th','6th','7th','8th'];
+  function plotTeams() {
+    if (!allTeams || allTeams.length === 0) {
+      setTimeout(plotTeams, 300);
+      return;
+    }
 
-  top16.forEach((t, idx) => {
-    const coords = TEAM_COORDS[t.team];
-    if (!coords) return;
+    const top16 = allTeams.filter(t => TEAM_COORDS[t.team]).slice(0, 16);
+    console.log('VBI Map: plotting', top16.length, 'teams');
+    top16.forEach(t => console.log(' -', t.team, TEAM_COORDS[t.team]));
 
-    const isNatSeed = idx < 8;
-    const color = isNatSeed ? '#00ff55' : '#007722';
-    const borderColor = isNatSeed ? '#00ff55' : '#1a3318';
-    const bgColor = isNatSeed ? '#001a0a' : '#0a0a0a';
-    const fontSize = isNatSeed ? '12' : '11';
-    const seedNum = idx + 1;
+    const ordinals = ['1st','2nd','3rd','4th','5th','6th','7th','8th'];
 
-    const icon = L.divIcon({
-      className: '',
-      html: `<div style="
-        font-family:'Courier New',monospace;
-        font-size:${fontSize}px;
-        font-weight:700;
-        color:${color};
-        background:${bgColor};
-        border:1px solid ${borderColor};
-        padding:2px 5px;
-        white-space:nowrap;
-        letter-spacing:0.04em;
-        box-shadow:${isNatSeed?`0 0 8px #00ff5540`:''};
-      ">[${seedNum}]</div>`,
-      iconSize:null,
-      iconAnchor:[16, 12]
+    top16.forEach((t, idx) => {
+      const coords = TEAM_COORDS[t.team];
+      if (!coords) return;
+
+      const isNatSeed = idx < 8;
+      const color = isNatSeed ? '#00ff55' : '#007722';
+      const borderColor = isNatSeed ? '#00ff55' : '#1a3318';
+      const bgColor = isNatSeed ? '#001a0a' : '#0a0a0a';
+      const fontSize = isNatSeed ? '12' : '11';
+      const seedNum = idx + 1;
+
+      const icon = L.divIcon({
+        className: '',
+        html: `<div style="
+          font-family:'Courier New',monospace;
+          font-size:${fontSize}px;
+          font-weight:700;
+          color:${color};
+          background:${bgColor};
+          border:1px solid ${borderColor};
+          padding:2px 5px;
+          white-space:nowrap;
+          letter-spacing:0.04em;
+          box-shadow:${isNatSeed?'0 0 8px #00ff5540':''};
+        ">[${seedNum}]</div>`,
+        iconSize:[36, 20],
+        iconAnchor:[18, 10]
+      });
+
+      const seedDesc = isNatSeed
+        ? `<div style="font-size:10px;color:#00ff55;margin-top:2px;letter-spacing:0.06em">${ordinals[idx]} National Seed</div>`
+        : '';
+
+      const popup = L.popup({
+        className:'vbi-popup',
+        maxWidth:220,
+        offset:[0, -10]
+      }).setContent(`
+        <div style="font-family:'Courier New',monospace;background:#0a0a0a;color:#00cc44;padding:10px 12px;border:1px solid ${isNatSeed?'#00ff55':'#007722'};min-width:180px">
+          <div style="font-weight:700;font-size:14px;color:#00ff55;margin-bottom:2px">${t.team}</div>
+          <div style="font-size:10px;color:#005518;letter-spacing:0.08em;margin-bottom:6px">${(t.conf||'').toUpperCase()}</div>
+          ${seedDesc}
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px;font-size:11px">
+            <div style="color:#005518">VBI RANK</div><div style="color:#00ff55;font-weight:700;text-align:right">#${t.rank}</div>
+            <div style="color:#005518">RATING</div><div style="color:#00ff55;font-weight:700;text-align:right">${t.rating.toFixed(4)}</div>
+            <div style="color:#005518">RECORD</div><div style="color:#00ff55;font-weight:700;text-align:right">${t.wins}-${t.losses}</div>
+            <div style="color:#005518">REGIONAL SEED</div><div style="color:#00ff55;font-weight:700;text-align:right">${seedNum}</div>
+          </div>
+        </div>`);
+
+      L.marker(coords, {icon}).addTo(m).bindPopup(popup);
     });
 
-    const seedDesc = isNatSeed
-      ? `<div style="font-size:10px;color:#00ff55;margin-top:2px;letter-spacing:0.06em">${ordinals[idx]} National Seed</div>`
-      : '';
-
-    const popup = L.popup({
-      className:'vbi-popup',
-      maxWidth:220,
-      offset:[0, -radius]
-    }).setContent(`
-      <div style="font-family:'Courier New',monospace;background:#0a0a0a;color:#00cc44;padding:10px 12px;border:1px solid ${isNatSeed?'#00ff55':'#007722'};min-width:180px">
-        <div style="font-weight:700;font-size:14px;color:#00ff55;margin-bottom:2px">${t.team}</div>
-        <div style="font-size:10px;color:#005518;letter-spacing:0.08em;margin-bottom:6px">${(t.conf||'').toUpperCase()}</div>
-        ${seedDesc}
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px;font-size:11px">
-          <div style="color:#005518">VBI RANK</div><div style="color:#00ff55;font-weight:700;text-align:right">#${t.rank}</div>
-          <div style="color:#005518">RATING</div><div style="color:#00ff55;font-weight:700;text-align:right">${t.rating.toFixed(4)}</div>
-          <div style="color:#005518">RECORD</div><div style="color:#00ff55;font-weight:700;text-align:right">${t.wins}-${t.losses}</div>
-          <div style="color:#005518">REGIONAL</div><div style="color:#00ff55;font-weight:700;text-align:right">SEED ${seedNum}</div>
-        </div>
-      </div>`);
-
-    L.marker(coords, {icon}).addTo(m).bindPopup(popup);
-  });
-
-  // Add custom popup CSS
-  if (!document.getElementById('vbi-popup-style')) {
-    const s = document.createElement('style');
-    s.id = 'vbi-popup-style';
-    s.textContent = `.vbi-popup .leaflet-popup-content-wrapper{background:transparent;border:none;box-shadow:none;padding:0}
-    .vbi-popup .leaflet-popup-content{margin:0}
-    .vbi-popup .leaflet-popup-tip-container{display:none}`;
-    document.head.appendChild(s);
+    if (!document.getElementById('vbi-popup-style')) {
+      const s = document.createElement('style');
+      s.id = 'vbi-popup-style';
+      s.textContent = `.vbi-popup .leaflet-popup-content-wrapper{background:transparent;border:none;box-shadow:none;padding:0}
+      .vbi-popup .leaflet-popup-content{margin:0}
+      .vbi-popup .leaflet-popup-tip-container{display:none}`;
+      document.head.appendChild(s);
+    }
   }
+
+  plotTeams();
 }
 
 // ── MATRIX ─────────────────────────────────────────────────
