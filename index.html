@@ -210,6 +210,7 @@
     .mob-game-rating{font-size:10px;color:var(--green-x);min-width:38px;text-align:right}
 
     footer{padding:10px 20px;border-top:1px solid var(--border2);font-size:10px;color:var(--green-x);letter-spacing:0.08em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+    #about-cols>div:first-child::-webkit-scrollbar{display:none}
 
     /* ── MOBILE ── */
     @media(max-width:600px){
@@ -222,16 +223,17 @@
       .nav-btn{font-size:10px;padding:4px 8px}
 
       /* about tab */
-      #about-panel{padding:1.25rem 14px}
+      #about-panel{height:auto!important;overflow:visible!important}
+      #about-cols{grid-template-columns:1fr!important;height:auto!important}
+      #about-cols>div:first-child{border-right:none!important;padding:1rem 14px!important;height:auto!important;overflow:visible!important}
+      #about-cols>div:last-child{height:auto!important;border-left:none!important;border-top:1px solid var(--border2)}
+      #about-cols>div:last-child>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
       .fgrid{grid-template-columns:1fr}
       .wbox{grid-template-columns:1fr}
       .rpi-grid{grid-template-columns:1fr}
       .fbox{padding:1rem}
       .feq{font-size:18px}
       .st{font-size:15px}
-
-      /* xavier widget on mobile */
-      #sim-wrap{grid-template-columns:1fr!important}
 
       /* rankings tab */
       .controls{padding:6px 10px;gap:4px}
@@ -432,162 +434,199 @@
 </div>
 
 <!-- ABOUT TAB -->
-<div id="about-panel">
+<div id="about-panel" style="max-width:none;padding:0;height:calc(100vh - 80px);overflow:hidden">
 
-  <div class="ey">// Matt DePrey's VBI</div>
-  <div class="st">Why RPI, KPI, and DSR all SUCK</div>
-  <div class="bt">
-    RPI measures schedule strength more than team quality. Since 75% of the formula comes from opponent and opponent-opponent winning percentage, teams inherit value from the schedules they play rather than fully earning it on the field. The system can reward teams for simply surviving difficult schedules, even when their actual results are mediocre.<br><br>
-    KPI attempts to fix this by rewarding “quality wins,” but that creates a different problem: the rankings become dependent on arbitrary cutoff tiers and constantly shifting definitions of what counts as a “good win.” Teams are judged relative to constructed categories instead of the full network of games.<br><br>
-    DSR goes even further toward prediction. It incorporates win expectancy, contextual adjustments, and margin-based modeling to estimate how strong a team is going forward. That can be useful for forecasting, but predictive systems inevitably inject more assumptions into the rankings. A 10-run win becomes fundamentally different from a 1-run win, and teams begin optimizing for model behavior rather than simply winning games.<br><br>
-    VBI takes a different approach. Using the Colley Matrix, every team’s rating is solved simultaneously through the entire network of wins and losses across Division I baseball. No score margin. No quality-win buckets. No predictive modeling. The system only asks:<br><br>
-   * Who did you play?<br>
-   * Did you win?<br>
-   * Where was the game played?<br><br>
-    Instead of hardcoding schedule strength, quality tiers, or predictive assumptions into the formula, VBI allows strength to emerge naturally from the interconnected results of the entire season. Every game matters. Every opponent matters. Every team influences every other team through the same mathematical system.
-  </div>
+  <!-- Two-column layout: text left, simulator right -->
+  <div id="about-cols" style="display:grid;grid-template-columns:1fr 720px;gap:0;height:100%">
 
-  <div class="abt-hr"></div>
+    <!-- LEFT: all explanatory text (this column scrolls) -->
+    <div style="padding:1.5rem 28px;border-right:1px solid var(--green-x);overflow-y:auto;height:100%;scrollbar-width:none;-ms-overflow-style:none">
+    <style>#about-panel .abt-left::-webkit-scrollbar{display:none}</style>
 
-  <div class="ey">// the equation</div>
-  <div class="st">C · r = b</div>
-  <div class="bt">Three variables. One system. 308 unknowns solved simultaneously.</div>
-
-  <div class="fbox">
-    <div class="feq">C &nbsp;·&nbsp; r &nbsp;=&nbsp; b</div>
-    <div class="fgrid">
-      <div class="fc">
-        <div class="fs" style="color:#60a5fa">C</div>
-        <div class="fn">the matrix</div>
-        <div class="fd">A 308×308 matrix representing every Division I team. Each team’s main value is based on its weighted games played, while every matchup against another team creates a negative connection between the two teams. When the system solves the equation, all of those connections work together so every team’s rating is influenced by the strength of its opponents. </div>
-      </div>
-      <div class="fc">
-        <div class="fs" style="color:#4ade80">r</div>
-        <div class="fn">the ratings</div>
-        <div class="fd">What we solve for. One number per team. Higher = better. No team's rating can be solved without knowing all others — that interdependence is the whole point.</div>
-      </div>
-      <div class="fc">
-        <div class="fs" style="color:#fbbf24">b</div>
-        <div class="fn">the record vector</div>
-        <div class="fd">The b vector is the part of the equation that measures a team’s game results. It starts every team at a neutral baseline of 1, then adds weighted wins and subtracts weighted losses based on game location. Teams that win more difficult games, especially on the road, build a stronger input value before the matrix adjusts for opponent strength.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ann">
-    This is not adjusted winning percentage. Solving C·r = b creates a web of interdependence across the entire sport. Xavier's rating is shaped by Arkansas's rating, which is shaped by every team Arkansas played, and so on — simultaneously, across all 308 teams. A 21–27 team can rate respectably if they lost to highly-rated opponents on the road. <b>Schedule strength isn't an input. It's an output.</b>
-  </div>
-
-  <div class="abt-hr"></div>
-
-  <div class="ey">// location weighting</div>
-  <div class="st">Where you play matters.</div>
-  <div class="bt">Every game result is multiplied by a location weight before entering the system. Winning on the road is harder, and the math reflects that.</div>
-  <div class="wbox">
-    <div class="wcard" style="border-color:#1a4a1a">
-      <div class="wi" style="color:var(--green-b)">×1.1</div>
-      <div class="wl" style="color:var(--green-d)">ROAD</div>
-      <div class="wd" style="color:#009933">Win away from home: +1.1 to b[i]. Lose on the road: −0.9.</div>
-    </div>
-    <div class="wcard" style="border-color:#2a1a0a">
-      <div class="wi" style="color:#fbbf24">×0.9</div>
-      <div class="wl" style="color:#92400e">HOME</div>
-      <div class="wd" style="color:#78350f">Win at home: +0.9 to b[i]. Lose at home: −1.1.</div>
-    </div>
-  </div>
-
-  <div class="abt-hr"></div>
-
-  <div class="abt-hr"></div>
-
-  <div class="ey">// try it yourself</div>
-  <div class="st">How does one game move the needle?</div>
-  <div class="bt">Xavier is 8 games into their season. Pick what happens next and watch the math update in real time.</div>
-
-  <!-- SIMULATOR -->
-  <div id="sim-wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1rem 0;align-items:start">
-
-    <!-- LEFT: equation state -->
-    <div>
-      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px">// xavier musketeers — big east</div>
-
-      <!-- big rating display -->
-      <div style="background:var(--bg2);border:1px solid var(--border);padding:14px 16px;margin-bottom:10px">
-        <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:4px">VBI RATING</div>
-        <div style="display:flex;align-items:baseline;gap:10px">
-          <div id="sim-rating" style="font-size:36px;font-weight:700;color:var(--green-b);letter-spacing:0.04em;transition:color 0.3s">0.5000</div>
-          <div id="sim-delta" style="font-size:13px;font-weight:700;opacity:0;transition:opacity 0.4s"></div>
-        </div>
-        <div style="display:flex;gap:16px;margin-top:8px;font-size:11px;color:var(--green-x)">
-          <span>record: <span id="sim-record" style="color:var(--green-b);font-weight:700">4-4</span></span>
-          <span>games: <span id="sim-games" style="color:var(--green-b);font-weight:700">8</span></span>
-        </div>
+      <div class="ey">// Matt DePrey's VBI</div>
+      <div class="st">Why RPI, KPI, and DSR all SUCK</div>
+      <div class="bt">
+        RPI measures schedule strength more than team quality. Since 75% of the formula comes from opponent and opponent-opponent winning percentage, teams inherit value from the schedules they play rather than fully earning it on the field. The system can reward teams for simply surviving difficult schedules, even when their actual results are mediocre.<br><br>
+        KPI attempts to fix this by rewarding "quality wins," but that creates a different problem: the rankings become dependent on arbitrary cutoff tiers and constantly shifting definitions of what counts as a "good win." Teams are judged relative to constructed categories instead of the full network of games.<br><br>
+        DSR goes even further toward prediction. It incorporates win expectancy, contextual adjustments, and margin-based modeling to estimate how strong a team is going forward. That can be useful for forecasting, but predictive systems inevitably inject more assumptions into the rankings. A 10-run win becomes fundamentally different from a 1-run win, and teams begin optimizing for model behavior rather than simply winning games.<br><br>
+        VBI takes a different approach. Using the Colley Matrix, every team's rating is solved simultaneously through the entire network of wins and losses across Division I baseball. No score margin. No quality-win buckets. No predictive modeling. The system only asks:<br><br>
+        &nbsp;&nbsp;&nbsp;* Who did you play?<br>
+        &nbsp;&nbsp;&nbsp;* Did you win?<br>
+        &nbsp;&nbsp;&nbsp;* Where was the game played?<br><br>
+        Instead of hardcoding schedule strength, quality tiers, or predictive assumptions into the formula, VBI allows strength to emerge naturally from the interconnected results of the entire season. Every game matters. Every opponent matters. Every team influences every other team through the same mathematical system.
       </div>
 
-      <!-- equation terms -->
-      <div style="border:1px solid var(--border);background:var(--bg2);padding:12px 14px;margin-bottom:10px">
-        <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--border)">
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
-            <span style="font-size:10px;color:var(--green-x);min-width:44px;letter-spacing:0.06em">C[i][i]</span>
-            <span id="sim-cii" style="font-size:15px;font-weight:700;color:var(--green-b);min-width:52px;transition:color 0.3s">9.60</span>
-            <span style="font-size:10px;color:var(--green-x)">= 2 + Σ(weighted games)</span>
+      <div class="abt-hr"></div>
+
+      <div class="ey">// the equation</div>
+      <div class="st">C · r = b</div>
+      <div class="bt">Three variables. One system. 308 unknowns solved simultaneously.</div>
+
+      <div class="fbox">
+        <div class="feq">C &nbsp;·&nbsp; r &nbsp;=&nbsp; b</div>
+        <div class="fgrid">
+          <div class="fc">
+            <div class="fs" style="color:#60a5fa">C</div>
+            <div class="fn">the matrix</div>
+            <div class="fd">A 308×308 matrix representing every Division I team. Each team's main value is based on its weighted games played, while every matchup against another team creates a negative connection between the two teams. When the system solves the equation, all of those connections work together so every team's rating is influenced by the strength of its opponents.</div>
           </div>
-          <div id="sim-cii-note" style="font-size:11px;color:var(--green-d);line-height:1.5;padding-left:52px">Your anchor weight. Grows with every game — the bigger it is, the harder it is for any single result to move you.</div>
-        </div>
-        <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--border)">
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
-            <span style="font-size:10px;color:var(--green-x);min-width:44px;letter-spacing:0.06em">b[i]</span>
-            <span id="sim-bi" style="font-size:15px;font-weight:700;color:var(--green-b);min-width:52px;transition:color 0.3s">0.0000</span>
-            <span style="font-size:10px;color:var(--green-x)">= 1 + Σ(win×wt) − Σ(loss×wt)</span>
+          <div class="fc">
+            <div class="fs" style="color:#4ade80">r</div>
+            <div class="fn">the ratings</div>
+            <div class="fd">What we solve for. One number per team. Higher = better. No team's rating can be solved without knowing all others — that interdependence is the whole point.</div>
           </div>
-          <div id="sim-bi-note" style="font-size:11px;color:var(--green-d);line-height:1.5;padding-left:52px">Your weighted record. 4 wins, 4 losses at mixed locations currently nets zero above the baseline.</div>
+          <div class="fc">
+            <div class="fs" style="color:#fbbf24">b</div>
+            <div class="fn">the record vector</div>
+            <div class="fd">The b vector measures a team's game results. It starts every team at a neutral baseline of 1, then adds weighted wins and subtracts weighted losses based on game location. Teams that win difficult games on the road build a stronger input value before the matrix adjusts for opponent strength.</div>
+          </div>
         </div>
+      </div>
+
+      <div class="ann">
+        This is not adjusted winning percentage. Solving C·r = b creates a web of interdependence across the entire sport. Xavier's rating is shaped by Arkansas's rating, which is shaped by every team Arkansas played, and so on — simultaneously, across all 308 teams. <b>Schedule strength isn't an input. It's an output.</b>
+      </div>
+
+      <div class="abt-hr"></div>
+
+      <div class="ey">// location weighting</div>
+      <div class="st">Where you play matters.</div>
+      <div class="bt">Every game result is multiplied by a location weight before entering the system.</div>
+      <div class="wbox">
+        <div class="wcard" style="border-color:#1a4a1a">
+          <div class="wi" style="color:var(--green-b)">×1.1</div>
+          <div class="wl" style="color:var(--green-d)">ROAD</div>
+          <div class="wd" style="color:#009933">Win away from home: +1.1 to b[i]. Lose on the road: −0.9.</div>
+        </div>
+        <div class="wcard" style="border-color:#2a1a0a">
+          <div class="wi" style="color:#fbbf24">×0.9</div>
+          <div class="wl" style="color:#92400e">HOME</div>
+          <div class="wd" style="color:#78350f">Win at home: +0.9 to b[i]. Lose at home: −1.1.</div>
+        </div>
+      </div>
+
+      <div class="abt-hr"></div>
+
+      <div class="rpi-grid">
+        <div class="rpi-card" style="border-color:#3f1a1a">
+          <div class="rpi-title" style="color:#f87171">RPI</div>
+          <div class="rpi-row"><div class="dot" style="background:#f87171"></div>25% your win%</div>
+          <div class="rpi-row"><div class="dot" style="background:#f87171"></div>50% opponents' win%</div>
+          <div class="rpi-row"><div class="dot" style="background:#f87171"></div>25% opponents' opponents' win%</div>
+          <div class="rpi-row" style="margin-top:6px;color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>75% of your rating ignores your results</div>
+          <div class="rpi-row" style="color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>Schedule strength assumed, not solved for</div>
+          <div class="rpi-row" style="color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>Can reward teams for losing in tough conferences</div>
+        </div>
+        <div class="rpi-card" style="border-color:#1a3a1a">
+          <div class="rpi-title" style="color:#4ade80">VBI — Colley Matrix</div>
+          <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>100% based on game results</div>
+          <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>Schedule strength emerges from the math</div>
+          <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>All 308 teams solved simultaneously</div>
+          <div class="rpi-row" style="margin-top:6px;color:var(--green)"><div class="dot" style="background:var(--green)"></div>Every team's rating influences every other</div>
+          <div class="rpi-row" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Mathematically objective — no committee</div>
+          <div class="rpi-row" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Way cooler name</div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem;border:1px solid var(--border);background:var(--bg2);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
         <div>
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
-            <span style="font-size:10px;color:var(--green-x);min-width:44px;letter-spacing:0.06em">r[i]</span>
-            <span id="sim-ri" style="font-size:15px;font-weight:700;color:var(--green-b);min-width:52px;transition:color 0.3s">0.5000</span>
-            <span style="font-size:10px;color:var(--green-x)">= solve(C · r = b)</span>
-          </div>
-          <div id="sim-ri-note" style="font-size:11px;color:var(--green-d);line-height:1.5;padding-left:52px">Solved simultaneously with all 308 teams. Opponent ratings pull this above or below your raw record.</div>
+          <div style="font-size:13px;font-weight:700;color:var(--green-b);margin-bottom:3px">// see the full 308×308 matrix</div>
+          <div style="font-size:11px;color:var(--green-x)">Every cell is a game connection. Drag the slider to watch it fill up day by day across the 2026 season.</div>
         </div>
+        <button onclick="showTab('matrix')" style="font-family:'Courier Prime','Courier New',monospace;font-size:12px;padding:6px 16px;border:1px solid var(--green);background:var(--bg3);color:var(--green-b);cursor:pointer;letter-spacing:0.08em;white-space:nowrap">[matrix] →</button>
       </div>
 
-      <!-- verdict -->
-      <div id="sim-verdict" style="border-left:2px solid var(--border);padding:8px 12px;font-size:12px;color:var(--green-d);line-height:1.6;min-height:48px;transition:border-color 0.3s">
-        Xavier is exactly at the .500 baseline. 4 wins, 4 losses, mixed schedule. Pick a next game to see the math move.
-      </div>
-
-      <!-- game log -->
-      <div style="margin-top:10px">
-        <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:4px">// game log</div>
-        <div id="sim-log" style="border:1px solid var(--border);background:var(--bg2);max-height:140px;overflow-y:auto;padding:4px 10px;font-family:'Courier Prime','Courier New',monospace"></div>
-      </div>
-
-      <!-- reset -->
-      <button onclick="simReset()" style="margin-top:10px;font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--green-d);cursor:pointer;letter-spacing:0.06em;width:100%">[reset to game 8]</button>
+      <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseballindex.com &nbsp;·&nbsp; updates nightly at 2am est &nbsp;·&nbsp; 2026</div>
     </div>
 
-    <!-- RIGHT: choices -->
-    <div>
-      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px">// what happens in game <span id="sim-game-num">9</span>?</div>
-      <div id="sim-choices" style="display:flex;flex-direction:column;gap:6px"></div>
-      <div id="sim-done" style="display:none;border:1px solid var(--border);background:var(--bg2);padding:16px;text-align:center">
-        <div style="font-size:13px;font-weight:700;color:var(--green-b);margin-bottom:6px">season simulated</div>
-        <div style="font-size:11px;color:var(--green-d);line-height:1.6" id="sim-summary"></div>
-        <button onclick="simReset()" style="margin-top:12px;font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:5px 14px;border:1px solid var(--green);background:var(--bg3);color:var(--green-b);cursor:pointer;letter-spacing:0.06em">[play again]</button>
+    <!-- RIGHT: simulator (fixed in place, parent handles containment) -->
+    <div style="height:100%;overflow:hidden;background:var(--bg2);display:flex;flex-direction:column">
+
+      <!-- header -->
+      <div style="padding:8px 14px;border-bottom:1px solid var(--border2);flex-shrink:0">
+        <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:1px">// try it yourself</div>
+        <div style="font-size:13px;font-weight:700;color:var(--green-b)">How does one game move the needle?</div>
+        <div style="font-size:10px;color:var(--green-d);margin-top:1px">Xavier · Big East · 8 games in · pick what happens next</div>
       </div>
-    </div>
+
+      <!-- two sub-columns -->
+      <div style="display:grid;grid-template-columns:3fr 2fr;flex:1;overflow:hidden;min-height:0">
+
+        <!-- LEFT sub: equation state -->
+        <div style="padding:10px 12px;border-right:1px solid var(--border2);overflow-y:auto;display:flex;flex-direction:column;gap:8px">
+
+          <!-- rating -->
+          <div style="background:var(--bg);border:1px solid var(--border);padding:10px 12px">
+            <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:4px">VBI RATING</div>
+            <div style="display:flex;align-items:baseline;gap:10px">
+              <div id="sim-rating" style="font-size:28px;font-weight:700;color:var(--green-b);letter-spacing:0.04em;transition:color 0.3s">0.5000</div>
+              <div id="sim-delta" style="font-size:13px;font-weight:700;opacity:0;transition:opacity 0.4s"></div>
+            </div>
+            <div style="display:flex;gap:16px;margin-top:6px;font-size:11px;color:var(--green-x)">
+              <span>record: <span id="sim-record" style="color:var(--green-b);font-weight:700">4-4</span></span>
+              <span>games: <span id="sim-games" style="color:var(--green-b);font-weight:700">8</span></span>
+            </div>
+          </div>
+
+          <!-- equation -->
+          <div style="border:1px solid var(--border);background:var(--bg);padding:10px 12px">
+            <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--border)">
+              <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px">
+                <span style="font-size:10px;color:var(--green-x);min-width:44px;letter-spacing:0.06em">C[i][i]</span>
+                <span id="sim-cii" style="font-size:14px;font-weight:700;color:var(--green-b);min-width:48px;transition:color 0.3s">9.60</span>
+                <span style="font-size:9px;color:var(--green-x)">= 2 + Σ(games)</span>
+              </div>
+              <div id="sim-cii-note" style="font-size:10px;color:var(--green-d);line-height:1.5;padding-left:50px">Anchor weight. Bigger = harder to move.</div>
+            </div>
+            <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--border)">
+              <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px">
+                <span style="font-size:10px;color:var(--green-x);min-width:44px;letter-spacing:0.06em">b[i]</span>
+                <span id="sim-bi" style="font-size:14px;font-weight:700;color:var(--green-b);min-width:48px;transition:color 0.3s">0.0000</span>
+                <span style="font-size:9px;color:var(--green-x)">= 1 + Σ(W×wt) − Σ(L×wt)</span>
+              </div>
+              <div id="sim-bi-note" style="font-size:10px;color:var(--green-d);line-height:1.5;padding-left:50px">Weighted record. 4W 4L = at baseline.</div>
+            </div>
+            <div>
+              <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px">
+                <span style="font-size:10px;color:var(--green-x);min-width:44px;letter-spacing:0.06em">r[i]</span>
+                <span id="sim-ri" style="font-size:14px;font-weight:700;color:var(--green-b);min-width:48px;transition:color 0.3s">0.5000</span>
+                <span style="font-size:9px;color:var(--green-x)">= solve(C · r = b)</span>
+              </div>
+              <div id="sim-ri-note" style="font-size:10px;color:var(--green-d);line-height:1.5;padding-left:50px">Solved with all 308 teams at once.</div>
+            </div>
+          </div>
+
+          <!-- verdict -->
+          <div id="sim-verdict" style="border-left:2px solid var(--border);padding:7px 10px;font-size:11px;color:var(--green-d);line-height:1.6;transition:border-color 0.3s">
+            Pick a game to see the math move.
+          </div>
+
+          <!-- game log -->
+          <div>
+            <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:3px">// game log</div>
+            <div id="sim-log" style="border:1px solid var(--border);background:var(--bg);max-height:72px;overflow-y:auto;padding:3px 8px;font-family:'Courier Prime','Courier New',monospace"></div>
+          </div>
+
+          <button onclick="simReset()" style="font-family:'Courier Prime','Courier New',monospace;font-size:10px;padding:4px 12px;border:1px solid var(--border);background:transparent;color:var(--green-x);cursor:pointer;letter-spacing:0.06em">[reset to game 8]</button>
+        </div>
+
+        <!-- RIGHT sub: game choices -->
+        <div style="padding:10px 12px;overflow-y:auto;display:flex;flex-direction:column">
+          <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px;flex-shrink:0">// game <span id="sim-game-num">9</span> — what happens?</div>
+          <div id="sim-choices" style="display:flex;flex-direction:column;gap:6px"></div>
+          <div id="sim-done" style="display:none;border:1px solid var(--border);background:var(--bg);padding:14px;text-align:center">
+            <div style="font-size:12px;font-weight:700;color:var(--green-b);margin-bottom:5px">season simulated</div>
+            <div style="font-size:11px;color:var(--green-d);line-height:1.6" id="sim-summary"></div>
+            <button onclick="simReset()" style="margin-top:10px;font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:4px 12px;border:1px solid var(--green);background:var(--bg3);color:var(--green-b);cursor:pointer;letter-spacing:0.06em">[play again]</button>
+          </div>
+        </div>
+
+      </div><!-- end sub-columns -->
+    </div><!-- end right sticky -->
+
   </div>
-
-  <div style="margin-top:1.5rem;border:1px solid var(--border);background:var(--bg2);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
-    <div>
-      <div style="font-size:13px;font-weight:700;color:var(--green-b);margin-bottom:3px">// see the full 308×308 matrix</div>
-      <div style="font-size:11px;color:var(--green-x)">Every cell is a game connection. Drag the slider to watch it fill up day by day as the 2026 season unfolds.</div>
-    </div>
-    <button onclick="showTab('matrix')" style="font-family:'Courier Prime','Courier New',monospace;font-size:12px;padding:6px 16px;border:1px solid var(--green);background:var(--bg3);color:var(--green-b);cursor:pointer;letter-spacing:0.08em;white-space:nowrap">[matrix] →</button>
+</div>
   </div>
-
-  <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseballindex.com &nbsp;·&nbsp; updates nightly at 2am est &nbsp;·&nbsp; 2026</div>
 </div>
 <footer>
   <span>veritasbaseballindex.com // vbi v1.0 // 2026</span>
@@ -657,6 +696,8 @@ function showTab(tab) {
   document.querySelectorAll(".nav-btn").forEach((b,i) => {
     b.classList.toggle("active", ["about","matrix","rankings","map"][i] === tab);
   });
+  // Lock page scroll when about tab is active (it has its own internal scroll)
+  document.body.style.overflow = tab === "about" ? "hidden" : "";
   if (tab === "map" && !mapInit) initMap();
   if (tab === "about") { if (!aboutInit) { aboutInit = true; initXavier(); } }
   if (tab === "matrix") { if (!matrixInit) { matrixInit = true; initMatrix(); } }
@@ -1581,10 +1622,10 @@ function simPick(optIdx) {
   // Update notes
   const wt = opt.loc==='road'?1.1:0.9;
   document.getElementById("sim-cii-note").textContent =
-    `Now ${newState.cii.toFixed(2)}. Added +${wt} for this ${opt.loc} game. Larger anchor = each future game moves you less.`;
-  const biDir = opt.win ? `+${wt*0.5} (win)` : `−${wt*0.5} (loss)`;
+    `Now ${newState.cii.toFixed(2)}. +${wt} for this ${opt.loc} game.`;
+  const biDir = opt.win ? `+${(wt*0.5).toFixed(2)} (win)` : `−${(wt*0.5).toFixed(2)} (loss)`;
   document.getElementById("sim-bi-note").textContent =
-    `${biDir} at ${wt}× weight → now ${newState.bi.toFixed(4)}. ${newState.bi>0?'Above':'Below'} the 1.0 baseline means ${newState.bi>0?'wins outweigh losses':'losses outweigh wins'} on weighted terms.`;
+    `${biDir} at ×${wt} → now ${newState.bi.toFixed(4)}.`;
   document.getElementById("sim-ri-note").textContent =
     `Solved with all opponent ratings. ${SIM_TEAMS[opt.opp].name} (${SIM_TEAMS[opt.opp].rating.toFixed(3)}) ${opt.win?"pulled your rating up":"dragged your rating down"} through the matrix connection.`;
 
