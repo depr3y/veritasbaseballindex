@@ -635,7 +635,7 @@ const MX_TEAMS = ["Alabama","Arkansas","Auburn","Florida","Georgia","Kentucky","
 
 const MX_CONF_GROUPS=[{"n":"SEC","s":0,"z":15},{"n":"Big Ten","s":15,"z":18},{"n":"ACC","s":33,"z":16},{"n":"Big 12","s":49,"z":15},{"n":"Sun Belt","s":64,"z":15},{"n":"MWC","s":79,"z":8},{"n":"Big West","s":87,"z":11},{"n":"WCC","s":98,"z":9},{"n":"Ivy","s":107,"z":8},{"n":"American","s":115,"z":10},{"n":"CUSA","s":125,"z":12},{"n":"A-10","s":137,"z":12},{"n":"CAA","s":149,"z":9},{"n":"Big South","s":158,"z":10},{"n":"SoCon","s":168,"z":8},{"n":"OVC","s":176,"z":8},{"n":"SWAC","s":184,"z":12},{"n":"WAC","s":196,"z":10},{"n":"MVC","s":206,"z":8},{"n":"MAC","s":214,"z":12},{"n":"MEAC","s":226,"z":5},{"n":"Horizon","s":231,"z":6},{"n":"Patriot","s":237,"z":6},{"n":"NEC","s":243,"z":15},{"n":"ASUN","s":258,"z":12},{"n":"Big East","s":270,"z":8},{"n":"Summit","s":278,"z":6},{"n":"Southland","s":284,"z":11},{"n":"MAAC","s":295,"z":11},{"n":"Big Sky","s":306,"z":1},{"n":"Other","s":307,"z":1}];
 
-const NT=308, CELL=6, LABEL=160, TOTAL=LABEL+NT*CELL;
+const NT=308, CELL=12, LABEL=200, TOTAL=LABEL+NT*CELL;
 const MX_TEAM_IDX={};
 MX_TEAMS.forEach((t,i)=>MX_TEAM_IDX[t]=i);
 
@@ -734,7 +734,7 @@ function drawMatrix(){
     ctx.strokeStyle="#00ff5550";ctx.lineWidth=1;
     ctx.strokeRect(x+.5,x+.5,w-1,w-1);
     if(w>=14){
-      const fs=Math.min(13,Math.max(7,w*0.13));
+      const fs=Math.min(16,Math.max(9,w*0.13));
       ctx.font=`bold ${fs}px 'Courier Prime','Courier New',monospace`;
       ctx.textAlign="center";
       const cx=x+w/2,cy=x+w/2+fs*0.35,tw=ctx.measureText(cg.n).width;
@@ -749,10 +749,10 @@ function drawMatrix(){
     ctx.fillRect(0,LABEL+cg.s*CELL,LABEL,cg.z*CELL);
   });
   // team names left
-  ctx.textAlign="right";ctx.font=`bold 9px 'Courier Prime','Courier New',monospace`;
+  ctx.textAlign="right";ctx.font=`bold 11px 'Courier Prime','Courier New',monospace`;
   for(let i=0;i<NT;i++){
     ctx.fillStyle=hl>=0&&i===hl?"#00ff55":hl>=0?"#003311":"#007722";
-    ctx.fillText(MX_TEAMS[i],LABEL-4,LABEL+i*CELL+CELL/2+3);
+    ctx.fillText(MX_TEAMS[i],LABEL-6,LABEL+i*CELL+CELL/2+4);
   }
   // conf name + divider left
   MX_CONF_GROUPS.forEach(cg=>{
@@ -760,7 +760,7 @@ function drawMatrix(){
     ctx.strokeStyle="#1a3318";ctx.lineWidth=0.5;
     ctx.beginPath();ctx.moveTo(0,y+.5);ctx.lineTo(LABEL-1,y+.5);ctx.stroke();
     if(h>=9){
-      const fs=Math.min(10,Math.max(7,h*0.22));
+      const fs=Math.min(12,Math.max(8,h*0.22));
       ctx.font=`bold ${fs}px 'Courier Prime','Courier New',monospace`;
       ctx.fillStyle="#00cc44";ctx.textAlign="left";
       ctx.fillText(cg.n,3,y+h/2+fs*0.35);
@@ -773,10 +773,10 @@ function drawMatrix(){
     ctx.fillRect(LABEL+cg.s*CELL,0,cg.z*CELL,LABEL);
   });
   // team names top (rotated)
-  ctx.font=`bold 9px 'Courier Prime','Courier New',monospace`;
+  ctx.font=`bold 11px 'Courier Prime','Courier New',monospace`;
   for(let j=0;j<NT;j++){
     ctx.fillStyle=hl>=0&&j===hl?"#00ff55":hl>=0?"#003311":"#007722";
-    ctx.save();ctx.translate(LABEL+j*CELL+CELL/2,LABEL-4);ctx.rotate(-Math.PI/2);
+    ctx.save();ctx.translate(LABEL+j*CELL+CELL/2,LABEL-6);ctx.rotate(-Math.PI/2);
     ctx.textAlign="left";ctx.fillText(MX_TEAMS[j],0,0);ctx.restore();
   }
   // conf name + divider top
@@ -785,8 +785,8 @@ function drawMatrix(){
     ctx.strokeStyle="#1a3318";ctx.lineWidth=0.5;
     ctx.beginPath();ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,LABEL-1);ctx.stroke();
     if(w>=9){
-      const fs=Math.min(10,Math.max(7,w*0.22));
-      ctx.save();ctx.translate(x+w/2,LABEL-4);ctx.rotate(-Math.PI/2);
+      const fs=Math.min(12,Math.max(8,w*0.22));
+      ctx.save();ctx.translate(x+w/2,LABEL-6);ctx.rotate(-Math.PI/2);
       ctx.font=`bold ${fs}px 'Courier Prime','Courier New',monospace`;
       ctx.fillStyle="#00cc44";ctx.textAlign="left";ctx.fillText(cg.n,0,0);ctx.restore();
     }
@@ -794,9 +794,9 @@ function drawMatrix(){
 
   // corner
   ctx.fillStyle="#080808";ctx.fillRect(0,0,LABEL,LABEL);
-  ctx.font="bold 10px 'Courier Prime','Courier New',monospace";
+  ctx.font="bold 13px 'Courier Prime','Courier New',monospace";
   ctx.fillStyle="#007722";ctx.textAlign="left";
-  ctx.fillText("VBI",6,16);ctx.fillText("308×308",6,30);
+  ctx.fillText("VBI",8,20);ctx.fillText("308×308",8,36);
 }
 
 function openSidebar(i){
