@@ -29,8 +29,11 @@
     .mx-info span{color:var(--green)}
     .sel-info{padding:6px 20px;font-size:11px;color:var(--green-d);border-bottom:1px solid var(--border2);min-height:26px;letter-spacing:0.04em}
     .sel-info span{color:var(--green-b);font-weight:700}
-    .canvas-wrap{overflow:hidden;cursor:grab;height:calc(100vh - 260px);position:relative;background:var(--bg)}
-    .canvas-wrap.grabbing{cursor:grabbing}
+    .canvas-wrap{overflow:auto;height:calc(100vh - 260px);background:var(--bg);cursor:crosshair}
+    .mx-zoom-row{padding:6px 20px;background:var(--bg2);border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:12px;font-size:11px;color:var(--green-x)}
+    .mx-zoom-row span{color:var(--green)}
+    .zoom-btn{font-family:'Courier Prime','Courier New',monospace;font-size:13px;padding:2px 10px;border:1px solid var(--border);background:transparent;color:var(--green-d);cursor:pointer;letter-spacing:0.04em}
+    .zoom-btn:hover{color:var(--green-b);border-color:var(--green)}
     .mx-legend{padding:8px 20px;border-top:1px solid var(--border2);display:flex;align-items:center;gap:10px;font-size:10px;color:var(--green-x);flex-wrap:wrap}
     .lbar{display:flex;height:5px;width:160px}
     .conf-labels{padding:6px 20px 10px;display:flex;flex-wrap:wrap;gap:5px;border-bottom:1px solid var(--border2)}
@@ -179,8 +182,18 @@
   </div>
 
   <div class="sel-info" id="sel-info">// drag the slider above to watch the matrix fill up game by game. click any cell to highlight that team.</div>
+  <div class="mx-zoom-row">
+    <button class="zoom-btn" onclick="setZoom(mxZoom * 1.5)">[ + ]</button>
+    <button class="zoom-btn" onclick="setZoom(mxZoom / 1.5)">[ - ]</button>
+    <button class="zoom-btn" onclick="fitZoom()">[fit]</button>
+    <button class="zoom-btn" onclick="setZoom(1)">[1:1]</button>
+    <span id="zoom-label">zoom: --</span>
+    &nbsp;·&nbsp; scroll to navigate · click cell to highlight team
+  </div>
   <div class="canvas-wrap" id="cwrap">
-    <canvas id="mc" role="img" aria-label="Colley Matrix heatmap — scroll to zoom, drag to pan"></canvas>
+    <div id="mc-scaler" style="transform-origin:top left;display:inline-block;line-height:0">
+      <canvas id="mc" role="img" aria-label="Colley Matrix heatmap"></canvas>
+    </div>
   </div>
   <div class="mx-legend">
     <span>no games</span>
@@ -475,6 +488,359 @@ function initMap() {
 const MX_TEAMS = ["Alabama","Arkansas","Auburn","Florida","Georgia","Kentucky","LSU","Mississippi St.","Missouri","Ole Miss","South Carolina","Tennessee","Texas","Texas A&M","Vanderbilt","Illinois","Indiana","Iowa","Maryland","Michigan","Michigan St.","Minnesota","Nebraska","Northwestern","Ohio St.","Oregon","Oregon St.","Penn St.","Purdue","Rutgers","Southern California","UCLA","Washington","Boston College","California","Clemson","Duke","Florida St.","Georgia Tech","Louisville","Miami (FL)","NC State","North Carolina","Notre Dame","Pittsburgh","Stanford","Virginia","Virginia Tech","Wake Forest","Arizona","Arizona St.","BYU","Baylor","Cincinnati","Houston","Kansas","Kansas St.","Oklahoma","Oklahoma St.","TCU","Texas Tech","UCF","Utah","West Virginia","App State","Arkansas St.","Coastal Carolina","Ga. Southern","Georgia St.","James Madison","Little Rock","Louisiana","Marshall","Old Dominion","South Alabama","Southern Miss.","Texas St.","Troy","ULM","Air Force","Fresno St.","Nevada","New Mexico","San Diego St.","San Jose St.","UNLV","Washington St.","CSU Bakersfield","CSUN","Cal Poly","Cal St. Fullerton","Hawaii","Long Beach St.","UC Davis","UC Irvine","UC Riverside","UC San Diego","UC Santa Barbara","Gonzaga","LMU (CA)","Pacific","Pepperdine","Portland","Saint Mary's (CA)","San Diego","San Francisco","Santa Clara","Brown","Columbia","Cornell","Dartmouth","Harvard","Penn","Princeton","Yale","Charlotte","East Carolina","Fla. Atlantic","Memphis","Rice","South Fla.","Tulane","UAB","UTSA","Wichita St.","DBU","Delaware","FIU","Jacksonville St.","Kennesaw St.","Liberty","Louisiana Tech","Middle Tenn.","Missouri St.","New Mexico St.","Sam Houston","Western Ky.","Davidson","Dayton","Fordham","George Mason","George Washington","La Salle","Rhode Island","Richmond","Saint Joseph's","Saint Louis","St. Bonaventure","VCU","Col. of Charleston","Elon","Hofstra","Monmouth","Northeastern","Stony Brook","Towson","UNCW","William & Mary","Campbell","Charleston So.","Gardner-Webb","High Point","Longwood","Presbyterian","Radford","UNC Asheville","USC Upstate","Winthrop","ETSU","Mercer","Samford","The Citadel","UNC Greensboro","VMI","Western Caro.","Wofford","Eastern Ill.","Morehead St.","Murray St.","SIUE","Southeast Mo. St.","Southern Ind.","Tennessee Tech","UT Martin","Alabama A&M","Alabama St.","Alcorn","Ark.-Pine Bluff","Bethune-Cookman","Florida A&M","Grambling","Jackson St.","Mississippi Val.","Prairie View","Southern U.","Texas Southern","Abilene Christian","California Baptist","Grand Canyon","Sacramento St.","Seattle U","Tarleton St.","UT Arlington","UTRGV","Utah Tech","Utah Valley","Belmont","Bradley","Evansville","Illinois St.","Indiana St.","Southern Ill.","UIC","Valparaiso","Akron","Ball St.","Bowling Green","Central Mich.","Eastern Mich.","Kent St.","Massachusetts","Miami (OH)","NIU","Ohio","Toledo","Western Mich.","Coppin St.","Delaware St.","N.C. A&T","Norfolk St.","UMES","Mercyhurst","Milwaukee","Northern Ky.","Oakland","Wright St.","Youngstown St.","Army West Point","Bucknell","Holy Cross","Lafayette","Lehigh","Navy","Binghamton","Bryant","Central Conn. St.","FDU","LIU","Maine","Merrimack","Mount St. Mary's","NJIT","Sacred Heart","Stonehill","UAlbany","UMBC","UMass Lowell","Wagner","Austin Peay","Bellarmine","Central Ark.","Eastern Ky.","FGCU","Jacksonville","Lindenwood","Lipscomb","North Ala.","North Florida","Queens (NC)","Stetson","Butler","Creighton","Georgetown","Seton Hall","St. John's (NY)","UConn","Villanova","Xavier","North Dakota St.","Omaha","Oral Roberts","South Dakota St.","St. Thomas (MN)","Western Ill.","A&M-Corpus Christi","Houston Christian","Lamar University","McNeese","New Orleans","Nicholls","Northwestern St.","SFA","Southeastern La.","UIW","West Ga.","Canisius","Fairfield","Iona","Le Moyne","Manhattan","Marist","Niagara","Quinnipiac","Rider","Saint Peter's","Siena","Northern Colo.","New Haven"];
 
 const MX_CONF_GROUPS = [{"n":"SEC","s":0,"z":15},{"n":"Big Ten","s":15,"z":18},{"n":"ACC","s":33,"z":16},{"n":"Big 12","s":49,"z":15},{"n":"Sun Belt","s":64,"z":15},{"n":"MWC","s":79,"z":8},{"n":"Big West","s":87,"z":11},{"n":"WCC","s":98,"z":9},{"n":"Ivy","s":107,"z":8},{"n":"American","s":115,"z":10},{"n":"CUSA","s":125,"z":12},{"n":"A-10","s":137,"z":12},{"n":"CAA","s":149,"z":9},{"n":"Big South","s":158,"z":10},{"n":"SoCon","s":168,"z":8},{"n":"OVC","s":176,"z":8},{"n":"SWAC","s":184,"z":12},{"n":"WAC","s":196,"z":10},{"n":"MVC","s":206,"z":8},{"n":"MAC","s":214,"z":12},{"n":"MEAC","s":226,"z":5},{"n":"Horizon","s":231,"z":6},{"n":"Patriot","s":237,"z":6},{"n":"NEC","s":243,"z":15},{"n":"ASUN","s":258,"z":12},{"n":"Big East","s":270,"z":8},{"n":"Summit","s":278,"z":6},{"n":"Southland","s":284,"z":11},{"n":"MAAC","s":295,"z":11},{"n":"Big Sky","s":306,"z":1},{"n":"Other","s":307,"z":1}];
+
+const NT = 308;
+const CELL = 6;        // native canvas px per team — 1848px matrix
+const LABEL = 160;     // native px for label margin
+const TOTAL = LABEL + NT * CELL;  // full canvas = 2008px native
+
+const MX_TEAM_IDX = {};
+MX_TEAMS.forEach((t, i) => MX_TEAM_IDX[t] = i);
+
+let TL_GAMES = [], TL_DATES = [], TL_IDX = 0;
+let mxData = null, mxRatings = [], selTeam = -1;
+let mxZoom = 1;
+
+// ── ZOOM ───────────────────────────────────────────────────
+function setZoom(z) {
+  mxZoom = Math.max(0.08, Math.min(5, z));
+  const scaler = document.getElementById("mc-scaler");
+  const scaled = Math.round(TOTAL * mxZoom);
+  scaler.style.transform = `scale(${mxZoom})`;
+  scaler.style.transformOrigin = "top left";
+  scaler.style.width  = TOTAL + "px";
+  scaler.style.height = TOTAL + "px";
+  // Expand the scroll container's content area to match scaled size
+  scaler.style.marginRight  = (scaled - TOTAL) + "px";
+  scaler.style.marginBottom = (scaled - TOTAL) + "px";
+  document.getElementById("zoom-label").textContent = `zoom: ${Math.round(mxZoom * 100)}%`;
+}
+
+function fitZoom() {
+  const wrap = document.getElementById("cwrap");
+  const z = Math.min(wrap.clientWidth / TOTAL, wrap.clientHeight / TOTAL);
+  setZoom(z);
+  wrap.scrollLeft = 0; wrap.scrollTop = 0;
+}
+
+// ── MATH ───────────────────────────────────────────────────
+function gaussSolve(A, b) {
+  const n = b.length;
+  const M = A.map((row, i) => [...row, b[i]]);
+  for (let col = 0; col < n; col++) {
+    let mx = col;
+    for (let row = col + 1; row < n; row++) if (Math.abs(M[row][col]) > Math.abs(M[mx][col])) mx = row;
+    [M[col], M[mx]] = [M[mx], M[col]];
+    if (Math.abs(M[col][col]) < 1e-12) continue;
+    for (let row = col + 1; row < n; row++) {
+      const f = M[row][col] / M[col][col];
+      for (let k = col; k <= n; k++) M[row][k] -= f * M[col][k];
+    }
+  }
+  const x = new Array(n).fill(0);
+  for (let i = n - 1; i >= 0; i--) {
+    x[i] = M[i][n] / M[i][i];
+    for (let j = i - 1; j >= 0; j--) M[j][n] -= M[j][i] * x[i];
+  }
+  return x;
+}
+
+function computeSlice(dateIdx) {
+  const cutoff = TL_DATES[dateIdx];
+  const games = TL_GAMES.filter(g => g.date <= cutoff);
+  const gc = new Int32Array(NT);
+  for (const g of games) {
+    const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
+    if (wi !== undefined && li !== undefined) { gc[wi]++; gc[li]++; }
+  }
+  const mx = Array.from({length: NT}, () => new Uint8Array(NT));
+  for (const g of games) {
+    const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
+    if (wi !== undefined && li !== undefined) { mx[wi][li]++; mx[li][wi]++; }
+  }
+  const qualIdx = [];
+  for (let i = 0; i < NT; i++) if (gc[i] >= 10) qualIdx.push(i);
+  const ratings = new Float64Array(NT);
+  if (qualIdx.length >= 2) {
+    const sub = {}; qualIdx.forEach((gi, si) => sub[gi] = si);
+    const qn = qualIdx.length;
+    const C = Array.from({length: qn}, () => new Array(qn).fill(0));
+    const b = new Array(qn).fill(1);
+    for (let si = 0; si < qn; si++) C[si][si] = 2;
+    for (const g of games) {
+      const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
+      if (wi === undefined || li === undefined) continue;
+      const swi = sub[wi], sli = sub[li];
+      if (swi === undefined || sli === undefined) continue;
+      const wt = g.location === 'away' ? 1.1 : g.location === 'home' ? 0.9 : 1.0;
+      C[swi][swi] += wt; C[sli][sli] += wt; C[swi][sli] -= wt; C[sli][swi] -= wt;
+      b[swi] += wt * 0.5; b[sli] -= wt * 0.5;
+    }
+    const r = gaussSolve(C, b);
+    qualIdx.forEach((gi, si) => ratings[gi] = r[si]);
+  }
+  return { mxMatrix: mx, ratings, gameCount: games.length, teamCount: qualIdx.length };
+}
+
+// ── DRAW — single canvas, everything in native px ──────────
+function drawMatrix() {
+  const cv = document.getElementById("mc");
+  cv.width = TOTAL; cv.height = TOTAL;
+  cv.style.width  = TOTAL + "px";
+  cv.style.height = TOTAL + "px";
+  const ctx = cv.getContext("2d");
+  ctx.fillStyle = "#0a0a0a";
+  ctx.fillRect(0, 0, TOTAL, TOTAL);
+  if (!mxData) return;
+
+  const hl = selTeam;
+
+  // ── Cells ──
+  for (let i = 0; i < NT; i++) {
+    for (let j = 0; j < NT; j++) {
+      const isDiag = i === j;
+      const isHL = hl >= 0 && (i === hl || j === hl);
+      let r = 0, g = 0, bl = 0;
+      if (isDiag) {
+        if (isHL || hl < 0) { g = 255; bl = 85; } else { g = 80; bl = 27; }
+      } else if (mxData[i][j] > 0) {
+        const intensity = Math.min(1, mxData[i][j] / 3);
+        const base = isHL ? 220 : (hl >= 0 ? 60 : 180);
+        g = Math.floor(base * intensity + 30); r = Math.floor(g * 0.05); bl = Math.floor(g * 0.15);
+        if (hl >= 0 && !isHL) { g = Math.floor(g*0.3); r = Math.floor(r*0.3); bl = Math.floor(bl*0.3); }
+      } else {
+        if (isHL) { g = 40; bl = 15; } else { r = 10; g = 10; bl = 10; }
+        if (hl >= 0 && !isHL) { r = 5; g = 5; bl = 5; }
+      }
+      ctx.fillStyle = `rgb(${r},${g},${bl})`;
+      ctx.fillRect(LABEL + j * CELL, LABEL + i * CELL, CELL, CELL);
+    }
+  }
+
+  // ── Conf blocks + matrix labels ──
+  MX_CONF_GROUPS.forEach(cg => {
+    const x = LABEL + cg.s * CELL, w = cg.z * CELL;
+    ctx.strokeStyle = "#00ff5555"; ctx.lineWidth = 1;
+    ctx.strokeRect(x + 0.5, x + 0.5, w - 1, w - 1);
+    if (w >= 14) {
+      const fs = Math.min(13, Math.max(7, w * 0.13));
+      ctx.font = `bold ${fs}px 'Courier Prime','Courier New',monospace`;
+      ctx.textAlign = "center";
+      const cx2 = x + w / 2, cy2 = x + w / 2 + fs * 0.35;
+      const tw = ctx.measureText(cg.n).width;
+      ctx.fillStyle = "rgba(10,10,10,0.85)";
+      ctx.fillRect(cx2 - tw/2 - 4, cy2 - fs - 1, tw + 8, fs + 6);
+      ctx.fillStyle = "#00ff55";
+      ctx.fillText(cg.n, cx2, cy2);
+    }
+  });
+
+  // ── Left axis ──
+  ctx.fillStyle = "#080808"; ctx.fillRect(0, LABEL, LABEL, NT * CELL);
+  // Alternating conf bands
+  MX_CONF_GROUPS.forEach((cg, ci) => {
+    ctx.fillStyle = ci % 2 === 0 ? "#0a0f0a" : "#0d150d";
+    ctx.fillRect(0, LABEL + cg.s * CELL, LABEL, cg.z * CELL);
+  });
+  // Team names
+  ctx.textAlign = "right";
+  ctx.font = `bold 9px 'Courier Prime','Courier New',monospace`;
+  for (let i = 0; i < NT; i++) {
+    const y = LABEL + i * CELL + CELL / 2 + 3;
+    const isHL = hl >= 0 && i === hl;
+    ctx.fillStyle = isHL ? "#00ff55" : (hl >= 0 ? "#003311" : "#007722");
+    ctx.fillText(MX_TEAMS[i], LABEL - 4, y);
+  }
+  // Conf labels + dividers on left
+  MX_CONF_GROUPS.forEach(cg => {
+    const y = LABEL + cg.s * CELL, h = cg.z * CELL;
+    ctx.strokeStyle = "#1a3318"; ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(0, y + 0.5); ctx.lineTo(LABEL - 1, y + 0.5); ctx.stroke();
+    if (h >= 9) {
+      const fs = Math.min(10, Math.max(7, h * 0.22));
+      ctx.font = `bold ${fs}px 'Courier Prime','Courier New',monospace`;
+      ctx.fillStyle = "#00cc44"; ctx.textAlign = "left";
+      ctx.fillText(cg.n, 3, y + h / 2 + fs * 0.35);
+    }
+  });
+
+  // ── Top axis ──
+  ctx.fillStyle = "#080808"; ctx.fillRect(LABEL, 0, NT * CELL, LABEL);
+  MX_CONF_GROUPS.forEach((cg, ci) => {
+    ctx.fillStyle = ci % 2 === 0 ? "#0a0f0a" : "#0d150d";
+    ctx.fillRect(LABEL + cg.s * CELL, 0, cg.z * CELL, LABEL);
+  });
+  // Team names rotated
+  ctx.font = `bold 9px 'Courier Prime','Courier New',monospace`;
+  for (let j = 0; j < NT; j++) {
+    const x = LABEL + j * CELL + CELL / 2;
+    const isHL = hl >= 0 && j === hl;
+    ctx.fillStyle = isHL ? "#00ff55" : (hl >= 0 ? "#003311" : "#007722");
+    ctx.save(); ctx.translate(x, LABEL - 4); ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = "left"; ctx.fillText(MX_TEAMS[j], 0, 0); ctx.restore();
+  }
+  // Conf labels + dividers on top
+  MX_CONF_GROUPS.forEach(cg => {
+    const x = LABEL + cg.s * CELL, w = cg.z * CELL;
+    ctx.strokeStyle = "#1a3318"; ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, LABEL - 1); ctx.stroke();
+    if (w >= 9) {
+      const fs = Math.min(10, Math.max(7, w * 0.22));
+      ctx.save(); ctx.translate(x + w / 2, LABEL - 4); ctx.rotate(-Math.PI / 2);
+      ctx.font = `bold ${fs}px 'Courier Prime','Courier New',monospace`;
+      ctx.fillStyle = "#00cc44"; ctx.textAlign = "left";
+      ctx.fillText(cg.n, 0, 0); ctx.restore();
+    }
+  });
+
+  // ── Corner ──
+  ctx.fillStyle = "#080808"; ctx.fillRect(0, 0, LABEL, LABEL);
+  ctx.font = "bold 10px 'Courier Prime','Courier New',monospace";
+  ctx.fillStyle = "#007722"; ctx.textAlign = "left";
+  ctx.fillText("VBI", 6, 16); ctx.fillText("308×308", 6, 30);
+}
+
+// ── SLIDER ─────────────────────────────────────────────────
+let raf = null;
+function onSliderChange() {
+  if (raf) cancelAnimationFrame(raf);
+  raf = requestAnimationFrame(() => {
+    TL_IDX = parseInt(document.getElementById("tl-slider").value);
+    const result = computeSlice(TL_IDX);
+    if (!result) return;
+    mxData = result.mxMatrix; mxRatings = result.ratings; selTeam = -1;
+    document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
+    drawMatrix();
+    document.getElementById("tl-date-display").textContent = TL_DATES[TL_IDX];
+    document.getElementById("tl-day-num").textContent = TL_IDX + 1;
+    document.getElementById("tl-games-to-date").textContent = result.gameCount.toLocaleString();
+    document.getElementById("tl-teams-active").textContent = result.teamCount;
+    document.getElementById("mx-dim").textContent = `${NT} × ${NT}`;
+    document.getElementById("mx-game-count").textContent = result.gameCount.toLocaleString();
+    document.getElementById("mx-team-count").textContent = result.teamCount;
+    document.getElementById("mx-cells").textContent = (NT * NT).toLocaleString();
+    let topTeam = "--", topR = -Infinity;
+    for (let i = 0; i < NT; i++) if (mxRatings[i] > topR) { topR = mxRatings[i]; topTeam = MX_TEAMS[i]; }
+    document.getElementById("tl-top1").textContent = topTeam;
+    document.getElementById("sel-info").innerHTML = "// use [ + ] [ - ] to zoom · scroll to pan · click any cell to highlight that team";
+  });
+}
+
+async function initMatrix() {
+  try {
+    const res = await fetch("games.json");
+    TL_GAMES = await res.json();
+  } catch(e) {
+    document.getElementById("tl-loading").textContent = "// error: could not load games.json"; return;
+  }
+  TL_DATES = [...new Set(TL_GAMES.map(g => g.date))].sort();
+  const lastIdx = TL_DATES.length - 1;
+  document.getElementById("tl-loading").style.display = "none";
+  document.getElementById("tl-wrap").style.display = "block";
+  const slider = document.getElementById("tl-slider");
+  slider.max = lastIdx; slider.value = lastIdx;
+  document.getElementById("tl-end-date").textContent = TL_DATES[lastIdx];
+  document.getElementById("tl-total-days").textContent = TL_DATES.length;
+
+  // Legend
+  const bar = document.getElementById("lbar");
+  if (!bar.children.length) {
+    for (let i = 0; i < 20; i++) {
+      const s = document.createElement("div"); s.style.flex = "1";
+      s.style.background = `rgb(${Math.floor(i*0.5)},${Math.floor(i*11)},${Math.floor(i*3)})`;
+      bar.appendChild(s);
+    }
+  }
+
+  // Conf buttons — clicking scrolls to that block
+  const cl = document.getElementById("conf-labels");
+  if (!cl.children.length) {
+    MX_CONF_GROUPS.forEach(cg => {
+      const btn = document.createElement("div"); btn.className = "clabel"; btn.textContent = cg.n;
+      btn.onclick = () => {
+        document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl")); btn.classList.add("hl");
+        selTeam = cg.s + Math.floor(cg.z / 2); drawMatrix();
+        const wrap = document.getElementById("cwrap");
+        const blockCenter = (LABEL + (cg.s + cg.z / 2) * CELL) * mxZoom;
+        wrap.scrollLeft = Math.max(0, blockCenter - wrap.clientWidth  / 2);
+        wrap.scrollTop  = Math.max(0, blockCenter - wrap.clientHeight / 2);
+        document.getElementById("sel-info").innerHTML = `// highlighted: <span>${cg.n}</span> (${cg.z} teams)`;
+      };
+      cl.appendChild(btn);
+    });
+  }
+
+  slider.addEventListener("input", onSliderChange);
+
+  // Ctrl+scroll = zoom centered on cursor
+  const wrap = document.getElementById("cwrap");
+  wrap.addEventListener("wheel", e => {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    const rect = wrap.getBoundingClientRect();
+    const cursorX = e.clientX - rect.left + wrap.scrollLeft;
+    const cursorY = e.clientY - rect.top  + wrap.scrollTop;
+    const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
+    const newZoom = Math.max(0.08, Math.min(5, mxZoom * factor));
+    const ratio = newZoom / mxZoom;
+    setZoom(newZoom);
+    wrap.scrollLeft = cursorX * ratio - (e.clientX - rect.left);
+    wrap.scrollTop  = cursorY * ratio - (e.clientY - rect.top);
+  }, { passive: false });
+
+  // Canvas click — select team
+  const cv = document.getElementById("mc");
+  const tip = document.getElementById("tip");
+  cv.addEventListener("click", e => {
+    if (!mxData) return;
+    const rect = cv.getBoundingClientRect();
+    // rect already accounts for CSS transform scale
+    const px = (e.clientX - rect.left) * (TOTAL / rect.width);
+    const py = (e.clientY - rect.top)  * (TOTAL / rect.height);
+    const j = Math.floor((px - LABEL) / CELL);
+    const i = Math.floor((py - LABEL) / CELL);
+    if (i < 0 || i >= NT || j < 0 || j >= NT) { selTeam = -1; drawMatrix(); return; }
+    if (selTeam === i) {
+      selTeam = -1;
+      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
+      document.getElementById("sel-info").innerHTML = "// use [ + ] [ - ] to zoom · scroll to pan · click any cell to highlight that team";
+    } else {
+      selTeam = i;
+      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
+      const ci = MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z);
+      if (ci >= 0) document.querySelectorAll(".clabel")[ci]?.classList.add("hl");
+      const gp = Array.from(mxData[i]).filter(v => v > 0).length;
+      const rating = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "not yet qualified";
+      const confName = MX_CONF_GROUPS[MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z)]?.n || "?";
+      document.getElementById("sel-info").innerHTML = `// selected: <span>${MX_TEAMS[i]}</span> (${confName}) — <span>${gp}</span> opponents · rating: <span>${rating}</span> · click again to deselect`;
+    }
+    drawMatrix();
+  });
+
+  // Hover tooltip
+  cv.addEventListener("mousemove", e => {
+    if (!mxData) return;
+    const rect = cv.getBoundingClientRect();
+    const px = (e.clientX - rect.left) * (TOTAL / rect.width);
+    const py = (e.clientY - rect.top)  * (TOTAL / rect.height);
+    const j = Math.floor((px - LABEL) / CELL);
+    const i = Math.floor((py - LABEL) / CELL);
+    if (i < 0 || i >= NT || j < 0 || j >= NT) { tip.style.display = "none"; return; }
+    const hasGame = mxData[i][j] > 0;
+    const rA = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "—";
+    tip.innerHTML = i === j
+      ? `<div class="ta">${MX_TEAMS[i]}</div><div class="tc">diagonal · rating: ${rA}</div><div class="tg">C[i][i] = 2 + games played</div>`
+      : `<div class="ta">${MX_TEAMS[i]} <span style="color:#005518">vs</span> ${MX_TEAMS[j]}</div><div class="tg">${hasGame ? `played ${mxData[i][j]}x — C[i][j] = -${mxData[i][j]}` : "no games — C[i][j] = 0"}</div>`;
+    tip.style.display = "block";
+    tip.style.left = (e.clientX + 14) + "px";
+    tip.style.top  = (e.clientY - 10) + "px";
+  });
+  cv.addEventListener("mouseleave", () => { tip.style.display = "none"; });
+
+  TL_IDX = lastIdx;
+  onSliderChange();
+  setTimeout(() => fitZoom(), 60);
+}
 
 const NT = 308;
 const BASE_CELL = 8; // base cell size at zoom=1 — full matrix = 2464px
