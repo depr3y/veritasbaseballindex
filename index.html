@@ -182,7 +182,7 @@
     <div style="display:inline-flex;flex-direction:column;align-items:flex-start">
       <!-- top label row: corner spacer + column labels -->
       <div style="display:flex">
-        <div style="width:160px;height:160px;flex-shrink:0;background:var(--bg)"></div>
+        <div style="width:180px;height:180px;flex-shrink:0;background:var(--bg)"></div>
         <canvas id="mc-top" style="display:block"></canvas>
       </div>
       <!-- matrix row: row labels + matrix canvas -->
@@ -488,8 +488,8 @@ const MX_TEAMS = ["Alabama","Arkansas","Auburn","Florida","Georgia","Kentucky","
 const MX_CONF_GROUPS = [{"n":"SEC","s":0,"z":15},{"n":"Big Ten","s":15,"z":18},{"n":"ACC","s":33,"z":16},{"n":"Big 12","s":49,"z":15},{"n":"Sun Belt","s":64,"z":15},{"n":"MWC","s":79,"z":8},{"n":"Big West","s":87,"z":11},{"n":"WCC","s":98,"z":9},{"n":"Ivy","s":107,"z":8},{"n":"American","s":115,"z":10},{"n":"CUSA","s":125,"z":12},{"n":"A-10","s":137,"z":12},{"n":"CAA","s":149,"z":9},{"n":"Big South","s":158,"z":10},{"n":"SoCon","s":168,"z":8},{"n":"OVC","s":176,"z":8},{"n":"SWAC","s":184,"z":12},{"n":"WAC","s":196,"z":10},{"n":"MVC","s":206,"z":8},{"n":"MAC","s":214,"z":12},{"n":"MEAC","s":226,"z":5},{"n":"Horizon","s":231,"z":6},{"n":"Patriot","s":237,"z":6},{"n":"NEC","s":243,"z":15},{"n":"ASUN","s":258,"z":12},{"n":"Big East","s":270,"z":8},{"n":"Summit","s":278,"z":6},{"n":"Southland","s":284,"z":11},{"n":"MAAC","s":295,"z":11},{"n":"Big Sky","s":306,"z":1},{"n":"Other","s":307,"z":1}];
 
 const NT = 308;
-const CELL = 4;
-const LABEL_W = 160; // px for row/col labels
+const CELL = 8;
+const LABEL_W = 180; // px for row/col labels
 const MXSZ = NT * CELL;
 
 // Build team index from the fixed list (used for rendering order)
@@ -613,18 +613,30 @@ function drawMx(mxMatrix, hl) {
   }
   ctx.putImageData(img, 0, 0);
 
-  // Draw conference boundary lines over the cells
-  ctx.strokeStyle = "#00cc4440";
-  ctx.lineWidth = 0.5;
+  // Draw conference boundary lines and bold labels on top
   MX_CONF_GROUPS.forEach(cg => {
     const x = cg.s * CELL, w = cg.z * CELL;
     if (x + w > MXSZ) return;
-    ctx.strokeRect(x, x, w, w);
-    if (w > 16) {
-      ctx.fillStyle = hl >= 0 ? "#00ff5530" : "#00ff5560";
-      ctx.font = `bold ${Math.min(8, w * 0.14)}px Courier New`;
+    // Border line
+    ctx.strokeStyle = "#00ff5560";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x + 0.5, x + 0.5, w - 1, w - 1);
+    // Conference label — bold, bright, with dark background so it reads over dots
+    if (w > 24) {
+      const label = cg.n;
+      const fontSize = Math.min(13, Math.max(9, w * 0.12));
+      ctx.font = `bold ${fontSize}px 'Courier Prime', 'Courier New', monospace`;
       ctx.textAlign = "center";
-      ctx.fillText(cg.n, x + w / 2, x + w / 2 + 3);
+      const cx = x + w / 2;
+      const cy = x + w / 2 + fontSize * 0.35;
+      const tw = ctx.measureText(label).width;
+      const pad = 4;
+      // Dark backing rect
+      ctx.fillStyle = "#0a0a0aCC";
+      ctx.fillRect(cx - tw / 2 - pad, cy - fontSize - 1, tw + pad * 2, fontSize + 6);
+      // Bright green text
+      ctx.fillStyle = "#00ff55";
+      ctx.fillText(label, cx, cy);
     }
   });
 }
@@ -637,7 +649,7 @@ function drawTopLabels(hl) {
   const ctx = cv.getContext("2d");
   ctx.clearRect(0, 0, MXSZ, LABEL_W);
   ctx.save();
-  ctx.font = "10px 'Courier Prime', 'Courier New', monospace";
+  ctx.font = "11px 'Courier Prime', 'Courier New', monospace";
   for (let j = 0; j < NT; j++) {
     const x = j * CELL + CELL / 2;
     const isHL = hl >= 0 && j === hl;
@@ -659,13 +671,13 @@ function drawLeftLabels(hl) {
   cv.style.width = LABEL_W + "px"; cv.style.height = MXSZ + "px";
   const ctx = cv.getContext("2d");
   ctx.clearRect(0, 0, LABEL_W, MXSZ);
-  ctx.font = "10px 'Courier Prime', 'Courier New', monospace";
+  ctx.font = "11px 'Courier Prime', 'Courier New', monospace";
   ctx.textAlign = "right";
   for (let i = 0; i < NT; i++) {
     const y = i * CELL + CELL / 2 + 4;
     const isHL = hl >= 0 && i === hl;
     ctx.fillStyle = isHL ? "#00ff55" : (hl >= 0 ? "#003311" : "#007722");
-    ctx.fillText(MX_TEAMS[i], LABEL_W - 4, y);
+    ctx.fillText(MX_TEAMS[i], LABEL_W - 6, y);
   }
 }
 
