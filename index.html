@@ -362,7 +362,7 @@ function showTab(tab) {
     b.classList.toggle("active", ["about","matrix","rankings","map"][i] === tab);
   });
   if (tab === "map" && !mapInit) initMap();
-  if (tab === "about" && !aboutInit) { aboutInit = true; buildSimButtons(); renderSim(); }
+  if (tab === "about") { if (!aboutInit) { aboutInit = true; buildSimButtons(); renderSim(); } }
   if (tab === "matrix") { if (!matrixInit) { matrixInit = true; buildMatrix(); } else { drawMx(mxData, selTeam); } }
 }
 
@@ -595,6 +595,9 @@ function buildSimButtons(){
 }
 
 loadRankings();
+aboutInit = true;
+buildSimButtons();
+renderSim();
 </script>
 </body>
 </html>
