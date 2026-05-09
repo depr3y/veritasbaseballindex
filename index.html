@@ -329,7 +329,7 @@
       <div class="fc">
         <div class="fs" style="color:#60a5fa">C</div>
         <div class="fn">the matrix</div>
-        <div class="fd">308×308. Diagonal C[i][i] = 2 + Σ(weighted games). Off-diagonal C[i][j] = negative shared games. The base 2 is a prior — keeps early-season ratings stable before enough games have been played.</div>
+        <div class="fd">308×308. A 308×308 matrix representing every Division I team. Each team’s main value is based on its weighted games played, while every matchup against another team creates a negative connection between the two teams. When the system solves the equation, all of those connections work together so every team’s rating is influenced by the strength of its opponents. </div>
       </div>
       <div class="fc">
         <div class="fs" style="color:#4ade80">r</div>
@@ -339,7 +339,7 @@
       <div class="fc">
         <div class="fs" style="color:#fbbf24">b</div>
         <div class="fn">the record vector</div>
-        <div class="fd">b[i] = 1 + Σ(weighted wins) − Σ(weighted losses). Starts at 1 (the .500 prior). Road wins add ×1.1. Road losses subtract ×1.1. Home games ×0.9 each way.</div>
+        <div class="fd">The b vector is the part of the equation that measures a team’s game results. It starts every team at a neutral baseline of 1, then adds weighted wins and subtracts weighted losses based on game location. Teams that win more difficult games, especially on the road, build a stronger input value before the matrix adjusts for opponent strength.</div>
       </div>
     </div>
   </div>
@@ -357,7 +357,7 @@
     <div class="wcard" style="border-color:#1a4a1a">
       <div class="wi" style="color:var(--green-b)">×1.1</div>
       <div class="wl" style="color:var(--green-d)">ROAD</div>
-      <div class="wd" style="color:#009933">Win away from home: +1.1 to b[i]. Lose on the road: −0.9</div>
+      <div class="wd" style="color:#009933">Win away from home: +1.1 to b[i]. Lose on the road: −0.9.</div>
     </div>
     <div class="wcard" style="border-color:#2a1a0a">
       <div class="wi" style="color:#fbbf24">×0.9</div>
@@ -370,7 +370,7 @@
 
   <div class="ey">// a real example</div>
   <div class="st">Xavier, 2026 season.</div>
-  <div class="bt">21–27. Ranked #117. Here's why that's actually fair — and why a lesser schedule would have ranked them lower. Drag through the season and watch every term in C·r = b update in real time.</div>
+  <div class="bt">22–27. Ranked #117. Here's why that's actually fair — and why a lesser schedule would have ranked them lower. Drag through the season and watch every term in C·r = b update in real time.</div>
 
   <div id="xavier-widget" style="margin:1rem 0 0.5rem">
     <div style="padding:6px 0 10px">
@@ -426,31 +426,6 @@
     <div style="font-size:10px;color:var(--green-x);letter-spacing:0.08em;margin-bottom:4px">// VBI rating over time</div>
     <div style="position:relative;width:100%;height:130px">
       <canvas id="xv-ch" role="img" aria-label="Xavier VBI rating Mar-May 2026: starts 0.27, dips to 0.38, climbs to 0.57, ends 0.554">Xavier VBI rating March–May 2026.</canvas>
-    </div>
-  </div>
-
-  <div class="abt-hr"></div>
-
-  <div class="ey">// vbi vs rpi</div>
-  <div class="st">Why not just use RPI?</div>
-  <div class="rpi-grid">
-    <div class="rpi-card" style="border-color:#3f1a1a">
-      <div class="rpi-title" style="color:#f87171">RPI</div>
-      <div class="rpi-row"><div class="dot" style="background:#f87171"></div>25% your win%</div>
-      <div class="rpi-row"><div class="dot" style="background:#f87171"></div>50% opponents' win%</div>
-      <div class="rpi-row"><div class="dot" style="background:#f87171"></div>25% opponents' opponents' win%</div>
-      <div class="rpi-row" style="margin-top:6px;color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>75% of your rating ignores your results</div>
-      <div class="rpi-row" style="color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>Schedule strength assumed, not solved for</div>
-      <div class="rpi-row" style="color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>Can reward teams for losing in tough conferences</div>
-    </div>
-    <div class="rpi-card" style="border-color:#1a3a1a">
-      <div class="rpi-title" style="color:#4ade80">VBI — Colley Matrix</div>
-      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>100% based on game results</div>
-      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>Schedule strength emerges from the math</div>
-      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>All 308 teams solved simultaneously</div>
-      <div class="rpi-row" style="margin-top:6px;color:var(--green)"><div class="dot" style="background:var(--green)"></div>Every team's rating influences every other</div>
-      <div class="rpi-row" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Mathematically objective — no committee involved</div>
-      <div class="rpi-row" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Way cooler name</div>
     </div>
   </div>
 
@@ -1015,7 +990,7 @@ function xvRatExplain(gi,rating,has){
   const l=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='L').length;
   if(!has) return `Once Xavier hits 10 games, the system solves all 308 ratings at once. Xavier's rating isn't calculated in isolation — it's shaped by the ratings of every opponent they played, whose ratings are shaped by their opponents, and so on across the entire sport.`;
   const feel = rating > 0.57 ? 'well above average — strong opponents are pulling it up significantly' : rating > 0.53 ? 'above average — quality schedule is doing more work than the raw record suggests' : rating > 0.50 ? 'slightly above average — hanging in despite the losing record' : 'below average — losses are outweighing the schedule quality for now';
-  return `<b>${rating.toFixed(4)}</b> — ${feel}. A ${w}-${l} record against Arkansas, Oregon St., Vanderbilt, and Georgia Tech rates higher than the same record against weaker teams. The system doesn't take your word for it — it solves for everyone simultaneously and the math works it out.`;
+  return `<b>${rating.toFixed(4)}</b> — ${feel}. A ${w}-${l} record against strong teams rates higher than the same record against weaker teams. The system doesn't take your word for it — it solves for everyone simultaneously and the math works it out.`;
 }
 
 function xvUpdate(gi){
