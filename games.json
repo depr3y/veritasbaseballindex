@@ -40696,5 +40696,115 @@
     "loser": "Bellarmine",
     "location": "home",
     "date": "2026-05-08"
+  },
+  {
+    "game_id": "6602835",
+    "winner": "Marist",
+    "loser": "Fairfield",
+    "location": "away",
+    "date": "2026-05-08",
+    "home_team": "Fairfield",
+    "away_team": "Marist",
+    "home_score": 3,
+    "away_score": 4
+  },
+  {
+    "game_id": "6544569",
+    "winner": "Merrimack",
+    "loser": "Saint Peter's",
+    "location": "away",
+    "date": "2026-05-08",
+    "home_team": "Saint Peter's",
+    "away_team": "Merrimack",
+    "home_score": 5,
+    "away_score": 16
+  },
+  {
+    "game_id": "6544782",
+    "winner": "Iona",
+    "loser": "Siena",
+    "location": "away",
+    "date": "2026-05-08",
+    "home_team": "Siena",
+    "away_team": "Iona",
+    "home_score": 1,
+    "away_score": 9
+  },
+  {
+    "game_id": "6550108",
+    "winner": "UIW",
+    "loser": "SFA",
+    "location": "home",
+    "date": "2026-05-08",
+    "home_team": "UIW",
+    "away_team": "SFA",
+    "home_score": 9,
+    "away_score": 8
+  },
+  {
+    "game_id": "6552497",
+    "winner": "Northern Ky.",
+    "loser": "Wright St.",
+    "location": "home",
+    "date": "2026-05-08",
+    "home_team": "Northern Ky.",
+    "away_team": "Wright St.",
+    "home_score": 12,
+    "away_score": 11
+  },
+  {
+    "game_id": "6542527",
+    "winner": "Valparaiso",
+    "loser": "Evansville",
+    "location": "home",
+    "date": "2026-05-08",
+    "home_team": "Valparaiso",
+    "away_team": "Evansville",
+    "home_score": 6,
+    "away_score": 5
+  },
+  {
+    "game_id": "6586086",
+    "winner": "NIU",
+    "loser": "Ball St.",
+    "location": "home",
+    "date": "2026-05-08",
+    "home_team": "NIU",
+    "away_team": "Ball St.",
+    "home_score": 5,
+    "away_score": 2
+  },
+  {
+    "game_id": "6588126",
+    "winner": "Ark.-Pine Bluff",
+    "loser": "Grambling",
+    "location": "home",
+    "date": "2026-05-08",
+    "home_team": "Ark.-Pine Bluff",
+    "away_team": "Grambling",
+    "home_score": 16,
+    "away_score": 1
+  },
+  {
+    "game_id": "6589976",
+    "winner": "UConn",
+    "loser": "Seton Hall",
+    "location": "away",
+    "date": "2026-05-08",
+    "home_team": "Seton Hall",
+    "away_team": "UConn",
+    "home_score": 3,
+    "away_score": 4
+  },
+  {
+    "game_id": "6549455",
+    "winner": "Ohio",
+    "loser": "Toledo",
+    "location": "home",
+    "date": "2026-05-08",
+    "home_team": "Ohio",
+    "away_team": "Toledo",
+    "home_score": 4,
+    "away_score": 3
   }
 ]
