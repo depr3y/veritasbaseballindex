@@ -252,53 +252,128 @@
 
 <!-- ABOUT TAB -->
 <div id="about-panel">
+
   <div class="ey">// the short version</div>
   <div class="st">What is VBI?</div>
   <div class="bt">
-    RPI is fundamentally flawed because it values schedule strength more than winning itself. Since 75% of the formula is tied to opponents’ records and opponents’ opponents’ records, teams can climb the rankings with mediocre or even losing records simply by existing in power conferences. At that point, the system stops measuring performance and starts rewarding association and reputation.<br><br>
-    VBI takes a different approach. It uses the Colley Matrix — a mathematically objective system of linear equations that evaluates every team simultaneously based only on game results. No polls. The only variables are who you beat, who you lost to, and where the game was played. Instead of assuming conference strength, or applying arbitrary values to different variables, VBI forces teams to earn their rating through results on the field.
+    RPI is broken. 75% of its formula has nothing to do with your results — it rewards conference reputation, not performance. Teams can climb the rankings with losing records just by playing in the right league.<br><br>
+    VBI uses the Colley Matrix: a system of 308 simultaneous linear equations where every team's rating depends on every other team's rating. No polls, no arbitrary weights. The only inputs are who you beat, who beat you, and where the game was played. Schedule strength isn't assumed — it emerges from the math.
   </div>
+
   <div class="abt-hr"></div>
-  <div class="ey">// the formula</div>
+
+  <div class="ey">// the equation</div>
   <div class="st">C · r = b</div>
-  <div class="bt">Three things. That's the whole equation.</div>
+  <div class="bt">Three variables. One system. 308 unknowns solved simultaneously.</div>
+
   <div class="fbox">
     <div class="feq">C &nbsp;·&nbsp; r &nbsp;=&nbsp; b</div>
     <div class="fgrid">
-      <div class="fc"><div class="fs" style="color:#60a5fa">C</div><div class="fn">the matrix</div><div class="fd">A 308×308 grid encoding every team's schedule. Diagonal = games played. Off-diagonal = negative games between those two teams.</div></div>
-      <div class="fc"><div class="fs" style="color:#4ade80">r</div><div class="fn">the ratings</div><div class="fd">What we're solving for. One number per team. Higher = better. This is the VBI rating you see on the rankings page.</div></div>
-      <div class="fc"><div class="fs" style="color:#fbbf24">b</div><div class="fn">the record vector</div><div class="fd">One number per team encoding raw record: 1 + (W−L) / 2. A .500 team gets 1.5. An undefeated team gets higher.</div></div>
+      <div class="fc">
+        <div class="fs" style="color:#60a5fa">C</div>
+        <div class="fn">the matrix</div>
+        <div class="fd">308×308. Diagonal C[i][i] = 2 + Σ(weighted games). Off-diagonal C[i][j] = negative shared games. The base 2 is a prior — keeps early-season ratings stable before enough games have been played.</div>
+      </div>
+      <div class="fc">
+        <div class="fs" style="color:#4ade80">r</div>
+        <div class="fn">the ratings</div>
+        <div class="fd">What we solve for. One number per team. Higher = better. No team's rating can be solved without knowing all others — that interdependence is the whole point.</div>
+      </div>
+      <div class="fc">
+        <div class="fs" style="color:#fbbf24">b</div>
+        <div class="fn">the record vector</div>
+        <div class="fd">b[i] = 1 + Σ(weighted wins) − Σ(weighted losses). Starts at 1 (the .500 prior). Road wins add ×1.1. Road losses subtract ×1.1. Home games ×0.9 each way.</div>
+      </div>
     </div>
   </div>
-  <div class="ann">The key insight: you can't solve for any one team's rating without knowing every other team's rating. So instead of going one team at a time, we write one equation per team and <b>solve all 308 simultaneously</b>. That's what makes it objective.</div>
+
+  <div class="ann">
+    This is not adjusted winning percentage. Solving C·r = b creates a web of interdependence across the entire sport. Xavier's rating is shaped by Arkansas's rating, which is shaped by every team Arkansas played, and so on — simultaneously, across all 308 teams. A 21–27 team can rate respectably if they lost to highly-rated opponents on the road. <b>Schedule strength isn't an input. It's an output.</b>
+  </div>
+
   <div class="abt-hr"></div>
-  <div class="ey">// home / away weighting</div>
-  <div class="st">Location matters. A little.</div>
-  <div class="bt">Winning on the road is harder. The matrix accounts for that with a small multiplier on every game result.</div>
+
+  <div class="ey">// location weighting</div>
+  <div class="st">Where you play matters.</div>
+  <div class="bt">Every game result is multiplied by a location weight before entering the system. Winning on the road is harder, and the math reflects that.</div>
   <div class="wbox">
     <div class="wcard" style="border-color:#1a4a1a">
       <div class="wi" style="color:var(--green-b)">×1.1</div>
-      <div class="wl" style="color:var(--green-d)">ROAD WIN</div>
-      <div class="wd" style="color:#009933">You won away from home. Your rating gets a 10% boost — and the home team's loss hurts 10% more.</div>
+      <div class="wl" style="color:var(--green-d)">ROAD</div>
+      <div class="wd" style="color:#009933">Win away from home: +1.1 to b[i]. Lose on the road: −1.1. Road games carry more weight — they're more informative.</div>
     </div>
     <div class="wcard" style="border-color:#2a1a0a">
       <div class="wi" style="color:#fbbf24">×0.9</div>
-      <div class="wl" style="color:#92400e">HOME WIN</div>
-      <div class="wd" style="color:#78350f">You won at home. Expected. Slight discount — and the road team's loss hurts 10% less.</div>
+      <div class="wl" style="color:#92400e">HOME</div>
+      <div class="wd" style="color:#78350f">Win at home: +0.9 to b[i]. Lose at home: −0.9. Expected outcome, slight discount.</div>
     </div>
   </div>
+
   <div class="abt-hr"></div>
-  <div class="ey">// live simulation</div>
-  <div class="st">Watch the math move.</div>
-  <div class="bt">Four teams, no games played yet. Add results one at a time and watch the matrix and ratings update in real time.</div>
-  <div class="sg">
-    <div class="sc"><div class="sl">// ratings</div><div id="rdisplay"></div></div>
-    <div class="sc"><div class="sl">// matrix C · r = b</div><div id="mdisplay" style="font-size:10px;color:var(--green-d);line-height:1.9;overflow-x:auto"></div></div>
+
+  <div class="ey">// a real example</div>
+  <div class="st">Xavier, 2026 season.</div>
+  <div class="bt">21–27. Ranked #117. Here's why that's actually fair — and why a lesser schedule would have ranked them lower. Drag through the season and watch every term in C·r = b update in real time.</div>
+
+  <div id="xavier-widget" style="margin:1rem 0 0.5rem">
+    <div style="padding:6px 0 10px">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--green-x);margin-bottom:6px">
+        <span>// season timeline</span>
+        <span id="xv-date" style="color:var(--green-b);font-weight:700"></span>
+      </div>
+      <input type="range" id="xv-sl" min="0" max="48" value="48"
+        style="width:100%;-webkit-appearance:none;appearance:none;height:3px;background:var(--border);border:none;outline:none;cursor:pointer">
+      <style>#xv-sl::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--green-b);border:2px solid var(--bg);cursor:pointer}#xv-sl::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--green-b);border:2px solid var(--bg);cursor:pointer}</style>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--green-x);margin-top:3px">
+        <span>Feb 13 — game 1</span><span>May 8 — game 49</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+      <div class="sc"><div class="sl">VBI RATING</div><div id="xv-rat" style="font-size:17px;font-weight:700;color:var(--green-b);margin-top:4px">—</div></div>
+      <div class="sc"><div class="sl">RANK</div><div id="xv-rk" style="font-size:17px;font-weight:700;color:var(--green-b);margin-top:4px">—</div></div>
+      <div class="sc"><div class="sl">RECORD</div><div id="xv-rec" style="font-size:17px;font-weight:700;color:var(--green-b);margin-top:4px">0-0</div></div>
+      <div class="sc"><div class="sl">GAMES</div><div id="xv-gp" style="font-size:17px;font-weight:700;color:var(--green-b);margin-top:4px">0/49</div></div>
+    </div>
+
+    <div style="border:1px solid var(--border);background:var(--bg2);padding:12px 14px;margin-bottom:10px">
+      <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed var(--border)">
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+          <span style="font-size:11px;color:var(--green-x);min-width:44px">C[i][i]</span>
+          <span id="eq-cii" style="font-size:16px;font-weight:700;color:var(--green-b);min-width:60px">—</span>
+          <span style="font-size:10px;color:var(--green-x)">= 2 + Σ(weighted games)</span>
+        </div>
+        <div id="eq-cii-explain" style="font-size:11px;color:var(--green-d);line-height:1.65;padding-left:54px"></div>
+      </div>
+      <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed var(--border)">
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+          <span style="font-size:11px;color:var(--green-x);min-width:44px">b[i]</span>
+          <span id="eq-bi" style="font-size:16px;font-weight:700;color:var(--green-b);min-width:60px">—</span>
+          <span style="font-size:10px;color:var(--green-x)">= 1 + Σ(win×wt) − Σ(loss×wt)</span>
+        </div>
+        <div id="eq-bi-explain" style="font-size:11px;color:var(--green-d);line-height:1.65;padding-left:54px"></div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+          <span style="font-size:11px;color:var(--green-x);min-width:44px">r[i]</span>
+          <span id="eq-rat" style="font-size:16px;font-weight:700;color:var(--green-b);min-width:60px">—</span>
+          <span style="font-size:10px;color:var(--green-x)">= solve(C · r = b)</span>
+        </div>
+        <div id="eq-rat-explain" style="font-size:11px;color:var(--green-d);line-height:1.65;padding-left:54px"></div>
+      </div>
+    </div>
+
+    <div style="font-size:10px;color:var(--green-x);letter-spacing:0.08em;margin-bottom:4px" id="xv-games-lbl">// all games — all count toward the rating</div>
+    <div style="border:1px solid var(--border);background:var(--bg2);max-height:150px;overflow-y:auto;padding:4px 10px;margin-bottom:10px" id="xv-gl"></div>
+
+    <div style="font-size:10px;color:var(--green-x);letter-spacing:0.08em;margin-bottom:4px">// VBI rating over time</div>
+    <div style="position:relative;width:100%;height:130px">
+      <canvas id="xv-ch" role="img" aria-label="Xavier VBI rating Mar-May 2026: starts 0.27, dips to 0.38, climbs to 0.57, ends 0.554">Xavier VBI rating March–May 2026.</canvas>
+    </div>
   </div>
-  <div class="br2" id="gbuts"></div>
-  <div class="gl" id="glog"><div class="ge" style="color:var(--green-x)">// no games yet.</div></div>
-  <div class="ann">Notice: after only home wins for LSU, their rating barely moves. Add a road win for Xavier — even against NJIT — and watch the difference. <b>The matrix rewards difficulty, not just results.</b></div>
+
   <div class="abt-hr"></div>
+
   <div class="ey">// vbi vs rpi</div>
   <div class="st">Why not just use RPI?</div>
   <div class="rpi-grid">
@@ -308,22 +383,30 @@
       <div class="rpi-row"><div class="dot" style="background:#f87171"></div>50% opponents' win%</div>
       <div class="rpi-row"><div class="dot" style="background:#f87171"></div>25% opponents' opponents' win%</div>
       <div class="rpi-row" style="margin-top:6px;color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>75% of your rating ignores your results</div>
-      <div class="rpi-row" style="color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>Arbitrary weights chosen by a committee</div>
+      <div class="rpi-row" style="color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>Schedule strength assumed, not solved for</div>
       <div class="rpi-row" style="color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>Can reward teams for losing in tough conferences</div>
     </div>
     <div class="rpi-card" style="border-color:#1a3a1a">
       <div class="rpi-title" style="color:#4ade80">VBI — Colley Matrix</div>
-      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>100% based on your results</div>
-      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>SOS emerges from the math naturally</div>
-      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>Every win equal — no margin of victory bonus</div>
-      <div class="rpi-row" style="margin-top:6px;color:var(--green)"><div class="dot" style="background:var(--green)"></div>Handles unbalanced schedules correctly</div>
-      <div class="rpi-row" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Solves all 308 teams simultaneously</div>
+      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>100% based on game results</div>
+      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>Schedule strength emerges from the math</div>
+      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>All 308 teams solved simultaneously</div>
+      <div class="rpi-row" style="margin-top:6px;color:var(--green)"><div class="dot" style="background:var(--green)"></div>Every team's rating influences every other</div>
+      <div class="rpi-row" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Mathematically objective — no committee involved</div>
       <div class="rpi-row" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Way cooler name</div>
     </div>
   </div>
-  <div style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseballindex.com &nbsp;·&nbsp; updates nightly at 2am est &nbsp;·&nbsp; 2026</div>
-</div>
 
+  <div style="margin-top:1.5rem;border:1px solid var(--border);background:var(--bg2);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--green-b);margin-bottom:3px">// see the full 308×308 matrix</div>
+      <div style="font-size:11px;color:var(--green-x)">Every cell is a game connection. Drag the slider to watch it fill up day by day as the 2026 season unfolds.</div>
+    </div>
+    <button onclick="showTab('matrix')" style="font-family:'Courier Prime','Courier New',monospace;font-size:12px;padding:6px 16px;border:1px solid var(--green);background:var(--bg3);color:var(--green-b);cursor:pointer;letter-spacing:0.08em;white-space:nowrap">[matrix] →</button>
+  </div>
+
+  <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseballindex.com &nbsp;·&nbsp; updates nightly at 2am est &nbsp;·&nbsp; 2026</div>
+</div>
 <footer>
   <span>veritasbaseballindex.com // vbi v1.0 // 2026</span>
   <span>colley matrix · win/loss only · updated nightly</span>
@@ -331,6 +414,7 @@
 
 <div id="tip"></div>
 
+<script src="https://unpkg.com/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
 const SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjaXB4dGRjeXhlcnl0eGZyemhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxODczNzEsImV4cCI6MjA5Mzc2MzM3MX0.Sdtj7bAZWp6N-UaGZIXtBYz--Q_D6aP2IMkkcGYZFhw";
@@ -392,7 +476,7 @@ function showTab(tab) {
     b.classList.toggle("active", ["about","matrix","rankings","map"][i] === tab);
   });
   if (tab === "map" && !mapInit) initMap();
-  if (tab === "about") { if (!aboutInit) { aboutInit = true; buildSimButtons(); renderSim(); } }
+  if (tab === "about") { if (!aboutInit) { aboutInit = true; initXavier(); } }
   if (tab === "matrix") { if (!matrixInit) { matrixInit = true; initMatrix(); } }
 }
 
@@ -755,43 +839,197 @@ async function initMatrix(){
   onSliderChange();
   setTimeout(fitZoom,80);
 }
-// ABOUT SIM
-const SIM_TEAMS=["Musketeers","Eagles","Tigers","Highlanders"];
-let simGames=[];
-function solveSim(games){
-  const n=SIM_TEAMS.length,idx={};
-  SIM_TEAMS.forEach((t,i)=>idx[t]=i);
-  const W=new Array(n).fill(0),L=new Array(n).fill(0),M=Array.from({length:n},()=>new Array(n).fill(0));
-  games.forEach(g=>{const wi=idx[g.w],li=idx[g.l];W[wi]+=g.wt;L[li]+=g.wt;M[wi][li]+=g.wt;M[li][wi]+=g.wt;});
-  const C=Array.from({length:n},()=>new Array(n).fill(0)),b=new Array(n).fill(0);
-  for(let i=0;i<n;i++){C[i][i]=2+W[i]+L[i];b[i]=1+(W[i]-L[i])/2;for(let j=0;j<n;j++) if(i!==j) C[i][j]=-M[i][j];}
-  return{r:gaussSim(C,b,n),C,b};
+
+// ── XAVIER WIDGET ──────────────────────────────────────────
+const XV_GAMES=[
+  {date:"2026-02-13",r:"W",opp:"East Carolina",loc:"away",wt:1.1},
+  {date:"2026-02-14",r:"W",opp:"East Carolina",loc:"away",wt:1.1},
+  {date:"2026-02-14",r:"L",opp:"East Carolina",loc:"away",wt:1.1},
+  {date:"2026-02-17",r:"L",opp:"Louisville",loc:"away",wt:1.1},
+  {date:"2026-02-20",r:"L",opp:"Arkansas",loc:"away",wt:1.1},
+  {date:"2026-02-21",r:"L",opp:"Arkansas",loc:"away",wt:1.1},
+  {date:"2026-02-22",r:"L",opp:"Arkansas",loc:"away",wt:1.1},
+  {date:"2026-02-25",r:"L",opp:"Indiana",loc:"home",wt:0.9},
+  {date:"2026-02-27",r:"W",opp:"Cal St. Fullerton",loc:"away",wt:1.1},
+  {date:"2026-02-28",r:"W",opp:"Cal St. Fullerton",loc:"away",wt:1.1},
+  {date:"2026-03-01",r:"L",opp:"Cal St. Fullerton",loc:"away",wt:1.1},
+  {date:"2026-03-04",r:"W",opp:"Ohio St.",loc:"away",wt:1.1},
+  {date:"2026-03-06",r:"L",opp:"Oregon St.",loc:"away",wt:1.1},
+  {date:"2026-03-07",r:"L",opp:"Oregon St.",loc:"away",wt:1.1},
+  {date:"2026-03-08",r:"L",opp:"Oregon St.",loc:"away",wt:1.1},
+  {date:"2026-03-09",r:"L",opp:"Oregon St.",loc:"away",wt:1.1},
+  {date:"2026-03-10",r:"L",opp:"Oregon",loc:"away",wt:1.1},
+  {date:"2026-03-11",r:"L",opp:"Oregon",loc:"away",wt:1.1},
+  {date:"2026-03-13",r:"W",opp:"Evansville",loc:"home",wt:0.9},
+  {date:"2026-03-14",r:"L",opp:"Evansville",loc:"home",wt:0.9},
+  {date:"2026-03-15",r:"L",opp:"Evansville",loc:"home",wt:0.9},
+  {date:"2026-03-18",r:"L",opp:"Ohio St.",loc:"home",wt:0.9},
+  {date:"2026-03-20",r:"W",opp:"Wofford",loc:"home",wt:0.9},
+  {date:"2026-03-21",r:"L",opp:"Wofford",loc:"home",wt:0.9},
+  {date:"2026-03-22",r:"L",opp:"Wofford",loc:"home",wt:0.9},
+  {date:"2026-03-24",r:"W",opp:"Cincinnati",loc:"home",wt:0.9},
+  {date:"2026-03-27",r:"L",opp:"UConn",loc:"away",wt:1.1},
+  {date:"2026-03-28",r:"L",opp:"UConn",loc:"away",wt:1.1},
+  {date:"2026-03-29",r:"W",opp:"UConn",loc:"away",wt:1.1},
+  {date:"2026-03-31",r:"W",opp:"Ball St.",loc:"away",wt:1.1},
+  {date:"2026-04-02",r:"W",opp:"Georgetown",loc:"away",wt:1.1},
+  {date:"2026-04-03",r:"W",opp:"Georgetown",loc:"away",wt:1.1},
+  {date:"2026-04-04",r:"L",opp:"Georgetown",loc:"away",wt:1.1},
+  {date:"2026-04-07",r:"W",opp:"Wright St.",loc:"away",wt:1.1},
+  {date:"2026-04-10",r:"W",opp:"Villanova",loc:"home",wt:0.9},
+  {date:"2026-04-11",r:"W",opp:"Villanova",loc:"home",wt:0.9},
+  {date:"2026-04-12",r:"W",opp:"Villanova",loc:"home",wt:0.9},
+  {date:"2026-04-14",r:"L",opp:"Cincinnati",loc:"away",wt:1.1},
+  {date:"2026-04-17",r:"W",opp:"Seton Hall",loc:"away",wt:1.1},
+  {date:"2026-04-18",r:"W",opp:"Seton Hall",loc:"away",wt:1.1},
+  {date:"2026-04-19",r:"W",opp:"Seton Hall",loc:"away",wt:1.1},
+  {date:"2026-04-21",r:"L",opp:"Vanderbilt",loc:"away",wt:1.1},
+  {date:"2026-04-24",r:"L",opp:"St. John's (NY)",loc:"home",wt:0.9},
+  {date:"2026-04-25",r:"L",opp:"St. John's (NY)",loc:"home",wt:0.9},
+  {date:"2026-04-26",r:"W",opp:"St. John's (NY)",loc:"home",wt:0.9},
+  {date:"2026-04-28",r:"W",opp:"Miami (OH)",loc:"away",wt:1.1},
+  {date:"2026-05-01",r:"W",opp:"Georgia Tech",loc:"away",wt:1.1},
+  {date:"2026-05-02",r:"L",opp:"Georgia Tech",loc:"away",wt:1.1},
+  {date:"2026-05-03",r:"L",opp:"Georgia Tech",loc:"away",wt:1.1},
+];
+const XV_RATED=[
+  {gi:9,rating:0.26783,rank:112,cii:8.7,bi:-1.25},
+  {gi:10,rating:0.26783,rank:112,cii:8.7,bi:-1.25},
+  {gi:11,rating:0.36569,rank:148,cii:11.8,bi:-0.6},
+  {gi:12,rating:0.43359,rank:148,cii:13.8,bi:-0.5},
+  {gi:13,rating:0.41323,rank:169,cii:14.7,bi:-0.95},
+  {gi:14,rating:0.42959,rank:173,cii:15.6,bi:-1.4},
+  {gi:15,rating:0.4181,rank:185,cii:16.5,bi:-1.85},
+  {gi:16,rating:0.42859,rank:181,cii:17.4,bi:-2.3},
+  {gi:17,rating:0.43022,rank:184,cii:18.3,bi:-2.75},
+  {gi:18,rating:0.4864,rank:152,cii:19.2,bi:-2.3},
+  {gi:19,rating:0.45722,rank:180,cii:20.3,bi:-2.85},
+  {gi:20,rating:0.43998,rank:188,cii:21.4,bi:-3.4},
+  {gi:21,rating:0.40234,rank:218,cii:22.5,bi:-3.95},
+  {gi:22,rating:0.43513,rank:195,cii:23.4,bi:-3.5},
+  {gi:23,rating:0.41789,rank:213,cii:24.5,bi:-4.05},
+  {gi:24,rating:0.38482,rank:226,cii:25.6,bi:-4.6},
+  {gi:25,rating:0.42326,rank:208,cii:26.5,bi:-4.15},
+  {gi:26,rating:0.42576,rank:199,cii:27.4,bi:-4.6},
+  {gi:27,rating:0.41305,rank:208,cii:28.3,bi:-5.05},
+  {gi:28,rating:0.43516,rank:193,cii:29.4,bi:-4.5},
+  {gi:29,rating:0.45346,rank:185,cii:30.5,bi:-3.95},
+  {gi:30,rating:0.47274,rank:172,cii:31.6,bi:-3.4},
+  {gi:31,rating:0.49569,rank:152,cii:32.7,bi:-2.85},
+  {gi:32,rating:0.48064,rank:163,cii:33.6,bi:-3.3},
+  {gi:33,rating:0.50487,rank:144,cii:34.7,bi:-2.75},
+  {gi:34,rating:0.51757,rank:137,cii:35.6,bi:-2.3},
+  {gi:35,rating:0.5276,rank:127,cii:36.5,bi:-1.85},
+  {gi:36,rating:0.53628,rank:125,cii:37.4,bi:-1.4},
+  {gi:37,rating:0.53387,rank:129,cii:38.3,bi:-1.85},
+  {gi:38,rating:0.54151,rank:124,cii:39.4,bi:-1.3},
+  {gi:39,rating:0.54423,rank:124,cii:40.5,bi:-0.75},
+  {gi:40,rating:0.55557,rank:119,cii:41.6,bi:-0.2},
+  {gi:41,rating:0.54933,rank:121,cii:42.5,bi:-0.65},
+  {gi:42,rating:0.53037,rank:130,cii:43.6,bi:-1.2},
+  {gi:43,rating:0.51891,rank:141,cii:44.7,bi:-1.75},
+  {gi:44,rating:0.53064,rank:134,cii:45.6,bi:-1.3},
+  {gi:45,rating:0.54574,rank:128,cii:46.7,bi:-0.75},
+  {gi:46,rating:0.56715,rank:113,cii:47.8,bi:-0.2},
+  {gi:47,rating:0.56038,rank:116,cii:48.7,bi:-0.65},
+  {gi:48,rating:0.55364,rank:117,cii:49.6,bi:-1.1},
+];
+let xvChart=null;
+
+function xvCiiExplain(gi,cii,has){
+  if(!has) return `The base value of <b>2</b> acts as a prior — every team starts at roughly .500 before any games count. Xavier has played <b>${gi+1} game${gi>0?'s':''}</b>. Once they hit 10, all prior games flood into the diagonal at once.`;
+  const road=XV_GAMES.slice(0,gi+1).filter(g=>g.loc==='away').length;
+  const home=XV_GAMES.slice(0,gi+1).filter(g=>g.loc==='home').length;
+  return `<b>2</b> (prior) + <b>${(cii-2).toFixed(2)}</b> from ${gi+1} games (${road} road ×1.1, ${home} home ×0.9) = <b>${cii.toFixed(2)}</b>. Xavier played 17 of their first 18 games on the road — that inflates this number faster than a home-heavy schedule, which means the system has more information to work with.`;
 }
-function gaussSim(A,b,n){
-  const M=A.map((row,i)=>[...row,b[i]]);
-  for(let col=0;col<n;col++){let mx=col;for(let row=col+1;row<n;row++) if(Math.abs(M[row][col])>Math.abs(M[mx][col])) mx=row;[M[col],M[mx]]=[M[mx],M[col]];for(let row=col+1;row<n;row++){const f=M[row][col]/M[col][col];for(let k=col;k<=n;k++) M[row][k]-=f*M[col][k];}}
-  const x=new Array(n).fill(0);for(let i=n-1;i>=0;i--){x[i]=M[i][n]/M[i][i];for(let j=i-1;j>=0;j--) M[j][n]-=M[j][i]*x[i];}return x;
+
+function xvBiExplain(gi,bi,has){
+  const w=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='W').length;
+  const l=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='L').length;
+  if(!has) return `Starts at <b>1</b> — the neutral .500 baseline every team gets. Each win adds its weight, each loss subtracts it. Xavier is <b>${w}-${l}</b> so far. Once qualified, b[i] will reflect the full weighted toll of this road stretch.`;
+  const roadL=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='L'&&g.loc==='away').length;
+  const gap=(bi-1).toFixed(2);
+  return `<b>1</b> (baseline) ${gap>=0?'+':''}${gap} from weighted record = <b>${bi.toFixed(4)}</b>. Xavier is ${w}-${l}. The value is ${Math.abs(bi)<0.5?'near zero — wins and losses nearly balanced':bi<-3?`deeply negative — ${roadL} road losses at ×1.1 each is the main driver`:bi<0?`negative — losses outweigh wins on weighted terms`:'positive — wins outweigh losses'}. A team with the same raw record but mostly home games would have a less negative b[i], since home losses only subtract 0.9.`;
 }
-function renderSim(){
-  const{r,C,b}=solveSim(simGames);
-  const sorted=SIM_TEAMS.map((t,i)=>({t,v:r[i]})).sort((a,b2)=>b2.v-a.v);
-  const mx=Math.max(...r)||1;
-  document.getElementById("rdisplay").innerHTML=sorted.map(s=>`<div class="tr2"><span class="tn">${s.t}</span><div class="rb"><div class="rf" style="width:${Math.max(0,((s.v/mx)*100)).toFixed(0)}%"></div></div><span class="tv">${s.v.toFixed(4)}</span></div>`).join("");
-  const n=SIM_TEAMS.length;let mh="";
-  for(let i=0;i<n;i++){let row=`<span style="color:var(--green-x)">${SIM_TEAMS[i].substring(0,4)}</span>[`;for(let j=0;j<n;j++){const v=C[i][j];const col=i===j?"#00ff55":v<0?"#dc2626":"#005518";row+=`<span style="color:${col}">${v.toFixed(1).padStart(5)}</span>${j<n-1?" ":""}`;}row+=`]=<span style="color:var(--green)">${b[i].toFixed(2)}</span><br>`;mh+=row;}
-  document.getElementById("mdisplay").innerHTML=mh;
+
+function xvRatExplain(gi,rating,has){
+  const w=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='W').length;
+  const l=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='L').length;
+  if(!has) return `Once Xavier reaches 10 games, the system solves all 308 ratings simultaneously. The key: Xavier's rating isn't just their record — it's pulled up or down by the ratings of every opponent they faced, whose ratings are shaped by their opponents in turn. Losing to Arkansas or Oregon St. on the road costs less than losing to a weak team at home.`;
+  const qual=rating>0.56?'strong — tough opponents pulling it well above the raw record':rating>0.53?'solid — road schedule doing its job, quality opponents lifting the floor':rating>0.50?'just above .500 — the wins against good teams are keeping it afloat':'still recovering — losses are outweighing opponent quality for now';
+  return `<b>${rating.toFixed(5)}</b> — ${qual}. A ${w}-${l} record against Arkansas, Oregon St., Vanderbilt, and Georgia Tech produces a meaningfully higher rating than the same record against weaker competition. That's not an opinion — it's what falls out of solving all 308 equations at once.`;
 }
-function buildSimButtons(){
-  const sc=[["Tigers","Highlanders","home","LSU def. NJIT (home)"],["Eagles","Highlanders","away","BC def. NJIT (road)"],["Tigers","Eagles","home","LSU def. BC (home)"],["Musketeers","Highlanders","away","XAV def. NJIT (road)"],["Tigers","Musketeers","home","LSU def. XAV (home)"],["Eagles","Musketeers","away","BC def. XAV (road)"]];
-  const c=document.getElementById("gbuts");
-  sc.forEach(([w,l,loc,lbl])=>{const btn=document.createElement("button");btn.className="sb";btn.textContent=`+ ${lbl}`;btn.onclick=()=>{const wt=loc==="away"?1.1:loc==="home"?0.9:1.0;simGames.push({w,l,loc,wt});const log=document.getElementById("glog");const ll=loc==="away"?"(road ×1.1)":loc==="home"?"(home ×0.9)":"(neutral)";log.innerHTML+=`<div class="ge"><span class="gw">${w}</span> def. ${l} <span class="gx">${ll}</span></div>`;log.scrollTop=log.scrollHeight;renderSim();btn.classList.add("pl");btn.disabled=true;};c.appendChild(btn);});
-  const rb=document.createElement("button");rb.className="sb";rb.textContent="[reset]";rb.onclick=()=>{simGames=[];document.getElementById("glog").innerHTML='<div class="ge" style="color:var(--green-x)">// no games yet.</div>';document.querySelectorAll(".sb").forEach(b=>{b.classList.remove("pl");b.disabled=false;});renderSim();};c.appendChild(rb);
+
+function xvUpdate(gi){
+  const g=XV_GAMES[gi];
+  const w=XV_GAMES.slice(0,gi+1).filter(x=>x.r==='W').length;
+  const l=XV_GAMES.slice(0,gi+1).filter(x=>x.r==='L').length;
+  document.getElementById('xv-date').textContent=`game ${gi+1} of 49 — ${g.date}`;
+  document.getElementById('xv-rec').textContent=`${w}-${l}`;
+  document.getElementById('xv-gp').textContent=`${gi+1}/49`;
+  const rd=XV_RATED.filter(r=>r.gi<=gi);
+  const latest=rd.length?rd[rd.length-1]:null;
+  const has=latest!==null;
+  document.getElementById('xv-rat').textContent=has?latest.rating.toFixed(4):'—';
+  document.getElementById('xv-rk').textContent=has?`#${latest.rank}`:'—';
+  document.getElementById('eq-cii').textContent=has?latest.cii.toFixed(2):'—';
+  document.getElementById('eq-bi').textContent=has?latest.bi.toFixed(4):'—';
+  document.getElementById('eq-rat').textContent=has?latest.rating.toFixed(5):'not yet';
+  document.getElementById('eq-cii-explain').innerHTML=xvCiiExplain(gi,has?latest.cii:0,has);
+  document.getElementById('eq-bi-explain').innerHTML=xvBiExplain(gi,has?latest.bi:0,has);
+  document.getElementById('eq-rat-explain').innerHTML=xvRatExplain(gi,has?latest.rating:0,has);
+  document.getElementById('xv-games-lbl').textContent=gi<9
+    ?`// all games — all ${gi+1} will count retroactively once Xavier reaches 10 games`
+    :'// all games — all count toward the rating';
+  const rows=[...XV_GAMES].slice(0,gi+1).reverse().map((x,ri)=>{
+    const rCol=x.r==='W'?'#00ff55':'#ff4444';
+    const wtCol=x.wt===1.1?(x.r==='W'?'#00cc44':'#cc2222'):'#005518';
+    return `<div style="display:flex;gap:8px;font-size:11px;padding:3px 0;border-bottom:1px dashed #0a1a0a;font-family:'Courier Prime','Courier New',monospace">
+      <span style="color:#005518;min-width:72px">${x.date}</span>
+      <span style="font-weight:700;min-width:12px;color:${rCol}">${x.r}</span>
+      <span style="flex:1;color:#007722">${x.opp}</span>
+      <span style="font-size:10px;color:#005518;min-width:36px">${x.loc}</span>
+      <span style="font-weight:700;color:${wtCol};min-width:32px;text-align:right">×${x.wt}</span>
+    </div>`;
+  });
+  document.getElementById('xv-gl').innerHTML=rows.join('');
+  if(xvChart){
+    const ni=rd.length?XV_RATED.indexOf(rd[rd.length-1]):-1;
+    xvChart.data.datasets[0].pointRadius=XV_RATED.map((_,i)=>i===ni?5:0);
+    xvChart.data.datasets[0].pointBackgroundColor=XV_RATED.map((_,i)=>i===ni?'#00ff55':'transparent');
+    xvChart.update('none');
+  }
+}
+
+function initXavier(){
+  const cv=document.getElementById('xv-ch');
+  if(!cv) return;
+  xvChart=new Chart(cv,{
+    type:'line',
+    data:{
+      labels:XV_RATED.map(r=>`G${r.gi+1}`),
+      datasets:[{
+        label:'VBI rating',
+        data:XV_RATED.map(r=>r.rating),
+        borderColor:'#00cc44',
+        backgroundColor:'rgba(0,204,68,0.06)',
+        borderWidth:2,pointRadius:0,pointHoverRadius:4,fill:true,tension:0.3
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`rating: ${c.raw.toFixed(4)}`}}},
+      scales:{
+        x:{ticks:{maxTicksLimit:8,color:'#005518',font:{size:9,family:'Courier Prime, Courier New, monospace'}},grid:{color:'#0a1a0a'}},
+        y:{min:0.2,max:0.62,ticks:{color:'#005518',font:{size:9,family:'Courier Prime, Courier New, monospace'},callback:v=>v.toFixed(2)},grid:{color:'#0a1a0a'}}
+      }
+    }
+  });
+  document.getElementById('xv-sl').addEventListener('input',e=>xvUpdate(+e.target.value));
+  xvUpdate(48);
 }
 
 loadRankings();
-aboutInit = true;
-buildSimButtons();
-renderSim();
 showTab('about');
 </script>
 </body>
