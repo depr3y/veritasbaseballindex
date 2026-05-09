@@ -1,6 +1,10 @@
 {
   "generated": "2026-05-09",
+<<<<<<< HEAD
   "total_games": 7231,
+=======
+  "total_games": 6715,
+>>>>>>> abfd4a3b6508bae4b61166cfa2bfdc70d04e16cf
   "rankings": [
     {
       "rank": 1,
