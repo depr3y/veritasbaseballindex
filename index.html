@@ -211,6 +211,30 @@
 
     footer{padding:10px 20px;border-top:1px solid var(--border2);font-size:10px;color:var(--green-x);letter-spacing:0.08em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
     #about-cols>div:first-child::-webkit-scrollbar{display:none}
+    #rankings-panel{display:none;height:calc(100vh - 80px);flex-direction:column;overflow:hidden}
+    .rk-body{display:flex;flex:1;overflow:hidden;min-height:0}
+    .rk-table-wrap{flex:1;overflow-y:auto;min-width:0}
+    .rk-sidebar{width:0;flex-shrink:0;overflow:hidden;border-left:1px solid var(--border2);background:var(--bg2);transition:width 0.2s ease;display:flex;flex-direction:column}
+    .rk-sidebar.open{width:300px}
+    .rk-sb-header{padding:10px 14px;border-bottom:1px solid var(--border2);display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0}
+    .rk-sb-close{background:none;border:1px solid var(--border);color:var(--green-d);font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:2px 7px;cursor:pointer;flex-shrink:0}
+    .rk-sb-close:hover{color:var(--green-b);border-color:var(--green)}
+    .rk-sb-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border2);flex-shrink:0}
+    .rk-sb-stat{background:var(--bg2);padding:8px 10px;text-align:center}
+    .rk-sb-stat-val{font-size:16px;font-weight:700;color:var(--green-b)}
+    .rk-sb-stat-lbl{font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-top:2px}
+    .rk-sb-insights{padding:8px 12px;border-bottom:1px solid var(--border2);flex-shrink:0}
+    .rk-sb-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px dashed #0a1a0a;font-size:11px}
+    .rk-sb-row:last-child{border-bottom:none}
+    .rk-sb-lbl{color:var(--green-x);font-size:10px;letter-spacing:0.06em}
+    .rk-sb-lbl small{display:block;font-size:9px;color:var(--green-x);opacity:0.6;margin-top:1px}
+    .rk-sb-val{font-weight:700;color:var(--green-b);font-size:12px;text-align:right}
+    .rk-sb-games-lbl{font-size:9px;color:var(--green-x);letter-spacing:0.1em;padding:6px 12px 3px;flex-shrink:0}
+    .rk-sb-games{flex:1;overflow-y:auto;padding:0 12px 8px}
+    .rk-sb-game{display:flex;align-items:center;gap:6px;font-size:11px;padding:4px 0;border-bottom:1px dashed #0a1a0a}
+    .rk-sb-game:last-child{border-bottom:none}
+    tbody tr.selected td{background:var(--bg3)!important}
+    tbody tr{cursor:pointer}
 
     /* ── MOBILE ── */
     @media(max-width:600px){
@@ -247,6 +271,7 @@
       .th-conf{display:none}
       .bar-bg{display:none}
       .td-rating{font-size:11px}
+      .rk-sidebar.open{width:100%;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2000;height:100vh}
 
       /* matrix tab — hide desktop matrix, show mobile explorer */
       .mx-desktop{display:none!important}
@@ -419,12 +444,32 @@
     <button class="conf-btn" onclick="setConf('America East',this)">AMERICA EAST</button>
     <button class="conf-btn" onclick="setConf('Ind',this)">IND</button>
   </div>
-  <div class="table-wrap">
-    <div class="loading" id="loading">// loading rankings...</div>
-    <table id="table" style="display:none">
-      <thead><tr><th>RK</th><th>TEAM</th><th class="th-conf">CONF</th><th class="r">W-L</th><th class="r">VBI RATING</th></tr></thead>
-      <tbody id="tbody"></tbody>
-    </table>
+  <div class="rk-body">
+    <div class="rk-table-wrap">
+      <div class="loading" id="loading">// loading rankings...</div>
+      <table id="table" style="display:none">
+        <thead><tr><th>RK</th><th>TEAM</th><th class="th-conf">CONF</th><th class="r">W-L</th><th class="r">VBI RATING</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <!-- TEAM SIDEBAR -->
+    <div class="rk-sidebar" id="rk-sidebar">
+      <div class="rk-sb-header">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--green-b)" id="rk-sb-name">—</div>
+          <div style="font-size:10px;color:var(--green-x);letter-spacing:0.08em;margin-top:2px" id="rk-sb-conf">—</div>
+        </div>
+        <button class="rk-sb-close" onclick="closeRkSidebar()">[ × ]</button>
+      </div>
+      <div class="rk-sb-stats">
+        <div class="rk-sb-stat"><div class="rk-sb-stat-val" id="rk-sb-rating">—</div><div class="rk-sb-stat-lbl">RATING</div></div>
+        <div class="rk-sb-stat"><div class="rk-sb-stat-val" id="rk-sb-rank">—</div><div class="rk-sb-stat-lbl">RANK</div></div>
+        <div class="rk-sb-stat"><div class="rk-sb-stat-val" id="rk-sb-record">—</div><div class="rk-sb-stat-lbl">RECORD</div></div>
+      </div>
+      <div class="rk-sb-insights" id="rk-sb-insights"></div>
+      <div class="rk-sb-games-lbl" id="rk-sb-games-lbl">// game log</div>
+      <div class="rk-sb-games" id="rk-sb-games"></div>
+    </div>
   </div>
 </div>
 
@@ -667,7 +712,7 @@ function renderTable() {
   document.getElementById("tbody").innerHTML = filtered.map(t => {
     const pct = ((t.rating/maxRating)*100).toFixed(1);
     const top = t.rank <= 25 ? " top25" : "";
-    return `<tr class="${top}">
+    return `<tr class="${top}" onclick="openRkSidebar('${t.team.replace(/'/g,"\\'")}')">
       <td class="td-rank">${t.rank}</td>
       <td class="td-team">${t.team}</td>
       <td class="td-conf"><span class="chip" style="background:#0a0a0a;color:#007722;border-color:#1a3318">${(t.conf||"—").toUpperCase()}</span></td>
@@ -677,14 +722,105 @@ function renderTable() {
   }).join("");
 }
 
+let rkSelectedTeam = null;
+
+function openRkSidebar(teamName) {
+  const t = allTeams.find(x => x.team === teamName);
+  if (!t) return;
+
+  // Highlight selected row
+  document.querySelectorAll("#tbody tr").forEach(r => r.classList.remove("selected"));
+  document.querySelectorAll("#tbody tr").forEach(r => {
+    if (r.querySelector(".td-team")?.textContent === teamName) r.classList.add("selected");
+  });
+
+  rkSelectedTeam = teamName;
+  document.getElementById("rk-sidebar").classList.add("open");
+
+  // Header
+  document.getElementById("rk-sb-name").textContent = t.team;
+  document.getElementById("rk-sb-conf").textContent = t.conf || "—";
+  document.getElementById("rk-sb-rating").textContent = t.rating.toFixed(4);
+  document.getElementById("rk-sb-rank").textContent = `#${t.rank}`;
+  document.getElementById("rk-sb-record").textContent = `${t.wins}-${t.losses}`;
+
+  // Conf rank
+  const confTeams = allTeams.filter(x => x.conf === t.conf).sort((a,b) => a.rank-b.rank);
+  const confRank = confTeams.findIndex(x => x.team === t.team) + 1;
+  const confSize = confTeams.length;
+
+  // Win% 
+  const winPct = t.wins + t.losses > 0 ? (t.wins/(t.wins+t.losses)).toFixed(3) : "—";
+
+  // Games above .500
+  const gab = t.wins - t.losses;
+  const gabStr = gab >= 0 ? `+${gab}` : `${gab}`;
+
+  // Rating tier
+  const tier = t.rating >= 0.65 ? "elite" : t.rating >= 0.58 ? "strong" : t.rating >= 0.52 ? "above avg" : t.rating >= 0.48 ? "average" : "below avg";
+
+  // Top 25 / top 16 badges
+  const badges = [];
+  if (t.rank <= 16) badges.push(`<span style="color:#00ff55;font-size:10px;font-weight:700">● projected host</span>`);
+  else if (t.rank <= 25) badges.push(`<span style="color:#00cc44;font-size:10px">● top 25</span>`);
+
+  document.getElementById("rk-sb-insights").innerHTML = `
+    <div class="rk-sb-row"><span class="rk-sb-lbl">CONF RANK</span><span class="rk-sb-val">#${confRank} of ${confSize}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">WIN %</span><span class="rk-sb-val">${winPct}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">GAMES ABOVE .500</span><span class="rk-sb-val" style="color:${gab>=0?'var(--green-b)':'#ff4444'}">${gabStr}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">RATING TIER</span><span class="rk-sb-val">${tier}</span></div>
+    ${badges.length?`<div class="rk-sb-row" style="border-bottom:none">${badges.join(' ')}</div>`:''}
+  `;
+
+  // Game log from TL_GAMES if matrix has loaded, otherwise show note
+  const gamesEl = document.getElementById("rk-sb-games");
+  const glblEl = document.getElementById("rk-sb-games-lbl");
+
+  if (TL_GAMES && TL_GAMES.length > 0) {
+    const teamGames = TL_GAMES.filter(g => g.winner === t.team || g.loser === t.team)
+      .sort((a,b) => b.date.localeCompare(a.date));
+    glblEl.textContent = `// ${teamGames.length} games this season`;
+    gamesEl.innerHTML = teamGames.map(g => {
+      const isWin = g.winner === t.team;
+      const opp = isWin ? g.loser : g.winner;
+      const onRoad = (isWin && g.location==='away') || (!isWin && g.location==='home');
+      const oppTeam = allTeams.find(x => x.team === opp);
+      const oppRating = oppTeam ? oppTeam.rating.toFixed(3) : "—";
+      const rCol = isWin ? '#00ff55' : '#ff4444';
+      return `<div class="rk-sb-game">
+        <span style="color:var(--green-x);font-size:10px;min-width:68px">${g.date}</span>
+        <span style="font-weight:700;color:${rCol};min-width:12px">${isWin?'W':'L'}</span>
+        <span style="flex:1;color:var(--green-d);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${opp}</span>
+        <span style="font-size:10px;color:var(--green-x);min-width:30px;text-align:right">${onRoad?'road':'home'}</span>
+        <span style="font-size:10px;color:var(--green-x);min-width:36px;text-align:right">${oppRating}</span>
+      </div>`;
+    }).join("") || `<div style="padding:12px 0;font-size:11px;color:var(--green-x)">no games found</div>`;
+  } else {
+    glblEl.textContent = "// game log";
+    gamesEl.innerHTML = `<div style="padding:12px 0;font-size:11px;color:var(--green-x);line-height:1.7">
+      Open the <span style="color:var(--green-b);cursor:pointer" onclick="showTab('matrix')">[matrix]</span> tab first to load game data, then come back here for the full game log.
+    </div>`;
+  }
+}
+
+function closeRkSidebar() {
+  rkSelectedTeam = null;
+  document.getElementById("rk-sidebar").classList.remove("open");
+  document.querySelectorAll("#tbody tr").forEach(r => r.classList.remove("selected"));
+}
+
 function showTab(tab) {
   ["matrix","rankings","map","about"].forEach(t => {
-    document.getElementById(t+"-panel").style.display = t === tab ? "block" : "none";
+    const el = document.getElementById(t+"-panel");
+    if(t === tab){
+      el.style.display = t === "rankings" ? "flex" : "block";
+    } else {
+      el.style.display = "none";
+    }
   });
   document.querySelectorAll(".nav-btn").forEach((b,i) => {
     b.classList.toggle("active", ["about","matrix","rankings","map"][i] === tab);
   });
-  // Lock page scroll when about tab is active (it has its own internal scroll)
   document.body.style.overflow = tab === "about" ? "hidden" : "";
   if (tab === "map" && !mapInit) initMap();
   if (tab === "about") { if (!aboutInit) { aboutInit = true; initXavier(); } }
