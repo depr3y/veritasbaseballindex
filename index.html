@@ -362,7 +362,7 @@ function renderTable() {
     return `<tr class="${top}">
       <td class="td-rank">${t.rank}</td>
       <td class="td-team">${t.team}</td>
-      <td class="td-conf"><span class="chip" style="background:${c.bg};color:${c.text};border-color:${c.border}">${(t.conf||"—").toUpperCase()}</span></td>
+      <td class="td-conf"><span class="chip" style="background:#0a0a0a;color:#007722;border-color:#1a3318">${(t.conf||"—").toUpperCase()}</span></td>
       <td class="td-record">${t.wins}-${t.losses}</td>
       <td class="td-rating"><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>${t.rating.toFixed(4)}</div></td>
     </tr>`;
