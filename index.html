@@ -256,8 +256,9 @@
   <div class="ey">// the short version</div>
   <div class="st">What is VBI?</div>
   <div class="bt">
-    RPI is broken. 75% of its formula has nothing to do with your results — it rewards conference reputation, not performance. Teams can climb the rankings with losing records just by playing in the right league.<br><br>
-    VBI uses the Colley Matrix: a system of 308 simultaneous linear equations where every team's rating depends on every other team's rating. No polls, no arbitrary weights. The only inputs are who you beat, who beat you, and where the game was played. Schedule strength isn't assumed — it emerges from the math.
+    RPI hardcodes schedule strength directly into the formula. Since 75% of the rating comes from opponent and opponent-opponent winning percentage, teams can gain ranking value simply from playing strong schedules — even if they do not consistently win those games.<br><br>
+    VBI uses the Colley Matrix to solve every team’s rating simultaneously through the entire network of results. Instead of assuming which schedules are strongest, the system derives strength from actual game outcomes. A team’s rating rises only if the teams it played continue proving themselves across the full season.<br><br>
+    The key difference is that RPI rewards who you scheduled. VBI rewards what actually happened when those games were played.
   </div>
 
   <div class="abt-hr"></div>
@@ -957,7 +958,7 @@ function xvRatExplain(gi,rating,has){
   const l=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='L').length;
   if(!has) return `Once Xavier reaches 10 games, the system solves all 308 ratings simultaneously. The key: Xavier's rating isn't just their record — it's pulled up or down by the ratings of every opponent they faced, whose ratings are shaped by their opponents in turn. Losing to Arkansas or Oregon St. on the road costs less than losing to a weak team at home.`;
   const qual=rating>0.56?'strong — tough opponents pulling it well above the raw record':rating>0.53?'solid — road schedule doing its job, quality opponents lifting the floor':rating>0.50?'just above .500 — the wins against good teams are keeping it afloat':'still recovering — losses are outweighing opponent quality for now';
-  return `<b>${rating.toFixed(5)}</b> — ${qual}. A ${w}-${l} record against Arkansas, Oregon St., Vanderbilt, and Georgia Tech produces a meaningfully higher rating than the same record against weaker competition. That's not an opinion — it's what falls out of solving all 308 equations at once.`;
+  return `<b>${rating.toFixed(5)}</b> — ${qual}. A ${w}-${l} record against good teams produces a meaningfully higher rating than the same record against weaker competition. That's not an opinion — it's what falls out of solving all 308 equations at once.`;
 }
 
 function xvUpdate(gi){
