@@ -170,6 +170,45 @@
     .rpi-row{display:flex;gap:6px;align-items:flex-start;font-size:11px;padding:3px 0;color:var(--green-d);line-height:1.5}
     .rpi-row .dot{margin-top:4px;flex-shrink:0;width:6px;height:6px;border-radius:50%}
 
+    /* ── MOBILE TEAM EXPLORER ── */
+    .mx-mobile{display:none;flex-direction:column;height:calc(100vh - 60px)}
+    .mob-search-wrap{padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--border2);flex-shrink:0;position:relative}
+    .mob-search-inner{position:relative}
+    .mob-search-input{width:100%;font-family:'Courier Prime','Courier New',monospace;font-size:14px;padding:8px 10px 8px 26px;border:1px solid var(--border);background:var(--bg);color:var(--green);outline:none;letter-spacing:0.04em}
+    .mob-search-input:focus{border-color:var(--green)}
+    .mob-search-prompt{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--green-d);font-size:13px;pointer-events:none}
+    .mob-dropdown{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--green);border-top:none;z-index:999;max-height:220px;overflow-y:auto}
+    .mob-dropdown.show{display:block}
+    .mob-dd-item{padding:11px 12px;font-size:13px;color:var(--green-d);border-bottom:1px dashed var(--border);display:flex;justify-content:space-between}
+    .mob-dd-item:active{background:var(--bg3);color:var(--green-b)}
+    .mob-dd-item span{font-size:10px;color:var(--green-x)}
+    .mob-desktop-note{font-size:10px;color:var(--green-x);margin-top:6px;letter-spacing:0.04em;text-align:center}
+    .mob-card{flex:1;overflow-y:auto;padding:14px}
+    .mob-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--green-x);font-size:12px;text-align:center;line-height:2}
+    .mob-empty-icon{font-size:28px;margin-bottom:8px;opacity:0.4}
+    .mob-team-name{font-size:22px;font-weight:700;color:var(--green-b);margin-bottom:2px}
+    .mob-team-conf{font-size:11px;color:var(--green-x);letter-spacing:0.08em;margin-bottom:14px}
+    .mob-stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+    .mob-stat{background:var(--bg2);border:1px solid var(--border);padding:10px 8px;text-align:center}
+    .mob-stat-val{font-size:18px;font-weight:700;color:var(--green-b)}
+    .mob-stat-lbl{font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-top:3px}
+    .mob-insights{border:1px solid var(--border);background:var(--bg2);margin-bottom:14px}
+    .mob-insight-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-bottom:1px dashed var(--border)}
+    .mob-insight-row:last-child{border-bottom:none}
+    .mob-insight-lbl{font-size:11px;color:var(--green-x);letter-spacing:0.06em}
+    .mob-insight-sub{font-size:10px;color:var(--green-x);opacity:0.6;margin-top:1px}
+    .mob-insight-val{font-size:13px;font-weight:700;color:var(--green-b);text-align:right}
+    .mob-section-lbl{font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px}
+    .mob-games{border:1px solid var(--border);background:var(--bg2);padding:4px 12px}
+    .mob-game{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed var(--border);font-size:12px}
+    .mob-game:last-child{border-bottom:none}
+    .mob-game-date{color:var(--green-x);font-size:10px;min-width:68px}
+    .mob-game-res{font-weight:700;min-width:12px}
+    .mob-game-opp{flex:1;color:var(--green-d)}
+    .mob-game-opp.hot{color:var(--green)}
+    .mob-game-loc{font-size:10px;color:var(--green-x);min-width:30px;text-align:right}
+    .mob-game-rating{font-size:10px;color:var(--green-x);min-width:38px;text-align:right}
+
     footer{padding:10px 20px;border-top:1px solid var(--border2);font-size:10px;color:var(--green-x);letter-spacing:0.08em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
 
     /* ── MOBILE ── */
@@ -206,17 +245,9 @@
       .bar-bg{display:none}
       .td-rating{font-size:11px}
 
-      /* matrix tab */
-      .mx-header{padding:8px 14px;flex-direction:column;align-items:flex-start}
-      .mx-info{display:none}
-      .mx-zoom-row{padding:5px 10px;gap:6px;font-size:10px;flex-wrap:wrap}
-      .zoom-btn{font-size:11px;padding:3px 8px}
-      #tl-wrap{padding:8px 14px 8px}
-      .conf-labels{padding:5px 10px 8px}
-      .clabel{font-size:8px;padding:2px 5px}
-      .sel-info{padding:5px 14px;font-size:10px}
-      .mx-body{height:calc(100vh - 260px);flex-direction:column}
-      .team-sidebar.open{width:100%;height:260px;border-left:none;border-top:1px solid var(--border2)}
+      /* matrix tab — hide desktop matrix, show mobile explorer */
+      .mx-desktop{display:none!important}
+      .mx-mobile{display:flex!important}
 
       /* map tab */
       #map{height:calc(100vh - 100px)}
@@ -245,82 +276,105 @@
 
 <!-- MATRIX TAB -->
 <div id="matrix-panel">
-  <div class="mx-header">
-    <div>
-      <div style="font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.06em">THE COLLEY MATRIX // <span id="mx-dim">308 × 308</span></div>
-      <div style="font-size:10px;color:var(--green-x);margin-top:2px;letter-spacing:0.08em">// drag slider to rewind season · zoom to explore · click cell to highlight team</div>
+
+  <!-- DESKTOP MATRIX (hidden on mobile via .mx-desktop) -->
+  <div class="mx-desktop">
+    <div class="mx-header">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.06em">THE COLLEY MATRIX // <span id="mx-dim">308 × 308</span></div>
+        <div style="font-size:10px;color:var(--green-x);margin-top:2px;letter-spacing:0.08em">// drag slider to rewind season · zoom to explore · search or click cell to open team stats</div>
+      </div>
+      <div class="mx-info">games: <span id="mx-game-count">--</span> &nbsp;|&nbsp; teams qualified: <span id="mx-team-count">--</span> &nbsp;|&nbsp; cells: <span id="mx-cells">--</span></div>
     </div>
-    <div class="mx-info">games: <span id="mx-game-count">--</span> &nbsp;|&nbsp; teams qualified: <span id="mx-team-count">--</span> &nbsp;|&nbsp; cells: <span id="mx-cells">--</span></div>
-  </div>
-  <div id="tl-loading" style="padding:6px 20px;font-size:11px;color:var(--green-d);letter-spacing:0.06em;background:var(--bg2);border-bottom:1px solid var(--border2)">// loading games.json...</div>
-  <div id="tl-wrap" style="display:none;padding:8px 20px 10px;background:var(--bg2);border-bottom:1px solid var(--border2)">
-    <div style="display:flex;align-items:center;gap:12px">
-      <span style="font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.06em;min-width:88px" id="tl-date-display">--</span>
-      <input type="range" id="tl-slider" min="0" value="0" step="1" style="flex:1;-webkit-appearance:none;appearance:none;height:3px;background:var(--border);border:none;outline:none;cursor:pointer">
-      <span style="font-size:11px;color:var(--green-x);min-width:88px;text-align:right" id="tl-end-date">--</span>
-    </div>
-    <div style="display:flex;gap:20px;margin-top:7px;font-size:10px;color:var(--green-x);letter-spacing:0.08em">
-      day <span id="tl-day-num" style="color:var(--green)">1</span> of <span id="tl-total-days" style="color:var(--green)">84</span>
-      &nbsp;·&nbsp; <span id="tl-games-to-date" style="color:var(--green)">0</span> games played
-      &nbsp;·&nbsp; <span id="tl-teams-active" style="color:var(--green)">0</span> teams qualified
-      &nbsp;·&nbsp; #1: <span id="tl-top1" style="color:var(--green)">--</span>
-    </div>
-  </div>
-  <div class="sel-info" id="sel-info">// loading...</div>
-  <div class="mx-zoom-row">
-    <button class="zoom-btn" onclick="setZoom(mxZoom*1.5)">[ + ]</button>
-    <button class="zoom-btn" onclick="setZoom(mxZoom/1.5)">[ - ]</button>
-    <button class="zoom-btn" onclick="fitZoom()">[fit]</button>
-    <button class="zoom-btn" onclick="setZoom(1)">[1:1]</button>
-    <span id="zoom-label">zoom: --</span>
-    &nbsp;·&nbsp; ctrl+scroll to zoom · scroll to pan · click cell to highlight
-  </div>
-  <div class="mx-search-row">
-    <div class="mx-search-wrap">
-      <span class="mx-search-prompt">&gt;</span>
-      <input class="mx-search-input" id="mx-search" type="text" placeholder="search team..." autocomplete="off" oninput="onMxSearch(this.value)" onkeydown="onMxSearchKey(event)">
-      <div class="mx-search-dropdown" id="mx-dropdown"></div>
-    </div>
-    <span style="font-size:10px;color:var(--green-x)">or click any cell on the matrix</span>
-  </div>
-  <div class="mx-body">
-    <div class="canvas-wrap" id="cwrap">
-      <div id="mc-scaler" style="display:inline-block;line-height:0;transform-origin:top left">
-        <canvas id="mc" role="img" aria-label="Colley Matrix"></canvas>
+    <div id="tl-loading" style="padding:6px 20px;font-size:11px;color:var(--green-d);letter-spacing:0.06em;background:var(--bg2);border-bottom:1px solid var(--border2)">// loading games.json...</div>
+    <div id="tl-wrap" style="display:none;padding:8px 20px 10px;background:var(--bg2);border-bottom:1px solid var(--border2)">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.06em;min-width:88px" id="tl-date-display">--</span>
+        <input type="range" id="tl-slider" min="0" value="0" step="1" style="flex:1;-webkit-appearance:none;appearance:none;height:3px;background:var(--border);border:none;outline:none;cursor:pointer">
+        <span style="font-size:11px;color:var(--green-x);min-width:88px;text-align:right" id="tl-end-date">--</span>
+      </div>
+      <div style="display:flex;gap:20px;margin-top:7px;font-size:10px;color:var(--green-x);letter-spacing:0.08em">
+        day <span id="tl-day-num" style="color:var(--green)">1</span> of <span id="tl-total-days" style="color:var(--green)">84</span>
+        &nbsp;·&nbsp; <span id="tl-games-to-date" style="color:var(--green)">0</span> games played
+        &nbsp;·&nbsp; <span id="tl-teams-active" style="color:var(--green)">0</span> teams qualified
+        &nbsp;·&nbsp; #1: <span id="tl-top1" style="color:var(--green)">--</span>
       </div>
     </div>
-    <!-- TEAM SIDEBAR -->
-    <div class="team-sidebar" id="team-sidebar">
-      <div class="sb-header">
-        <div>
-          <div class="sb-team-name" id="sb-team-name">—</div>
-          <div class="sb-conf" id="sb-conf">—</div>
+    <div class="sel-info" id="sel-info">// loading...</div>
+    <div class="mx-search-row">
+      <div class="mx-search-wrap">
+        <span class="mx-search-prompt">&gt;</span>
+        <input class="mx-search-input" id="mx-search" type="text" placeholder="search team..." autocomplete="off" oninput="onMxSearch(this.value)" onkeydown="onMxSearchKey(event)">
+        <div class="mx-search-dropdown" id="mx-dropdown"></div>
+      </div>
+      <span style="font-size:10px;color:var(--green-x)">or click any cell on the matrix</span>
+    </div>
+    <div class="mx-zoom-row">
+      <button class="zoom-btn" onclick="setZoom(mxZoom*1.5)">[ + ]</button>
+      <button class="zoom-btn" onclick="setZoom(mxZoom/1.5)">[ - ]</button>
+      <button class="zoom-btn" onclick="fitZoom()">[fit]</button>
+      <button class="zoom-btn" onclick="setZoom(1)">[1:1]</button>
+      <span id="zoom-label">zoom: --</span>
+      &nbsp;·&nbsp; ctrl+scroll to zoom · scroll to pan · click cell to highlight
+    </div>
+    <div class="mx-body">
+      <div class="canvas-wrap" id="cwrap">
+        <div id="mc-scaler" style="display:inline-block;line-height:0;transform-origin:top left">
+          <canvas id="mc" role="img" aria-label="Colley Matrix"></canvas>
         </div>
-        <button class="sb-close" onclick="closeSidebar()">[ × ]</button>
       </div>
-      <div class="sb-stats">
-        <div class="sb-stat"><div class="sb-stat-val" id="sb-rating">—</div><div class="sb-stat-lbl">RATING</div></div>
-        <div class="sb-stat"><div class="sb-stat-val" id="sb-rank">—</div><div class="sb-stat-lbl">RANK</div></div>
-        <div class="sb-stat"><div class="sb-stat-val" id="sb-record">—</div><div class="sb-stat-lbl">RECORD</div></div>
+      <div class="team-sidebar" id="team-sidebar">
+        <div class="sb-header">
+          <div>
+            <div class="sb-team-name" id="sb-team-name">—</div>
+            <div class="sb-conf" id="sb-conf">—</div>
+          </div>
+          <button class="sb-close" onclick="closeSidebar()">[ × ]</button>
+        </div>
+        <div class="sb-stats">
+          <div class="sb-stat"><div class="sb-stat-val" id="sb-rating">—</div><div class="sb-stat-lbl">RATING</div></div>
+          <div class="sb-stat"><div class="sb-stat-val" id="sb-rank">—</div><div class="sb-stat-lbl">RANK</div></div>
+          <div class="sb-stat"><div class="sb-stat-val" id="sb-record">—</div><div class="sb-stat-lbl">RECORD</div></div>
+        </div>
+        <div class="sb-insight" id="sb-insight"></div>
+        <div class="sb-section-lbl" id="sb-games-lbl">// games through this date</div>
+        <div class="sb-games" id="sb-games"></div>
       </div>
-      <!-- ANALYTICS -->
-      <div class="sb-insight" id="sb-insight"></div>
-      <div class="sb-section-lbl" id="sb-games-lbl">// games through this date</div>
-      <div class="sb-games" id="sb-games"></div>
+    </div>
+    <div class="mx-legend">
+      <span>no games</span>
+      <div class="lbar" id="lbar"></div>
+      <span>many games</span>
+      &nbsp;&nbsp;<span style="color:var(--green-b)">■</span>&nbsp;diagonal
+      &nbsp;<span style="color:#003311">■</span>&nbsp;conf games
+      &nbsp;<span style="color:#001a0a">■</span>&nbsp;non-conf games
+    </div>
+    <div class="conf-labels" id="conf-labels"></div>
+  </div><!-- /.mx-desktop -->
+
+  <!-- MOBILE TEAM EXPLORER -->
+  <div class="mx-mobile" id="mx-mobile">
+    <div class="mob-search-wrap">
+      <div class="mob-search-inner">
+        <span class="mob-search-prompt">&gt;</span>
+        <input class="mob-search-input" id="mob-search" type="text" placeholder="search any team..." autocomplete="off" oninput="onMobSearch(this.value)">
+        <div class="mob-dropdown" id="mob-dropdown"></div>
+      </div>
+      <div class="mob-desktop-note">// open on desktop to see the full 308×308 matrix</div>
+    </div>
+    <div class="mob-card" id="mob-card">
+      <div class="mob-empty">
+        <div style="font-size:28px;margin-bottom:10px;opacity:0.3">⚾</div>
+        <div style="color:var(--green-d);font-weight:700;font-size:15px;margin-bottom:8px">Team Explorer</div>
+        <div>Search any D1 team above</div>
+        <div>to see their full VBI breakdown:</div>
+        <div style="margin-top:8px;color:var(--green-x)">rating · rank · road/home splits</div>
+        <div style="color:var(--green-x)">schedule strength · best win</div>
+        <div style="color:var(--green-x)">worst loss · trend · game log</div>
+      </div>
     </div>
   </div>
-  <div class="mx-legend">
-    <span>no games</span>
-    <div class="lbar" id="lbar"></div>
-    <span>many games</span>
-    &nbsp;&nbsp;
-    <span style="color:var(--green-b)">■</span>&nbsp;diagonal (team itself)
-    &nbsp;
-    <span style="color:#003311">■</span>&nbsp;conf games
-    &nbsp;
-    <span style="color:#001a0a">■</span>&nbsp;non-conf games
-  </div>
-  <div class="conf-labels" id="conf-labels"></div>
+
 </div>
 
 <!-- RANKINGS TAB -->
@@ -873,7 +927,118 @@ function selectMxTeam(i){
 // Close dropdown when clicking outside
 document.addEventListener("click", e=>{
   if(!e.target.closest(".mx-search-wrap")) document.getElementById("mx-dropdown")?.classList.remove("show");
+  if(!e.target.closest(".mob-search-inner")) document.getElementById("mob-dropdown")?.classList.remove("show");
 });
+
+// ── MOBILE EXPLORER ────────────────────────────────────────
+function onMobSearch(val){
+  const dd=document.getElementById("mob-dropdown");
+  if(!val.trim()){dd.classList.remove("show");return;}
+  const q=val.toLowerCase();
+  const results=MX_TEAMS.map((t,i)=>({t,i})).filter(x=>x.t.toLowerCase().includes(q)).slice(0,10);
+  if(!results.length){dd.classList.remove("show");return;}
+  dd.innerHTML=results.map(x=>{
+    const ci=MX_CONF_GROUPS.findIndex(cg=>x.i>=cg.s&&x.i<cg.s+cg.z);
+    const conf=MX_CONF_GROUPS[ci]?.n||"";
+    return `<div class="mob-dd-item" onmousedown="mobSelectTeam(${x.i})">${x.t}<span>${conf}</span></div>`;
+  }).join("");
+  dd.classList.add("show");
+}
+
+function mobSelectTeam(i){
+  document.getElementById("mob-search").value=MX_TEAMS[i];
+  document.getElementById("mob-dropdown").classList.remove("show");
+  renderMobCard(i);
+}
+
+function renderMobCard(i){
+  const team=MX_TEAMS[i];
+  const ci=MX_CONF_GROUPS.findIndex(cg=>i>=cg.s&&i<cg.s+cg.z);
+  const conf=MX_CONF_GROUPS[ci]?.n||"—";
+
+  // Use latest full-season data (all games)
+  const allGames=TL_GAMES||[];
+  const cutoff=TL_DATES?TL_DATES[TL_DATES.length-1]:"2026-05-09";
+  const teamGames=allGames.filter(g=>g.date<=cutoff&&(g.winner===team||g.loser===team));
+  const wins=teamGames.filter(g=>g.winner===team).length;
+  const losses=teamGames.filter(g=>g.loser===team).length;
+
+  // Need ratings — compute from full season slice if available
+  let rating="—",rank="—",confRank="—";
+  let roadW=0,roadL=0,homeW=0,homeL=0;
+  let sosSum=0,sosCount=0,bestWin=null,bestWinR=-Infinity,worstLoss=null,worstLossR=Infinity;
+  let trendHtml="stable";
+
+  if(mxRatings&&mxRatings[i]>0){
+    rating=mxRatings[i].toFixed(4);
+    const ranked=Array.from(mxRatings).map((r,idx)=>({r,idx})).filter(x=>x.r>0).sort((a,b)=>b.r-a.r);
+    const ri=ranked.findIndex(x=>x.idx===i);
+    if(ri>=0) rank=`#${ri+1}`;
+    if(ci>=0){
+      const cg=MX_CONF_GROUPS[ci];
+      const ct=Array.from({length:cg.z},(_,k)=>cg.s+k).filter(idx=>mxRatings[idx]>0).sort((a,b)=>mxRatings[b]-mxRatings[a]);
+      const cr=ct.indexOf(i);
+      if(cr>=0) confRank=`#${cr+1} of ${cg.z}`;
+    }
+  }
+
+  for(const g of teamGames){
+    const isWin=g.winner===team;
+    const onRoad=(isWin&&g.location==='away')||(!isWin&&g.location==='home');
+    if(isWin){onRoad?roadW++:homeW++;}else{onRoad?roadL++:homeL++;}
+    const oppIdx=MX_TEAM_IDX[isWin?g.loser:g.winner];
+    const oppR=oppIdx!==undefined&&mxRatings?mxRatings[oppIdx]:0;
+    if(oppR>0){sosSum+=oppR;sosCount++;}
+    if(isWin&&oppR>bestWinR){bestWinR=oppR;bestWin={opp:isWin?g.loser:g.winner,r:oppR};}
+    if(!isWin&&oppR>0&&oppR<worstLossR){worstLossR=oppR;worstLoss={opp:isWin?g.loser:g.winner,r:oppR};}
+  }
+  const sos=sosCount>0?(sosSum/sosCount).toFixed(4):"—";
+
+  const gameRows=teamGames.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(g=>{
+    const isWin=g.winner===team;
+    const opp=isWin?g.loser:g.winner;
+    const oppIdx=MX_TEAM_IDX[opp];
+    const oppR=oppIdx!==undefined&&mxRatings&&mxRatings[oppIdx]>0?mxRatings[oppIdx].toFixed(3):"—";
+    const onRoad=(isWin&&g.location==='away')||(!isWin&&g.location==='home');
+    const rCol=isWin?"#00ff55":"#ff4444";
+    const hot=oppIdx!==undefined&&mxRatings&&mxRatings[oppIdx]>0.55?" hot":"";
+    return `<div class="mob-game">
+      <span class="mob-game-date">${g.date}</span>
+      <span class="mob-game-res" style="color:${rCol}">${isWin?"W":"L"}</span>
+      <span class="mob-game-opp${hot}">${opp}</span>
+      <span class="mob-game-loc">${onRoad?"road":"home"}</span>
+      <span class="mob-game-rating">${oppR}</span>
+    </div>`;
+  }).join("");
+
+  document.getElementById("mob-card").innerHTML=`
+    <div style="margin-bottom:14px">
+      <div class="mob-team-name">${team}</div>
+      <div class="mob-team-conf">${conf}</div>
+    </div>
+    <div class="mob-stats-grid">
+      <div class="mob-stat"><div class="mob-stat-val">${rating}</div><div class="mob-stat-lbl">RATING</div></div>
+      <div class="mob-stat"><div class="mob-stat-val">${rank}</div><div class="mob-stat-lbl">RANK</div></div>
+      <div class="mob-stat"><div class="mob-stat-val">${wins}-${losses}</div><div class="mob-stat-lbl">RECORD</div></div>
+    </div>
+    <div class="mob-insights">
+      <div class="mob-insight-row"><span class="mob-insight-lbl">CONF RANK</span><span class="mob-insight-val">${confRank}</span></div>
+      <div class="mob-insight-row"><span class="mob-insight-lbl">ROAD</span><span class="mob-insight-val">${roadW}-${roadL}</span></div>
+      <div class="mob-insight-row"><span class="mob-insight-lbl">HOME</span><span class="mob-insight-val">${homeW}-${homeL}</span></div>
+      <div class="mob-insight-row"><span class="mob-insight-lbl">AVG OPP RATING</span><span class="mob-insight-val">${sos}</span></div>
+      <div class="mob-insight-row">
+        <span class="mob-insight-lbl">BEST WIN<div class="mob-insight-sub">${bestWin?bestWin.opp:"—"}</div></span>
+        <span class="mob-insight-val">${bestWin?bestWin.r.toFixed(4):"—"}</span>
+      </div>
+      <div class="mob-insight-row">
+        <span class="mob-insight-lbl">WORST LOSS<div class="mob-insight-sub">${worstLoss?worstLoss.opp:"—"}</div></span>
+        <span class="mob-insight-val">${worstLoss?worstLoss.r.toFixed(4):"—"}</span>
+      </div>
+    </div>
+    <div class="mob-section-lbl">// game log — ${teamGames.length} games</div>
+    <div class="mob-games">${gameRows||'<div style="padding:12px;color:var(--green-x);font-size:11px">no games found</div>'}</div>
+  `;
+}
 
 function openSidebar(i){
   selTeam=i;
