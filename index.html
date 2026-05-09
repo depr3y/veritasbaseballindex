@@ -124,7 +124,7 @@
 
     /* MAP TAB */
     #map-panel{display:none}
-    #map{height:calc(100vh - 120px);width:100%}
+    #map{height:calc(100vh - 160px);width:100%}
 
     /* ABOUT TAB */
     #about-panel{display:none;padding:1.5rem 20px;max-width:800px}
@@ -429,7 +429,17 @@
 </div>
 
 <!-- MAP TAB -->
-<div id="map-panel">
+<div id="map-panel" style="position:relative">
+  <div id="map-header" style="padding:10px 20px;background:var(--bg2);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.04em">VBI REGIONAL HOST MAP</div>
+      <div style="font-size:10px;color:var(--green-x);margin-top:2px;letter-spacing:0.06em">// top 16 VBI teams — projected regional hosts as of today · updated nightly</div>
+    </div>
+    <div style="font-size:11px;color:var(--green-x)">
+      <span style="color:var(--green-b)">⬤</span> #1-8 national seeds &nbsp;·&nbsp;
+      <span style="color:#00cc44">⬤</span> #9-16 regional hosts
+    </div>
+  </div>
   <div id="map"></div>
 </div>
 
@@ -745,14 +755,75 @@ const TEAM_COORDS = {
 
 function initMap() {
   mapInit = true;
-  const m = L.map("map",{center:[38,-96],zoom:4});
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{attribution:"© OpenStreetMap © CARTO",maxZoom:18}).addTo(m);
-  allTeams.forEach(t => {
+  const m = L.map("map", {center:[38,-96], zoom:4, zoomControl:true});
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    attribution:"© OpenStreetMap © CARTO", maxZoom:18
+  }).addTo(m);
+
+  // Top 16 from allTeams (already sorted by rank)
+  const top16 = allTeams.filter(t => TEAM_COORDS[t.team]).slice(0, 16);
+  const ordinals = ['1st','2nd','3rd','4th','5th','6th','7th','8th'];
+
+  top16.forEach((t, idx) => {
     const coords = TEAM_COORDS[t.team];
     if (!coords) return;
-    const marker = L.circleMarker(coords,{radius:t.rank<=25?9:6,fillColor:"#00cc44",color:"#000",weight:1,opacity:1,fillOpacity:t.rank<=25?0.95:0.6}).addTo(m);
-    marker.bindPopup(`<div style="font-family:'Courier New',monospace;background:#0a0a0a;color:#00cc44;padding:8px;min-width:160px;border:1px solid #007722;"><div style="font-weight:bold;font-size:13px;color:#00ff55;">${t.team}</div><div style="font-size:11px;color:#007722;margin:3px 0;">${(t.conf||"").toUpperCase()}</div><div style="font-size:12px;">#${t.rank} &nbsp;|&nbsp; ${t.wins}-${t.losses} &nbsp;|&nbsp; ${t.rating.toFixed(4)}</div></div>`);
+
+    const isNatSeed = idx < 8;
+    const color = isNatSeed ? '#00ff55' : '#00cc44';
+    const radius = isNatSeed ? 14 : 10;
+    const seedNum = idx + 1;
+
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="
+        width:${radius*2}px;height:${radius*2}px;
+        background:${color};
+        border:2px solid ${isNatSeed?'#fff':'#0a0a0a'};
+        border-radius:50%;
+        display:flex;align-items:center;justify-content:center;
+        font-family:'Courier New',monospace;
+        font-size:${isNatSeed?'11':'10'}px;
+        font-weight:700;
+        color:#0a0a0a;
+        box-shadow:0 0 ${isNatSeed?'12':'6'}px ${color}80;
+      ">${seedNum}</div>`,
+      iconSize:[radius*2, radius*2],
+      iconAnchor:[radius, radius]
+    });
+
+    const seedDesc = isNatSeed
+      ? `<div style="font-size:10px;color:#00ff55;margin-top:2px;letter-spacing:0.06em">${ordinals[idx]} National Seed</div>`
+      : '';
+
+    const popup = L.popup({
+      className:'vbi-popup',
+      maxWidth:220,
+      offset:[0, -radius]
+    }).setContent(`
+      <div style="font-family:'Courier New',monospace;background:#0a0a0a;color:#00cc44;padding:10px 12px;border:1px solid ${isNatSeed?'#00ff55':'#007722'};min-width:180px">
+        <div style="font-weight:700;font-size:14px;color:#00ff55;margin-bottom:2px">${t.team}</div>
+        <div style="font-size:10px;color:#005518;letter-spacing:0.08em;margin-bottom:6px">${(t.conf||'').toUpperCase()}</div>
+        ${seedDesc}
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px;font-size:11px">
+          <div style="color:#005518">VBI RANK</div><div style="color:#00ff55;font-weight:700;text-align:right">#${t.rank}</div>
+          <div style="color:#005518">RATING</div><div style="color:#00ff55;font-weight:700;text-align:right">${t.rating.toFixed(4)}</div>
+          <div style="color:#005518">RECORD</div><div style="color:#00ff55;font-weight:700;text-align:right">${t.wins}-${t.losses}</div>
+          <div style="color:#005518">REGIONAL</div><div style="color:#00ff55;font-weight:700;text-align:right">SEED ${seedNum}</div>
+        </div>
+      </div>`);
+
+    L.marker(coords, {icon}).addTo(m).bindPopup(popup);
   });
+
+  // Add custom popup CSS
+  if (!document.getElementById('vbi-popup-style')) {
+    const s = document.createElement('style');
+    s.id = 'vbi-popup-style';
+    s.textContent = `.vbi-popup .leaflet-popup-content-wrapper{background:transparent;border:none;box-shadow:none;padding:0}
+    .vbi-popup .leaflet-popup-content{margin:0}
+    .vbi-popup .leaflet-popup-tip-container{display:none}`;
+    document.head.appendChild(s);
+  }
 }
 
 // ── MATRIX ─────────────────────────────────────────────────
