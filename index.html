@@ -130,7 +130,7 @@
   <div class="logo">VERITAS BASEBALL INDEX</div>
   <div class="tagline">// the objective standard for d1 college baseball</div>
   <div class="header-bottom">
-    <div class="meta">updated: <span id="updated">--</span> &nbsp;|&nbsp; teams: <span id="team-count">--</span> &nbsp;|&nbsp; method: <span>colley matrix</span> &nbsp;|&nbsp; by: <span>matt deprey</span></div>
+    <div class="meta">updated: <span id="updated">--</span> &nbsp;|&nbsp; teams: <span id="team-count">--</span> &nbsp;|&nbsp; method: <span>colley matrix</span> &nbsp;|&nbsp; created by <span>matt deprey</span></div>
     <div class="nav">
       <button class="nav-btn active" onclick="showTab('about')">[about]</button>
       <button class="nav-btn" onclick="showTab('matrix')">[matrix]</button>
@@ -225,8 +225,8 @@
   <div class="ey">// the short version</div>
   <div class="st">What is VBI?</div>
   <div class="bt">
-    RPI is broken. It weights strength of schedule at 75%, which means a team can have a losing record and still rank highly just because they play in a tough conference. That's not a ranking — that's a reputation system.<br><br>
-    VBI uses the <b>Colley Matrix</b> — a system of linear equations that solves every team's rating simultaneously. Every win counts equally. No margin of victory. No human input. The only things that matter are <i>who you beat</i> and <i>where you beat them</i>.
+    RPI is fundamentally flawed because it values schedule strength more than winning itself. Since 75% of the formula is tied to opponents’ records and opponents’ opponents’ records, teams can climb the rankings with mediocre or even losing records simply by existing in power conferences. At that point, the system stops measuring performance and starts rewarding association and reputation.<br><br>
+    VBI takes a different approach. It uses the Colley Matrix — a mathematically objective system of linear equations that evaluates every team simultaneously based only on game results. No polls. No preseason bias. No margin-of-victory inflation. The only variables are who you beat, who you lost to, and where the game was played. Instead of assuming conference strength, VBI forces teams to earn their rating through results on the field.
   </div>
   <div class="abt-hr"></div>
   <div class="ey">// the formula</div>
@@ -363,7 +363,7 @@ function showTab(tab) {
   });
   if (tab === "map" && !mapInit) initMap();
   if (tab === "about" && !aboutInit) { aboutInit = true; buildSimButtons(); renderSim(); }
-  if (tab === "matrix" && !matrixInit) { matrixInit = true; buildMatrix(); }
+  if (tab === "matrix") { if (!matrixInit) { matrixInit = true; buildMatrix(); } else { drawMx(mxData, selTeam); } }
 }
 
 // MAP
@@ -595,7 +595,6 @@ function buildSimButtons(){
 }
 
 loadRankings();
-buildMatrix();
 </script>
 </body>
 </html>
