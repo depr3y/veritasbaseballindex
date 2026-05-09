@@ -272,6 +272,9 @@
       .bar-bg{display:none}
       .td-rating{font-size:11px}
       .rk-sidebar.open{width:100%;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2000;height:100vh}
+      #rankings-panel{height:auto!important;overflow:visible!important}
+      .rk-body{flex-direction:column;overflow:visible!important}
+      .rk-table-wrap{overflow:visible!important}
 
       /* matrix tab — hide desktop matrix, show mobile explorer */
       .mx-desktop{display:none!important}
@@ -821,7 +824,9 @@ function showTab(tab) {
   document.querySelectorAll(".nav-btn").forEach((b,i) => {
     b.classList.toggle("active", ["about","matrix","rankings","map"][i] === tab);
   });
-  document.body.style.overflow = tab === "about" ? "hidden" : "";
+  // Only lock body scroll on desktop — mobile needs normal scroll
+  const isMobile = window.innerWidth <= 600;
+  document.body.style.overflow = (!isMobile && tab === "about") ? "hidden" : "";
   if (tab === "map" && !mapInit) initMap();
   if (tab === "about") { if (!aboutInit) { aboutInit = true; initXavier(); } }
   if (tab === "matrix") { if (!matrixInit) { matrixInit = true; initMatrix(); } }
