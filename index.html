@@ -311,8 +311,8 @@
     KPI attempts to fix this by rewarding “quality wins,” but that creates a different problem: the rankings become dependent on arbitrary cutoff tiers and constantly shifting definitions of what counts as a “good win.” Teams are judged relative to constructed categories instead of the full network of games.<br><br>
     DSR goes even further toward prediction. It incorporates win expectancy, contextual adjustments, and margin-based modeling to estimate how strong a team is going forward. That can be useful for forecasting, but predictive systems inevitably inject more assumptions into the rankings. A 10-run win becomes fundamentally different from a 1-run win, and teams begin optimizing for model behavior rather than simply winning games.<br><br>
     VBI takes a different approach. Using the Colley Matrix, every team’s rating is solved simultaneously through the entire network of wins and losses across Division I baseball. No score margin. No quality-win buckets. No predictive modeling. The system only asks:<br><br>
-   * Who did you play?
-   * Did you win?
+   * Who did you play?<br>
+   * Did you win?<br>
    * Where was the game played?<br><br>
     Instead of hardcoding schedule strength, quality tiers, or predictive assumptions into the formula, VBI allows strength to emerge naturally from the interconnected results of the entire season. Every game matters. Every opponent matters. Every team influences every other team through the same mathematical system.
   </div>
@@ -329,7 +329,7 @@
       <div class="fc">
         <div class="fs" style="color:#60a5fa">C</div>
         <div class="fn">the matrix</div>
-        <div class="fd">308×308. A 308×308 matrix representing every Division I team. Each team’s main value is based on its weighted games played, while every matchup against another team creates a negative connection between the two teams. When the system solves the equation, all of those connections work together so every team’s rating is influenced by the strength of its opponents. </div>
+        <div class="fd">A 308×308 matrix representing every Division I team. Each team’s main value is based on its weighted games played, while every matchup against another team creates a negative connection between the two teams. When the system solves the equation, all of those connections work together so every team’s rating is influenced by the strength of its opponents. </div>
       </div>
       <div class="fc">
         <div class="fs" style="color:#4ade80">r</div>
