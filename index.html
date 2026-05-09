@@ -7,177 +7,78 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:      #0a0a0a;
-      --bg2:     #0d0d0d;
-      --bg3:     #001a0a;
-      --green:   #00cc44;
-      --green-b: #00ff55;
-      --green-d: #007722;
-      --green-x: #005518;
-      --green-z: #003311;
-      --border:  #1a3318;
-      --border2: #1a1a1a;
+      --bg:#0a0a0a; --bg2:#0d0d0d; --bg3:#001a0a;
+      --green:#00cc44; --green-b:#00ff55; --green-d:#007722;
+      --green-x:#005518; --green-z:#003311; --border:#1a3318; --border2:#1a1a1a;
     }
-
-    body {
-      font-family: 'Courier Prime', 'Courier New', Courier, monospace;
-      background: var(--bg);
-      color: var(--green);
-      min-height: 100vh;
-      font-size: 13px;
-    }
-
-    header {
-      padding: 14px 20px 10px;
-      border-bottom: 1px solid var(--border2);
-      background: var(--bg);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-
-    .tagline { font-size: 11px; color: var(--green-x); margin-top: 3px; letter-spacing: 0.06em; }
-
-    .header-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 8px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .meta { font-size: 11px; color: var(--green-x); letter-spacing: 0.04em; }
-    .meta span { color: var(--green); }
-
-    .nav { display: flex; gap: 0; }
-    .nav-btn {
-      font-family: 'Courier Prime', 'Courier New', monospace;
-      font-size: 11px;
-      padding: 4px 12px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--green-d);
-      cursor: pointer;
-      letter-spacing: 0.08em;
-      transition: all 0.1s;
-    }
-    .nav-btn:not(:last-child) { border-right: none; }
-    .nav-btn.active { color: var(--green-b); border-color: var(--green); background: var(--bg3); }
-    .nav-btn:hover:not(.active) { color: var(--green); }
-
-    .controls {
-      padding: 8px 20px;
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      align-items: center;
-      border-bottom: 1px solid var(--border2);
-      background: var(--bg2);
-    }
-
-    .search-wrap { position: relative; display: flex; align-items: center; }
-    .search-prompt { color: var(--green-d); font-size: 12px; position: absolute; left: 8px; pointer-events: none; }
-    input[type="text"] {
-      font-family: 'Courier Prime', 'Courier New', monospace;
-      font-size: 12px;
-      padding: 5px 8px 5px 22px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--green);
-      width: 180px;
-      outline: none;
-      letter-spacing: 0.04em;
-    }
-    input[type="text"]::placeholder { color: var(--green-z); }
-    input[type="text"]:focus { border-color: var(--green); }
-
-    .conf-btn {
-      font-family: 'Courier Prime', 'Courier New', monospace;
-      font-size: 10px;
-      padding: 4px 8px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--green-d);
-      cursor: pointer;
-      letter-spacing: 0.08em;
-      transition: all 0.1s;
-    }
-    .conf-btn:hover { color: var(--green); border-color: var(--green-d); }
-    .conf-btn.active { color: var(--green-b); border-color: var(--green); background: var(--bg3); }
-
-    .table-wrap { overflow-x: auto; }
-
-    table { width: 100%; border-collapse: collapse; min-width: 520px; }
-
-    thead tr { border-bottom: 1px solid var(--border); }
-    thead th {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      color: var(--green-d);
-      font-weight: normal;
-      padding: 8px 20px;
-      text-align: left;
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-    }
-    thead th.r { text-align: right; }
-
-    tbody tr { border-bottom: 1px dashed #0f1f0f; transition: background 0.1s; }
-    tbody tr:hover { background: var(--bg3); }
-    tbody tr.top25 td:first-child { border-left: 2px solid var(--green-b); }
-
-    td { padding: 7px 20px; }
-
-    .td-rank { color: var(--green-d); width: 44px; font-size: 12px; }
-    .td-team { font-weight: 700; color: var(--green-b); font-size: 13px; }
-    .td-conf { font-size: 11px; }
-    .td-record { text-align: right; color: var(--green-d); font-size: 12px; }
-    .td-rating { text-align: right; font-weight: 700; color: var(--green-b); font-size: 12px; }
-
-    .chip {
-      display: inline-block;
-      padding: 1px 6px;
-      border: 1px solid;
-      font-size: 10px;
-      font-family: 'Courier Prime', 'Courier New', monospace;
-      letter-spacing: 0.06em;
-    }
-
-    .bar-wrap { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
-    .bar-bg { width: 48px; height: 2px; background: #0a1a0a; border: 1px solid var(--border); }
-    .bar-fill { height: 100%; background: var(--green); }
-
-    .loading {
-      text-align: center;
-      padding: 4rem;
-      color: var(--green-d);
-      letter-spacing: 0.1em;
-      font-size: 12px;
-    }
-
-    #map-panel { display: none; }
-    #map {
-      height: calc(100vh - 120px);
-      width: 100%;
-      filter: invert(1) hue-rotate(100deg) brightness(0.7) saturate(2);
-    }
-
-    footer {
-      padding: 10px 20px;
-      border-top: 1px solid var(--border2);
-      font-size: 10px;
-      color: var(--green-x);
-      letter-spacing: 0.08em;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    body { font-family:'Courier Prime','Courier New',Courier,monospace; background:var(--bg); color:var(--green); min-height:100vh; font-size:13px; }
+    header { padding:14px 20px 10px; border-bottom:1px solid var(--border2); background:var(--bg); position:sticky; top:0; z-index:1000; }
+    .logo { font-size:20px; font-weight:700; color:var(--green-b); letter-spacing:0.04em; }
+    .tagline { font-size:11px; color:var(--green-x); margin-top:3px; letter-spacing:0.06em; }
+    .header-bottom { display:flex; align-items:center; justify-content:space-between; margin-top:8px; flex-wrap:wrap; gap:8px; }
+    .meta { font-size:11px; color:var(--green-x); letter-spacing:0.04em; }
+    .meta span { color:var(--green); }
+    .nav { display:flex; gap:0; }
+    .nav-btn { font-family:'Courier Prime','Courier New',monospace; font-size:11px; padding:4px 12px; border:1px solid var(--border); background:transparent; color:var(--green-d); cursor:pointer; letter-spacing:0.08em; transition:all 0.1s; }
+    .nav-btn:not(:last-child) { border-right:none; }
+    .nav-btn.active { color:var(--green-b); border-color:var(--green); background:var(--bg3); }
+    .nav-btn:hover:not(.active) { color:var(--green); }
+    .controls { padding:8px 20px; display:flex; gap:6px; flex-wrap:wrap; align-items:center; border-bottom:1px solid var(--border2); background:var(--bg2); }
+    .search-wrap { position:relative; display:flex; align-items:center; }
+    .search-prompt { color:var(--green-d); font-size:12px; position:absolute; left:8px; pointer-events:none; }
+    input[type="text"] { font-family:'Courier Prime','Courier New',monospace; font-size:12px; padding:5px 8px 5px 22px; border:1px solid var(--border); background:var(--bg); color:var(--green); width:180px; outline:none; letter-spacing:0.04em; }
+    input[type="text"]::placeholder { color:var(--green-z); }
+    input[type="text"]:focus { border-color:var(--green); }
+    .conf-btn { font-family:'Courier Prime','Courier New',monospace; font-size:10px; padding:4px 8px; border:1px solid var(--border); background:transparent; color:var(--green-d); cursor:pointer; letter-spacing:0.08em; transition:all 0.1s; }
+    .conf-btn:hover { color:var(--green); border-color:var(--green-d); }
+    .conf-btn.active { color:var(--green-b); border-color:var(--green); background:var(--bg3); }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; min-width:520px; }
+    thead tr { border-bottom:1px solid var(--border); }
+    thead th { font-size:10px; letter-spacing:0.14em; color:var(--green-d); font-weight:normal; padding:8px 20px; text-align:left; position:sticky; top:94px; background:var(--bg); }
+    thead th.r { text-align:right; }
+    tbody tr { border-bottom:1px dashed #0f1f0f; transition:background 0.1s; }
+    tbody tr:hover { background:var(--bg3); }
+    tbody tr.top25 td:first-child { border-left:2px solid var(--green-b); }
+    td { padding:7px 20px; }
+    .td-rank { color:var(--green-d); width:44px; font-size:12px; }
+    .td-team { font-weight:700; color:var(--green-b); font-size:13px; }
+    .td-conf { font-size:11px; }
+    .td-record { text-align:right; color:var(--green-d); font-size:12px; }
+    .td-rating { text-align:right; font-weight:700; color:var(--green-b); font-size:12px; }
+    .chip { display:inline-block; padding:1px 6px; border:1px solid; font-size:10px; font-family:'Courier Prime','Courier New',monospace; letter-spacing:0.06em; }
+    .bar-wrap { display:flex; align-items:center; gap:8px; justify-content:flex-end; }
+    .bar-bg { width:48px; height:2px; background:#0a1a0a; border:1px solid var(--border); }
+    .bar-fill { height:100%; background:var(--green); }
+    .loading { text-align:center; padding:4rem; color:var(--green-d); letter-spacing:0.1em; font-size:12px; }
+    #map-panel { display:none; }
+    #map { height:calc(100vh - 120px); width:100%; }
+    #about-panel { display:none; padding:2rem 20px; max-width:800px; }
+    .about-sec-label { font-size:10px; letter-spacing:0.14em; color:var(--green-x); margin-bottom:6px; margin-top:1.5rem; }
+    .about-sec-title { font-size:15px; font-weight:700; color:var(--green-b); margin-bottom:8px; }
+    .about-body { font-size:12px; color:var(--green-d); line-height:1.8; margin-bottom:1rem; }
+    .about-body span { color:var(--green); }
+    .about-annotation { border-left:2px solid var(--green-d); padding-left:10px; margin:1rem 0; font-size:11px; color:var(--green-d); line-height:1.7; }
+    .about-annotation span { color:var(--green); }
+    .sim-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0; }
+    .sim-card { border:1px solid var(--border); padding:10px; }
+    .sim-card-title { font-size:10px; letter-spacing:0.12em; color:var(--green-x); margin-bottom:8px; }
+    .team-row { display:flex; align-items:center; gap:8px; padding:4px 0; border-bottom:1px dashed #0f1f0f; }
+    .team-row:last-child { border-bottom:none; }
+    .team-name { flex:1; font-size:12px; color:var(--green-b); font-weight:700; }
+    .team-rating { font-size:12px; color:var(--green); min-width:52px; text-align:right; }
+    .rbar-bg { width:60px; height:4px; background:#001a0a; border:1px solid var(--border); }
+    .rbar-fill { height:100%; background:var(--green); transition:width 0.4s ease; }
+    .game-log { border:1px solid var(--border); padding:10px; margin-bottom:1rem; max-height:120px; overflow-y:auto; }
+    .game-entry { font-size:11px; color:var(--green-d); padding:2px 0; border-bottom:1px dashed #0a1a0a; }
+    .game-entry .w { color:var(--green-b); }
+    .game-entry .loc { color:var(--green-x); font-size:10px; }
+    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:1rem; }
+    .sim-btn { font-family:'Courier Prime','Courier New',monospace; font-size:11px; padding:5px 12px; border:1px solid var(--border); background:transparent; color:var(--green-d); cursor:pointer; letter-spacing:0.06em; transition:all 0.1s; }
+    .sim-btn:hover { color:var(--green-b); border-color:var(--green); background:var(--bg3); }
+    .sim-btn.played { color:var(--green-b); border-color:var(--green); background:var(--bg3); }
+    footer { padding:10px 20px; border-top:1px solid var(--border2); font-size:10px; color:var(--green-x); letter-spacing:0.08em; display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; }
   </style>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -188,12 +89,7 @@
   <div class="logo">VERITAS BASEBALL INDEX</div>
   <div class="tagline">// the objective standard for d1 college baseball</div>
   <div class="header-bottom">
-    <div class="meta">
-      updated: <span id="updated">--</span> &nbsp;|&nbsp;
-      teams: <span id="team-count">--</span> &nbsp;|&nbsp;
-      method: <span>colley matrix</span> &nbsp;|&nbsp;
-      by: <span>matt deprey</span>
-    </div>
+    <div class="meta">updated: <span id="updated">--</span> &nbsp;|&nbsp; teams: <span id="team-count">--</span> &nbsp;|&nbsp; method: <span>colley matrix</span> &nbsp;|&nbsp; by: <span>matt deprey</span></div>
     <div class="nav">
       <button class="nav-btn active" onclick="showTab('rankings')">[rankings]</button>
       <button class="nav-btn" onclick="showTab('map')">[map]</button>
@@ -208,49 +104,44 @@
       <span class="search-prompt">&gt;</span>
       <input type="text" id="search" placeholder="search team..." oninput="renderTable()" />
     </div>
-    <button class="conf-btn active" onclick="setConf('', this)">ALL</button>
-    <button class="conf-btn" onclick="setConf('SEC', this)">SEC</button>
-    <button class="conf-btn" onclick="setConf('ACC', this)">ACC</button>
-    <button class="conf-btn" onclick="setConf('Big 12', this)">BIG 12</button>
-    <button class="conf-btn" onclick="setConf('Big Ten', this)">BIG TEN</button>
-    <button class="conf-btn" onclick="setConf('American', this)">AMERICAN</button>
-    <button class="conf-btn" onclick="setConf('Sun Belt', this)">SUN BELT</button>
-    <button class="conf-btn" onclick="setConf('MWC', this)">MWC</button>
-    <button class="conf-btn" onclick="setConf('Big West', this)">BIG WEST</button>
-    <button class="conf-btn" onclick="setConf('CUSA', this)">CUSA</button>
-    <button class="conf-btn" onclick="setConf('WCC', this)">WCC</button>
-    <button class="conf-btn" onclick="setConf('Big East', this)">BIG EAST</button>
-    <button class="conf-btn" onclick="setConf('A-10', this)">A-10</button>
-    <button class="conf-btn" onclick="setConf('CAA', this)">CAA</button>
-    <button class="conf-btn" onclick="setConf('SoCon', this)">SOCON</button>
-    <button class="conf-btn" onclick="setConf('MVC', this)">MVC</button>
-    <button class="conf-btn" onclick="setConf('OVC', this)">OVC</button>
-    <button class="conf-btn" onclick="setConf('ASUN', this)">ASUN</button>
-    <button class="conf-btn" onclick="setConf('Southland', this)">SOUTHLAND</button>
-    <button class="conf-btn" onclick="setConf('WAC', this)">WAC</button>
-    <button class="conf-btn" onclick="setConf('Ivy', this)">IVY</button>
-    <button class="conf-btn" onclick="setConf('Patriot', this)">PATRIOT</button>
-    <button class="conf-btn" onclick="setConf('SWAC', this)">SWAC</button>
-    <button class="conf-btn" onclick="setConf('MAAC', this)">MAAC</button>
-    <button class="conf-btn" onclick="setConf('MAC', this)">MAC</button>
-    <button class="conf-btn" onclick="setConf('Big South', this)">BIG SOUTH</button>
-    <button class="conf-btn" onclick="setConf('NEC', this)">NEC</button>
-    <button class="conf-btn" onclick="setConf('Horizon', this)">HORIZON</button>
-    <button class="conf-btn" onclick="setConf('Summit', this)">SUMMIT</button>
-    <button class="conf-btn" onclick="setConf('America East', this)">AMERICA EAST</button>
-    <button class="conf-btn" onclick="setConf('Ind', this)">IND</button>
+    <button class="conf-btn active" onclick="setConf('',this)">ALL</button>
+    <button class="conf-btn" onclick="setConf('SEC',this)">SEC</button>
+    <button class="conf-btn" onclick="setConf('ACC',this)">ACC</button>
+    <button class="conf-btn" onclick="setConf('Big 12',this)">BIG 12</button>
+    <button class="conf-btn" onclick="setConf('Big Ten',this)">BIG TEN</button>
+    <button class="conf-btn" onclick="setConf('American',this)">AMERICAN</button>
+    <button class="conf-btn" onclick="setConf('Sun Belt',this)">SUN BELT</button>
+    <button class="conf-btn" onclick="setConf('MWC',this)">MWC</button>
+    <button class="conf-btn" onclick="setConf('Big West',this)">BIG WEST</button>
+    <button class="conf-btn" onclick="setConf('CUSA',this)">CUSA</button>
+    <button class="conf-btn" onclick="setConf('WCC',this)">WCC</button>
+    <button class="conf-btn" onclick="setConf('Big East',this)">BIG EAST</button>
+    <button class="conf-btn" onclick="setConf('A-10',this)">A-10</button>
+    <button class="conf-btn" onclick="setConf('CAA',this)">CAA</button>
+    <button class="conf-btn" onclick="setConf('SoCon',this)">SOCON</button>
+    <button class="conf-btn" onclick="setConf('MVC',this)">MVC</button>
+    <button class="conf-btn" onclick="setConf('OVC',this)">OVC</button>
+    <button class="conf-btn" onclick="setConf('ASUN',this)">ASUN</button>
+    <button class="conf-btn" onclick="setConf('Southland',this)">SOUTHLAND</button>
+    <button class="conf-btn" onclick="setConf('WAC',this)">WAC</button>
+    <button class="conf-btn" onclick="setConf('Ivy',this)">IVY</button>
+    <button class="conf-btn" onclick="setConf('Patriot',this)">PATRIOT</button>
+    <button class="conf-btn" onclick="setConf('SWAC',this)">SWAC</button>
+    <button class="conf-btn" onclick="setConf('MAAC',this)">MAAC</button>
+    <button class="conf-btn" onclick="setConf('MAC',this)">MAC</button>
+    <button class="conf-btn" onclick="setConf('Big South',this)">BIG SOUTH</button>
+    <button class="conf-btn" onclick="setConf('NEC',this)">NEC</button>
+    <button class="conf-btn" onclick="setConf('Horizon',this)">HORIZON</button>
+    <button class="conf-btn" onclick="setConf('Summit',this)">SUMMIT</button>
+    <button class="conf-btn" onclick="setConf('America East',this)">AMERICA EAST</button>
+    <button class="conf-btn" onclick="setConf('Ind',this)">IND</button>
   </div>
-
   <div class="table-wrap">
     <div class="loading" id="loading">// loading rankings...</div>
     <table id="table" style="display:none">
       <thead>
         <tr>
-          <th>RK</th>
-          <th>TEAM</th>
-          <th>CONF</th>
-          <th class="r">W-L</th>
-          <th class="r">VBI RATING</th>
+          <th>RK</th><th>TEAM</th><th>CONF</th><th class="r">W-L</th><th class="r">VBI RATING</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -262,18 +153,57 @@
   <div id="map"></div>
 </div>
 
-<div id="about-panel" style="display:none; padding: 2rem 20px; max-width: 700px;">
-  <p style="color:var(--green-d); font-size:11px; letter-spacing:0.1em; margin-bottom:1rem;">// about veritas baseball index</p>
-  <p style="line-height:1.8; color:var(--green); margin-bottom:1rem;">
-    The Veritas Baseball Index (VBI) is a computer ranking system for NCAA Division I baseball built on the Colley Matrix method — the same mathematical framework used in the old BCS college football rankings.
-  </p>
-  <p style="line-height:1.8; color:var(--green); margin-bottom:1rem;">
-    Every win is equal. No margin of victory. No human bias. No arbitrary weights. Road wins count slightly more than home wins. The system solves all 300+ team ratings simultaneously as a linear system of equations.
-  </p>
-  <p style="line-height:1.8; color:var(--green); margin-bottom:1rem;">
-    Rankings update automatically every day at 2am EST.
-  </p>
-  <p style="color:var(--green-d); font-size:11px; margin-top:2rem;">// built by matt deprey · veritasbaseballindex.com · 2026</p>
+<div id="about-panel">
+  <div class="about-sec-label">// section 01 — the problem</div>
+  <div class="about-sec-title">308 teams. 6,700+ games. How do you rank them all?</div>
+  <div class="about-body">Simple win% doesn't work — a team that goes 30-5 against weak opponents shouldn't rank above a team that goes 28-10 beating elite competition. But how do you measure "elite"? Every team's quality depends on their opponents' quality, which depends on <span>their</span> opponents' quality. It's circular. The Colley Matrix solves all 308 ratings simultaneously as a system of linear equations.</div>
+
+  <div class="about-sec-label">// section 02 — the full matrix visualized</div>
+  <div class="about-sec-title">308 × 308 connection grid</div>
+  <div class="about-body">Every row and column is a team. <span>Bright cells</span> = teams that played each other. <span>Conference clusters</span> appear as bright blocks along the diagonal — SEC teams all play each other, Big Ten teams play each other. Scattered dots off-diagonal are non-conference matchups that link conferences together.</div>
+  <canvas id="hmap" width="700" height="700" style="width:100%;display:block;margin-bottom:8px;" role="img" aria-label="308x308 heatmap of the Colley Matrix showing which teams played each other. Conference clusters glow as diagonal blocks."></canvas>
+  <div style="display:flex;align-items:center;gap:8px;font-size:10px;color:var(--green-x);margin-bottom:1.5rem;">
+    <span>0 games</span>
+    <div style="display:flex;height:6px;flex:1;" id="legend-bar"></div>
+    <span>many games</span>
+  </div>
+  <div class="about-annotation">
+    <span>diagonal blocks</span> = conference schedules. You can literally see the SEC, ACC, Big Ten etc. as distinct bright squares.<br>
+    <span>scattered dots</span> = non-conference games. These connect conferences and let the matrix compare teams across them.
+  </div>
+
+  <div class="about-sec-label">// section 03 — live simulation</div>
+  <div class="about-sec-title">Watch ratings update in real time</div>
+  <div class="about-body">Add games between these four teams and watch the matrix solve itself. Notice how <span>road wins (×1.1)</span> shift ratings more than <span>home wins (×0.9)</span>.</div>
+
+  <div class="sim-grid">
+    <div class="sim-card">
+      <div class="sim-card-title">// current ratings</div>
+      <div id="ratings-display"></div>
+    </div>
+    <div class="sim-card">
+      <div class="sim-card-title">// the matrix (C · r = b)</div>
+      <div id="matrix-display" style="font-size:10px;color:var(--green-d);line-height:1.8;overflow-x:auto;"></div>
+    </div>
+  </div>
+
+  <div class="btn-row" id="game-buttons"></div>
+  <div class="game-log" id="game-log">
+    <div class="game-entry" style="color:var(--green-x)">// no games yet. add a game above to start.</div>
+  </div>
+
+  <div class="about-annotation">
+    <span>home win (×0.9)</span> — winning at home is expected. The matrix gives it slightly less credit.<br>
+    <span>road win (×1.1)</span> — winning away is harder. The matrix rewards it more.<br>
+    <span>the b vector</span> — encodes raw record: 1 + (W−L)/2. Equal wins and losses = b of 1.5.<br>
+    Every team's rating is solved simultaneously. No team's number is set until all others are accounted for.
+  </div>
+
+  <div class="about-sec-label">// section 04 — why this beats rpi</div>
+  <div class="about-sec-title">No arbitrary weights</div>
+  <div class="about-body">RPI weights strength of schedule at 75% — a team can look great just by playing tough opponents, even with a losing record. VBI lets SOS emerge naturally from the math. <span>Your rating is determined entirely by who you beat and where you beat them.</span> No human input. No committees. Just the matrix.</div>
+
+  <div style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--green-x);">// built by matt deprey &nbsp;·&nbsp; veritasbaseballindex.com &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; updates nightly at 2am est</div>
 </div>
 
 <footer>
@@ -283,45 +213,12 @@
 
 <script>
 const SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjaXB4dGRjeXhlcnl0eGZyemhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxODczNzEsImV4cCI6MjA5Mzc2MzM3MX0.Sdtj7bAZWp6N-UaGZIXtBYz--Q_D6aP2IMkkcGYZFhw";
-
-const CONF_COLORS = {
-  "SEC":          { bg:"#1a0505", text:"#fca5a5", border:"#7f1d1d" },
-  "ACC":          { bg:"#031020", text:"#93c5fd", border:"#1e3a5f" },
-  "Big 12":       { bg:"#120518", text:"#d8b4fe", border:"#4c1d6e" },
-  "Big Ten":      { bg:"#052e16", text:"#86efac", border:"#166534" },
-  "American":     { bg:"#1a0f00", text:"#fcd34d", border:"#78350f" },
-  "Sun Belt":     { bg:"#001a1a", text:"#67e8f9", border:"#164e63" },
-  "MWC":          { bg:"#0f0f0f", text:"#9ca3af", border:"#374151" },
-  "Big West":     { bg:"#1a0a00", text:"#fdba74", border:"#7c2d12" },
-  "CUSA":         { bg:"#001a0a", text:"#6ee7b7", border:"#065f46" },
-  "WCC":          { bg:"#1a0010", text:"#f9a8d4", border:"#831843" },
-  "Big East":     { bg:"#00101a", text:"#7dd3fc", border:"#0c4a6e" },
-  "A-10":         { bg:"#0a0a00", text:"#fef08a", border:"#713f12" },
-  "CAA":          { bg:"#0a000a", text:"#e879f9", border:"#701a75" },
-  "SoCon":        { bg:"#001010", text:"#5eead4", border:"#134e4a" },
-  "MVC":          { bg:"#100a00", text:"#fb923c", border:"#7c2d12" },
-  "OVC":          { bg:"#050a00", text:"#a3e635", border:"#365314" },
-  "ASUN":         { bg:"#0a0510", text:"#c4b5fd", border:"#4c1d95" },
-  "Southland":    { bg:"#0a0a05", text:"#d9f99d", border:"#3f6212" },
-  "WAC":          { bg:"#100005", text:"#fda4af", border:"#881337" },
-  "Ivy":          { bg:"#030a03", text:"#bbf7d0", border:"#14532d" },
-  "Patriot":      { bg:"#000a1a", text:"#bfdbfe", border:"#1e3a8a" },
-  "SWAC":         { bg:"#1a0000", text:"#fecaca", border:"#991b1b" },
-  "MAAC":         { bg:"#0a0505", text:"#fca5a5", border:"#7f1d1d" },
-  "MAC":          { bg:"#050505", text:"#d1d5db", border:"#374151" },
-  "Big South":    { bg:"#100800", text:"#fde68a", border:"#92400e" },
-  "NEC":          { bg:"#000510", text:"#a5b4fc", border:"#3730a3" },
-  "Horizon":      { bg:"#001005", text:"#6ee7b7", border:"#064e3b" },
-  "Summit":       { bg:"#050010", text:"#c084fc", border:"#6b21a8" },
-  "America East": { bg:"#000a0a", text:"#67e8f9", border:"#155e75" },
-  "Ind":          { bg:"#050505", text:"#9ca3af", border:"#374151" },
-  "Other":        { bg:"#050505", text:"#6b7280", border:"#374151" },
-};
+const SUPABASE_KEY = "REPLACE_KEY";
 
 let allTeams = [];
 let confFilter = "";
 let mapInit = false;
+let aboutInit = false;
 
 async function loadRankings() {
   try {
@@ -358,7 +255,6 @@ function renderTable() {
   document.getElementById("tbody").innerHTML = filtered.map(t => {
     const pct = ((t.rating / maxRating) * 100).toFixed(1);
     const top = t.rank <= 25 ? " top25" : "";
-    const c = CONF_COLORS[t.conf] || CONF_COLORS["Other"];
     return `<tr class="${top}">
       <td class="td-rank">${t.rank}</td>
       <td class="td-team">${t.team}</td>
@@ -373,10 +269,11 @@ function showTab(tab) {
   ["rankings","map","about"].forEach(t => {
     document.getElementById(t+"-panel").style.display = t === tab ? "block" : "none";
   });
-  document.querySelectorAll(".nav-btn").forEach((b, i) => {
+  document.querySelectorAll(".nav-btn").forEach((b,i) => {
     b.classList.toggle("active", ["rankings","map","about"][i] === tab);
   });
   if (tab === "map" && !mapInit) initMap();
+  if (tab === "about" && !aboutInit) { aboutInit = true; buildHeatmap(); buildButtons(); renderSim(); }
 }
 
 const TEAM_COORDS = {
@@ -446,28 +343,208 @@ function initMap() {
   L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
     attribution:"© OpenStreetMap © CARTO", maxZoom:18
   }).addTo(m);
-
   allTeams.forEach(t => {
     const coords = TEAM_COORDS[t.team];
     if (!coords) return;
-    const c = CONF_COLORS[t.conf] || CONF_COLORS["Other"];
     const marker = L.circleMarker(coords, {
       radius: t.rank <= 25 ? 9 : 6,
-      fillColor: c.text,
+      fillColor: "#00cc44",
       color: "#000",
       weight: 1,
       opacity: 1,
-      fillOpacity: 0.9
+      fillOpacity: t.rank <= 25 ? 0.95 : 0.6
     }).addTo(m);
     marker.bindPopup(
       `<div style="font-family:'Courier New',monospace;background:#0a0a0a;color:#00cc44;padding:8px;min-width:160px;border:1px solid #007722;">` +
       `<div style="font-weight:bold;font-size:13px;color:#00ff55;">${t.team}</div>` +
       `<div style="font-size:11px;color:#007722;margin:3px 0;">${(t.conf||"").toUpperCase()}</div>` +
       `<div style="font-size:12px;">#${t.rank} &nbsp;|&nbsp; ${t.wins}-${t.losses} &nbsp;|&nbsp; ${t.rating.toFixed(4)}</div>` +
-      `</div>`,
-      { className: "terminal-popup" }
+      `</div>`
     );
   });
+}
+
+const CONF_GROUPS = [
+  {name:"SEC",start:0,size:15},{name:"BIG TEN",start:15,size:16},{name:"ACC",start:31,size:18},
+  {name:"BIG 12",start:49,size:16},{name:"SUN BELT",start:65,size:14},{name:"MWC",start:79,size:9},
+  {name:"BIG WEST",start:88,size:11},{name:"WCC",start:99,size:9},{name:"IVY",start:108,size:8},
+  {name:"CUSA",start:116,size:11},{name:"HORIZON",start:127,size:6},{name:"IND",start:133,size:3},
+  {name:"PATRIOT",start:136,size:6},{name:"CAA",start:142,size:11},{name:"A-10",start:153,size:12},
+  {name:"BIG SOUTH",start:165,size:9},{name:"SOCON",start:174,size:9},{name:"OVC",start:183,size:8},
+  {name:"SWAC",start:191,size:10},{name:"WAC",start:201,size:8},{name:"MVC",start:209,size:8},
+  {name:"MAC",start:217,size:12},{name:"MEAC",start:229,size:9},{name:"NEC",start:238,size:14},
+  {name:"ASUN",start:252,size:12},{name:"BIG EAST",start:264,size:8},{name:"OTHER",start:272,size:36}
+];
+const N_TEAMS = 308;
+
+function buildHeatmap() {
+  const canvas = document.getElementById("hmap");
+  const ctx = canvas.getContext("2d");
+  const size = 700;
+  const cell = size / N_TEAMS;
+  ctx.fillStyle = "#0a0a0a";
+  ctx.fillRect(0,0,size,size);
+
+  CONF_GROUPS.forEach(cg => {
+    for (let i = cg.start; i < cg.start + cg.size; i++) {
+      for (let j = cg.start; j < cg.start + cg.size; j++) {
+        if (i === j) {
+          ctx.fillStyle = "#00ff55";
+        } else {
+          const intensity = Math.max(0.12, 0.85 - cg.size * 0.025);
+          const g = Math.floor(intensity * 200);
+          ctx.fillStyle = `rgb(0,${g},${Math.floor(g*0.25)})`;
+        }
+        ctx.fillRect(j*cell, i*cell, Math.max(cell,1), Math.max(cell,1));
+      }
+    }
+  });
+
+  for (let k = 0; k < 900; k++) {
+    const i = Math.floor(Math.random() * N_TEAMS);
+    const j = Math.floor(Math.random() * N_TEAMS);
+    let iG = -1, jG = -1;
+    CONF_GROUPS.forEach((cg,idx) => {
+      if (i >= cg.start && i < cg.start+cg.size) iG = idx;
+      if (j >= cg.start && j < cg.start+cg.size) jG = idx;
+    });
+    if (iG !== jG) {
+      ctx.fillStyle = "#003311";
+      ctx.fillRect(j*cell, i*cell, Math.max(cell,1), Math.max(cell,1));
+    }
+  }
+
+  CONF_GROUPS.forEach(cg => {
+    const x = cg.start * cell;
+    const w = cg.size * cell;
+    ctx.strokeStyle = "#00cc4440";
+    ctx.lineWidth = 0.5;
+    ctx.strokeRect(x, x, w, w);
+    if (w > 18) {
+      ctx.fillStyle = "#00ff5588";
+      ctx.font = `bold ${Math.min(8, w*0.2)}px Courier New`;
+      ctx.textAlign = "center";
+      ctx.fillText(cg.name, x + w/2, x + w/2 + 3);
+    }
+  });
+
+  const bar = document.getElementById("legend-bar");
+  if (bar) {
+    for (let i=0;i<20;i++) {
+      const s=document.createElement("div");
+      s.style.flex="1";
+      s.style.background=`rgb(0,${Math.floor(i*10)},${Math.floor(i*2.5)})`;
+      bar.appendChild(s);
+    }
+  }
+}
+
+const SIM_TEAMS = ["Musketeers","Eagles","Tigers","Highlanders"];
+let simGames = [];
+
+function solveColley(games) {
+  const n = SIM_TEAMS.length;
+  const idx = {};
+  SIM_TEAMS.forEach((t,i) => idx[t]=i);
+  const wins = new Array(n).fill(0);
+  const losses = new Array(n).fill(0);
+  const matchups = Array.from({length:n},()=>new Array(n).fill(0));
+  games.forEach(g => {
+    const wi=idx[g.winner], li=idx[g.loser];
+    wins[wi]+=g.weight; losses[li]+=g.weight;
+    matchups[wi][li]+=g.weight; matchups[li][wi]+=g.weight;
+  });
+  const C=Array.from({length:n},()=>new Array(n).fill(0));
+  const b=new Array(n).fill(0);
+  for(let i=0;i<n;i++){
+    C[i][i]=2+wins[i]+losses[i];
+    b[i]=1+(wins[i]-losses[i])/2;
+    for(let j=0;j<n;j++) if(i!==j) C[i][j]=-matchups[i][j];
+  }
+  const r=gaussSolve(C,b,n);
+  return {ratings:r,C,b};
+}
+
+function gaussSolve(A,b,n){
+  const M=A.map((row,i)=>[...row,b[i]]);
+  for(let col=0;col<n;col++){
+    let maxRow=col;
+    for(let row=col+1;row<n;row++) if(Math.abs(M[row][col])>Math.abs(M[maxRow][col])) maxRow=row;
+    [M[col],M[maxRow]]=[M[maxRow],M[col]];
+    for(let row=col+1;row<n;row++){
+      const f=M[row][col]/M[col][col];
+      for(let k=col;k<=n;k++) M[row][k]-=f*M[col][k];
+    }
+  }
+  const x=new Array(n).fill(0);
+  for(let i=n-1;i>=0;i--){
+    x[i]=M[i][n]/M[i][i];
+    for(let j=i-1;j>=0;j--) M[j][n]-=M[j][i]*x[i];
+  }
+  return x;
+}
+
+function renderSim(){
+  const {ratings,C,b}=solveColley(simGames);
+  const sorted=SIM_TEAMS.map((t,i)=>({team:t,rating:ratings[i]})).sort((a,b2)=>b2.rating-a.rating);
+  const maxR=Math.max(...ratings.map(r=>Math.abs(r)))||1;
+  document.getElementById("ratings-display").innerHTML=sorted.map(t=>{
+    const pct=((t.rating/Math.max(...ratings))*100).toFixed(0);
+    return `<div class="team-row"><span class="team-name">${t.team}</span><div class="rbar-bg"><div class="rbar-fill" style="width:${Math.max(0,pct)}%"></div></div><span class="team-rating">${t.rating.toFixed(4)}</span></div>`;
+  }).join("");
+  const n=SIM_TEAMS.length;
+  let mhtml="";
+  for(let i=0;i<n;i++){
+    let row=`<span style="color:var(--green-x)">${SIM_TEAMS[i].substring(0,4)}</span> [`;
+    for(let j=0;j<n;j++){
+      const v=C[i][j];
+      const color=i===j?"#00ff55":v<0?"#cc4400":"#005518";
+      row+=`<span style="color:${color}">${v.toFixed(1).padStart(5)}</span>`;
+      if(j<n-1) row+=" ";
+    }
+    row+=`] = <span style="color:var(--green)">${b[i].toFixed(2)}</span><br>`;
+    mhtml+=row;
+  }
+  document.getElementById("matrix-display").innerHTML=mhtml;
+}
+
+function addGame(winner,loser,location){
+  const weight=location==="away"?1.1:location==="home"?0.9:1.0;
+  simGames.push({winner,loser,location,weight});
+  const log=document.getElementById("game-log");
+  const locLabel=location==="away"?"(road win ×1.1)":location==="home"?"(home win ×0.9)":"(neutral)";
+  log.innerHTML+=`<div class="game-entry"><span class="w">${winner}</span> def. ${loser} <span class="loc">${locLabel}</span></div>`;
+  log.scrollTop=log.scrollHeight;
+  renderSim();
+}
+
+function buildButtons(){
+  const scenarios=[
+    ["Tigers","Highlanders","home","LSU def. NJIT (home)"],
+    ["Eagles","Highlanders","away","BC def. NJIT (road)"],
+    ["Tigers","Eagles","home","LSU def. BC (home)"],
+    ["Musketeers","Highlanders","away","XAV def. NJIT (road)"],
+    ["Tigers","Musketeers","home","LSU def. XAV (home)"],
+    ["Eagles","Musketeers","away","BC def. XAV (road)"],
+  ];
+  const container=document.getElementById("game-buttons");
+  scenarios.forEach(([w,l,loc,label])=>{
+    const btn=document.createElement("button");
+    btn.className="sim-btn";
+    btn.textContent=`+ ${label}`;
+    btn.onclick=()=>{ addGame(w,l,loc); btn.classList.add("played"); btn.disabled=true; };
+    container.appendChild(btn);
+  });
+  const resetBtn=document.createElement("button");
+  resetBtn.className="sim-btn";
+  resetBtn.textContent="[reset]";
+  resetBtn.onclick=()=>{
+    simGames=[];
+    document.getElementById("game-log").innerHTML='<div class="game-entry" style="color:var(--green-x)">// no games yet. add a game above to start.</div>';
+    document.querySelectorAll(".sim-btn").forEach(b=>{ b.classList.remove("played"); b.disabled=false; });
+    renderSim();
+  };
+  container.appendChild(resetBtn);
 }
 
 loadRankings();
