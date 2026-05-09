@@ -3,340 +3,254 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veritas Baseball Index — D1 College Baseball Rankings</title>
+  <title>Veritas Baseball Index // D1 Rankings</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy: #0a0e1a;
-      --navy-2: #111827;
-      --navy-3: #1c2333;
-      --navy-4: #252f42;
-      --blue: #3b82f6;
-      --blue-dim: #1d4ed8;
-      --accent: #60a5fa;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-dim: #64748b;
-      --border: #1e2d45;
-      --border-light: #253347;
-      --gold: #f59e0b;
+      --bg:      #0a0a0a;
+      --bg2:     #0d0d0d;
+      --bg3:     #001a0a;
+      --green:   #00cc44;
+      --green-b: #00ff55;
+      --green-d: #007722;
+      --green-x: #005518;
+      --green-z: #003311;
+      --border:  #1a3318;
+      --border2: #1a1a1a;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--navy);
-      color: var(--text-primary);
+      font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+      background: var(--bg);
+      color: var(--green);
       min-height: 100vh;
+      font-size: 13px;
     }
 
     header {
-      padding: 0 2rem;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-      background: var(--navy);
+      padding: 14px 20px 10px;
+      border-bottom: 1px solid var(--border2);
+      background: var(--bg);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
 
-    .logo-wrap { display: flex; align-items: baseline; gap: 10px; }
-    .logo-main {
-      font-family: 'DM Mono', monospace;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      color: var(--text-primary);
-    }
-    .logo-main span { color: var(--accent); }
-    .logo-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      text-transform: uppercase;
+
+    .tagline { font-size: 11px; color: var(--green-x); margin-top: 3px; letter-spacing: 0.06em; }
+
+    .header-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
-    .tabs { display: flex; gap: 0; }
-    .tab {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 7px 16px;
-      cursor: pointer;
+    .meta { font-size: 11px; color: var(--green-x); letter-spacing: 0.04em; }
+    .meta span { color: var(--green); }
+
+    .nav { display: flex; gap: 0; }
+    .nav-btn {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 11px;
+      padding: 4px 12px;
       border: 1px solid var(--border);
       background: transparent;
-      color: var(--text-dim);
-      transition: all 0.15s;
+      color: var(--green-d);
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.1s;
     }
-    .tab:first-child { border-radius: 4px 0 0 4px; }
-    .tab:last-child  { border-radius: 0 4px 4px 0; border-left: none; }
-    .tab.active { background: var(--blue); color: #fff; border-color: var(--blue); }
-    .tab:hover:not(.active) { color: var(--text-primary); border-color: var(--border-light); }
-
-    .hero {
-      padding: 2rem 2rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(180deg, var(--navy-2) 0%, var(--navy) 100%);
-    }
-
-    .hero-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .hero-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-title {
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-    }
-
-    .hero-subtitle {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 2rem;
-      margin-top: 1.25rem;
-    }
-
-    .stat-item { display: flex; flex-direction: column; gap: 2px; }
-    .stat-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
-    .stat-value { font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 500; color: var(--text-primary); }
+    .nav-btn:not(:last-child) { border-right: none; }
+    .nav-btn.active { color: var(--green-b); border-color: var(--green); background: var(--bg3); }
+    .nav-btn:hover:not(.active) { color: var(--green); }
 
     .controls {
-      padding: 0.75rem 2rem;
+      padding: 8px 20px;
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
       align-items: center;
-      border-bottom: 1px solid var(--border);
-      background: var(--navy-2);
+      border-bottom: 1px solid var(--border2);
+      background: var(--bg2);
     }
 
+    .search-wrap { position: relative; display: flex; align-items: center; }
+    .search-prompt { color: var(--green-d); font-size: 12px; position: absolute; left: 8px; pointer-events: none; }
     input[type="text"] {
-      font-family: 'DM Mono', monospace;
+      font-family: 'Courier Prime', 'Courier New', monospace;
       font-size: 12px;
-      padding: 6px 12px;
+      padding: 5px 8px 5px 22px;
       border: 1px solid var(--border);
-      border-radius: 4px;
-      background: var(--navy-3);
-      color: var(--text-primary);
-      width: 200px;
+      background: var(--bg);
+      color: var(--green);
+      width: 180px;
       outline: none;
       letter-spacing: 0.04em;
     }
-    input[type="text"]::placeholder { color: var(--text-dim); }
-    input[type="text"]:focus { border-color: var(--blue); }
+    input[type="text"]::placeholder { color: var(--green-z); }
+    input[type="text"]:focus { border-color: var(--green); }
 
-    .filter-btn {
-      font-family: 'DM Mono', monospace;
+    .conf-btn {
+      font-family: 'Courier Prime', 'Courier New', monospace;
       font-size: 10px;
-      padding: 5px 12px;
+      padding: 4px 8px;
       border: 1px solid var(--border);
-      border-radius: 4px;
       background: transparent;
-      color: var(--text-dim);
+      color: var(--green-d);
       cursor: pointer;
       letter-spacing: 0.08em;
-      text-transform: uppercase;
       transition: all 0.1s;
     }
-    .filter-btn:hover { color: var(--text-primary); border-color: var(--border-light); }
-    .filter-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .conf-btn:hover { color: var(--green); border-color: var(--green-d); }
+    .conf-btn.active { color: var(--green-b); border-color: var(--green); background: var(--bg3); }
 
-    .table-wrap { padding: 0 2rem 4rem; overflow-x: auto; }
+    .table-wrap { overflow-x: auto; }
 
-    table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 500px; }
+    table { width: 100%; border-collapse: collapse; min-width: 520px; }
 
+    thead tr { border-bottom: 1px solid var(--border); }
     thead th {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
+      font-size: 10px;
       letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      font-weight: 400;
-      padding: 10px 12px;
+      color: var(--green-d);
+      font-weight: normal;
+      padding: 8px 20px;
       text-align: left;
-      border-bottom: 1px solid var(--border);
-      position: 0;
-      top: 56px;
-      background: var(--navy);
+      position: sticky;
+      top: 94px;
+      background: var(--bg);
     }
     thead th.r { text-align: right; }
 
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.1s;
-      cursor: pointer;
-    }
-    tbody tr:hover { background: var(--navy-3); }
-    tbody tr.top25 td:first-child { border-left: 2px solid var(--gold); }
+    tbody tr { border-bottom: 1px dashed #0f1f0f; transition: background 0.1s; }
+    tbody tr:hover { background: var(--bg3); }
+    tbody tr.top25 td:first-child { border-left: 2px solid var(--green-b); }
 
-    td { padding: 9px 12px; }
+    td { padding: 7px 20px; }
 
-    .td-rank { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); width: 44px; }
-    .td-team { font-weight: 500; font-size: 13px; color: var(--text-primary); }
-    .td-conf { font-size: 11px; font-family: 'DM Mono', monospace; }
-    .td-record { font-family: 'DM Mono', monospace; font-size: 11px; text-align: right; color: var(--text-secondary); }
-    .td-rating { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; text-align: right; }
+    .td-rank { color: var(--green-d); width: 44px; font-size: 12px; }
+    .td-team { font-weight: 700; color: var(--green-b); font-size: 13px; }
+    .td-conf { font-size: 11px; }
+    .td-record { text-align: right; color: var(--green-d); font-size: 12px; }
+    .td-rating { text-align: right; font-weight: 700; color: var(--green-b); font-size: 12px; }
 
-    .conf-chip {
+    .chip {
       display: inline-block;
-      padding: 2px 7px;
-      border-radius: 3px;
+      padding: 1px 6px;
+      border: 1px solid;
       font-size: 10px;
-      font-family: 'DM Mono', monospace;
+      font-family: 'Courier Prime', 'Courier New', monospace;
       letter-spacing: 0.06em;
     }
 
     .bar-wrap { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
-    .bar-bg { width: 48px; height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
-    .bar-fill { height: 100%; background: var(--blue); border-radius: 1px; }
+    .bar-bg { width: 48px; height: 2px; background: #0a1a0a; border: 1px solid var(--border); }
+    .bar-fill { height: 100%; background: var(--green); }
 
     .loading {
       text-align: center;
-      padding: 4rem 2rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      color: var(--text-dim);
+      padding: 4rem;
+      color: var(--green-d);
       letter-spacing: 0.1em;
+      font-size: 12px;
+    }
+
+    #map-panel { display: none; }
+    #map {
+      height: calc(100vh - 120px);
+      width: 100%;
+      filter: invert(1) hue-rotate(100deg) brightness(0.7) saturate(2);
     }
 
     footer {
-      padding: 1.25rem 2rem;
-      border-top: 1px solid var(--border);
-      font-family: 'DM Mono', monospace;
+      padding: 10px 20px;
+      border-top: 1px solid var(--border2);
       font-size: 10px;
-      color: var(--text-dim);
+      color: var(--green-x);
       letter-spacing: 0.08em;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .vbi-badge {
-      display: inline-flex;
-      align-items: center;
       gap: 6px;
-      background: var(--navy-3);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 3px 10px;
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--text-dim);
-      letter-spacing: 0.06em;
     }
-    .vbi-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 
 <header>
-  <div class="logo-wrap">
-    <div class="logo-main"><span>V</span>eritas <span>B</span>aseball <span>I</span>ndex</div>
-    <div class="logo-tag">D1 · 2026</div>
-  </div>
-  <div class="tabs">
-    <div class="tab active" onclick="showTab('rankings')">Rankings</div>
-    <div class="tab" onclick="showTab('map')">Map</div>
+  <div class="logo">VERITAS BASEBALL INDEX</div>
+  <div class="tagline">// the objective standard for d1 college baseball</div>
+  <div class="header-bottom">
+    <div class="meta">
+      updated: <span id="updated">--</span> &nbsp;|&nbsp;
+      teams: <span id="team-count">--</span> &nbsp;|&nbsp;
+      method: <span>colley matrix</span> &nbsp;|&nbsp;
+      by: <span>matt deprey</span>
+    </div>
+    <div class="nav">
+      <button class="nav-btn active" onclick="showTab('rankings')">[rankings]</button>
+      <button class="nav-btn" onclick="showTab('map')">[map]</button>
+      <button class="nav-btn" onclick="showTab('about')">[about]</button>
+    </div>
   </div>
 </header>
 
 <div id="rankings-panel">
-  <div class="hero">
-    <div class="hero-top">
-      <div>
-        <div class="hero-eyebrow">College Baseball Power Index</div>
-        <div class="hero-title">Veritas Baseball Index</div>
-        <div class="hero-subtitle">The objective standard for college baseball</div>
-      </div>
-      <div class="vbi-badge"><div class="dot"></div> Live · Updated daily</div>
+  <div class="controls">
+    <div class="search-wrap">
+      <span class="search-prompt">&gt;</span>
+      <input type="text" id="search" placeholder="search team..." oninput="renderTable()" />
     </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-label">Teams ranked</div>
-        <div class="stat-value" id="team-count">—</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Last updated</div>
-        <div class="stat-value" id="updated">—</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Method</div>
-        <div class="stat-value">Colley</div>
-      </div>
-    </div>
+    <button class="conf-btn active" onclick="setConf('', this)">ALL</button>
+    <button class="conf-btn" onclick="setConf('SEC', this)">SEC</button>
+    <button class="conf-btn" onclick="setConf('ACC', this)">ACC</button>
+    <button class="conf-btn" onclick="setConf('Big 12', this)">BIG 12</button>
+    <button class="conf-btn" onclick="setConf('Big Ten', this)">BIG TEN</button>
+    <button class="conf-btn" onclick="setConf('American', this)">AMERICAN</button>
+    <button class="conf-btn" onclick="setConf('Sun Belt', this)">SUN BELT</button>
+    <button class="conf-btn" onclick="setConf('MWC', this)">MWC</button>
+    <button class="conf-btn" onclick="setConf('Big West', this)">BIG WEST</button>
+    <button class="conf-btn" onclick="setConf('CUSA', this)">CUSA</button>
+    <button class="conf-btn" onclick="setConf('WCC', this)">WCC</button>
+    <button class="conf-btn" onclick="setConf('Big East', this)">BIG EAST</button>
+    <button class="conf-btn" onclick="setConf('A-10', this)">A-10</button>
+    <button class="conf-btn" onclick="setConf('CAA', this)">CAA</button>
+    <button class="conf-btn" onclick="setConf('SoCon', this)">SOCON</button>
+    <button class="conf-btn" onclick="setConf('MVC', this)">MVC</button>
+    <button class="conf-btn" onclick="setConf('OVC', this)">OVC</button>
+    <button class="conf-btn" onclick="setConf('ASUN', this)">ASUN</button>
+    <button class="conf-btn" onclick="setConf('Southland', this)">SOUTHLAND</button>
+    <button class="conf-btn" onclick="setConf('WAC', this)">WAC</button>
+    <button class="conf-btn" onclick="setConf('Ivy', this)">IVY</button>
+    <button class="conf-btn" onclick="setConf('Patriot', this)">PATRIOT</button>
+    <button class="conf-btn" onclick="setConf('SWAC', this)">SWAC</button>
+    <button class="conf-btn" onclick="setConf('MAAC', this)">MAAC</button>
+    <button class="conf-btn" onclick="setConf('MAC', this)">MAC</button>
+    <button class="conf-btn" onclick="setConf('Big South', this)">BIG SOUTH</button>
+    <button class="conf-btn" onclick="setConf('NEC', this)">NEC</button>
+    <button class="conf-btn" onclick="setConf('Horizon', this)">HORIZON</button>
+    <button class="conf-btn" onclick="setConf('Summit', this)">SUMMIT</button>
+    <button class="conf-btn" onclick="setConf('America East', this)">AMERICA EAST</button>
+    <button class="conf-btn" onclick="setConf('Ind', this)">IND</button>
   </div>
 
-<div class="controls">
-  <input type="text" id="search" placeholder="Search team..." oninput="renderTable()" />
-  <button class="filter-btn active" onclick="setConf('', this)">All</button>
-  <button class="filter-btn" onclick="setConf('SEC', this)">SEC</button>
-  <button class="filter-btn" onclick="setConf('ACC', this)">ACC</button>
-  <button class="filter-btn" onclick="setConf('Big 12', this)">Big 12</button>
-  <button class="filter-btn" onclick="setConf('Big Ten', this)">Big Ten</button>
-  <button class="filter-btn" onclick="setConf('American', this)">American</button>
-  <button class="filter-btn" onclick="setConf('Sun Belt', this)">Sun Belt</button>
-  <button class="filter-btn" onclick="setConf('MWC', this)">MWC</button>
-  <button class="filter-btn" onclick="setConf('Big West', this)">Big West</button>
-  <button class="filter-btn" onclick="setConf('CUSA', this)">CUSA</button>
-  <button class="filter-btn" onclick="setConf('WCC', this)">WCC</button>
-  <button class="filter-btn" onclick="setConf('Big East', this)">Big East</button>
-  <button class="filter-btn" onclick="setConf('A-10', this)">A-10</button>
-  <button class="filter-btn" onclick="setConf('CAA', this)">CAA</button>
-  <button class="filter-btn" onclick="setConf('SoCon', this)">SoCon</button>
-  <button class="filter-btn" onclick="setConf('MVC', this)">MVC</button>
-  <button class="filter-btn" onclick="setConf('OVC', this)">OVC</button>
-  <button class="filter-btn" onclick="setConf('ASUN', this)">ASUN</button>
-  <button class="filter-btn" onclick="setConf('Southland', this)">Southland</button>
-  <button class="filter-btn" onclick="setConf('WAC', this)">WAC</button>
-  <button class="filter-btn" onclick="setConf('Ivy', this)">Ivy</button>
-  <button class="filter-btn" onclick="setConf('Patriot', this)">Patriot</button>
-  <button class="filter-btn" onclick="setConf('SWAC', this)">SWAC</button>
-  <button class="filter-btn" onclick="setConf('MAAC', this)">MAAC</button>
-  <button class="filter-btn" onclick="setConf('MAC', this)">MAC</button>
-  <button class="filter-btn" onclick="setConf('Big South', this)">Big South</button>
-  <button class="filter-btn" onclick="setConf('NEC', this)">NEC</button>
-  <button class="filter-btn" onclick="setConf('Horizon', this)">Horizon</button>
-  <button class="filter-btn" onclick="setConf('Summit', this)">Summit</button>
-  <button class="filter-btn" onclick="setConf('America East', this)">America East</button>
-  <button class="filter-btn" onclick="setConf('Ind', this)">Ind</button>
-</div>
-
   <div class="table-wrap">
-    <div class="loading" id="loading">Loading rankings...</div>
+    <div class="loading" id="loading">// loading rankings...</div>
     <table id="table" style="display:none">
       <thead>
         <tr>
-          <th>Rank</th>
-          <th>Team</th>
-          <th>Conf</th>
-          <th class="r">Record</th>
-          <th class="r">VBI Rating</th>
+          <th>RK</th>
+          <th>TEAM</th>
+          <th>CONF</th>
+          <th class="r">W-L</th>
+          <th class="r">VBI RATING</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -344,15 +258,27 @@
   </div>
 </div>
 
-<div id="map-panel" style="display:none">
-  <div style="display:flex;align-items:center;justify-content:center;height:400px;font-family:'DM Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:0.1em;">
-    MAP COMING SOON
-  </div>
+<div id="map-panel">
+  <div id="map"></div>
+</div>
+
+<div id="about-panel" style="display:none; padding: 2rem 20px; max-width: 700px;">
+  <p style="color:var(--green-d); font-size:11px; letter-spacing:0.1em; margin-bottom:1rem;">// about veritas baseball index</p>
+  <p style="line-height:1.8; color:var(--green); margin-bottom:1rem;">
+    The Veritas Baseball Index (VBI) is a computer ranking system for NCAA Division I baseball built on the Colley Matrix method — the same mathematical framework used in the old BCS college football rankings.
+  </p>
+  <p style="line-height:1.8; color:var(--green); margin-bottom:1rem;">
+    Every win is equal. No margin of victory. No human bias. No arbitrary weights. Road wins count slightly more than home wins. The system solves all 300+ team ratings simultaneously as a linear system of equations.
+  </p>
+  <p style="line-height:1.8; color:var(--green); margin-bottom:1rem;">
+    Rankings update automatically every day at 2am EST.
+  </p>
+  <p style="color:var(--green-d); font-size:11px; margin-top:2rem;">// built by matt deprey · veritasbaseballindex.com · 2026</p>
 </div>
 
 <footer>
-  <span>Veritas Baseball Index &nbsp;·&nbsp; By Matt DePrey &nbsp;·&nbsp; Colley Matrix method &nbsp;·&nbsp; 2026</span>
-  <span>veritasbaseballindex.com</span>
+  <span>veritasbaseballindex.com // vbi v1.0 // 2026</span>
+  <span>colley matrix · win/loss only · updated nightly</span>
 </footer>
 
 <script>
@@ -360,19 +286,42 @@ const SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjaXB4dGRjeXhlcnl0eGZyemhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxODczNzEsImV4cCI6MjA5Mzc2MzM3MX0.Sdtj7bAZWp6N-UaGZIXtBYz--Q_D6aP2IMkkcGYZFhw";
 
 const CONF_COLORS = {
-  "SEC":      { bg: "#7f1d1d22", text: "#fca5a5", border: "#7f1d1d" },
-  "ACC":      { bg: "#1e3a5f22", text: "#93c5fd", border: "#1e3a5f" },
-  "Big 12":   { bg: "#2e1065 22", text: "#c4b5fd", border: "#2e1065" },
-  "Big Ten":  { bg: "#7f1d1d22", text: "#fda4af", border: "#881337" },
-  "Pac-12":   { bg: "#14532d22", text: "#86efac", border: "#14532d" },
-  "AAC":      { bg: "#78350f22", text: "#fcd34d", border: "#78350f" },
-  "Sun Belt": { bg: "#0c4a6e22", text: "#7dd3fc", border: "#0c4a6e" },
-  "MWC":      { bg: "#1e293b22", text: "#94a3b8", border: "#334155" },
-  "Other":    { bg: "#1e293b22", text: "#94a3b8", border: "#334155" },
+  "SEC":          { bg:"#1a0505", text:"#fca5a5", border:"#7f1d1d" },
+  "ACC":          { bg:"#031020", text:"#93c5fd", border:"#1e3a5f" },
+  "Big 12":       { bg:"#120518", text:"#d8b4fe", border:"#4c1d6e" },
+  "Big Ten":      { bg:"#052e16", text:"#86efac", border:"#166534" },
+  "American":     { bg:"#1a0f00", text:"#fcd34d", border:"#78350f" },
+  "Sun Belt":     { bg:"#001a1a", text:"#67e8f9", border:"#164e63" },
+  "MWC":          { bg:"#0f0f0f", text:"#9ca3af", border:"#374151" },
+  "Big West":     { bg:"#1a0a00", text:"#fdba74", border:"#7c2d12" },
+  "CUSA":         { bg:"#001a0a", text:"#6ee7b7", border:"#065f46" },
+  "WCC":          { bg:"#1a0010", text:"#f9a8d4", border:"#831843" },
+  "Big East":     { bg:"#00101a", text:"#7dd3fc", border:"#0c4a6e" },
+  "A-10":         { bg:"#0a0a00", text:"#fef08a", border:"#713f12" },
+  "CAA":          { bg:"#0a000a", text:"#e879f9", border:"#701a75" },
+  "SoCon":        { bg:"#001010", text:"#5eead4", border:"#134e4a" },
+  "MVC":          { bg:"#100a00", text:"#fb923c", border:"#7c2d12" },
+  "OVC":          { bg:"#050a00", text:"#a3e635", border:"#365314" },
+  "ASUN":         { bg:"#0a0510", text:"#c4b5fd", border:"#4c1d95" },
+  "Southland":    { bg:"#0a0a05", text:"#d9f99d", border:"#3f6212" },
+  "WAC":          { bg:"#100005", text:"#fda4af", border:"#881337" },
+  "Ivy":          { bg:"#030a03", text:"#bbf7d0", border:"#14532d" },
+  "Patriot":      { bg:"#000a1a", text:"#bfdbfe", border:"#1e3a8a" },
+  "SWAC":         { bg:"#1a0000", text:"#fecaca", border:"#991b1b" },
+  "MAAC":         { bg:"#0a0505", text:"#fca5a5", border:"#7f1d1d" },
+  "MAC":          { bg:"#050505", text:"#d1d5db", border:"#374151" },
+  "Big South":    { bg:"#100800", text:"#fde68a", border:"#92400e" },
+  "NEC":          { bg:"#000510", text:"#a5b4fc", border:"#3730a3" },
+  "Horizon":      { bg:"#001005", text:"#6ee7b7", border:"#064e3b" },
+  "Summit":       { bg:"#050010", text:"#c084fc", border:"#6b21a8" },
+  "America East": { bg:"#000a0a", text:"#67e8f9", border:"#155e75" },
+  "Ind":          { bg:"#050505", text:"#9ca3af", border:"#374151" },
+  "Other":        { bg:"#050505", text:"#6b7280", border:"#374151" },
 };
 
 let allTeams = [];
 let confFilter = "";
+let mapInit = false;
 
 async function loadRankings() {
   try {
@@ -387,13 +336,13 @@ async function loadRankings() {
     if (allTeams.length > 0) document.getElementById("updated").textContent = allTeams[0].updated_at;
     renderTable();
   } catch(e) {
-    document.getElementById("loading").textContent = "Error loading rankings.";
+    document.getElementById("loading").textContent = "// error loading rankings. please refresh.";
   }
 }
 
 function setConf(conf, btn) {
   confFilter = conf;
-  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".conf-btn").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
   renderTable();
 }
@@ -413,19 +362,112 @@ function renderTable() {
     return `<tr class="${top}">
       <td class="td-rank">${t.rank}</td>
       <td class="td-team">${t.team}</td>
-      <td class="td-conf"><span class="conf-chip" style="background:${c.bg};color:${c.text};border:1px solid ${c.border}40">${t.conf || "—"}</span></td>
-      <td class="td-record">${t.wins}–${t.losses}</td>
+      <td class="td-conf"><span class="chip" style="background:${c.bg};color:${c.text};border-color:${c.border}">${(t.conf||"—").toUpperCase()}</span></td>
+      <td class="td-record">${t.wins}-${t.losses}</td>
       <td class="td-rating"><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>${t.rating.toFixed(4)}</div></td>
     </tr>`;
   }).join("");
 }
 
 function showTab(tab) {
-  document.querySelectorAll(".tab").forEach((t, i) => {
-    t.classList.toggle("active", (i === 0 && tab === "rankings") || (i === 1 && tab === "map"));
+  ["rankings","map","about"].forEach(t => {
+    document.getElementById(t+"-panel").style.display = t === tab ? "block" : "none";
   });
-  document.getElementById("rankings-panel").style.display = tab === "rankings" ? "block" : "none";
-  document.getElementById("map-panel").style.display = tab === "map" ? "block" : "none";
+  document.querySelectorAll(".nav-btn").forEach((b, i) => {
+    b.classList.toggle("active", ["rankings","map","about"][i] === tab);
+  });
+  if (tab === "map" && !mapInit) initMap();
+}
+
+const TEAM_COORDS = {
+  "UCLA":[34.0689,-118.4452],"Southern California":[34.0224,-118.2851],"Oregon St.":[44.5646,-123.262],"Oregon":[44.0461,-123.0708],
+  "Washington St.":[46.7298,-117.1817],"Washington":[47.6553,-122.3035],"Tennessee":[35.9545,-83.9282],"Vanderbilt":[36.1447,-86.8027],
+  "Kentucky":[38.0323,-84.5034],"Georgia":[33.948,-83.3774],"Florida":[29.6499,-82.3486],"Alabama":[33.2098,-87.5692],
+  "Auburn":[32.6031,-85.4882],"LSU":[30.4133,-91.18],"Arkansas":[36.068,-94.1741],"Mississippi St.":[33.4554,-88.7893],
+  "Ole Miss":[34.3654,-89.5373],"South Carolina":[33.9969,-81.03],"Missouri":[38.9517,-92.3341],"Texas":[30.2849,-97.7341],
+  "Texas A&M":[30.6187,-96.3365],"Georgia Tech":[33.7756,-84.3963],"Clemson":[34.6834,-82.8374],"Florida St.":[30.4381,-84.2987],
+  "Miami (FL)":[25.7059,-80.277],"North Carolina":[35.9049,-79.0469],"NC State":[35.7872,-78.6628],"Virginia Tech":[37.2284,-80.4234],
+  "Virginia":[38.0293,-78.4767],"Duke":[36.0014,-78.9382],"Wake Forest":[36.1318,-80.2747],"Louisville":[38.2086,-85.7585],
+  "Notre Dame":[41.7052,-86.2352],"Pittsburgh":[40.4428,-79.9625],"Stanford":[37.4275,-122.1697],"Boston College":[42.3355,-71.1685],
+  "TCU":[32.7096,-97.3627],"Texas Tech":[33.5843,-101.8783],"Baylor":[31.5489,-97.1131],"Oklahoma St.":[36.1269,-97.0748],
+  "Kansas St.":[39.1974,-96.5847],"Kansas":[38.9717,-95.2353],"West Virginia":[39.648,-79.9592],"Arizona":[32.2319,-110.9501],
+  "Arizona St.":[33.4255,-111.94],"BYU":[40.2518,-111.6493],"Utah":[40.7649,-111.8421],"Cincinnati":[39.1329,-84.515],
+  "Houston":[29.7199,-95.3422],"UCF":[28.6024,-81.2001],"Iowa St.":[42.0308,-93.6319],"Illinois":[40.102,-88.2272],
+  "Indiana":[39.1755,-86.5132],"Iowa":[41.6611,-91.5302],"Maryland":[38.9869,-76.9426],"Michigan":[42.278,-83.7382],
+  "Michigan St.":[42.7018,-84.4822],"Minnesota":[44.974,-93.2277],"Nebraska":[40.8202,-96.7005],"Ohio St.":[40.0061,-83.0283],
+  "Penn St.":[40.7934,-77.86],"Purdue":[40.4259,-86.9081],"Rutgers":[40.5018,-74.4479],"Northwestern":[42.0565,-87.6753],
+  "East Carolina":[35.6043,-77.3664],"Tulane":[29.9399,-90.1183],"South Florida":[28.0588,-82.4139],"Memphis":[35.1495,-90.049],
+  "Wichita St.":[37.7195,-97.2951],"Rice":[29.7174,-95.4018],"UTSA":[29.5827,-98.6201],"UAB":[33.5022,-86.8089],
+  "Charlotte":[35.3077,-80.7278],"Coastal Carolina":[33.7955,-79.0186],"Louisiana":[30.2241,-92.0198],"South Alabama":[30.6944,-88.0431],
+  "Southern Miss":[31.3271,-89.3346],"Troy":[31.8093,-85.9693],"Georgia Southern":[32.4339,-81.7832],"App State":[36.2168,-81.6746],
+  "Texas St.":[29.8883,-97.9414],"Arkansas St.":[35.8423,-90.6712],"Georgia St.":[33.7537,-84.3863],"Old Dominion":[36.886,-76.3059],
+  "Marshall":[38.4192,-82.4452],"James Madison":[38.4354,-78.869],"San Diego St.":[32.7757,-117.0719],"Fresno St.":[36.8125,-119.748],
+  "Nevada":[39.55,-119.815],"UNLV":[36.1079,-115.1405],"Air Force":[38.9983,-104.8616],"San Jose St.":[37.3382,-121.8863],
+  "New Mexico":[35.0844,-106.6504],"Cal St. Fullerton":[33.8822,-117.8851],"Cal Poly":[35.305,-120.6625],
+  "UC Santa Barbara":[34.414,-119.8489],"UC Irvine":[33.6405,-117.8443],"Long Beach St.":[33.7838,-118.1141],
+  "Hawaii":[21.2969,-157.8171],"UC Davis":[38.5449,-121.7405],"Dallas Baptist":[32.6877,-96.9033],
+  "Liberty":[37.3523,-79.1783],"Western Kentucky":[36.9685,-86.4808],"Middle Tennessee":[35.8456,-86.3594],
+  "North Texas":[33.2148,-97.1331],"Jacksonville St.":[33.8201,-85.765],"Sam Houston":[30.708,-95.54],
+  "Kennesaw St.":[34.0234,-84.5749],"FIU":[25.7575,-80.3746],"New Mexico St.":[32.279,-106.747],
+  "Gonzaga":[47.667,-117.4025],"Pepperdine":[34.0364,-118.7026],"San Diego":[32.7726,-117.1924],
+  "Santa Clara":[37.3496,-121.939],"LMU":[33.9693,-118.4173],"Portland":[45.5091,-122.6867],
+  "Brown":[41.8268,-71.4025],"Harvard":[42.377,-71.1167],"Yale":[41.3163,-72.9223],"Princeton":[40.3431,-74.6551],
+  "Dartmouth":[43.7044,-72.2887],"Cornell":[42.4534,-76.4735],"Columbia":[40.8075,-73.9626],"Penn":[39.9522,-75.1932],
+  "Army":[41.3906,-73.9549],"Navy":[38.9834,-76.4819],"Bucknell":[40.9534,-76.8841],"Lehigh":[40.606,-75.3788],
+  "Lafayette":[40.6954,-75.2218],"Holy Cross":[42.2374,-71.8083],"Elon":[36.1016,-79.5063],
+  "Northeastern":[42.3398,-71.0892],"UNC Wilmington":[34.2257,-77.8717],"Delaware":[39.6781,-75.7514],
+  "Hofstra":[40.7135,-73.599],"Stony Brook":[40.9148,-73.1231],"Monmouth":[40.3143,-74.0162],"Towson":[39.3956,-76.6019],
+  "VCU":[37.548,-77.4511],"Fordham":[40.8602,-73.8851],"George Mason":[38.8313,-77.313],"Rhode Island":[41.4867,-71.5271],
+  "Davidson":[35.4993,-80.8489],"Richmond":[37.574,-77.54],"Winthrop":[34.9249,-81.0256],"High Point":[35.9557,-79.9994],
+  "Campbell":[35.1596,-78.8244],"Radford":[37.1318,-80.5573],"UNC Asheville":[35.5951,-82.5515],
+  "Furman":[34.9251,-82.4471],"Wofford":[34.9477,-81.9377],"Samford":[33.4643,-86.7933],"Mercer":[32.8362,-83.6402],
+  "East Tennessee St.":[36.3023,-82.3633],"The Citadel":[32.8037,-79.9603],"Western Carolina":[35.3106,-83.1871],
+  "Murray St.":[36.6111,-88.3143],"Eastern Kentucky":[37.7349,-84.2946],"Tennessee Tech":[36.1637,-85.5016],
+  "Morehead St.":[38.1862,-83.4324],"UT Martin":[35.8506,-88.912],"Eastern Illinois":[39.48,-88.1765],
+  "Florida A&M":[30.4204,-84.2866],"Bethune-Cookman":[29.2108,-81.0228],"Alabama A&M":[34.7833,-86.5686],
+  "Alabama St.":[32.3792,-86.3077],"Jackson St.":[32.2988,-90.2136],"Southern":[30.5245,-91.1874],
+  "Grambling":[32.5277,-92.7177],"Prairie View A&M":[30.093,-95.9852],"Texas Southern":[29.7291,-95.3584],
+  "Florida Atlantic":[26.3726,-80.102],"Cal Baptist":[33.9533,-117.3961],"Grand Canyon":[33.5124,-112.143],
+  "Utah Valley":[40.2977,-111.6946],"Southern Utah":[37.6775,-113.0619],"Tarleton St.":[32.2484,-98.2005],
+  "Bradley":[40.6975,-89.6208],"Illinois St.":[40.5142,-88.9906],"Indiana St.":[39.4667,-87.4139],
+  "Missouri St.":[37.1956,-93.268],"Southern Illinois":[37.7094,-89.215],"Lamar":[30.086,-94.1316],
+  "McNeese":[30.2202,-93.2113],"Nicholls":[29.6966,-90.8187],"SE Louisiana":[30.5212,-90.4774],
+  "Northwestern St.":[31.5953,-93.0852],"Stephen F. Austin":[31.6049,-94.6529],
+  "Oakland":[42.672,-83.2217],"Wright St.":[39.7769,-84.0639],"Youngstown St.":[41.0998,-80.6495],
+  "Milwaukee":[43.0731,-87.9712],"Northern Kentucky":[39.0349,-84.4689],
+  "Oral Roberts":[36.1547,-95.9483],"Creighton":[41.2565,-96.0007],"UConn":[41.8075,-72.2537],
+  "Seton Hall":[40.7448,-74.2388],"St. John's":[40.7282,-73.7949],"Butler":[39.8406,-86.1699],
+  "Xavier":[39.1478,-84.4752]
+};
+
+function initMap() {
+  mapInit = true;
+  const m = L.map("map", { center:[38,-96], zoom:4 });
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    attribution:"© OpenStreetMap © CARTO", maxZoom:18
+  }).addTo(m);
+
+  allTeams.forEach(t => {
+    const coords = TEAM_COORDS[t.team];
+    if (!coords) return;
+    const c = CONF_COLORS[t.conf] || CONF_COLORS["Other"];
+    const marker = L.circleMarker(coords, {
+      radius: t.rank <= 25 ? 9 : 6,
+      fillColor: c.text,
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.9
+    }).addTo(m);
+    marker.bindPopup(
+      `<div style="font-family:'Courier New',monospace;background:#0a0a0a;color:#00cc44;padding:8px;min-width:160px;border:1px solid #007722;">` +
+      `<div style="font-weight:bold;font-size:13px;color:#00ff55;">${t.team}</div>` +
+      `<div style="font-size:11px;color:#007722;margin:3px 0;">${(t.conf||"").toUpperCase()}</div>` +
+      `<div style="font-size:12px;">#${t.rank} &nbsp;|&nbsp; ${t.wins}-${t.losses} &nbsp;|&nbsp; ${t.rating.toFixed(4)}</div>` +
+      `</div>`,
+      { className: "terminal-popup" }
+    );
+  });
 }
 
 loadRankings();
