@@ -179,7 +179,18 @@
 
   <div class="sel-info" id="sel-info">// drag the slider above to watch the matrix fill up game by game. click any cell to highlight that team.</div>
   <div class="canvas-wrap" id="cwrap">
-    <canvas id="mc" role="img" aria-label="Colley Matrix heatmap showing game connections between D1 baseball teams"></canvas>
+    <div style="display:inline-flex;flex-direction:column;align-items:flex-start">
+      <!-- top label row: corner spacer + column labels -->
+      <div style="display:flex">
+        <div style="width:110px;height:110px;flex-shrink:0;background:var(--bg)"></div>
+        <canvas id="mc-top" style="display:block"></canvas>
+      </div>
+      <!-- matrix row: row labels + matrix canvas -->
+      <div style="display:flex">
+        <canvas id="mc-left" style="display:block;flex-shrink:0"></canvas>
+        <canvas id="mc" role="img" aria-label="Colley Matrix heatmap showing game connections between D1 baseball teams" style="display:block"></canvas>
+      </div>
+    </div>
   </div>
   <div class="mx-legend">
     <span>no games</span>
@@ -471,28 +482,37 @@ function initMap() {
 }
 
 // ── MATRIX ENGINE ──────────────────────────────────────────
-// All game data loaded once, matrix rebuilt on every slider tick
-let TL_GAMES = [];       // full sorted games array
-let TL_DATES = [];       // sorted unique date strings
-let TL_IDX = 0;          // current slider index
-let MX_TEAMS_LIVE = [];  // team names for current slice (308 when full season)
-let mxData = null;
-let selTeam = -1;
-const CELL = 3;
+// Fixed 308-team conference-ordered list built from games.json real names
+const MX_TEAMS = ["Alabama","Arkansas","Auburn","Florida","Georgia","Kentucky","LSU","Mississippi St.","Missouri","Ole Miss","South Carolina","Tennessee","Texas","Texas A&M","Vanderbilt","Illinois","Indiana","Iowa","Maryland","Michigan","Michigan St.","Minnesota","Nebraska","Northwestern","Ohio St.","Oregon","Oregon St.","Penn St.","Purdue","Rutgers","Southern California","UCLA","Washington","Boston College","California","Clemson","Duke","Florida St.","Georgia Tech","Louisville","Miami (FL)","NC State","North Carolina","Notre Dame","Pittsburgh","Stanford","Virginia","Virginia Tech","Wake Forest","Arizona","Arizona St.","BYU","Baylor","Cincinnati","Houston","Kansas","Kansas St.","Oklahoma","Oklahoma St.","TCU","Texas Tech","UCF","Utah","West Virginia","App State","Arkansas St.","Coastal Carolina","Ga. Southern","Georgia St.","James Madison","Little Rock","Louisiana","Marshall","Old Dominion","South Alabama","Southern Miss.","Texas St.","Troy","ULM","Air Force","Fresno St.","Nevada","New Mexico","San Diego St.","San Jose St.","UNLV","Washington St.","CSU Bakersfield","CSUN","Cal Poly","Cal St. Fullerton","Hawaii","Long Beach St.","UC Davis","UC Irvine","UC Riverside","UC San Diego","UC Santa Barbara","Gonzaga","LMU (CA)","Pacific","Pepperdine","Portland","Saint Mary's (CA)","San Diego","San Francisco","Santa Clara","Brown","Columbia","Cornell","Dartmouth","Harvard","Penn","Princeton","Yale","Charlotte","East Carolina","Fla. Atlantic","Memphis","Rice","South Fla.","Tulane","UAB","UTSA","Wichita St.","DBU","Delaware","FIU","Jacksonville St.","Kennesaw St.","Liberty","Louisiana Tech","Middle Tenn.","Missouri St.","New Mexico St.","Sam Houston","Western Ky.","Davidson","Dayton","Fordham","George Mason","George Washington","La Salle","Rhode Island","Richmond","Saint Joseph's","Saint Louis","St. Bonaventure","VCU","Col. of Charleston","Elon","Hofstra","Monmouth","Northeastern","Stony Brook","Towson","UNCW","William & Mary","Campbell","Charleston So.","Gardner-Webb","High Point","Longwood","Presbyterian","Radford","UNC Asheville","USC Upstate","Winthrop","ETSU","Mercer","Samford","The Citadel","UNC Greensboro","VMI","Western Caro.","Wofford","Eastern Ill.","Morehead St.","Murray St.","SIUE","Southeast Mo. St.","Southern Ind.","Tennessee Tech","UT Martin","Alabama A&M","Alabama St.","Alcorn","Ark.-Pine Bluff","Bethune-Cookman","Florida A&M","Grambling","Jackson St.","Mississippi Val.","Prairie View","Southern U.","Texas Southern","Abilene Christian","California Baptist","Grand Canyon","Sacramento St.","Seattle U","Tarleton St.","UT Arlington","UTRGV","Utah Tech","Utah Valley","Belmont","Bradley","Evansville","Illinois St.","Indiana St.","Southern Ill.","UIC","Valparaiso","Akron","Ball St.","Bowling Green","Central Mich.","Eastern Mich.","Kent St.","Massachusetts","Miami (OH)","NIU","Ohio","Toledo","Western Mich.","Coppin St.","Delaware St.","N.C. A&T","Norfolk St.","UMES","Mercyhurst","Milwaukee","Northern Ky.","Oakland","Wright St.","Youngstown St.","Army West Point","Bucknell","Holy Cross","Lafayette","Lehigh","Navy","Binghamton","Bryant","Central Conn. St.","FDU","LIU","Maine","Merrimack","Mount St. Mary's","NJIT","Sacred Heart","Stonehill","UAlbany","UMBC","UMass Lowell","Wagner","Austin Peay","Bellarmine","Central Ark.","Eastern Ky.","FGCU","Jacksonville","Lindenwood","Lipscomb","North Ala.","North Florida","Queens (NC)","Stetson","Butler","Creighton","Georgetown","Seton Hall","St. John's (NY)","UConn","Villanova","Xavier","North Dakota St.","Omaha","Oral Roberts","South Dakota St.","St. Thomas (MN)","Western Ill.","A&M-Corpus Christi","Houston Christian","Lamar University","McNeese","New Orleans","Nicholls","Northwestern St.","SFA","Southeastern La.","UIW","West Ga.","Canisius","Fairfield","Iona","Le Moyne","Manhattan","Marist","Niagara","Quinnipiac","Rider","Saint Peter's","Siena","Northern Colo.","New Haven"];
 
-// Gaussian elimination — solves Ax = b in place, returns x[]
+const MX_CONF_GROUPS = [{"n":"SEC","s":0,"z":15},{"n":"Big Ten","s":15,"z":18},{"n":"ACC","s":33,"z":16},{"n":"Big 12","s":49,"z":15},{"n":"Sun Belt","s":64,"z":15},{"n":"MWC","s":79,"z":8},{"n":"Big West","s":87,"z":11},{"n":"WCC","s":98,"z":9},{"n":"Ivy","s":107,"z":8},{"n":"American","s":115,"z":10},{"n":"CUSA","s":125,"z":12},{"n":"A-10","s":137,"z":12},{"n":"CAA","s":149,"z":9},{"n":"Big South","s":158,"z":10},{"n":"SoCon","s":168,"z":8},{"n":"OVC","s":176,"z":8},{"n":"SWAC","s":184,"z":12},{"n":"WAC","s":196,"z":10},{"n":"MVC","s":206,"z":8},{"n":"MAC","s":214,"z":12},{"n":"MEAC","s":226,"z":5},{"n":"Horizon","s":231,"z":6},{"n":"Patriot","s":237,"z":6},{"n":"NEC","s":243,"z":15},{"n":"ASUN","s":258,"z":12},{"n":"Big East","s":270,"z":8},{"n":"Summit","s":278,"z":6},{"n":"Southland","s":284,"z":11},{"n":"MAAC","s":295,"z":11},{"n":"Big Sky","s":306,"z":1},{"n":"Other","s":307,"z":1}];
+
+const NT = 308;
+const CELL = 2;
+const LABEL_W = 110; // px for row/col labels
+const MXSZ = NT * CELL;
+
+// Build team index from the fixed list (used for rendering order)
+const MX_TEAM_IDX = {};
+MX_TEAMS.forEach((t, i) => MX_TEAM_IDX[t] = i);
+
+// All game data loaded once, matrix rebuilt on every slider tick
+let TL_GAMES = [];
+let TL_DATES = [];
+let TL_IDX = 0;
+let mxData = null;      // Uint8Array[NT][NT] — game counts between fixed team indices
+let mxRatings = [];     // ratings[] aligned to MX_TEAMS order
+let selTeam = -1;
+
+// Gaussian elimination
 function gaussSolve(A, b) {
   const n = b.length;
-  // Augmented matrix
   const M = A.map((row, i) => [...row, b[i]]);
   for (let col = 0; col < n; col++) {
-    // Partial pivot
     let maxRow = col;
-    for (let row = col + 1; row < n; row++) {
-      if (Math.abs(M[row][col]) > Math.abs(M[maxRow][col])) maxRow = row;
-    }
+    for (let row = col + 1; row < n; row++) if (Math.abs(M[row][col]) > Math.abs(M[maxRow][col])) maxRow = row;
     [M[col], M[maxRow]] = [M[maxRow], M[col]];
-    if (Math.abs(M[col][col]) < 1e-12) continue; // singular row, skip
+    if (Math.abs(M[col][col]) < 1e-12) continue;
     for (let row = col + 1; row < n; row++) {
       const f = M[row][col] / M[col][col];
       for (let k = col; k <= n; k++) M[row][k] -= f * M[col][k];
@@ -506,94 +526,69 @@ function gaussSolve(A, b) {
   return x;
 }
 
-// Build Colley matrix + b vector for games[0..gameCount-1], filtered to qualified teams
-function buildColley(games, teamIdx, n) {
-  // C matrix as flat array for speed, b vector
-  const C = Array.from({length: n}, () => new Float64Array(n));
-  const b = new Float64Array(n);
-  // Seed diagonal with 2
-  for (let i = 0; i < n; i++) C[i][i] = 2;
-
-  for (const g of games) {
-    const wi = teamIdx[g.winner];
-    const li = teamIdx[g.loser];
-    if (wi === undefined || li === undefined) continue;
-    const wt = g.location === 'away' ? 1.1 : g.location === 'home' ? 0.9 : 1.0;
-    C[wi][wi] += wt;
-    C[li][li] += wt;
-    C[wi][li] -= wt;
-    C[li][wi] -= wt;
-    b[wi] += 0.5 + (wt - 1) * 0.5;
-    b[li] += 0.5 - (wt - 1) * 0.5;
-  }
-  // Add 1 to each b[i] base (standard Colley: b[i] = 1 + (W-L)/2)
-  // We built b as running sum of win/loss contributions already correct
-  // Restate: b[i] = 1 + (wins_i - losses_i) / 2
-  // Our loop: each win adds wt*0.5 + 0.5*(wt-1)*... let's just recompute cleanly:
-  // Reset b and recompute correctly
-  for (let i = 0; i < n; i++) b[i] = 1; // base
-  for (const g of games) {
-    const wi = teamIdx[g.winner];
-    const li = teamIdx[g.loser];
-    if (wi === undefined || li === undefined) continue;
-    const wt = g.location === 'away' ? 1.1 : g.location === 'home' ? 0.9 : 1.0;
-    b[wi] += wt * 0.5;   // win contribution
-    b[li] -= wt * 0.5;   // loss contribution
-  }
-  return { C, b };
-}
-
-// Compute ratings for a given date index, returns {teams, ratings, gameCount, teamCount, mxMatrix}
+// Compute slice: fixed 308 matrix, only solve for 10+ game teams
 function computeSlice(dateIdx) {
   const cutoffDate = TL_DATES[dateIdx];
-  // Filter games up to and including cutoff date
   const games = TL_GAMES.filter(g => g.date <= cutoffDate);
 
-  // Count games per team
-  const gameCounts = {};
+  // Count games per team (in MX_TEAMS order only)
+  const gameCounts = new Int32Array(NT);
   for (const g of games) {
-    gameCounts[g.winner] = (gameCounts[g.winner] || 0) + 1;
-    gameCounts[g.loser]  = (gameCounts[g.loser]  || 0) + 1;
+    const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
+    if (wi !== undefined && li !== undefined) { gameCounts[wi]++; gameCounts[li]++; }
   }
 
-  // Qualified teams: 10+ games, sorted alphabetically for stable ordering
-  const qualified = Object.keys(gameCounts).filter(t => gameCounts[t] >= 10).sort();
-  const n = qualified.length;
-  if (n < 2) return null;
-
-  const teamIdx = {};
-  qualified.forEach((t, i) => teamIdx[t] = i);
-
-  // Build connection matrix for rendering (separate from Colley C)
-  const mxMatrix = Array.from({length: n}, () => new Uint8Array(n));
+  // Fixed 308 connection matrix for rendering
+  const mxMatrix = Array.from({length: NT}, () => new Uint8Array(NT));
   for (const g of games) {
-    const wi = teamIdx[g.winner];
-    const li = teamIdx[g.loser];
-    if (wi === undefined || li === undefined) continue;
-    mxMatrix[wi][li]++;
-    mxMatrix[li][wi]++;
+    const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
+    if (wi !== undefined && li !== undefined) { mxMatrix[wi][li]++; mxMatrix[li][wi]++; }
   }
 
-  // Build and solve Colley system
-  const { C, b } = buildColley(games, teamIdx, n);
-  const ratings = gaussSolve(C.map(r => Array.from(r)), Array.from(b));
+  // Solve Colley only for qualified teams (10+ games), map results back to MX_TEAMS indices
+  const qualIdx = MX_TEAMS.map((_, i) => i).filter(i => gameCounts[i] >= 10);
+  const qn = qualIdx.length;
+  const ratings = new Float64Array(NT); // 0 for unqualified
 
-  return { teams: qualified, ratings, gameCount: games.length, teamCount: n, mxMatrix };
+  if (qn >= 2) {
+    // Build sub-index for qualified teams
+    const subIdx = {};
+    qualIdx.forEach((gi, si) => subIdx[gi] = si);
+
+    const C = Array.from({length: qn}, () => new Array(qn).fill(0));
+    const b = new Array(qn).fill(1);
+    for (let si = 0; si < qn; si++) C[si][si] = 2;
+
+    for (const g of games) {
+      const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
+      if (wi === undefined || li === undefined) continue;
+      const swi = subIdx[wi], sli = subIdx[li];
+      if (swi === undefined || sli === undefined) continue;
+      const wt = g.location === 'away' ? 1.1 : g.location === 'home' ? 0.9 : 1.0;
+      C[swi][swi] += wt; C[sli][sli] += wt;
+      C[swi][sli] -= wt; C[sli][swi] -= wt;
+      b[swi] += wt * 0.5; b[sli] -= wt * 0.5;
+    }
+
+    const r = gaussSolve(C, b);
+    qualIdx.forEach((gi, si) => ratings[gi] = r[si]);
+  }
+
+  const activeCount = qualIdx.length;
+  return { mxMatrix, ratings, gameCount: games.length, teamCount: activeCount };
 }
 
-// Render the canvas
-function drawMx(mxMatrix, teams, hl) {
-  const n = teams.length;
-  const mxsz = n * CELL;
+// Render the main matrix canvas (matrix cells only, no labels)
+function drawMx(mxMatrix, hl) {
   const cv = document.getElementById("mc");
-  cv.width = mxsz; cv.height = mxsz;
-  cv.style.width = mxsz + "px"; cv.style.height = mxsz + "px";
+  cv.width = MXSZ; cv.height = MXSZ;
+  cv.style.width = MXSZ + "px"; cv.style.height = MXSZ + "px";
   const ctx = cv.getContext("2d");
-  const img = ctx.createImageData(mxsz, mxsz);
+  const img = ctx.createImageData(MXSZ, MXSZ);
   const d = img.data;
 
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
+  for (let i = 0; i < NT; i++) {
+    for (let j = 0; j < NT; j++) {
       const isHL = hl >= 0 && (i === hl || j === hl);
       const isDiag = i === j;
       let r = 0, g = 0, bl = 0;
@@ -604,23 +599,81 @@ function drawMx(mxMatrix, teams, hl) {
         const intensity = Math.min(1, mxMatrix[i][j] / 3);
         const base = isHL ? 220 : (hl >= 0 ? 60 : 180);
         g = Math.floor(base * intensity + 30);
-        r = Math.floor(g * 0.05);
-        bl = Math.floor(g * 0.15);
+        r = Math.floor(g * 0.05); bl = Math.floor(g * 0.15);
         if (hl >= 0 && !isHL) { g = Math.floor(g * 0.3); r = Math.floor(r * 0.3); bl = Math.floor(bl * 0.3); }
       } else {
-        if (isHL) { g = 40; bl = 15; }
-        else { r = 10; g = 10; bl = 10; }
+        if (isHL) { g = 40; bl = 15; } else { r = 10; g = 10; bl = 10; }
         if (hl >= 0 && !isHL) { r = 5; g = 5; bl = 5; }
       }
-      for (let cy = 0; cy < CELL; cy++) {
-        for (let cx = 0; cx < CELL; cx++) {
-          const px = ((i * CELL + cy) * mxsz + (j * CELL + cx)) * 4;
-          d[px] = r; d[px+1] = g; d[px+2] = bl; d[px+3] = 255;
-        }
+      for (let cy = 0; cy < CELL; cy++) for (let cx = 0; cx < CELL; cx++) {
+        const px = ((i * CELL + cy) * MXSZ + (j * CELL + cx)) * 4;
+        d[px] = r; d[px+1] = g; d[px+2] = bl; d[px+3] = 255;
       }
     }
   }
   ctx.putImageData(img, 0, 0);
+
+  // Draw conference boundary lines over the cells
+  ctx.strokeStyle = "#00cc4440";
+  ctx.lineWidth = 0.5;
+  MX_CONF_GROUPS.forEach(cg => {
+    const x = cg.s * CELL, w = cg.z * CELL;
+    if (x + w > MXSZ) return;
+    ctx.strokeRect(x, x, w, w);
+    if (w > 16) {
+      ctx.fillStyle = hl >= 0 ? "#00ff5530" : "#00ff5560";
+      ctx.font = `bold ${Math.min(8, w * 0.14)}px Courier New`;
+      ctx.textAlign = "center";
+      ctx.fillText(cg.n, x + w / 2, x + w / 2 + 3);
+    }
+  });
+}
+
+// Draw top axis labels (column headers)
+function drawTopLabels(hl) {
+  const cv = document.getElementById("mc-top");
+  cv.width = MXSZ; cv.height = LABEL_W;
+  cv.style.width = MXSZ + "px"; cv.style.height = LABEL_W + "px";
+  const ctx = cv.getContext("2d");
+  ctx.clearRect(0, 0, MXSZ, LABEL_W);
+  ctx.save();
+  ctx.font = "7px Courier New";
+  for (let j = 0; j < NT; j++) {
+    const x = j * CELL + CELL / 2;
+    const isHL = hl >= 0 && j === hl;
+    ctx.fillStyle = isHL ? "#00ff55" : (hl >= 0 ? "#003311" : "#007722");
+    ctx.save();
+    ctx.translate(x, LABEL_W - 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = "left";
+    ctx.fillText(MX_TEAMS[j], 0, 0);
+    ctx.restore();
+  }
+  ctx.restore();
+}
+
+// Draw left axis labels (row headers)
+function drawLeftLabels(hl) {
+  const cv = document.getElementById("mc-left");
+  cv.width = LABEL_W; cv.height = MXSZ;
+  cv.style.width = LABEL_W + "px"; cv.style.height = MXSZ + "px";
+  const ctx = cv.getContext("2d");
+  ctx.clearRect(0, 0, LABEL_W, MXSZ);
+  ctx.font = "7px Courier New";
+  ctx.textAlign = "right";
+  for (let i = 0; i < NT; i++) {
+    const y = i * CELL + CELL / 2 + 3;
+    const isHL = hl >= 0 && i === hl;
+    ctx.fillStyle = isHL ? "#00ff55" : (hl >= 0 ? "#003311" : "#007722");
+    ctx.fillText(MX_TEAMS[i], LABEL_W - 3, y);
+  }
+}
+
+// Full redraw: labels + matrix
+function redrawAll(hl) {
+  drawMx(mxData, hl);
+  drawTopLabels(hl);
+  drawLeftLabels(hl);
 }
 
 // Update everything when slider changes
@@ -632,37 +685,34 @@ function onSliderChange() {
     const result = computeSlice(TL_IDX);
     if (!result) return;
 
-    MX_TEAMS_LIVE = result.teams;
     mxData = result.mxMatrix;
+    mxRatings = result.ratings;
     selTeam = -1;
     document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
 
-    drawMx(mxData, MX_TEAMS_LIVE, -1);
+    redrawAll(-1);
 
-    // Update stats bar
+    // Update stats
     const date = TL_DATES[TL_IDX];
     document.getElementById("tl-date-display").textContent = date;
     document.getElementById("tl-day-num").textContent = TL_IDX + 1;
     document.getElementById("tl-games-to-date").textContent = result.gameCount.toLocaleString();
     document.getElementById("tl-teams-active").textContent = result.teamCount;
-
-    // Header info
-    const n = result.teamCount;
-    document.getElementById("mx-dim").textContent = `${n} × ${n}`;
+    document.getElementById("mx-dim").textContent = `${NT} × ${NT}`;
     document.getElementById("mx-game-count").textContent = result.gameCount.toLocaleString();
-    document.getElementById("mx-team-count").textContent = n;
-    document.getElementById("mx-cells").textContent = (n * n).toLocaleString();
+    document.getElementById("mx-team-count").textContent = result.teamCount;
+    document.getElementById("mx-cells").textContent = (NT * NT).toLocaleString();
 
     // Top ranked team
-    const ranked = result.teams.map((t, i) => ({t, v: result.ratings[i]})).sort((a, b) => b.v - a.v);
-    document.getElementById("tl-top1").textContent = ranked[0] ? ranked[0].t : "--";
+    let topTeam = "--", topRating = -Infinity;
+    for (let i = 0; i < NT; i++) { if (mxRatings[i] > topRating) { topRating = mxRatings[i]; topTeam = MX_TEAMS[i]; } }
+    document.getElementById("tl-top1").textContent = topTeam;
 
-    // Reset sel-info
-    document.getElementById("sel-info").innerHTML = "// drag the slider above to watch the matrix fill up game by game. click any cell to highlight that team.";
+    document.getElementById("sel-info").innerHTML = "// drag the slider to rewind the season · hover any cell · click to highlight a team's connections";
   });
 }
 
-// Initialize matrix tab — loads games.json once, sets up slider + canvas events
+// Initialize matrix tab
 async function initMatrix() {
   try {
     const res = await fetch("games.json");
@@ -672,11 +722,9 @@ async function initMatrix() {
     return;
   }
 
-  // Build sorted date list
   TL_DATES = [...new Set(TL_GAMES.map(g => g.date))].sort();
   const lastIdx = TL_DATES.length - 1;
 
-  // Show slider, hide loading
   document.getElementById("tl-loading").style.display = "none";
   document.getElementById("tl-wrap").style.display = "block";
 
@@ -686,7 +734,7 @@ async function initMatrix() {
   document.getElementById("tl-end-date").textContent = TL_DATES[lastIdx];
   document.getElementById("tl-total-days").textContent = TL_DATES.length;
 
-  // Render legend bar once
+  // Legend bar
   const bar = document.getElementById("lbar");
   if (!bar.children.length) {
     for (let i = 0; i < 20; i++) {
@@ -697,10 +745,23 @@ async function initMatrix() {
     }
   }
 
-  // Wire slider
+  // Build conf label buttons
+  const cl = document.getElementById("conf-labels");
+  if (!cl.children.length) {
+    MX_CONF_GROUPS.forEach((cg, idx) => {
+      const btn = document.createElement("div"); btn.className = "clabel"; btn.textContent = cg.n;
+      btn.onclick = () => {
+        document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl")); btn.classList.add("hl");
+        const mid = Math.floor(cg.s + cg.z / 2); selTeam = mid; redrawAll(selTeam);
+        document.getElementById("sel-info").innerHTML = `// highlighted: <span>${cg.n}</span> (${cg.z} teams) — showing all connections`;
+      };
+      cl.appendChild(btn);
+    });
+  }
+
   slider.addEventListener("input", onSliderChange);
 
-  // Wire canvas hover/click (delegated via live MX_TEAMS_LIVE)
+  // Canvas mouse events — offset by LABEL_W for left label column
   const cv = document.getElementById("mc");
   const tip = document.getElementById("tip");
 
@@ -710,12 +771,12 @@ async function initMatrix() {
     const sx = cv.width / rect.width, sy = cv.height / rect.height;
     const px = (e.clientX - rect.left) * sx, py = (e.clientY - rect.top) * sy;
     const j = Math.floor(px / CELL), i = Math.floor(py / CELL);
-    const n = MX_TEAMS_LIVE.length;
-    if (i < 0 || i >= n || j < 0 || j >= n) { tip.style.display = "none"; return; }
-    const tA = MX_TEAMS_LIVE[i] || "?", tB = MX_TEAMS_LIVE[j] || "?";
+    if (i < 0 || i >= NT || j < 0 || j >= NT) { tip.style.display = "none"; return; }
+    const tA = MX_TEAMS[i], tB = MX_TEAMS[j];
     const hasGame = mxData[i][j] > 0;
+    const rA = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "—";
     if (i === j) {
-      tip.innerHTML = `<div class="ta">${tA}</div><div class="tc">diagonal</div><div class="tg">C[i][i] = 2 + games played</div>`;
+      tip.innerHTML = `<div class="ta">${tA}</div><div class="tc">diagonal · rating: ${rA}</div><div class="tg">C[i][i] = 2 + games played</div>`;
     } else {
       tip.innerHTML = `<div class="ta">${tA} <span style="color:#005518">vs</span> ${tB}</div><div class="tg">${hasGame ? `played ${mxData[i][j]}x — C[i][j] = -${mxData[i][j]}` : "no games — C[i][j] = 0"}</div>`;
     }
@@ -732,23 +793,24 @@ async function initMatrix() {
     const sx = cv.width / rect.width, sy = cv.height / rect.height;
     const px = (e.clientX - rect.left) * sx, py = (e.clientY - rect.top) * sy;
     const j = Math.floor(px / CELL), i = Math.floor(py / CELL);
-    const n = MX_TEAMS_LIVE.length;
-    if (i < 0 || i >= n || j < 0 || j >= n) return;
+    if (i < 0 || i >= NT || j < 0 || j >= NT) return;
     if (selTeam === i) {
       selTeam = -1;
       document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-      drawMx(mxData, MX_TEAMS_LIVE, -1);
-      document.getElementById("sel-info").innerHTML = "// drag the slider above to watch the matrix fill up game by game. click any cell to highlight that team.";
+      redrawAll(-1);
+      document.getElementById("sel-info").innerHTML = "// drag the slider to rewind the season · hover any cell · click to highlight a team's connections";
     } else {
       selTeam = i;
       document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-      drawMx(mxData, MX_TEAMS_LIVE, selTeam);
+      const confIdx = MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z);
+      if (confIdx >= 0) document.querySelectorAll(".clabel")[confIdx]?.classList.add("hl");
+      redrawAll(selTeam);
       const gp = Array.from(mxData[i]).filter(v => v > 0).length;
-      document.getElementById("sel-info").innerHTML = `// selected: <span>${MX_TEAMS_LIVE[i]}</span> — connected to <span>${gp}</span> opponents · click again to deselect`;
+      const rating = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "not yet qualified";
+      document.getElementById("sel-info").innerHTML = `// selected: <span>${MX_TEAMS[i]}</span> (${MX_CONF_GROUPS[confIdx]?.n || "?"}) — <span>${gp}</span> opponents · rating: <span>${rating}</span> · click again to deselect`;
     }
   });
 
-  // Trigger initial render at full season
   TL_IDX = lastIdx;
   onSliderChange();
 }
