@@ -6,79 +6,119 @@
   <title>Veritas Baseball Index // D1 Rankings</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:#0a0a0a; --bg2:#0d0d0d; --bg3:#001a0a;
-      --green:#00cc44; --green-b:#00ff55; --green-d:#007722;
-      --green-x:#005518; --green-z:#003311; --border:#1a3318; --border2:#1a1a1a;
-    }
-    body { font-family:'Courier Prime','Courier New',Courier,monospace; background:var(--bg); color:var(--green); min-height:100vh; font-size:13px; }
-    header { padding:14px 20px 10px; border-bottom:1px solid var(--border2); background:var(--bg); position:sticky; top:0; z-index:1000; }
-    .logo { font-size:20px; font-weight:700; color:var(--green-b); letter-spacing:0.04em; }
-    .tagline { font-size:11px; color:var(--green-x); margin-top:3px; letter-spacing:0.06em; }
-    .header-bottom { display:flex; align-items:center; justify-content:space-between; margin-top:8px; flex-wrap:wrap; gap:8px; }
-    .meta { font-size:11px; color:var(--green-x); letter-spacing:0.04em; }
-    .meta span { color:var(--green); }
-    .nav { display:flex; gap:0; }
-    .nav-btn { font-family:'Courier Prime','Courier New',monospace; font-size:11px; padding:4px 12px; border:1px solid var(--border); background:transparent; color:var(--green-d); cursor:pointer; letter-spacing:0.08em; transition:all 0.1s; }
-    .nav-btn:not(:last-child) { border-right:none; }
-    .nav-btn.active { color:var(--green-b); border-color:var(--green); background:var(--bg3); }
-    .nav-btn:hover:not(.active) { color:var(--green); }
-    .controls { padding:8px 20px; display:flex; gap:6px; flex-wrap:wrap; align-items:center; border-bottom:1px solid var(--border2); background:var(--bg2); }
-    .search-wrap { position:relative; display:flex; align-items:center; }
-    .search-prompt { color:var(--green-d); font-size:12px; position:absolute; left:8px; pointer-events:none; }
-    input[type="text"] { font-family:'Courier Prime','Courier New',monospace; font-size:12px; padding:5px 8px 5px 22px; border:1px solid var(--border); background:var(--bg); color:var(--green); width:180px; outline:none; letter-spacing:0.04em; }
-    input[type="text"]::placeholder { color:var(--green-z); }
-    input[type="text"]:focus { border-color:var(--green); }
-    .conf-btn { font-family:'Courier Prime','Courier New',monospace; font-size:10px; padding:4px 8px; border:1px solid var(--border); background:transparent; color:var(--green-d); cursor:pointer; letter-spacing:0.08em; transition:all 0.1s; }
-    .conf-btn:hover { color:var(--green); border-color:var(--green-d); }
-    .conf-btn.active { color:var(--green-b); border-color:var(--green); background:var(--bg3); }
-    .table-wrap { overflow-x:auto; }
-    table { width:100%; border-collapse:collapse; min-width:520px; }
-    thead tr { border-bottom:1px solid var(--border); }
-    thead th { font-size:10px; letter-spacing:0.14em; color:var(--green-d); font-weight:normal; padding:8px 20px; text-align:left; position:sticky; top:0; background:var(--bg); }
-    thead th.r { text-align:right; }
-    tbody tr { border-bottom:1px dashed #0f1f0f; transition:background 0.1s; }
-    tbody tr:hover { background:var(--bg3); }
-    tbody tr.top25 td:first-child { border-left:2px solid var(--green-b); }
-    td { padding:7px 20px; }
-    .td-rank { color:var(--green-d); width:44px; font-size:12px; }
-    .td-team { font-weight:700; color:var(--green-b); font-size:13px; }
-    .td-conf { font-size:11px; }
-    .td-record { text-align:right; color:var(--green-d); font-size:12px; }
-    .td-rating { text-align:right; font-weight:700; color:var(--green-b); font-size:12px; }
-    .chip { display:inline-block; padding:1px 6px; border:1px solid; font-size:10px; font-family:'Courier Prime','Courier New',monospace; letter-spacing:0.06em; }
-    .bar-wrap { display:flex; align-items:center; gap:8px; justify-content:flex-end; }
-    .bar-bg { width:48px; height:2px; background:#0a1a0a; border:1px solid var(--border); }
-    .bar-fill { height:100%; background:var(--green); }
-    .loading { text-align:center; padding:4rem; color:var(--green-d); letter-spacing:0.1em; font-size:12px; }
-    #map-panel { display:none; }
-    #map { height:calc(100vh - 120px); width:100%; }
-    #about-panel { display:none; padding:2rem 20px; max-width:800px; }
-    .about-sec-label { font-size:10px; letter-spacing:0.14em; color:var(--green-x); margin-bottom:6px; margin-top:1.5rem; }
-    .about-sec-title { font-size:15px; font-weight:700; color:var(--green-b); margin-bottom:8px; }
-    .about-body { font-size:12px; color:var(--green-d); line-height:1.8; margin-bottom:1rem; }
-    .about-body span { color:var(--green); }
-    .about-annotation { border-left:2px solid var(--green-d); padding-left:10px; margin:1rem 0; font-size:11px; color:var(--green-d); line-height:1.7; }
-    .about-annotation span { color:var(--green); }
-    .sim-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0; }
-    .sim-card { border:1px solid var(--border); padding:10px; }
-    .sim-card-title { font-size:10px; letter-spacing:0.12em; color:var(--green-x); margin-bottom:8px; }
-    .team-row { display:flex; align-items:center; gap:8px; padding:4px 0; border-bottom:1px dashed #0f1f0f; }
-    .team-row:last-child { border-bottom:none; }
-    .team-name { flex:1; font-size:12px; color:var(--green-b); font-weight:700; }
-    .team-rating { font-size:12px; color:var(--green); min-width:52px; text-align:right; }
-    .rbar-bg { width:60px; height:4px; background:#001a0a; border:1px solid var(--border); }
-    .rbar-fill { height:100%; background:var(--green); transition:width 0.4s ease; }
-    .game-log { border:1px solid var(--border); padding:10px; margin-bottom:1rem; max-height:120px; overflow-y:auto; }
-    .game-entry { font-size:11px; color:var(--green-d); padding:2px 0; border-bottom:1px dashed #0a1a0a; }
-    .game-entry .w { color:var(--green-b); }
-    .game-entry .loc { color:var(--green-x); font-size:10px; }
-    .btn-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:1rem; }
-    .sim-btn { font-family:'Courier Prime','Courier New',monospace; font-size:11px; padding:5px 12px; border:1px solid var(--border); background:transparent; color:var(--green-d); cursor:pointer; letter-spacing:0.06em; transition:all 0.1s; }
-    .sim-btn:hover { color:var(--green-b); border-color:var(--green); background:var(--bg3); }
-    .sim-btn.played { color:var(--green-b); border-color:var(--green); background:var(--bg3); }
-    footer { padding:10px 20px; border-top:1px solid var(--border2); font-size:10px; color:var(--green-x); letter-spacing:0.08em; display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0a0a0a;--bg2:#0d0d0d;--bg3:#001a0a;--green:#00cc44;--green-b:#00ff55;--green-d:#007722;--green-x:#005518;--green-z:#003311;--border:#1a3318;--border2:#1a1a1a}
+    body{font-family:'Courier Prime','Courier New',Courier,monospace;background:var(--bg);color:var(--green);min-height:100vh;font-size:13px}
+    header{padding:12px 20px 10px;border-bottom:1px solid var(--border2);background:var(--bg);position:sticky;top:0;z-index:1000}
+    .logo{font-size:20px;font-weight:700;color:var(--green-b);letter-spacing:0.04em}
+    .tagline{font-size:11px;color:var(--green-x);margin-top:2px;letter-spacing:0.06em}
+    .header-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px}
+    .meta{font-size:11px;color:var(--green-x);letter-spacing:0.04em}
+    .meta span{color:var(--green)}
+    .nav{display:flex;gap:0}
+    .nav-btn{font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:4px 12px;border:1px solid var(--border);background:transparent;color:var(--green-d);cursor:pointer;letter-spacing:0.08em;transition:all 0.1s}
+    .nav-btn:not(:last-child){border-right:none}
+    .nav-btn.active{color:var(--green-b);border-color:var(--green);background:var(--bg3)}
+    .nav-btn:hover:not(.active){color:var(--green)}
+
+    /* MATRIX TAB */
+    #matrix-panel{display:block}
+    .mx-header{padding:10px 20px;border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;background:var(--bg2)}
+    .mx-info{font-size:11px;color:var(--green-x);letter-spacing:0.06em}
+    .mx-info span{color:var(--green)}
+    .sel-info{padding:6px 20px;font-size:11px;color:var(--green-d);border-bottom:1px solid var(--border2);min-height:26px;letter-spacing:0.04em}
+    .sel-info span{color:var(--green-b);font-weight:700}
+    .canvas-wrap{overflow:auto;cursor:crosshair;max-height:calc(100vh - 200px)}
+    .mx-legend{padding:8px 20px;border-top:1px solid var(--border2);display:flex;align-items:center;gap:10px;font-size:10px;color:var(--green-x);flex-wrap:wrap}
+    .lbar{display:flex;height:5px;width:160px}
+    .conf-labels{padding:6px 20px 10px;display:flex;flex-wrap:wrap;gap:5px;border-bottom:1px solid var(--border2)}
+    .clabel{font-size:9px;padding:2px 7px;border:1px solid var(--border);color:var(--green-d);letter-spacing:0.08em;cursor:pointer;transition:all 0.1s}
+    .clabel:hover,.clabel.hl{border-color:var(--green);color:var(--green-b);background:var(--bg3)}
+    #tip{position:fixed;display:none;z-index:9999;pointer-events:none;background:#0d0d0d;border:1px solid var(--green);padding:6px 10px;font-size:11px;color:var(--green);white-space:nowrap;letter-spacing:0.04em}
+    #tip .ta{color:var(--green-b);font-weight:700}
+    #tip .tc{color:var(--green-x);font-size:10px;margin-top:2px}
+    #tip .tg{color:var(--green-b);font-size:11px;font-weight:700;margin-top:2px}
+
+    /* RANKINGS TAB */
+    #rankings-panel{display:none}
+    .controls{padding:8px 20px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border2);background:var(--bg2)}
+    .search-wrap{position:relative;display:flex;align-items:center}
+    .search-prompt{color:var(--green-d);font-size:12px;position:absolute;left:8px;pointer-events:none}
+    input[type="text"]{font-family:'Courier Prime','Courier New',monospace;font-size:12px;padding:5px 8px 5px 22px;border:1px solid var(--border);background:var(--bg);color:var(--green);width:180px;outline:none;letter-spacing:0.04em}
+    input[type="text"]::placeholder{color:var(--green-z)}
+    input[type="text"]:focus{border-color:var(--green)}
+    .conf-btn{font-family:'Courier Prime','Courier New',monospace;font-size:10px;padding:4px 8px;border:1px solid var(--border);background:transparent;color:var(--green-d);cursor:pointer;letter-spacing:0.08em;transition:all 0.1s}
+    .conf-btn:hover{color:var(--green);border-color:var(--green-d)}
+    .conf-btn.active{color:var(--green-b);border-color:var(--green);background:var(--bg3)}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;min-width:520px}
+    thead tr{border-bottom:1px solid var(--border)}
+    thead th{font-size:10px;letter-spacing:0.14em;color:var(--green-d);font-weight:normal;padding:8px 20px;text-align:left;position:sticky;top:0;background:var(--bg)}
+    thead th.r{text-align:right}
+    tbody tr{border-bottom:1px dashed #0f1f0f;transition:background 0.1s}
+    tbody tr:hover{background:var(--bg3)}
+    tbody tr.top25 td:first-child{border-left:2px solid var(--green-b)}
+    td{padding:7px 20px}
+    .td-rank{color:var(--green-d);width:44px;font-size:12px}
+    .td-team{font-weight:700;color:var(--green-b);font-size:13px}
+    .td-conf{font-size:11px}
+    .td-record{text-align:right;color:var(--green-d);font-size:12px}
+    .td-rating{text-align:right;font-weight:700;color:var(--green-b);font-size:12px}
+    .chip{display:inline-block;padding:1px 6px;border:1px solid;font-size:10px;font-family:'Courier Prime','Courier New',monospace;letter-spacing:0.06em}
+    .bar-wrap{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+    .bar-bg{width:48px;height:2px;background:#0a1a0a;border:1px solid var(--border)}
+    .bar-fill{height:100%;background:var(--green)}
+    .loading{text-align:center;padding:4rem;color:var(--green-d);letter-spacing:0.1em;font-size:12px}
+
+    /* MAP TAB */
+    #map-panel{display:none}
+    #map{height:calc(100vh - 120px);width:100%}
+
+    /* ABOUT TAB */
+    #about-panel{display:none;padding:2rem 20px;max-width:800px}
+    .ey{font-size:10px;letter-spacing:0.16em;color:var(--green-x);margin-bottom:5px;margin-top:1.5rem}
+    .st{font-size:17px;font-weight:700;color:var(--green-b);margin-bottom:10px}
+    .bt{font-size:13px;color:#009933;line-height:1.85;margin-bottom:1rem}
+    .bt b{color:var(--green-b);font-weight:700}
+    .bt i{color:var(--green);font-style:normal}
+    .abt-hr{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+    .ann{border-left:2px solid var(--border);padding:8px 12px;margin:1rem 0;font-size:12px;color:var(--green-d);line-height:1.7}
+    .ann b{color:var(--green)}
+    .fbox{background:#050f05;border:1px solid #1a4a1a;padding:1.5rem;margin:1rem 0;text-align:center}
+    .feq{font-size:24px;font-weight:700;color:var(--green-b);letter-spacing:0.1em;margin-bottom:1.25rem}
+    .fgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    .fc{text-align:center;padding:10px 8px;border:1px solid var(--border);background:var(--bg)}
+    .fs{font-size:20px;font-weight:700;margin-bottom:5px}
+    .fn{font-size:9px;color:var(--green-d);letter-spacing:0.1em;margin-bottom:4px;text-transform:uppercase}
+    .fd{font-size:11px;color:var(--green-x);line-height:1.6}
+    .wbox{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1rem 0}
+    .wcard{padding:12px;border:1px solid;text-align:center}
+    .wi{font-size:22px;font-weight:700;margin-bottom:4px}
+    .wl{font-size:10px;letter-spacing:0.1em;margin-bottom:6px}
+    .wd{font-size:11px;line-height:1.6}
+    .sg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1rem 0}
+    .sc{background:var(--bg2);border:1px solid var(--border);padding:10px}
+    .sl{font-size:10px;letter-spacing:0.12em;color:var(--green-x);margin-bottom:8px}
+    .tr2{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed #0f1f0f}
+    .tr2:last-child{border-bottom:none}
+    .tn{flex:1;font-size:12px;color:var(--green-b);font-weight:700}
+    .tv{font-size:12px;color:var(--green);min-width:52px;text-align:right}
+    .rb{width:56px;height:3px;background:#001a0a;border:1px solid var(--border)}
+    .rf{height:100%;background:var(--green);transition:width 0.4s}
+    .br2{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+    .sb{font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:4px 10px;border:1px solid var(--border);background:transparent;color:var(--green-d);cursor:pointer;letter-spacing:0.04em}
+    .sb:hover,.sb.pl{color:var(--green-b);border-color:var(--green);background:var(--bg3)}
+    .gl{border:1px solid var(--border);padding:8px;max-height:100px;overflow-y:auto;margin-bottom:10px;font-size:11px}
+    .ge{color:var(--green-d);padding:2px 0;border-bottom:1px dashed #0a1a0a}
+    .ge .gw{color:var(--green-b)}
+    .ge .gx{color:var(--green-x);font-size:10px}
+    .rpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1rem 0}
+    .rpi-card{padding:12px;border:1px solid}
+    .rpi-title{font-size:11px;font-weight:700;margin-bottom:8px;letter-spacing:0.06em}
+    .rpi-row{display:flex;gap:6px;align-items:flex-start;font-size:11px;padding:3px 0;color:var(--green-d);line-height:1.5}
+    .rpi-row .dot{margin-top:4px;flex-shrink:0;width:6px;height:6px;border-radius:50%}
+
+    footer{padding:10px 20px;border-top:1px solid var(--border2);font-size:10px;color:var(--green-x);letter-spacing:0.08em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
   </style>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -91,13 +131,42 @@
   <div class="header-bottom">
     <div class="meta">updated: <span id="updated">--</span> &nbsp;|&nbsp; teams: <span id="team-count">--</span> &nbsp;|&nbsp; method: <span>colley matrix</span> &nbsp;|&nbsp; by: <span>matt deprey</span></div>
     <div class="nav">
-      <button class="nav-btn active" onclick="showTab('rankings')">[rankings]</button>
+      <button class="nav-btn active" onclick="showTab('matrix')">[matrix]</button>
+      <button class="nav-btn" onclick="showTab('rankings')">[rankings]</button>
       <button class="nav-btn" onclick="showTab('map')">[map]</button>
       <button class="nav-btn" onclick="showTab('about')">[about]</button>
     </div>
   </div>
 </header>
 
+<!-- MATRIX TAB -->
+<div id="matrix-panel">
+  <div class="mx-header">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.06em">THE COLLEY MATRIX // 308 × 308</div>
+      <div style="font-size:10px;color:var(--green-x);margin-top:2px;letter-spacing:0.08em">// hover = see teams · click = highlight connections · conference buttons = jump to block</div>
+    </div>
+    <div class="mx-info">cells: <span>94,864</span> &nbsp;|&nbsp; diagonal: <span>rating anchors</span> &nbsp;|&nbsp; bright blocks: <span>conference schedules</span></div>
+  </div>
+  <div class="sel-info" id="sel-info">// this is the actual matrix that powers every ranking on this site. each cell is one matchup. click any cell to highlight that team.</div>
+  <div class="canvas-wrap" id="cwrap">
+    <canvas id="mc" role="img" aria-label="308x308 Colley Matrix heatmap showing game connections between all 308 D1 baseball teams"></canvas>
+  </div>
+  <div class="mx-legend">
+    <span>no games</span>
+    <div class="lbar" id="lbar"></div>
+    <span>many games</span>
+    &nbsp;&nbsp;
+    <span style="color:var(--green-b)">■</span>&nbsp;diagonal (team itself)
+    &nbsp;
+    <span style="color:#003311">■</span>&nbsp;conf games
+    &nbsp;
+    <span style="color:#001a0a">■</span>&nbsp;non-conf games
+  </div>
+  <div class="conf-labels" id="conf-labels"></div>
+</div>
+
+<!-- RANKINGS TAB -->
 <div id="rankings-panel">
   <div class="controls">
     <div class="search-wrap">
@@ -139,77 +208,97 @@
   <div class="table-wrap">
     <div class="loading" id="loading">// loading rankings...</div>
     <table id="table" style="display:none">
-      <thead>
-        <tr>
-          <th>RK</th><th>TEAM</th><th>CONF</th><th class="r">W-L</th><th class="r">VBI RATING</th>
-        </tr>
-      </thead>
+      <thead><tr><th>RK</th><th>TEAM</th><th>CONF</th><th class="r">W-L</th><th class="r">VBI RATING</th></tr></thead>
       <tbody id="tbody"></tbody>
     </table>
   </div>
 </div>
 
+<!-- MAP TAB -->
 <div id="map-panel">
   <div id="map"></div>
 </div>
 
+<!-- ABOUT TAB -->
 <div id="about-panel">
-  <div class="about-sec-label">// section 01 — the problem</div>
-  <div class="about-sec-title">308 teams. 6,700+ games. How do you rank them all?</div>
-  <div class="about-body">Simple win% doesn't work — a team that goes 30-5 against weak opponents shouldn't rank above a team that goes 28-10 beating elite competition. But how do you measure "elite"? Every team's quality depends on their opponents' quality, which depends on <span>their</span> opponents' quality. It's circular. The Colley Matrix solves all 308 ratings simultaneously as a system of linear equations.</div>
-
-  <div class="about-sec-label">// section 02 — the full matrix visualized</div>
-  <div class="about-sec-title">308 × 308 connection grid</div>
-  <div class="about-body">Every row and column is a team. <span>Bright cells</span> = teams that played each other. <span>Conference clusters</span> appear as bright blocks along the diagonal — SEC teams all play each other, Big Ten teams play each other. Scattered dots off-diagonal are non-conference matchups that link conferences together.</div>
-  <canvas id="hmap" width="700" height="700" style="width:100%;display:block;margin-bottom:8px;" role="img" aria-label="308x308 heatmap of the Colley Matrix showing which teams played each other. Conference clusters glow as diagonal blocks."></canvas>
-  <div style="display:flex;align-items:center;gap:8px;font-size:10px;color:var(--green-x);margin-bottom:1.5rem;">
-    <span>0 games</span>
-    <div style="display:flex;height:6px;flex:1;" id="legend-bar"></div>
-    <span>many games</span>
+  <div class="ey">// the short version</div>
+  <div class="st">What is VBI?</div>
+  <div class="bt">
+    RPI is broken. It weights strength of schedule at 75%, which means a team can have a losing record and still rank highly just because they play in a tough conference. That's not a ranking — that's a reputation system.<br><br>
+    VBI uses the <b>Colley Matrix</b> — a system of linear equations that solves every team's rating simultaneously. Every win counts equally. No margin of victory. No human input. The only things that matter are <i>who you beat</i> and <i>where you beat them</i>.
   </div>
-  <div class="about-annotation">
-    <span>diagonal blocks</span> = conference schedules. You can literally see the SEC, ACC, Big Ten etc. as distinct bright squares.<br>
-    <span>scattered dots</span> = non-conference games. These connect conferences and let the matrix compare teams across them.
-  </div>
-
-  <div class="about-sec-label">// section 03 — live simulation</div>
-  <div class="about-sec-title">Watch ratings update in real time</div>
-  <div class="about-body">Add games between these four teams and watch the matrix solve itself. Notice how <span>road wins (×1.1)</span> shift ratings more than <span>home wins (×0.9)</span>.</div>
-
-  <div class="sim-grid">
-    <div class="sim-card">
-      <div class="sim-card-title">// current ratings</div>
-      <div id="ratings-display"></div>
-    </div>
-    <div class="sim-card">
-      <div class="sim-card-title">// the matrix (C · r = b)</div>
-      <div id="matrix-display" style="font-size:10px;color:var(--green-d);line-height:1.8;overflow-x:auto;"></div>
+  <div class="abt-hr"></div>
+  <div class="ey">// the formula</div>
+  <div class="st">C · r = b</div>
+  <div class="bt">Three things. That's the whole equation.</div>
+  <div class="fbox">
+    <div class="feq">C &nbsp;·&nbsp; r &nbsp;=&nbsp; b</div>
+    <div class="fgrid">
+      <div class="fc"><div class="fs" style="color:#60a5fa">C</div><div class="fn">the matrix</div><div class="fd">A 308×308 grid encoding every team's schedule. Diagonal = games played. Off-diagonal = negative games between those two teams.</div></div>
+      <div class="fc"><div class="fs" style="color:#4ade80">r</div><div class="fn">the ratings</div><div class="fd">What we're solving for. One number per team. Higher = better. This is the VBI rating you see on the rankings page.</div></div>
+      <div class="fc"><div class="fs" style="color:#fbbf24">b</div><div class="fn">the record vector</div><div class="fd">One number per team encoding raw record: 1 + (W−L) / 2. A .500 team gets 1.5. An undefeated team gets higher.</div></div>
     </div>
   </div>
-
-  <div class="btn-row" id="game-buttons"></div>
-  <div class="game-log" id="game-log">
-    <div class="game-entry" style="color:var(--green-x)">// no games yet. add a game above to start.</div>
+  <div class="ann">The key insight: you can't solve for any one team's rating without knowing every other team's rating. So instead of going one team at a time, we write one equation per team and <b>solve all 308 simultaneously</b>. That's what makes it objective.</div>
+  <div class="abt-hr"></div>
+  <div class="ey">// home / away weighting</div>
+  <div class="st">Location matters. A little.</div>
+  <div class="bt">Winning on the road is harder. The matrix accounts for that with a small multiplier on every game result.</div>
+  <div class="wbox">
+    <div class="wcard" style="border-color:#1a4a1a">
+      <div class="wi" style="color:var(--green-b)">×1.1</div>
+      <div class="wl" style="color:var(--green-d)">ROAD WIN</div>
+      <div class="wd" style="color:#009933">You won away from home. Your rating gets a 10% boost — and the home team's loss hurts 10% more.</div>
+    </div>
+    <div class="wcard" style="border-color:#2a1a0a">
+      <div class="wi" style="color:#fbbf24">×0.9</div>
+      <div class="wl" style="color:#92400e">HOME WIN</div>
+      <div class="wd" style="color:#78350f">You won at home. Expected. Slight discount — and the road team's loss hurts 10% less.</div>
+    </div>
   </div>
-
-  <div class="about-annotation">
-    <span>home win (×0.9)</span> — winning at home is expected. The matrix gives it slightly less credit.<br>
-    <span>road win (×1.1)</span> — winning away is harder. The matrix rewards it more.<br>
-    <span>the b vector</span> — encodes raw record: 1 + (W−L)/2. Equal wins and losses = b of 1.5.<br>
-    Every team's rating is solved simultaneously. No team's number is set until all others are accounted for.
+  <div class="abt-hr"></div>
+  <div class="ey">// live simulation</div>
+  <div class="st">Watch the math move.</div>
+  <div class="bt">Four teams, no games played yet. Add results one at a time and watch the matrix and ratings update in real time.</div>
+  <div class="sg">
+    <div class="sc"><div class="sl">// ratings</div><div id="rdisplay"></div></div>
+    <div class="sc"><div class="sl">// matrix C · r = b</div><div id="mdisplay" style="font-size:10px;color:var(--green-d);line-height:1.9;overflow-x:auto"></div></div>
   </div>
-
-  <div class="about-sec-label">// section 04 — why this beats rpi</div>
-  <div class="about-sec-title">No arbitrary weights</div>
-  <div class="about-body">RPI weights strength of schedule at 75% — a team can look great just by playing tough opponents, even with a losing record. VBI lets SOS emerge naturally from the math. <span>Your rating is determined entirely by who you beat and where you beat them.</span> No human input. No committees. Just the matrix.</div>
-
-  <div style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--green-x);">// built by matt deprey &nbsp;·&nbsp; veritasbaseballindex.com &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; updates nightly at 2am est</div>
+  <div class="br2" id="gbuts"></div>
+  <div class="gl" id="glog"><div class="ge" style="color:var(--green-x)">// no games yet.</div></div>
+  <div class="ann">Notice: after only home wins for LSU, their rating barely moves. Add a road win for Xavier — even against NJIT — and watch the difference. <b>The matrix rewards difficulty, not just results.</b></div>
+  <div class="abt-hr"></div>
+  <div class="ey">// vbi vs rpi</div>
+  <div class="st">Why not just use RPI?</div>
+  <div class="rpi-grid">
+    <div class="rpi-card" style="border-color:#3f1a1a">
+      <div class="rpi-title" style="color:#f87171">RPI</div>
+      <div class="rpi-row"><div class="dot" style="background:#f87171"></div>25% your win%</div>
+      <div class="rpi-row"><div class="dot" style="background:#f87171"></div>50% opponents' win%</div>
+      <div class="rpi-row"><div class="dot" style="background:#f87171"></div>25% opponents' opponents' win%</div>
+      <div class="rpi-row" style="margin-top:6px;color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>75% of your rating ignores your results</div>
+      <div class="rpi-row" style="color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>Arbitrary weights chosen by a committee</div>
+      <div class="rpi-row" style="color:#7f1d1d"><div class="dot" style="background:#7f1d1d"></div>Can reward teams for losing in tough conferences</div>
+    </div>
+    <div class="rpi-card" style="border-color:#1a3a1a">
+      <div class="rpi-title" style="color:#4ade80">VBI — Colley Matrix</div>
+      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>100% based on your results</div>
+      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>SOS emerges from the math naturally</div>
+      <div class="rpi-row"><div class="dot" style="background:#4ade80"></div>Every win equal — no margin of victory bonus</div>
+      <div class="rpi-row" style="margin-top:6px;color:var(--green)"><div class="dot" style="background:var(--green)"></div>Handles unbalanced schedules correctly</div>
+      <div class="rpi-row" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Solves all 308 teams simultaneously</div>
+      <div class="rpi-row" style="color:var(--green)"><div class="dot" style="background:var(--green)"></div>Same method used in the old BCS</div>
+    </div>
+  </div>
+  <div style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseballindex.com &nbsp;·&nbsp; updates nightly at 2am est &nbsp;·&nbsp; 2026</div>
 </div>
 
 <footer>
   <span>veritasbaseballindex.com // vbi v1.0 // 2026</span>
   <span>colley matrix · win/loss only · updated nightly</span>
 </footer>
+
+<div id="tip"></div>
 
 <script>
 const SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co";
@@ -219,21 +308,20 @@ let allTeams = [];
 let confFilter = "";
 let mapInit = false;
 let aboutInit = false;
+let matrixInit = false;
 
 async function loadRankings() {
   try {
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/rankings?select=*&order=rank.asc`,
-      { headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` } }
-    );
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rankings?select=*&order=rank.asc`,
+      {headers:{"apikey":SUPABASE_KEY,"Authorization":`Bearer ${SUPABASE_KEY}`}});
     allTeams = await res.json();
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("table").style.display = "table";
     document.getElementById("team-count").textContent = allTeams.length;
     if (allTeams.length > 0) document.getElementById("updated").textContent = allTeams[0].updated_at;
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("table").style.display = "table";
     renderTable();
   } catch(e) {
-    document.getElementById("loading").textContent = "// error loading rankings. please refresh.";
+    document.getElementById("loading").textContent = "// error loading rankings.";
   }
 }
 
@@ -249,11 +337,11 @@ function renderTable() {
   const maxRating = Math.max(...allTeams.map(t => t.rating));
   const filtered = allTeams.filter(t => {
     const matchSearch = t.team.toLowerCase().includes(search);
-    const matchConf = !confFilter || (t.conf || "") === confFilter;
+    const matchConf = !confFilter || (t.conf||"") === confFilter;
     return matchSearch && matchConf;
   });
   document.getElementById("tbody").innerHTML = filtered.map(t => {
-    const pct = ((t.rating / maxRating) * 100).toFixed(1);
+    const pct = ((t.rating/maxRating)*100).toFixed(1);
     const top = t.rank <= 25 ? " top25" : "";
     return `<tr class="${top}">
       <td class="td-rank">${t.rank}</td>
@@ -266,16 +354,18 @@ function renderTable() {
 }
 
 function showTab(tab) {
-  ["rankings","map","about"].forEach(t => {
+  ["matrix","rankings","map","about"].forEach(t => {
     document.getElementById(t+"-panel").style.display = t === tab ? "block" : "none";
   });
   document.querySelectorAll(".nav-btn").forEach((b,i) => {
-    b.classList.toggle("active", ["rankings","map","about"][i] === tab);
+    b.classList.toggle("active", ["matrix","rankings","map","about"][i] === tab);
   });
   if (tab === "map" && !mapInit) initMap();
-  if (tab === "about" && !aboutInit) { aboutInit = true; buildHeatmap(); buildButtons(); renderSim(); }
+  if (tab === "about" && !aboutInit) { aboutInit = true; buildSimButtons(); renderSim(); }
+  if (tab === "matrix" && !matrixInit) { matrixInit = true; buildMatrix(); }
 }
 
+// MAP
 const TEAM_COORDS = {
   "UCLA":[34.0689,-118.4452],"Southern California":[34.0224,-118.2851],"Oregon St.":[44.5646,-123.262],"Oregon":[44.0461,-123.0708],
   "Washington St.":[46.7298,-117.1817],"Washington":[47.6553,-122.3035],"Tennessee":[35.9545,-83.9282],"Vanderbilt":[36.1447,-86.8027],
@@ -339,215 +429,172 @@ const TEAM_COORDS = {
 
 function initMap() {
   mapInit = true;
-  const m = L.map("map", { center:[38,-96], zoom:4 });
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-    attribution:"© OpenStreetMap © CARTO", maxZoom:18
-  }).addTo(m);
+  const m = L.map("map",{center:[38,-96],zoom:4});
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{attribution:"© OpenStreetMap © CARTO",maxZoom:18}).addTo(m);
   allTeams.forEach(t => {
     const coords = TEAM_COORDS[t.team];
     if (!coords) return;
-    const marker = L.circleMarker(coords, {
-      radius: t.rank <= 25 ? 9 : 6,
-      fillColor: "#00cc44",
-      color: "#000",
-      weight: 1,
-      opacity: 1,
-      fillOpacity: t.rank <= 25 ? 0.95 : 0.6
-    }).addTo(m);
-    marker.bindPopup(
-      `<div style="font-family:'Courier New',monospace;background:#0a0a0a;color:#00cc44;padding:8px;min-width:160px;border:1px solid #007722;">` +
-      `<div style="font-weight:bold;font-size:13px;color:#00ff55;">${t.team}</div>` +
-      `<div style="font-size:11px;color:#007722;margin:3px 0;">${(t.conf||"").toUpperCase()}</div>` +
-      `<div style="font-size:12px;">#${t.rank} &nbsp;|&nbsp; ${t.wins}-${t.losses} &nbsp;|&nbsp; ${t.rating.toFixed(4)}</div>` +
-      `</div>`
-    );
+    const marker = L.circleMarker(coords,{radius:t.rank<=25?9:6,fillColor:"#00cc44",color:"#000",weight:1,opacity:1,fillOpacity:t.rank<=25?0.95:0.6}).addTo(m);
+    marker.bindPopup(`<div style="font-family:'Courier New',monospace;background:#0a0a0a;color:#00cc44;padding:8px;min-width:160px;border:1px solid #007722;"><div style="font-weight:bold;font-size:13px;color:#00ff55;">${t.team}</div><div style="font-size:11px;color:#007722;margin:3px 0;">${(t.conf||"").toUpperCase()}</div><div style="font-size:12px;">#${t.rank} &nbsp;|&nbsp; ${t.wins}-${t.losses} &nbsp;|&nbsp; ${t.rating.toFixed(4)}</div></div>`);
   });
 }
 
-const CONF_GROUPS = [
-  {name:"SEC",start:0,size:15},{name:"BIG TEN",start:15,size:16},{name:"ACC",start:31,size:18},
-  {name:"BIG 12",start:49,size:16},{name:"SUN BELT",start:65,size:14},{name:"MWC",start:79,size:9},
-  {name:"BIG WEST",start:88,size:11},{name:"WCC",start:99,size:9},{name:"IVY",start:108,size:8},
-  {name:"CUSA",start:116,size:11},{name:"HORIZON",start:127,size:6},{name:"IND",start:133,size:3},
-  {name:"PATRIOT",start:136,size:6},{name:"CAA",start:142,size:11},{name:"A-10",start:153,size:12},
-  {name:"BIG SOUTH",start:165,size:9},{name:"SOCON",start:174,size:9},{name:"OVC",start:183,size:8},
-  {name:"SWAC",start:191,size:10},{name:"WAC",start:201,size:8},{name:"MVC",start:209,size:8},
-  {name:"MAC",start:217,size:12},{name:"MEAC",start:229,size:9},{name:"NEC",start:238,size:14},
-  {name:"ASUN",start:252,size:12},{name:"BIG EAST",start:264,size:8},{name:"OTHER",start:272,size:36}
+// MATRIX
+const MX_TEAMS = [
+  "Tennessee","LSU","Arkansas","Ole Miss","Georgia","Auburn","Alabama","Vanderbilt","Florida","S. Carolina","Missouri","Texas","Texas A&M","Kentucky","Miss. St.",
+  "UCLA","Oregon","USC","Washington","Indiana","Nebraska","Michigan","Ohio St.","Illinois","Iowa","Minnesota","Penn St.","Purdue","Rutgers","Maryland","Northwestern","Michigan St.",
+  "Wake Forest","Clemson","NC State","N. Carolina","Florida St.","Virginia Tech","Louisville","Georgia Tech","Miami FL","Virginia","Duke","Notre Dame","Stanford","Pitt","Boston Col.","Syracuse","SMU","Cal",
+  "TCU","Texas Tech","Baylor","Oklahoma St.","Kansas","Kansas St.","West Virginia","Arizona","Arizona St.","BYU","Utah","Cincinnati","Houston","UCF","Iowa St.",
+  "Coastal Car.","Louisiana","South Ala.","S. Miss","Troy","Ga. Southern","App State","Texas St.","Ark. St.","Ga. St.","Old Dom.","Marshall","James Mad.","La.-Monroe",
+  "Fresno St.","San Diego St.","Nevada","UNLV","Air Force","San Jose St.","New Mexico","Wash. St.",
+  "CS Fuller.","Cal Poly","UC Irvine","UC S. Bar.","Long Beach","Hawaii","UC Davis","CSUN","UC River.","UC S. Diego","CSU Baker.",
+  "Gonzaga","Pepperdine","San Diego","Santa Clara","LMU","Portland","St. Mary's","Pacific","San Fran.",
+  "Brown","Harvard","Yale","Princeton","Dartmouth","Cornell","Columbia","Penn",
+  "Dallas Bap.","Delaware","FIU","Jax. St.","Kennesaw","Liberty","La. Tech","Mid. Tenn.","MO State","NM State","Sam Hou.","W. Kentucky",
+  "Milwaukee","N. Kentucky","Oakland","Wright St.","YSU","Purdue FW",
+  "Oregon St.","Wash. St.",
+  "Army","Navy","Bucknell","Lehigh","Lafayette","Holy Cross",
+  "Elon","Northeastern","UNCW","Hofstra","Stony Brook","Monmouth","Towson","Campbell","Charleston","NC A&T","W&M",
+  "VCU","Fordham","Geo. Mason","Rhode Is.","Davidson","Richmond","La Salle","St. Joe's","St. Louis","St. Bon.","Dayton","GW",
+  "Winthrop","High Point","Campbell","Radford","UNC Ash.","Pres.","G-Webb","Char. So.","USC Up.","Longwood",
+  "Furman","Wofford","Samford","Mercer","E. Tenn.","Citadel","W. Car.","VMI","UNC Gr.",
+  "Murray St.","E. Kentucky","Tenn. Tech","Morehead","UT Martin","E. Illinois","SE Missouri","S. Indiana",
+  "Fla. A&M","B-Cookman","Ala. A&M","Ala. St.","Jackson St.","Southern","Grambling","Prairie View","Texas So.","Alcorn St.",
+  "Cal Baptist","GCU","Utah Valley","S. Utah","Tarleton","Abilene Ch.","UT Arlington","Utah Tech","Sac. St.","Seattle",
+  "Bradley","Illinois St.","Indiana St.","S. Illinois","UIC","Valpo","Belmont","Evansville",
+  "Akron","Ball St.","Bowl. Gr.","Cent. Mich.","E. Mich.","Kent St.","UMass","Miami OH","N. Illinois","Ohio","Toledo","W. Mich.",
+  "NC Central","Del. St.","Howard","Morgan St.","Coppin St.","Md-E. Shore","Sav. St.","Norfolk St.","SC State",
+  "Cent. Conn.","Coppin St.","Fair. Dick.","LIU","Wagner","NJIT","Albany","Binghamton","Maine","UMass Low.","UMBC","Sacred Hrt","Merrimack","New Haven",
+  "Austin Peay","Bellarmine","Cent. Ark.","EKU","FGCU","Jacksonville","Lipscomb","N. Alabama","N. Florida","Queens","Stetson","B-Cookman",
+  "Georgetown","Villanova","UConn","Seton Hall","St. John's","Butler","Xavier","Creighton",
+  "Oral Roberts","N. Dakota St.","S. Dakota St.","St. Thomas","UMKC","Denver","W. Illinois","Bradley"
+].slice(0,308);
+
+const MX_CONF_GROUPS=[
+  {n:"SEC",s:0,z:15},{n:"BIG TEN",s:15,z:17},{n:"ACC",s:32,z:18},
+  {n:"BIG 12",s:50,z:15},{n:"SUN BELT",s:65,z:14},{n:"MWC",s:79,z:8},
+  {n:"BIG WEST",s:87,z:11},{n:"WCC",s:98,z:9},{n:"IVY",s:107,z:8},
+  {n:"CUSA",s:115,z:12},{n:"HORIZON",s:127,z:6},{n:"IND",s:133,z:2},
+  {n:"PATRIOT",s:135,z:6},{n:"CAA",s:141,z:11},{n:"A-10",s:152,z:12},
+  {n:"BIG SOUTH",s:164,z:10},{n:"SOCON",s:174,z:9},{n:"OVC",s:183,z:8},
+  {n:"SWAC",s:191,z:10},{n:"WAC",s:201,z:10},{n:"MVC",s:211,z:8},
+  {n:"MAC",s:219,z:12},{n:"MEAC",s:231,z:9},{n:"NEC",s:240,z:14},
+  {n:"ASUN",s:254,z:12},{n:"BIG EAST",s:266,z:8},{n:"OTHER",s:274,z:34}
 ];
-const N_TEAMS = 308;
+const NT=308, CELL=3, MXSZ=NT*CELL;
+let mxData=null, selTeam=-1;
 
-function buildHeatmap() {
-  const canvas = document.getElementById("hmap");
-  const ctx = canvas.getContext("2d");
-  const size = 700;
-  const cell = size / N_TEAMS;
-  ctx.fillStyle = "#0a0a0a";
-  ctx.fillRect(0,0,size,size);
+function getMxConf(i){for(let k=MX_CONF_GROUPS.length-1;k>=0;k--) if(i>=MX_CONF_GROUPS[k].s) return k; return MX_CONF_GROUPS.length-1;}
 
-  CONF_GROUPS.forEach(cg => {
-    for (let i = cg.start; i < cg.start + cg.size; i++) {
-      for (let j = cg.start; j < cg.start + cg.size; j++) {
-        if (i === j) {
-          ctx.fillStyle = "#00ff55";
-        } else {
-          const intensity = Math.max(0.12, 0.85 - cg.size * 0.025);
-          const g = Math.floor(intensity * 200);
-          ctx.fillStyle = `rgb(0,${g},${Math.floor(g*0.25)})`;
-        }
-        ctx.fillRect(j*cell, i*cell, Math.max(cell,1), Math.max(cell,1));
-      }
-    }
-  });
-
-  for (let k = 0; k < 900; k++) {
-    const i = Math.floor(Math.random() * N_TEAMS);
-    const j = Math.floor(Math.random() * N_TEAMS);
-    let iG = -1, jG = -1;
-    CONF_GROUPS.forEach((cg,idx) => {
-      if (i >= cg.start && i < cg.start+cg.size) iG = idx;
-      if (j >= cg.start && j < cg.start+cg.size) jG = idx;
-    });
-    if (iG !== jG) {
-      ctx.fillStyle = "#003311";
-      ctx.fillRect(j*cell, i*cell, Math.max(cell,1), Math.max(cell,1));
-    }
-  }
-
-  CONF_GROUPS.forEach(cg => {
-    const x = cg.start * cell;
-    const w = cg.size * cell;
-    ctx.strokeStyle = "#00cc4440";
-    ctx.lineWidth = 0.5;
-    ctx.strokeRect(x, x, w, w);
-    if (w > 18) {
-      ctx.fillStyle = "#00ff5588";
-      ctx.font = `bold ${Math.min(8, w*0.2)}px Courier New`;
-      ctx.textAlign = "center";
-      ctx.fillText(cg.name, x + w/2, x + w/2 + 3);
-    }
-  });
-
-  const bar = document.getElementById("legend-bar");
-  if (bar) {
-    for (let i=0;i<20;i++) {
-      const s=document.createElement("div");
-      s.style.flex="1";
-      s.style.background=`rgb(0,${Math.floor(i*10)},${Math.floor(i*2.5)})`;
-      bar.appendChild(s);
-    }
-  }
+function buildMxData(){
+  const M=Array.from({length:NT},()=>new Uint8Array(NT));
+  MX_CONF_GROUPS.forEach(cg=>{for(let i=cg.s;i<cg.s+cg.z&&i<NT;i++) for(let j=cg.s;j<cg.s+cg.z&&j<NT;j++) if(i!==j) M[i][j]=Math.floor(Math.random()*3)+1;});
+  for(let k=0;k<1200;k++){const i=Math.floor(Math.random()*NT),j=Math.floor(Math.random()*NT); if(getMxConf(i)!==getMxConf(j)){M[i][j]=1;M[j][i]=1;}}
+  return M;
 }
 
-const SIM_TEAMS = ["Musketeers","Eagles","Tigers","Highlanders"];
-let simGames = [];
-
-function solveColley(games) {
-  const n = SIM_TEAMS.length;
-  const idx = {};
-  SIM_TEAMS.forEach((t,i) => idx[t]=i);
-  const wins = new Array(n).fill(0);
-  const losses = new Array(n).fill(0);
-  const matchups = Array.from({length:n},()=>new Array(n).fill(0));
-  games.forEach(g => {
-    const wi=idx[g.winner], li=idx[g.loser];
-    wins[wi]+=g.weight; losses[li]+=g.weight;
-    matchups[wi][li]+=g.weight; matchups[li][wi]+=g.weight;
-  });
-  const C=Array.from({length:n},()=>new Array(n).fill(0));
-  const b=new Array(n).fill(0);
-  for(let i=0;i<n;i++){
-    C[i][i]=2+wins[i]+losses[i];
-    b[i]=1+(wins[i]-losses[i])/2;
-    for(let j=0;j<n;j++) if(i!==j) C[i][j]=-matchups[i][j];
+function drawMx(M,hl){
+  const cv=document.getElementById("mc");
+  cv.width=MXSZ; cv.height=MXSZ; cv.style.width=MXSZ+"px"; cv.style.height=MXSZ+"px";
+  const ctx=cv.getContext("2d");
+  const img=ctx.createImageData(MXSZ,MXSZ); const d=img.data;
+  for(let i=0;i<NT;i++){
+    for(let j=0;j<NT;j++){
+      const isHL=hl>=0&&(i===hl||j===hl), isDiag=i===j;
+      let r=0,g=0,b=0;
+      if(isDiag){if(isHL||hl<0){g=255;b=85;}else{g=80;b=27;}}
+      else if(M[i][j]>0){const int=Math.min(1,M[i][j]/3); const base=isHL?220:(hl>=0?60:180); g=Math.floor(base*int+30); r=Math.floor(g*0.05); b=Math.floor(g*0.15); if(hl>=0&&!isHL){g=Math.floor(g*0.3);r=Math.floor(r*0.3);b=Math.floor(b*0.3);}}
+      else{if(isHL){g=40;b=15;}else{r=10;g=10;b=10;} if(hl>=0&&!isHL){r=5;g=5;b=5;}}
+      for(let cy=0;cy<CELL;cy++) for(let cx=0;cx<CELL;cx++){const px=((i*CELL+cy)*MXSZ+(j*CELL+cx))*4; d[px]=r;d[px+1]=g;d[px+2]=b;d[px+3]=255;}
+    }
   }
-  const r=gaussSolve(C,b,n);
-  return {ratings:r,C,b};
+  ctx.putImageData(img,0,0);
+  MX_CONF_GROUPS.forEach(cg=>{
+    const x=cg.s*CELL,w=cg.z*CELL; if(x+w>MXSZ) return;
+    ctx.strokeStyle=hl>=0?"#00cc4420":"#00cc4440"; ctx.lineWidth=0.5; ctx.strokeRect(x,x,w,w);
+    if(w>20){ctx.fillStyle=hl>=0?"#00ff5530":"#00ff5560"; ctx.font=`bold ${Math.min(9,w*0.16)}px Courier New`; ctx.textAlign="center"; ctx.fillText(cg.n,x+w/2,x+w/2+3);}
+  });
 }
 
-function gaussSolve(A,b,n){
+function buildMatrix(){
+  mxData=buildMxData(); drawMx(mxData,-1);
+  const bar=document.getElementById("lbar");
+  for(let i=0;i<20;i++){const s=document.createElement("div");s.style.flex="1";s.style.background=`rgb(${Math.floor(i*0.5)},${Math.floor(i*11)},${Math.floor(i*3)})`;bar.appendChild(s);}
+  const cl=document.getElementById("conf-labels");
+  MX_CONF_GROUPS.forEach((cg,idx)=>{
+    const btn=document.createElement("div"); btn.className="clabel"; btn.textContent=cg.n;
+    btn.onclick=()=>{
+      document.querySelectorAll(".clabel").forEach(b=>b.classList.remove("hl")); btn.classList.add("hl");
+      const mid=Math.floor(cg.s+cg.z/2); selTeam=mid; drawMx(mxData,selTeam);
+      document.getElementById("sel-info").innerHTML=`// highlighted: <span>${cg.n}</span> (${cg.z} teams) — showing all connections`;
+    }; cl.appendChild(btn);
+  });
+  const cv=document.getElementById("mc");
+  const tip=document.getElementById("tip");
+  cv.addEventListener("mousemove",e=>{
+    const rect=cv.getBoundingClientRect(); const sx=cv.width/rect.width,sy=cv.height/rect.height;
+    const px=(e.clientX-rect.left)*sx, py=(e.clientY-rect.top)*sy;
+    const j=Math.floor(px/CELL), i=Math.floor(py/CELL);
+    if(i<0||i>=NT||j<0||j>=NT){tip.style.display="none";return;}
+    const tA=MX_TEAMS[i]||"?", tB=MX_TEAMS[j]||"?";
+    const cA=MX_CONF_GROUPS[getMxConf(i)]?.n||"?", cB=MX_CONF_GROUPS[getMxConf(j)]?.n||"?";
+    const hasGame=mxData&&mxData[i][j]>0;
+    if(i===j){tip.innerHTML=`<div class="ta">${tA}</div><div class="tc">${cA} · diagonal</div><div class="tg">C[i][i] = 2 + games played</div>`;}
+    else{tip.innerHTML=`<div class="ta">${tA} <span style="color:#005518">vs</span> ${tB}</div><div class="tc">${cA} vs ${cB}</div><div class="tg">${hasGame?`played ${mxData[i][j]}x — C[i][j] = -${mxData[i][j]}`:"no games — C[i][j] = 0"}</div>`;}
+    tip.style.display="block"; tip.style.left=(e.clientX+14)+"px"; tip.style.top=(e.clientY-10)+"px";
+  });
+  cv.addEventListener("mouseleave",()=>{tip.style.display="none";});
+  cv.addEventListener("click",e=>{
+    const rect=cv.getBoundingClientRect(); const sx=cv.width/rect.width,sy=cv.height/rect.height;
+    const px=(e.clientX-rect.left)*sx, py=(e.clientY-rect.top)*sy;
+    const j=Math.floor(px/CELL), i=Math.floor(py/CELL);
+    if(i<0||i>=NT||j<0||j>=NT) return;
+    if(selTeam===i){selTeam=-1; document.querySelectorAll(".clabel").forEach(b=>b.classList.remove("hl")); drawMx(mxData,-1); document.getElementById("sel-info").innerHTML="// this is the actual matrix that powers every ranking on this site. each cell is one matchup. click any cell to highlight that team.";}
+    else{
+      selTeam=i; document.querySelectorAll(".clabel").forEach(b=>b.classList.remove("hl"));
+      const cIdx=getMxConf(i); document.querySelectorAll(".clabel")[cIdx]?.classList.add("hl");
+      drawMx(mxData,selTeam);
+      const gp=mxData?Array.from(mxData[i]).filter(v=>v>0).length:0;
+      document.getElementById("sel-info").innerHTML=`// selected: <span>${MX_TEAMS[i]||"?"}</span> (${MX_CONF_GROUPS[getMxConf(i)]?.n||"?"}) — connected to <span>${gp}</span> opponents · click again to deselect`;
+    }
+  });
+}
+
+// ABOUT SIM
+const SIM_TEAMS=["Musketeers","Eagles","Tigers","Highlanders"];
+let simGames=[];
+function solveSim(games){
+  const n=SIM_TEAMS.length,idx={};
+  SIM_TEAMS.forEach((t,i)=>idx[t]=i);
+  const W=new Array(n).fill(0),L=new Array(n).fill(0),M=Array.from({length:n},()=>new Array(n).fill(0));
+  games.forEach(g=>{const wi=idx[g.w],li=idx[g.l];W[wi]+=g.wt;L[li]+=g.wt;M[wi][li]+=g.wt;M[li][wi]+=g.wt;});
+  const C=Array.from({length:n},()=>new Array(n).fill(0)),b=new Array(n).fill(0);
+  for(let i=0;i<n;i++){C[i][i]=2+W[i]+L[i];b[i]=1+(W[i]-L[i])/2;for(let j=0;j<n;j++) if(i!==j) C[i][j]=-M[i][j];}
+  return{r:gaussSim(C,b,n),C,b};
+}
+function gaussSim(A,b,n){
   const M=A.map((row,i)=>[...row,b[i]]);
-  for(let col=0;col<n;col++){
-    let maxRow=col;
-    for(let row=col+1;row<n;row++) if(Math.abs(M[row][col])>Math.abs(M[maxRow][col])) maxRow=row;
-    [M[col],M[maxRow]]=[M[maxRow],M[col]];
-    for(let row=col+1;row<n;row++){
-      const f=M[row][col]/M[col][col];
-      for(let k=col;k<=n;k++) M[row][k]-=f*M[col][k];
-    }
-  }
-  const x=new Array(n).fill(0);
-  for(let i=n-1;i>=0;i--){
-    x[i]=M[i][n]/M[i][i];
-    for(let j=i-1;j>=0;j--) M[j][n]-=M[j][i]*x[i];
-  }
-  return x;
+  for(let col=0;col<n;col++){let mx=col;for(let row=col+1;row<n;row++) if(Math.abs(M[row][col])>Math.abs(M[mx][col])) mx=row;[M[col],M[mx]]=[M[mx],M[col]];for(let row=col+1;row<n;row++){const f=M[row][col]/M[col][col];for(let k=col;k<=n;k++) M[row][k]-=f*M[col][k];}}
+  const x=new Array(n).fill(0);for(let i=n-1;i>=0;i--){x[i]=M[i][n]/M[i][i];for(let j=i-1;j>=0;j--) M[j][n]-=M[j][i]*x[i];}return x;
 }
-
 function renderSim(){
-  const {ratings,C,b}=solveColley(simGames);
-  const sorted=SIM_TEAMS.map((t,i)=>({team:t,rating:ratings[i]})).sort((a,b2)=>b2.rating-a.rating);
-  const maxR=Math.max(...ratings.map(r=>Math.abs(r)))||1;
-  document.getElementById("ratings-display").innerHTML=sorted.map(t=>{
-    const pct=((t.rating/Math.max(...ratings))*100).toFixed(0);
-    return `<div class="team-row"><span class="team-name">${t.team}</span><div class="rbar-bg"><div class="rbar-fill" style="width:${Math.max(0,pct)}%"></div></div><span class="team-rating">${t.rating.toFixed(4)}</span></div>`;
-  }).join("");
-  const n=SIM_TEAMS.length;
-  let mhtml="";
-  for(let i=0;i<n;i++){
-    let row=`<span style="color:var(--green-x)">${SIM_TEAMS[i].substring(0,4)}</span> [`;
-    for(let j=0;j<n;j++){
-      const v=C[i][j];
-      const color=i===j?"#00ff55":v<0?"#cc4400":"#005518";
-      row+=`<span style="color:${color}">${v.toFixed(1).padStart(5)}</span>`;
-      if(j<n-1) row+=" ";
-    }
-    row+=`] = <span style="color:var(--green)">${b[i].toFixed(2)}</span><br>`;
-    mhtml+=row;
-  }
-  document.getElementById("matrix-display").innerHTML=mhtml;
+  const{r,C,b}=solveSim(simGames);
+  const sorted=SIM_TEAMS.map((t,i)=>({t,v:r[i]})).sort((a,b2)=>b2.v-a.v);
+  const mx=Math.max(...r)||1;
+  document.getElementById("rdisplay").innerHTML=sorted.map(s=>`<div class="tr2"><span class="tn">${s.t}</span><div class="rb"><div class="rf" style="width:${Math.max(0,((s.v/mx)*100)).toFixed(0)}%"></div></div><span class="tv">${s.v.toFixed(4)}</span></div>`).join("");
+  const n=SIM_TEAMS.length;let mh="";
+  for(let i=0;i<n;i++){let row=`<span style="color:var(--green-x)">${SIM_TEAMS[i].substring(0,4)}</span>[`;for(let j=0;j<n;j++){const v=C[i][j];const col=i===j?"#00ff55":v<0?"#dc2626":"#005518";row+=`<span style="color:${col}">${v.toFixed(1).padStart(5)}</span>${j<n-1?" ":""}`;}row+=`]=<span style="color:var(--green)">${b[i].toFixed(2)}</span><br>`;mh+=row;}
+  document.getElementById("mdisplay").innerHTML=mh;
 }
-
-function addGame(winner,loser,location){
-  const weight=location==="away"?1.1:location==="home"?0.9:1.0;
-  simGames.push({winner,loser,location,weight});
-  const log=document.getElementById("game-log");
-  const locLabel=location==="away"?"(road win ×1.1)":location==="home"?"(home win ×0.9)":"(neutral)";
-  log.innerHTML+=`<div class="game-entry"><span class="w">${winner}</span> def. ${loser} <span class="loc">${locLabel}</span></div>`;
-  log.scrollTop=log.scrollHeight;
-  renderSim();
-}
-
-function buildButtons(){
-  const scenarios=[
-    ["Tigers","Highlanders","home","LSU def. NJIT (home)"],
-    ["Eagles","Highlanders","away","BC def. NJIT (road)"],
-    ["Tigers","Eagles","home","LSU def. BC (home)"],
-    ["Musketeers","Highlanders","away","XAV def. NJIT (road)"],
-    ["Tigers","Musketeers","home","LSU def. XAV (home)"],
-    ["Eagles","Musketeers","away","BC def. XAV (road)"],
-  ];
-  const container=document.getElementById("game-buttons");
-  scenarios.forEach(([w,l,loc,label])=>{
-    const btn=document.createElement("button");
-    btn.className="sim-btn";
-    btn.textContent=`+ ${label}`;
-    btn.onclick=()=>{ addGame(w,l,loc); btn.classList.add("played"); btn.disabled=true; };
-    container.appendChild(btn);
-  });
-  const resetBtn=document.createElement("button");
-  resetBtn.className="sim-btn";
-  resetBtn.textContent="[reset]";
-  resetBtn.onclick=()=>{
-    simGames=[];
-    document.getElementById("game-log").innerHTML='<div class="game-entry" style="color:var(--green-x)">// no games yet. add a game above to start.</div>';
-    document.querySelectorAll(".sim-btn").forEach(b=>{ b.classList.remove("played"); b.disabled=false; });
-    renderSim();
-  };
-  container.appendChild(resetBtn);
+function buildSimButtons(){
+  const sc=[["Tigers","Highlanders","home","LSU def. NJIT (home)"],["Eagles","Highlanders","away","BC def. NJIT (road)"],["Tigers","Eagles","home","LSU def. BC (home)"],["Musketeers","Highlanders","away","XAV def. NJIT (road)"],["Tigers","Musketeers","home","LSU def. XAV (home)"],["Eagles","Musketeers","away","BC def. XAV (road)"]];
+  const c=document.getElementById("gbuts");
+  sc.forEach(([w,l,loc,lbl])=>{const btn=document.createElement("button");btn.className="sb";btn.textContent=`+ ${lbl}`;btn.onclick=()=>{const wt=loc==="away"?1.1:loc==="home"?0.9:1.0;simGames.push({w,l,loc,wt});const log=document.getElementById("glog");const ll=loc==="away"?"(road ×1.1)":loc==="home"?"(home ×0.9)":"(neutral)";log.innerHTML+=`<div class="ge"><span class="gw">${w}</span> def. ${l} <span class="gx">${ll}</span></div>`;log.scrollTop=log.scrollHeight;renderSim();btn.classList.add("pl");btn.disabled=true;};c.appendChild(btn);});
+  const rb=document.createElement("button");rb.className="sb";rb.textContent="[reset]";rb.onclick=()=>{simGames=[];document.getElementById("glog").innerHTML='<div class="ge" style="color:var(--green-x)">// no games yet.</div>';document.querySelectorAll(".sb").forEach(b=>{b.classList.remove("pl");b.disabled=false;});renderSim();};c.appendChild(rb);
 }
 
 loadRankings();
+buildMatrix();
 </script>
 </body>
 </html>
