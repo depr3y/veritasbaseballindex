@@ -414,7 +414,7 @@
 
 <div id="tip"></div>
 
-<script src="https://unpkg.com/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 const SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjaXB4dGRjeXhlcnl0eGZyemhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxODczNzEsImV4cCI6MjA5Mzc2MzM3MX0.Sdtj7bAZWp6N-UaGZIXtBYz--Q_D6aP2IMkkcGYZFhw";
@@ -1004,6 +1004,8 @@ function xvUpdate(gi){
 function initXavier(){
   const cv=document.getElementById('xv-ch');
   if(!cv) return;
+  // If Chart.js isn't loaded yet, retry in 100ms
+  if(typeof Chart === 'undefined') { setTimeout(initXavier, 100); return; }
   xvChart=new Chart(cv,{
     type:'line',
     data:{
@@ -1030,7 +1032,7 @@ function initXavier(){
 }
 
 loadRankings();
-showTab('about');
+setTimeout(() => showTab('about'), 50);
 </script>
 </body>
 </html>
