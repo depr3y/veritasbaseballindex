@@ -989,27 +989,27 @@ const XV_RATED=[
 let xvChart=null;
 
 function xvCiiExplain(gi,cii,has){
-  if(!has) return `The base value of <b>2</b> acts as a prior — every team starts at roughly .500 before any games count. Xavier has played <b>${gi+1} game${gi>0?'s':''}</b>. Once they hit 10, all prior games flood into the diagonal at once.`;
-  const road=XV_GAMES.slice(0,gi+1).filter(g=>g.loc==='away').length;
-  const home=XV_GAMES.slice(0,gi+1).filter(g=>g.loc==='home').length;
-  return `<b>2</b> (prior) + <b>${(cii-2).toFixed(2)}</b> from ${gi+1} games (${road} road ×1.1, ${home} home ×0.9) = <b>${cii.toFixed(2)}</b>. Xavier played 17 of their first 18 games on the road — that inflates this number faster than a home-heavy schedule, which means the system has more information to work with.`;
+  if(!has) return `Xavier has played <b>${gi+1} game${gi>0?'s':''}</b> but needs 10 before entering the system. Once they qualify, this number will reflect their full schedule weight.`;
+  const feel = cii < 15 ? 'still small — rating is volatile, one result can shift things significantly' : cii < 30 ? 'growing — rating is stabilizing as more games come in' : 'large — rating is anchored, individual games have less impact now';
+  return `Think of this as Xavier's <b>anchor weight</b>. The larger it gets, the harder it is for any single game to move their rating. At <b>${cii.toFixed(1)}</b>, Xavier's rating is ${feel}. This is why early-season ratings swing wildly and late-season ratings barely budge.`;
 }
 
 function xvBiExplain(gi,bi,has){
   const w=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='W').length;
   const l=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='L').length;
-  if(!has) return `Starts at <b>1</b> — the neutral .500 baseline every team gets. Each win adds its weight, each loss subtracts it. Xavier is <b>${w}-${l}</b> so far. Once qualified, b[i] will reflect the full weighted toll of this road stretch.`;
+  if(!has) return `This encodes Xavier's weighted record. Starts at <b>1</b> (the .500 baseline every team gets). Each win adds its weight, each loss subtracts it. Road wins add <b>+1.1</b>, road losses subtract <b>−1.1</b>. Home wins add <b>+0.9</b>, home losses subtract <b>−0.9</b>.`;
+  const roadW=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='W'&&g.loc==='away').length;
   const roadL=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='L'&&g.loc==='away').length;
-  const gap=(bi-1).toFixed(2);
-  return `<b>1</b> (baseline) ${gap>=0?'+':''}${gap} from weighted record = <b>${bi.toFixed(4)}</b>. Xavier is ${w}-${l}. The value is ${Math.abs(bi)<0.5?'near zero — wins and losses nearly balanced':bi<-3?`deeply negative — ${roadL} road losses at ×1.1 each is the main driver`:bi<0?`negative — losses outweigh wins on weighted terms`:'positive — wins outweigh losses'}. A team with the same raw record but mostly home games would have a less negative b[i], since home losses only subtract 0.9.`;
+  const feel = bi > 0.5 ? 'above the .500 line' : bi > -1 ? 'just below the .500 line' : bi > -3 ? 'clearly below .500 — losses are outweighing wins on weighted terms' : 'deeply negative — the road loss streak is the main driver';
+  return `Xavier is <b>${w}-${l}</b>. This number is ${feel} at <b>${bi.toFixed(2)}</b>. They have <b>${roadW} road wins</b> (each +1.1) and <b>${roadL} road losses</b> (each −1.1). Because most of their schedule is on the road, both wins and losses carry more weight than they would for a home-heavy team.`;
 }
 
 function xvRatExplain(gi,rating,has){
   const w=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='W').length;
   const l=XV_GAMES.slice(0,gi+1).filter(g=>g.r==='L').length;
-  if(!has) return `Once Xavier reaches 10 games, the system solves all 308 ratings simultaneously. The key: Xavier's rating isn't just their record — it's pulled up or down by the ratings of every opponent they faced, whose ratings are shaped by their opponents in turn. Losing to Arkansas or Oregon St. on the road costs less than losing to a weak team at home.`;
-  const qual=rating>0.56?'strong — tough opponents pulling it well above the raw record':rating>0.53?'solid — road schedule doing its job, quality opponents lifting the floor':rating>0.50?'just above .500 — the wins against good teams are keeping it afloat':'still recovering — losses are outweighing opponent quality for now';
-  return `<b>${rating.toFixed(5)}</b> — ${qual}. A ${w}-${l} record against good teams produces a meaningfully higher rating than the same record against weaker competition. That's not an opinion — it's what falls out of solving all 308 equations at once.`;
+  if(!has) return `Once Xavier hits 10 games, the system solves all 308 ratings at once. Xavier's rating isn't calculated in isolation — it's shaped by the ratings of every opponent they played, whose ratings are shaped by their opponents, and so on across the entire sport.`;
+  const feel = rating > 0.57 ? 'well above average — strong opponents are pulling it up significantly' : rating > 0.53 ? 'above average — quality schedule is doing more work than the raw record suggests' : rating > 0.50 ? 'slightly above average — hanging in despite the losing record' : 'below average — losses are outweighing the schedule quality for now';
+  return `<b>${rating.toFixed(4)}</b> — ${feel}. A ${w}-${l} record against Arkansas, Oregon St., Vanderbilt, and Georgia Tech rates higher than the same record against weaker teams. The system doesn't take your word for it — it solves for everyone simultaneously and the math works it out.`;
 }
 
 function xvUpdate(gi){
