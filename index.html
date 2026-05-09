@@ -29,7 +29,8 @@
     .mx-info span{color:var(--green)}
     .sel-info{padding:6px 20px;font-size:11px;color:var(--green-d);border-bottom:1px solid var(--border2);min-height:26px;letter-spacing:0.04em}
     .sel-info span{color:var(--green-b);font-weight:700}
-    .canvas-wrap{overflow:auto;cursor:crosshair;max-height:calc(100vh - 260px)}
+    .canvas-wrap{overflow:hidden;cursor:grab;height:calc(100vh - 260px);position:relative;background:var(--bg)}
+    .canvas-wrap.grabbing{cursor:grabbing}
     .mx-legend{padding:8px 20px;border-top:1px solid var(--border2);display:flex;align-items:center;gap:10px;font-size:10px;color:var(--green-x);flex-wrap:wrap}
     .lbar{display:flex;height:5px;width:160px}
     .conf-labels{padding:6px 20px 10px;display:flex;flex-wrap:wrap;gap:5px;border-bottom:1px solid var(--border2)}
@@ -179,18 +180,7 @@
 
   <div class="sel-info" id="sel-info">// drag the slider above to watch the matrix fill up game by game. click any cell to highlight that team.</div>
   <div class="canvas-wrap" id="cwrap">
-    <div style="display:inline-flex;flex-direction:column;align-items:flex-start">
-      <!-- top label row: corner spacer + column labels -->
-      <div style="display:flex">
-        <div style="width:180px;height:180px;flex-shrink:0;background:var(--bg)"></div>
-        <canvas id="mc-top" style="display:block"></canvas>
-      </div>
-      <!-- matrix row: row labels + matrix canvas -->
-      <div style="display:flex">
-        <canvas id="mc-left" style="display:block;flex-shrink:0"></canvas>
-        <canvas id="mc" role="img" aria-label="Colley Matrix heatmap showing game connections between D1 baseball teams" style="display:block"></canvas>
-      </div>
-    </div>
+    <canvas id="mc" role="img" aria-label="Colley Matrix heatmap — scroll to zoom, drag to pan"></canvas>
   </div>
   <div class="mx-legend">
     <span>no games</span>
@@ -482,27 +472,24 @@ function initMap() {
 }
 
 // ── MATRIX ENGINE ──────────────────────────────────────────
-// Fixed 308-team conference-ordered list built from games.json real names
 const MX_TEAMS = ["Alabama","Arkansas","Auburn","Florida","Georgia","Kentucky","LSU","Mississippi St.","Missouri","Ole Miss","South Carolina","Tennessee","Texas","Texas A&M","Vanderbilt","Illinois","Indiana","Iowa","Maryland","Michigan","Michigan St.","Minnesota","Nebraska","Northwestern","Ohio St.","Oregon","Oregon St.","Penn St.","Purdue","Rutgers","Southern California","UCLA","Washington","Boston College","California","Clemson","Duke","Florida St.","Georgia Tech","Louisville","Miami (FL)","NC State","North Carolina","Notre Dame","Pittsburgh","Stanford","Virginia","Virginia Tech","Wake Forest","Arizona","Arizona St.","BYU","Baylor","Cincinnati","Houston","Kansas","Kansas St.","Oklahoma","Oklahoma St.","TCU","Texas Tech","UCF","Utah","West Virginia","App State","Arkansas St.","Coastal Carolina","Ga. Southern","Georgia St.","James Madison","Little Rock","Louisiana","Marshall","Old Dominion","South Alabama","Southern Miss.","Texas St.","Troy","ULM","Air Force","Fresno St.","Nevada","New Mexico","San Diego St.","San Jose St.","UNLV","Washington St.","CSU Bakersfield","CSUN","Cal Poly","Cal St. Fullerton","Hawaii","Long Beach St.","UC Davis","UC Irvine","UC Riverside","UC San Diego","UC Santa Barbara","Gonzaga","LMU (CA)","Pacific","Pepperdine","Portland","Saint Mary's (CA)","San Diego","San Francisco","Santa Clara","Brown","Columbia","Cornell","Dartmouth","Harvard","Penn","Princeton","Yale","Charlotte","East Carolina","Fla. Atlantic","Memphis","Rice","South Fla.","Tulane","UAB","UTSA","Wichita St.","DBU","Delaware","FIU","Jacksonville St.","Kennesaw St.","Liberty","Louisiana Tech","Middle Tenn.","Missouri St.","New Mexico St.","Sam Houston","Western Ky.","Davidson","Dayton","Fordham","George Mason","George Washington","La Salle","Rhode Island","Richmond","Saint Joseph's","Saint Louis","St. Bonaventure","VCU","Col. of Charleston","Elon","Hofstra","Monmouth","Northeastern","Stony Brook","Towson","UNCW","William & Mary","Campbell","Charleston So.","Gardner-Webb","High Point","Longwood","Presbyterian","Radford","UNC Asheville","USC Upstate","Winthrop","ETSU","Mercer","Samford","The Citadel","UNC Greensboro","VMI","Western Caro.","Wofford","Eastern Ill.","Morehead St.","Murray St.","SIUE","Southeast Mo. St.","Southern Ind.","Tennessee Tech","UT Martin","Alabama A&M","Alabama St.","Alcorn","Ark.-Pine Bluff","Bethune-Cookman","Florida A&M","Grambling","Jackson St.","Mississippi Val.","Prairie View","Southern U.","Texas Southern","Abilene Christian","California Baptist","Grand Canyon","Sacramento St.","Seattle U","Tarleton St.","UT Arlington","UTRGV","Utah Tech","Utah Valley","Belmont","Bradley","Evansville","Illinois St.","Indiana St.","Southern Ill.","UIC","Valparaiso","Akron","Ball St.","Bowling Green","Central Mich.","Eastern Mich.","Kent St.","Massachusetts","Miami (OH)","NIU","Ohio","Toledo","Western Mich.","Coppin St.","Delaware St.","N.C. A&T","Norfolk St.","UMES","Mercyhurst","Milwaukee","Northern Ky.","Oakland","Wright St.","Youngstown St.","Army West Point","Bucknell","Holy Cross","Lafayette","Lehigh","Navy","Binghamton","Bryant","Central Conn. St.","FDU","LIU","Maine","Merrimack","Mount St. Mary's","NJIT","Sacred Heart","Stonehill","UAlbany","UMBC","UMass Lowell","Wagner","Austin Peay","Bellarmine","Central Ark.","Eastern Ky.","FGCU","Jacksonville","Lindenwood","Lipscomb","North Ala.","North Florida","Queens (NC)","Stetson","Butler","Creighton","Georgetown","Seton Hall","St. John's (NY)","UConn","Villanova","Xavier","North Dakota St.","Omaha","Oral Roberts","South Dakota St.","St. Thomas (MN)","Western Ill.","A&M-Corpus Christi","Houston Christian","Lamar University","McNeese","New Orleans","Nicholls","Northwestern St.","SFA","Southeastern La.","UIW","West Ga.","Canisius","Fairfield","Iona","Le Moyne","Manhattan","Marist","Niagara","Quinnipiac","Rider","Saint Peter's","Siena","Northern Colo.","New Haven"];
 
 const MX_CONF_GROUPS = [{"n":"SEC","s":0,"z":15},{"n":"Big Ten","s":15,"z":18},{"n":"ACC","s":33,"z":16},{"n":"Big 12","s":49,"z":15},{"n":"Sun Belt","s":64,"z":15},{"n":"MWC","s":79,"z":8},{"n":"Big West","s":87,"z":11},{"n":"WCC","s":98,"z":9},{"n":"Ivy","s":107,"z":8},{"n":"American","s":115,"z":10},{"n":"CUSA","s":125,"z":12},{"n":"A-10","s":137,"z":12},{"n":"CAA","s":149,"z":9},{"n":"Big South","s":158,"z":10},{"n":"SoCon","s":168,"z":8},{"n":"OVC","s":176,"z":8},{"n":"SWAC","s":184,"z":12},{"n":"WAC","s":196,"z":10},{"n":"MVC","s":206,"z":8},{"n":"MAC","s":214,"z":12},{"n":"MEAC","s":226,"z":5},{"n":"Horizon","s":231,"z":6},{"n":"Patriot","s":237,"z":6},{"n":"NEC","s":243,"z":15},{"n":"ASUN","s":258,"z":12},{"n":"Big East","s":270,"z":8},{"n":"Summit","s":278,"z":6},{"n":"Southland","s":284,"z":11},{"n":"MAAC","s":295,"z":11},{"n":"Big Sky","s":306,"z":1},{"n":"Other","s":307,"z":1}];
 
 const NT = 308;
-const CELL = 8;
-const LABEL_W = 180; // px for row/col labels
-const MXSZ = NT * CELL;
-
-// Build team index from the fixed list (used for rendering order)
+const BASE_CELL = 8; // base cell size at zoom=1 — full matrix = 2464px
 const MX_TEAM_IDX = {};
 MX_TEAMS.forEach((t, i) => MX_TEAM_IDX[t] = i);
 
-// All game data loaded once, matrix rebuilt on every slider tick
-let TL_GAMES = [];
-let TL_DATES = [];
-let TL_IDX = 0;
-let mxData = null;      // Uint8Array[NT][NT] — game counts between fixed team indices
-let mxRatings = [];     // ratings[] aligned to MX_TEAMS order
-let selTeam = -1;
+// State
+let TL_GAMES = [], TL_DATES = [], TL_IDX = 0;
+let mxData = null, mxRatings = [], selTeam = -1;
+
+// Zoom/pan state
+let zoom = 0;        // will be set to fit-to-screen on init
+let panX = 0, panY = 0;
+const ZOOM_MIN = 0.05, ZOOM_MAX = 8;
+const LABEL_MARGIN = 160; // reserved px for axis labels in screen space
 
 // Gaussian elimination
 function gaussSolve(A, b) {
@@ -526,39 +513,28 @@ function gaussSolve(A, b) {
   return x;
 }
 
-// Compute slice: fixed 308 matrix, only solve for 10+ game teams
 function computeSlice(dateIdx) {
   const cutoffDate = TL_DATES[dateIdx];
   const games = TL_GAMES.filter(g => g.date <= cutoffDate);
-
-  // Count games per team (in MX_TEAMS order only)
   const gameCounts = new Int32Array(NT);
   for (const g of games) {
     const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
     if (wi !== undefined && li !== undefined) { gameCounts[wi]++; gameCounts[li]++; }
   }
-
-  // Fixed 308 connection matrix for rendering
   const mxMatrix = Array.from({length: NT}, () => new Uint8Array(NT));
   for (const g of games) {
     const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
     if (wi !== undefined && li !== undefined) { mxMatrix[wi][li]++; mxMatrix[li][wi]++; }
   }
-
-  // Solve Colley only for qualified teams (10+ games), map results back to MX_TEAMS indices
   const qualIdx = MX_TEAMS.map((_, i) => i).filter(i => gameCounts[i] >= 10);
   const qn = qualIdx.length;
-  const ratings = new Float64Array(NT); // 0 for unqualified
-
+  const ratings = new Float64Array(NT);
   if (qn >= 2) {
-    // Build sub-index for qualified teams
     const subIdx = {};
     qualIdx.forEach((gi, si) => subIdx[gi] = si);
-
     const C = Array.from({length: qn}, () => new Array(qn).fill(0));
     const b = new Array(qn).fill(1);
     for (let si = 0; si < qn; si++) C[si][si] = 2;
-
     for (const g of games) {
       const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
       if (wi === undefined || li === undefined) continue;
@@ -569,221 +545,266 @@ function computeSlice(dateIdx) {
       C[swi][sli] -= wt; C[sli][swi] -= wt;
       b[swi] += wt * 0.5; b[sli] -= wt * 0.5;
     }
-
     const r = gaussSolve(C, b);
     qualIdx.forEach((gi, si) => ratings[gi] = r[si]);
   }
-
-  const activeCount = qualIdx.length;
-  return { mxMatrix, ratings, gameCount: games.length, teamCount: activeCount };
+  return { mxMatrix, ratings, gameCount: games.length, teamCount: qualIdx.length };
 }
 
-// Render the main matrix canvas (matrix cells only, no labels)
-function drawMx(mxMatrix, hl) {
+// ── RENDER ──────────────────────────────────────────────────
+function render() {
+  const wrap = document.getElementById("cwrap");
   const cv = document.getElementById("mc");
-  cv.width = MXSZ; cv.height = MXSZ;
-  cv.style.width = MXSZ + "px"; cv.style.height = MXSZ + "px";
-  const ctx = cv.getContext("2d");
-  const img = ctx.createImageData(MXSZ, MXSZ);
-  const d = img.data;
+  const W = wrap.clientWidth, H = wrap.clientHeight;
+  cv.width = W; cv.height = H;
+  cv.style.width = W + "px"; cv.style.height = H + "px";
+  if (!mxData) return;
 
-  for (let i = 0; i < NT; i++) {
-    for (let j = 0; j < NT; j++) {
-      const isHL = hl >= 0 && (i === hl || j === hl);
+  const ctx = cv.getContext("2d");
+  ctx.fillStyle = "#0a0a0a";
+  ctx.fillRect(0, 0, W, H);
+
+  const cellPx = BASE_CELL * zoom;               // screen pixels per team cell
+  const matW = NT * cellPx;                       // total matrix width in screen px
+  const originX = LABEL_MARGIN + panX;            // screen x where matrix starts
+  const originY = LABEL_MARGIN + panY;            // screen y where matrix starts
+
+  // Clamp visible team range for perf
+  const j0 = Math.max(0, Math.floor(-panX / cellPx));
+  const j1 = Math.min(NT, Math.ceil((W - originX) / cellPx) + 1);
+  const i0 = Math.max(0, Math.floor(-panY / cellPx));
+  const i1 = Math.min(NT, Math.ceil((H - originY) / cellPx) + 1);
+
+  // ── Draw matrix cells ──
+  for (let i = i0; i < i1; i++) {
+    for (let j = j0; j < j1; j++) {
+      const sx = originX + j * cellPx;
+      const sy = originY + i * cellPx;
       const isDiag = i === j;
+      const isHL = selTeam >= 0 && (i === selTeam || j === selTeam);
       let r = 0, g = 0, bl = 0;
       if (isDiag) {
-        if (isHL || hl < 0) { g = 255; bl = 85; }
+        if (isHL || selTeam < 0) { g = 255; bl = 85; }
         else { g = 80; bl = 27; }
-      } else if (mxMatrix[i][j] > 0) {
-        const intensity = Math.min(1, mxMatrix[i][j] / 3);
-        const base = isHL ? 220 : (hl >= 0 ? 60 : 180);
+      } else if (mxData[i][j] > 0) {
+        const intensity = Math.min(1, mxData[i][j] / 3);
+        const base = isHL ? 220 : (selTeam >= 0 ? 60 : 180);
         g = Math.floor(base * intensity + 30);
         r = Math.floor(g * 0.05); bl = Math.floor(g * 0.15);
-        if (hl >= 0 && !isHL) { g = Math.floor(g * 0.3); r = Math.floor(r * 0.3); bl = Math.floor(bl * 0.3); }
+        if (selTeam >= 0 && !isHL) { g = Math.floor(g*0.3); r = Math.floor(r*0.3); bl = Math.floor(bl*0.3); }
       } else {
         if (isHL) { g = 40; bl = 15; } else { r = 10; g = 10; bl = 10; }
-        if (hl >= 0 && !isHL) { r = 5; g = 5; bl = 5; }
+        if (selTeam >= 0 && !isHL) { r = 5; g = 5; bl = 5; }
       }
-      for (let cy = 0; cy < CELL; cy++) for (let cx = 0; cx < CELL; cx++) {
-        const px = ((i * CELL + cy) * MXSZ + (j * CELL + cx)) * 4;
-        d[px] = r; d[px+1] = g; d[px+2] = bl; d[px+3] = 255;
-      }
+      ctx.fillStyle = `rgb(${r},${g},${bl})`;
+      ctx.fillRect(sx, sy, cellPx + 0.5, cellPx + 0.5);
     }
   }
-  ctx.putImageData(img, 0, 0);
 
-  // Draw conference boundary lines and bold labels on top
+  // ── Conference blocks + labels on matrix ──
   MX_CONF_GROUPS.forEach(cg => {
-    const x = cg.s * CELL, w = cg.z * CELL;
-    if (x + w > MXSZ) return;
-    // Border line
-    ctx.strokeStyle = "#00ff5560";
+    const sx = originX + cg.s * cellPx;
+    const sy = originY + cg.s * cellPx;
+    const sw = cg.z * cellPx;
+    if (sx + sw < LABEL_MARGIN || sy + sw < LABEL_MARGIN || sx > W || sy > H) return;
+    ctx.strokeStyle = "#00ff5550";
     ctx.lineWidth = 1;
-    ctx.strokeRect(x + 0.5, x + 0.5, w - 1, w - 1);
-    // Conference label — bold, bright, with dark background so it reads over dots
-    if (w > 24) {
-      const label = cg.n;
-      const fontSize = Math.min(13, Math.max(9, w * 0.12));
-      ctx.font = `bold ${fontSize}px 'Courier Prime', 'Courier New', monospace`;
+    ctx.strokeRect(sx + 0.5, sy + 0.5, sw - 1, sw - 1);
+    // Conf label on matrix — always visible, scales with zoom
+    if (sw > 12) {
+      const fontSize = Math.min(14, Math.max(7, sw * 0.13));
+      ctx.font = `bold ${fontSize}px 'Courier Prime','Courier New',monospace`;
       ctx.textAlign = "center";
-      const cx = x + w / 2;
-      const cy = x + w / 2 + fontSize * 0.35;
-      const tw = ctx.measureText(label).width;
-      const pad = 4;
-      // Dark backing rect
-      ctx.fillStyle = "#0a0a0aCC";
-      ctx.fillRect(cx - tw / 2 - pad, cy - fontSize - 1, tw + pad * 2, fontSize + 6);
-      // Bright green text
-      ctx.fillStyle = "#00ff55";
-      ctx.fillText(label, cx, cy);
+      const cx2 = sx + sw / 2, cy2 = sy + sw / 2 + fontSize * 0.35;
+      if (cx2 > LABEL_MARGIN && cy2 > LABEL_MARGIN && cx2 < W && cy2 < H) {
+        const tw = ctx.measureText(cg.n).width;
+        ctx.fillStyle = "#0a0a0aCC";
+        ctx.fillRect(cx2 - tw/2 - 4, cy2 - fontSize - 1, tw + 8, fontSize + 6);
+        ctx.fillStyle = "#00ff55";
+        ctx.fillText(cg.n, cx2, cy2);
+      }
     }
   });
-}
 
-// Draw top axis labels (column headers)
-function drawTopLabels(hl) {
-  const cv = document.getElementById("mc-top");
-  cv.width = MXSZ; cv.height = LABEL_W;
-  cv.style.width = MXSZ + "px"; cv.style.height = LABEL_W + "px";
-  const ctx = cv.getContext("2d");
-  ctx.clearRect(0, 0, MXSZ, LABEL_W);
+  // ── Left axis (row labels) ──
   ctx.save();
-  ctx.font = "11px 'Courier Prime', 'Courier New', monospace";
-  for (let j = 0; j < NT; j++) {
-    const x = j * CELL + CELL / 2;
-    const isHL = hl >= 0 && j === hl;
-    ctx.fillStyle = isHL ? "#00ff55" : (hl >= 0 ? "#003311" : "#007722");
-    ctx.save();
-    ctx.translate(x, LABEL_W - 4);
-    ctx.rotate(-Math.PI / 2);
-    ctx.textAlign = "left";
-    ctx.fillText(MX_TEAMS[j], 0, 0);
-    ctx.restore();
-  }
-  ctx.restore();
-}
+  ctx.beginPath();
+  ctx.rect(0, LABEL_MARGIN, LABEL_MARGIN, H - LABEL_MARGIN);
+  ctx.clip();
+  ctx.fillStyle = "#0a0a0a";
+  ctx.fillRect(0, LABEL_MARGIN, LABEL_MARGIN, H - LABEL_MARGIN);
 
-// Draw left axis labels (row headers)
-function drawLeftLabels(hl) {
-  const cv = document.getElementById("mc-left");
-  cv.width = LABEL_W; cv.height = MXSZ;
-  cv.style.width = LABEL_W + "px"; cv.style.height = MXSZ + "px";
-  const ctx = cv.getContext("2d");
-  ctx.clearRect(0, 0, LABEL_W, MXSZ);
-  ctx.font = "11px 'Courier Prime', 'Courier New', monospace";
-  ctx.textAlign = "right";
-  for (let i = 0; i < NT; i++) {
-    const y = i * CELL + CELL / 2 + 4;
-    const isHL = hl >= 0 && i === hl;
-    ctx.fillStyle = isHL ? "#00ff55" : (hl >= 0 ? "#003311" : "#007722");
-    ctx.fillText(MX_TEAMS[i], LABEL_W - 6, y);
-  }
-}
-
-// Full redraw: labels + matrix
-function redrawAll(hl) {
-  drawMx(mxData, hl);
-  drawTopLabels(hl);
-  drawLeftLabels(hl);
-}
-
-// Update everything when slider changes
-let raf = null;
-function onSliderChange() {
-  if (raf) cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => {
-    TL_IDX = parseInt(document.getElementById("tl-slider").value);
-    const result = computeSlice(TL_IDX);
-    if (!result) return;
-
-    mxData = result.mxMatrix;
-    mxRatings = result.ratings;
-    selTeam = -1;
-    document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-
-    redrawAll(-1);
-
-    // Update stats
-    const date = TL_DATES[TL_IDX];
-    document.getElementById("tl-date-display").textContent = date;
-    document.getElementById("tl-day-num").textContent = TL_IDX + 1;
-    document.getElementById("tl-games-to-date").textContent = result.gameCount.toLocaleString();
-    document.getElementById("tl-teams-active").textContent = result.teamCount;
-    document.getElementById("mx-dim").textContent = `${NT} × ${NT}`;
-    document.getElementById("mx-game-count").textContent = result.gameCount.toLocaleString();
-    document.getElementById("mx-team-count").textContent = result.teamCount;
-    document.getElementById("mx-cells").textContent = (NT * NT).toLocaleString();
-
-    // Top ranked team
-    let topTeam = "--", topRating = -Infinity;
-    for (let i = 0; i < NT; i++) { if (mxRatings[i] > topRating) { topRating = mxRatings[i]; topTeam = MX_TEAMS[i]; } }
-    document.getElementById("tl-top1").textContent = topTeam;
-
-    document.getElementById("sel-info").innerHTML = "// drag the slider to rewind the season · hover any cell · click to highlight a team's connections";
-  });
-}
-
-// Initialize matrix tab
-async function initMatrix() {
-  try {
-    const res = await fetch("games.json");
-    TL_GAMES = await res.json();
-  } catch(e) {
-    document.getElementById("tl-loading").textContent = "// error: could not load games.json";
-    return;
-  }
-
-  TL_DATES = [...new Set(TL_GAMES.map(g => g.date))].sort();
-  const lastIdx = TL_DATES.length - 1;
-
-  document.getElementById("tl-loading").style.display = "none";
-  document.getElementById("tl-wrap").style.display = "block";
-
-  const slider = document.getElementById("tl-slider");
-  slider.max = lastIdx;
-  slider.value = lastIdx;
-  document.getElementById("tl-end-date").textContent = TL_DATES[lastIdx];
-  document.getElementById("tl-total-days").textContent = TL_DATES.length;
-
-  // Legend bar
-  const bar = document.getElementById("lbar");
-  if (!bar.children.length) {
-    for (let i = 0; i < 20; i++) {
-      const s = document.createElement("div");
-      s.style.flex = "1";
-      s.style.background = `rgb(${Math.floor(i*0.5)},${Math.floor(i*11)},${Math.floor(i*3)})`;
-      bar.appendChild(s);
+  if (cellPx >= 5) {
+    // Show individual team names
+    ctx.font = `${Math.min(12, Math.max(7, cellPx * 0.7))}px 'Courier Prime','Courier New',monospace`;
+    ctx.textAlign = "right";
+    for (let i = i0; i < i1; i++) {
+      const sy = originY + i * cellPx + cellPx / 2 + 3;
+      if (sy < LABEL_MARGIN || sy > H) continue;
+      const isHL = selTeam >= 0 && i === selTeam;
+      ctx.fillStyle = isHL ? "#00ff55" : (selTeam >= 0 ? "#003311" : "#007722");
+      ctx.fillText(MX_TEAMS[i], LABEL_MARGIN - 5, sy);
     }
-  }
-
-  // Build conf label buttons
-  const cl = document.getElementById("conf-labels");
-  if (!cl.children.length) {
-    MX_CONF_GROUPS.forEach((cg, idx) => {
-      const btn = document.createElement("div"); btn.className = "clabel"; btn.textContent = cg.n;
-      btn.onclick = () => {
-        document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl")); btn.classList.add("hl");
-        const mid = Math.floor(cg.s + cg.z / 2); selTeam = mid; redrawAll(selTeam);
-        document.getElementById("sel-info").innerHTML = `// highlighted: <span>${cg.n}</span> (${cg.z} teams) — showing all connections`;
-      };
-      cl.appendChild(btn);
+  } else {
+    // Show conference names on left axis
+    ctx.textAlign = "right";
+    MX_CONF_GROUPS.forEach(cg => {
+      const sy = originY + cg.s * cellPx;
+      const sh = cg.z * cellPx;
+      const midY = sy + sh / 2 + 4;
+      if (midY < LABEL_MARGIN || midY > H) return;
+      const fontSize = Math.min(11, Math.max(7, sh * 0.18));
+      ctx.font = `bold ${fontSize}px 'Courier Prime','Courier New',monospace`;
+      ctx.fillStyle = "#00cc44";
+      ctx.fillText(cg.n, LABEL_MARGIN - 5, midY);
     });
   }
+  ctx.restore();
 
-  slider.addEventListener("input", onSliderChange);
+  // ── Top axis (column labels) ──
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(LABEL_MARGIN, 0, W - LABEL_MARGIN, LABEL_MARGIN);
+  ctx.clip();
+  ctx.fillStyle = "#0a0a0a";
+  ctx.fillRect(LABEL_MARGIN, 0, W - LABEL_MARGIN, LABEL_MARGIN);
 
-  // Canvas mouse events — offset by LABEL_W for left label column
+  if (cellPx >= 5) {
+    // Show individual team names rotated
+    const fontSize = Math.min(12, Math.max(7, cellPx * 0.7));
+    ctx.font = `${fontSize}px 'Courier Prime','Courier New',monospace`;
+    for (let j = j0; j < j1; j++) {
+      const sx = originX + j * cellPx + cellPx / 2;
+      if (sx < LABEL_MARGIN || sx > W) continue;
+      const isHL = selTeam >= 0 && j === selTeam;
+      ctx.fillStyle = isHL ? "#00ff55" : (selTeam >= 0 ? "#003311" : "#007722");
+      ctx.save();
+      ctx.translate(sx, LABEL_MARGIN - 5);
+      ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = "left";
+      ctx.fillText(MX_TEAMS[j], 0, 0);
+      ctx.restore();
+    }
+  } else {
+    // Show conference names on top axis
+    MX_CONF_GROUPS.forEach(cg => {
+      const sx = originX + cg.s * cellPx;
+      const sw = cg.z * cellPx;
+      const midX = sx + sw / 2;
+      if (midX < LABEL_MARGIN || midX > W) return;
+      const fontSize = Math.min(11, Math.max(7, sw * 0.18));
+      ctx.font = `bold ${fontSize}px 'Courier Prime','Courier New',monospace`;
+      ctx.fillStyle = "#00cc44";
+      ctx.save();
+      ctx.translate(midX, LABEL_MARGIN - 5);
+      ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = "left";
+      ctx.fillText(cg.n, 0, 0);
+      ctx.restore();
+    });
+  }
+  ctx.restore();
+
+  // ── Corner block ──
+  ctx.fillStyle = "#0a0a0a";
+  ctx.fillRect(0, 0, LABEL_MARGIN, LABEL_MARGIN);
+
+  // ── Zoom hint ──
+  ctx.font = "10px 'Courier Prime','Courier New',monospace";
+  ctx.fillStyle = "#003311";
+  ctx.textAlign = "left";
+  ctx.fillText(`zoom: ${zoom.toFixed(2)}x  |  scroll to zoom · drag to pan`, LABEL_MARGIN + 6, 14);
+}
+
+// ── ZOOM / PAN EVENTS ──────────────────────────────────────
+function initZoomPan() {
+  const wrap = document.getElementById("cwrap");
   const cv = document.getElementById("mc");
-  const tip = document.getElementById("tip");
 
-  cv.addEventListener("mousemove", e => {
+  // Mouse wheel zoom
+  wrap.addEventListener("wheel", e => {
+    e.preventDefault();
+    const rect = wrap.getBoundingClientRect();
+    const mx = e.clientX - rect.left - LABEL_MARGIN;
+    const my = e.clientY - rect.top  - LABEL_MARGIN;
+    const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+    const newZoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoom * factor));
+    // Zoom toward mouse position
+    panX = mx - (mx - panX) * (newZoom / zoom);
+    panY = my - (my - panY) * (newZoom / zoom);
+    zoom = newZoom;
+    render();
+  }, { passive: false });
+
+  // Drag to pan
+  let dragging = false, dragStartX = 0, dragStartY = 0, panStartX = 0, panStartY = 0;
+  wrap.addEventListener("mousedown", e => {
+    dragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
+    panStartX = panX; panStartY = panY;
+    wrap.classList.add("grabbing");
+  });
+  window.addEventListener("mousemove", e => {
+    if (!dragging) return;
+    panX = panStartX + (e.clientX - dragStartX);
+    panY = panStartY + (e.clientY - dragStartY);
+    render();
+  });
+  window.addEventListener("mouseup", () => { dragging = false; wrap.classList.remove("grabbing"); });
+
+  // Touch pinch/pan
+  let lastDist = 0, lastTX = 0, lastTY = 0;
+  wrap.addEventListener("touchstart", e => {
+    if (e.touches.length === 2) { lastDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); }
+    if (e.touches.length === 1) { lastTX = e.touches[0].clientX; lastTY = e.touches[0].clientY; }
+  }, { passive: true });
+  wrap.addEventListener("touchmove", e => {
+    if (e.touches.length === 2) {
+      const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      const factor = dist / lastDist;
+      zoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoom * factor));
+      lastDist = dist; render();
+    } else if (e.touches.length === 1) {
+      panX += e.touches[0].clientX - lastTX;
+      panY += e.touches[0].clientY - lastTY;
+      lastTX = e.touches[0].clientX; lastTY = e.touches[0].clientY; render();
+    }
+  }, { passive: true });
+
+  // Click to select team
+  wrap.addEventListener("click", e => {
     if (!mxData) return;
-    const rect = cv.getBoundingClientRect();
-    const sx = cv.width / rect.width, sy = cv.height / rect.height;
-    const px = (e.clientX - rect.left) * sx, py = (e.clientY - rect.top) * sy;
-    const j = Math.floor(px / CELL), i = Math.floor(py / CELL);
-    if (i < 0 || i >= NT || j < 0 || j >= NT) { tip.style.display = "none"; return; }
+    const rect = wrap.getBoundingClientRect();
+    const sx = e.clientX - rect.left - LABEL_MARGIN - panX;
+    const sy = e.clientY - rect.top  - LABEL_MARGIN - panY;
+    const j = Math.floor(sx / (BASE_CELL * zoom));
+    const i = Math.floor(sy / (BASE_CELL * zoom));
+    if (i < 0 || i >= NT || j < 0 || j >= NT) { selTeam = -1; document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl")); render(); return; }
+    if (selTeam === i) {
+      selTeam = -1;
+      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
+      document.getElementById("sel-info").innerHTML = "// scroll to zoom · drag to pan · click any cell to highlight that team";
+    } else {
+      selTeam = i;
+      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
+      const confIdx = MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z);
+      if (confIdx >= 0) document.querySelectorAll(".clabel")[confIdx]?.classList.add("hl");
+      const gp = Array.from(mxData[i]).filter(v => v > 0).length;
+      const rating = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "not yet qualified";
+      document.getElementById("sel-info").innerHTML = `// selected: <span>${MX_TEAMS[i]}</span> (${MX_CONF_GROUPS[MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z)]?.n || "?"})) — <span>${gp}</span> opponents · rating: <span>${rating}</span> · click again to deselect`;
+    }
+    render();
+  });
+
+  // Hover tooltip
+  const tip = document.getElementById("tip");
+  wrap.addEventListener("mousemove", e => {
+    if (!mxData || document.getElementById("cwrap").classList.contains("grabbing")) { tip.style.display = "none"; return; }
+    const rect = wrap.getBoundingClientRect();
+    const sx = e.clientX - rect.left - LABEL_MARGIN - panX;
+    const sy = e.clientY - rect.top  - LABEL_MARGIN - panY;
+    const j = Math.floor(sx / (BASE_CELL * zoom));
+    const i = Math.floor(sy / (BASE_CELL * zoom));
+    if (i < 0 || i >= NT || j < 0 || j >= NT || e.clientX - rect.left < LABEL_MARGIN || e.clientY - rect.top < LABEL_MARGIN) { tip.style.display = "none"; return; }
     const tA = MX_TEAMS[i], tB = MX_TEAMS[j];
     const hasGame = mxData[i][j] > 0;
     const rA = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "—";
@@ -796,32 +817,101 @@ async function initMatrix() {
     tip.style.left = (e.clientX + 14) + "px";
     tip.style.top  = (e.clientY - 10) + "px";
   });
+  wrap.addEventListener("mouseleave", () => { tip.style.display = "none"; });
+}
 
-  cv.addEventListener("mouseleave", () => { tip.style.display = "none"; });
-
-  cv.addEventListener("click", e => {
-    if (!mxData) return;
-    const rect = cv.getBoundingClientRect();
-    const sx = cv.width / rect.width, sy = cv.height / rect.height;
-    const px = (e.clientX - rect.left) * sx, py = (e.clientY - rect.top) * sy;
-    const j = Math.floor(px / CELL), i = Math.floor(py / CELL);
-    if (i < 0 || i >= NT || j < 0 || j >= NT) return;
-    if (selTeam === i) {
-      selTeam = -1;
-      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-      redrawAll(-1);
-      document.getElementById("sel-info").innerHTML = "// drag the slider to rewind the season · hover any cell · click to highlight a team's connections";
-    } else {
-      selTeam = i;
-      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-      const confIdx = MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z);
-      if (confIdx >= 0) document.querySelectorAll(".clabel")[confIdx]?.classList.add("hl");
-      redrawAll(selTeam);
-      const gp = Array.from(mxData[i]).filter(v => v > 0).length;
-      const rating = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "not yet qualified";
-      document.getElementById("sel-info").innerHTML = `// selected: <span>${MX_TEAMS[i]}</span> (${MX_CONF_GROUPS[confIdx]?.n || "?"}) — <span>${gp}</span> opponents · rating: <span>${rating}</span> · click again to deselect`;
-    }
+// Update on slider change
+let raf = null;
+function onSliderChange() {
+  if (raf) cancelAnimationFrame(raf);
+  raf = requestAnimationFrame(() => {
+    TL_IDX = parseInt(document.getElementById("tl-slider").value);
+    const result = computeSlice(TL_IDX);
+    if (!result) return;
+    mxData = result.mxMatrix;
+    mxRatings = result.ratings;
+    selTeam = -1;
+    document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
+    render();
+    const date = TL_DATES[TL_IDX];
+    document.getElementById("tl-date-display").textContent = date;
+    document.getElementById("tl-day-num").textContent = TL_IDX + 1;
+    document.getElementById("tl-games-to-date").textContent = result.gameCount.toLocaleString();
+    document.getElementById("tl-teams-active").textContent = result.teamCount;
+    document.getElementById("mx-dim").textContent = `${NT} × ${NT}`;
+    document.getElementById("mx-game-count").textContent = result.gameCount.toLocaleString();
+    document.getElementById("mx-team-count").textContent = result.teamCount;
+    document.getElementById("mx-cells").textContent = (NT * NT).toLocaleString();
+    let topTeam = "--", topRating = -Infinity;
+    for (let i = 0; i < NT; i++) { if (mxRatings[i] > topRating) { topRating = mxRatings[i]; topTeam = MX_TEAMS[i]; } }
+    document.getElementById("tl-top1").textContent = topTeam;
+    document.getElementById("sel-info").innerHTML = "// scroll to zoom · drag to pan · click any cell to highlight that team";
   });
+}
+
+async function initMatrix() {
+  try {
+    const res = await fetch("games.json");
+    TL_GAMES = await res.json();
+  } catch(e) {
+    document.getElementById("tl-loading").textContent = "// error: could not load games.json";
+    return;
+  }
+  TL_DATES = [...new Set(TL_GAMES.map(g => g.date))].sort();
+  const lastIdx = TL_DATES.length - 1;
+  document.getElementById("tl-loading").style.display = "none";
+  document.getElementById("tl-wrap").style.display = "block";
+  const slider = document.getElementById("tl-slider");
+  slider.max = lastIdx; slider.value = lastIdx;
+  document.getElementById("tl-end-date").textContent = TL_DATES[lastIdx];
+  document.getElementById("tl-total-days").textContent = TL_DATES.length;
+
+  // Legend bar
+  const bar = document.getElementById("lbar");
+  if (!bar.children.length) {
+    for (let i = 0; i < 20; i++) {
+      const s = document.createElement("div"); s.style.flex = "1";
+      s.style.background = `rgb(${Math.floor(i*0.5)},${Math.floor(i*11)},${Math.floor(i*3)})`;
+      bar.appendChild(s);
+    }
+  }
+
+  // Conf label buttons
+  const cl = document.getElementById("conf-labels");
+  if (!cl.children.length) {
+    MX_CONF_GROUPS.forEach((cg, idx) => {
+      const btn = document.createElement("div"); btn.className = "clabel"; btn.textContent = cg.n;
+      btn.onclick = () => {
+        document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl")); btn.classList.add("hl");
+        // Pan to center that conference block
+        const wrap = document.getElementById("cwrap");
+        const W = wrap.clientWidth, H = wrap.clientHeight;
+        const cellPx = BASE_CELL * zoom;
+        const blockCenterX = (cg.s + cg.z / 2) * cellPx;
+        const blockCenterY = (cg.s + cg.z / 2) * cellPx;
+        panX = (W - LABEL_MARGIN) / 2 - blockCenterX;
+        panY = (H - LABEL_MARGIN) / 2 - blockCenterY;
+        selTeam = cg.s + Math.floor(cg.z / 2);
+        render();
+        document.getElementById("sel-info").innerHTML = `// highlighted: <span>${cg.n}</span> (${cg.z} teams)`;
+      };
+      cl.appendChild(btn);
+    });
+  }
+
+  slider.addEventListener("input", onSliderChange);
+
+  // Set initial zoom to fit full matrix in viewport
+  const wrap = document.getElementById("cwrap");
+  const fitW = (wrap.clientWidth  - LABEL_MARGIN) / (NT * BASE_CELL);
+  const fitH = (wrap.clientHeight - LABEL_MARGIN) / (NT * BASE_CELL);
+  zoom = Math.min(fitW, fitH, 1);
+  panX = 0; panY = 0;
+
+  initZoomPan();
+
+  // Re-render on window resize
+  window.addEventListener("resize", () => { render(); });
 
   TL_IDX = lastIdx;
   onSliderChange();
