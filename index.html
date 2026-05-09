@@ -13,7 +13,7 @@
     .logo{font-size:20px;font-weight:700;color:var(--green-b);letter-spacing:0.04em}
     .tagline{font-size:11px;color:var(--green-x);margin-top:2px;letter-spacing:0.06em}
     .header-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px}
-    .meta{font-size:11px;color:var(--green-x);letter-spacing:0.04em}
+    .meta{font-size:11px;color:var(--green-x);letter-spacing:0.04em;min-width:0}
     .meta span{color:var(--green)}
     .nav{display:flex;gap:0}
     .nav-btn{font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:4px 12px;border:1px solid var(--border);background:transparent;color:var(--green-d);cursor:pointer;letter-spacing:0.08em;transition:all 0.1s}
@@ -58,7 +58,7 @@
     .conf-btn:hover{color:var(--green);border-color:var(--green-d)}
     .conf-btn.active{color:var(--green-b);border-color:var(--green);background:var(--bg3)}
     .table-wrap{overflow-x:auto}
-    table{width:100%;border-collapse:collapse;min-width:520px}
+    table{width:100%;border-collapse:collapse;min-width:400px}
     thead tr{border-bottom:1px solid var(--border)}
     thead th{font-size:10px;letter-spacing:0.14em;color:var(--green-d);font-weight:normal;padding:8px 20px;text-align:left;position:sticky;top:0;background:var(--bg)}
     thead th.r{text-align:right}
@@ -82,7 +82,7 @@
     #map{height:calc(100vh - 120px);width:100%}
 
     /* ABOUT TAB */
-    #about-panel{display:none;padding:2rem 20px;max-width:800px}
+    #about-panel{display:none;padding:1.5rem 20px;max-width:800px}
     .ey{font-size:10px;letter-spacing:0.16em;color:var(--green-x);margin-bottom:5px;margin-top:1.5rem}
     .st{font-size:17px;font-weight:700;color:var(--green-b);margin-bottom:10px}
     .bt{font-size:13px;color:#009933;line-height:1.85;margin-bottom:1rem}
@@ -126,6 +126,57 @@
     .rpi-row .dot{margin-top:4px;flex-shrink:0;width:6px;height:6px;border-radius:50%}
 
     footer{padding:10px 20px;border-top:1px solid var(--border2);font-size:10px;color:var(--green-x);letter-spacing:0.08em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+
+    /* ── MOBILE ── */
+    @media(max-width:600px){
+      /* header */
+      header{padding:10px 14px 8px}
+      .logo{font-size:16px}
+      .tagline{display:none}
+      .header-bottom{margin-top:6px;gap:6px}
+      .meta{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100vw - 160px)}
+      .nav-btn{font-size:10px;padding:4px 8px}
+
+      /* about tab */
+      #about-panel{padding:1.25rem 14px}
+      .fgrid{grid-template-columns:1fr}
+      .wbox{grid-template-columns:1fr}
+      .rpi-grid{grid-template-columns:1fr}
+      .fbox{padding:1rem}
+      .feq{font-size:18px}
+      .st{font-size:15px}
+
+      /* xavier widget on mobile */
+      #xavier-widget div[style*="grid-template-columns:repeat(4"]{grid-template-columns:repeat(2,1fr)!important}
+
+      /* rankings tab */
+      .controls{padding:6px 10px;gap:4px}
+      input[type="text"]{width:140px;font-size:11px}
+      .conf-btn{font-size:9px;padding:3px 6px}
+      table{min-width:0;width:100%}
+      thead th{padding:6px 10px;font-size:9px}
+      td{padding:6px 10px}
+      .td-team{font-size:12px}
+      .td-conf{display:none}
+      .bar-bg{display:none}
+      .td-rating{font-size:11px}
+
+      /* matrix tab */
+      .mx-header{padding:8px 14px;flex-direction:column;align-items:flex-start}
+      .mx-info{display:none}
+      .mx-zoom-row{padding:5px 10px;gap:6px;font-size:10px;flex-wrap:wrap}
+      .zoom-btn{font-size:11px;padding:3px 8px}
+      #tl-wrap{padding:8px 14px 8px}
+      .conf-labels{padding:5px 10px 8px}
+      .clabel{font-size:8px;padding:2px 5px}
+      .sel-info{padding:5px 14px;font-size:10px}
+      .canvas-wrap{height:calc(100vh - 260px)}
+
+      /* map tab */
+      #map{height:calc(100vh - 100px)}
+
+      footer{padding:8px 14px;font-size:9px}
+    }
   </style>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
