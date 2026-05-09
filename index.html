@@ -29,11 +29,13 @@
     .mx-info span{color:var(--green)}
     .sel-info{padding:6px 20px;font-size:11px;color:var(--green-d);border-bottom:1px solid var(--border2);min-height:26px;letter-spacing:0.04em}
     .sel-info span{color:var(--green-b);font-weight:700}
-    .canvas-wrap{overflow:auto;height:calc(100vh - 260px);background:var(--bg);cursor:crosshair}
-    .mx-zoom-row{padding:6px 20px;background:var(--bg2);border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:12px;font-size:11px;color:var(--green-x)}
+    .canvas-wrap{overflow:auto;cursor:crosshair;height:calc(100vh - 300px)}
+    .mx-zoom-row{padding:5px 20px;background:var(--bg2);border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:8px;font-size:11px;color:var(--green-x)}
     .mx-zoom-row span{color:var(--green)}
-    .zoom-btn{font-family:'Courier Prime','Courier New',monospace;font-size:13px;padding:2px 10px;border:1px solid var(--border);background:transparent;color:var(--green-d);cursor:pointer;letter-spacing:0.04em}
+    .zoom-btn{font-family:'Courier Prime','Courier New',monospace;font-size:12px;padding:2px 9px;border:1px solid var(--border);background:transparent;color:var(--green-d);cursor:pointer}
     .zoom-btn:hover{color:var(--green-b);border-color:var(--green)}
+    #tl-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--green-b);border:2px solid var(--bg);cursor:pointer}
+    #tl-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--green-b);border:2px solid var(--bg);cursor:pointer}
     .mx-legend{padding:8px 20px;border-top:1px solid var(--border2);display:flex;align-items:center;gap:10px;font-size:10px;color:var(--green-x);flex-wrap:wrap}
     .lbar{display:flex;height:5px;width:160px}
     .conf-labels{padding:6px 20px 10px;display:flex;flex-wrap:wrap;gap:5px;border-bottom:1px solid var(--border2)}
@@ -43,18 +45,6 @@
     #tip .ta{color:var(--green-b);font-weight:700}
     #tip .tc{color:var(--green-x);font-size:10px;margin-top:2px}
     #tip .tg{color:var(--green-b);font-size:11px;font-weight:700;margin-top:2px}
-
-    /* TIMELINE SLIDER */
-    .tl-wrap{padding:8px 20px 10px;background:var(--bg2);border-bottom:1px solid var(--border2)}
-    .tl-row{display:flex;align-items:center;gap:12px}
-    .tl-date{font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.06em;min-width:88px}
-    .tl-slider{flex:1;-webkit-appearance:none;appearance:none;height:3px;background:var(--border);border:none;outline:none;cursor:pointer}
-    .tl-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--green-b);border:2px solid var(--bg);cursor:pointer;box-shadow:0 0 4px #00ff5540}
-    .tl-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--green-b);border:2px solid var(--bg);cursor:pointer}
-    .tl-end{font-size:11px;color:var(--green-x);min-width:88px;text-align:right}
-    .tl-stats{display:flex;gap:20px;margin-top:7px;font-size:10px;color:var(--green-x);letter-spacing:0.08em}
-    .tl-stats span{color:var(--green)}
-    .tl-loading{padding:6px 20px;font-size:11px;color:var(--green-d);letter-spacing:0.06em;background:var(--bg2);border-bottom:1px solid var(--border2)}
 
     /* RANKINGS TAB */
     #rankings-panel{display:none}
@@ -134,6 +124,7 @@
     .rpi-title{font-size:11px;font-weight:700;margin-bottom:8px;letter-spacing:0.06em}
     .rpi-row{display:flex;gap:6px;align-items:flex-start;font-size:11px;padding:3px 0;color:var(--green-d);line-height:1.5}
     .rpi-row .dot{margin-top:4px;flex-shrink:0;width:6px;height:6px;border-radius:50%}
+
     footer{padding:10px 20px;border-top:1px solid var(--border2);font-size:10px;color:var(--green-x);letter-spacing:0.08em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
   </style>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -159,40 +150,37 @@
 <div id="matrix-panel">
   <div class="mx-header">
     <div>
-      <div style="font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.06em">THE COLLEY MATRIX // <span id="mx-dim">-- × --</span></div>
-      <div style="font-size:10px;color:var(--green-x);margin-top:2px;letter-spacing:0.08em">// drag slider to rewind season · hover = see teams · click = highlight connections</div>
+      <div style="font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.06em">THE COLLEY MATRIX // <span id="mx-dim">308 × 308</span></div>
+      <div style="font-size:10px;color:var(--green-x);margin-top:2px;letter-spacing:0.08em">// drag slider to rewind season · zoom to explore · click cell to highlight team</div>
     </div>
-    <div class="mx-info">games loaded: <span id="mx-game-count">--</span> &nbsp;|&nbsp; teams qualified: <span id="mx-team-count">--</span> &nbsp;|&nbsp; cells: <span id="mx-cells">--</span></div>
+    <div class="mx-info">games: <span id="mx-game-count">--</span> &nbsp;|&nbsp; teams qualified: <span id="mx-team-count">--</span> &nbsp;|&nbsp; cells: <span id="mx-cells">--</span></div>
   </div>
-
-  <!-- TIMELINE SLIDER -->
-  <div id="tl-loading" class="tl-loading">// loading games.json...</div>
-  <div class="tl-wrap" id="tl-wrap" style="display:none">
-    <div class="tl-row">
-      <span class="tl-date" id="tl-date-display">2026-02-14</span>
-      <input type="range" class="tl-slider" id="tl-slider" min="0" value="0" step="1">
-      <span class="tl-end" id="tl-end-date">2026-05-08</span>
+  <div id="tl-loading" style="padding:6px 20px;font-size:11px;color:var(--green-d);letter-spacing:0.06em;background:var(--bg2);border-bottom:1px solid var(--border2)">// loading games.json...</div>
+  <div id="tl-wrap" style="display:none;padding:8px 20px 10px;background:var(--bg2);border-bottom:1px solid var(--border2)">
+    <div style="display:flex;align-items:center;gap:12px">
+      <span style="font-size:13px;font-weight:700;color:var(--green-b);letter-spacing:0.06em;min-width:88px" id="tl-date-display">--</span>
+      <input type="range" id="tl-slider" min="0" value="0" step="1" style="flex:1;-webkit-appearance:none;appearance:none;height:3px;background:var(--border);border:none;outline:none;cursor:pointer">
+      <span style="font-size:11px;color:var(--green-x);min-width:88px;text-align:right" id="tl-end-date">--</span>
     </div>
-    <div class="tl-stats">
-      day <span id="tl-day-num">1</span> of <span id="tl-total-days">84</span>
-      &nbsp;·&nbsp; <span id="tl-games-to-date">0</span> games played
-      &nbsp;·&nbsp; <span id="tl-teams-active">0</span> teams with 10+ games
-      &nbsp;·&nbsp; <span id="tl-top1">--</span> rated #1
+    <div style="display:flex;gap:20px;margin-top:7px;font-size:10px;color:var(--green-x);letter-spacing:0.08em">
+      day <span id="tl-day-num" style="color:var(--green)">1</span> of <span id="tl-total-days" style="color:var(--green)">84</span>
+      &nbsp;·&nbsp; <span id="tl-games-to-date" style="color:var(--green)">0</span> games played
+      &nbsp;·&nbsp; <span id="tl-teams-active" style="color:var(--green)">0</span> teams qualified
+      &nbsp;·&nbsp; #1: <span id="tl-top1" style="color:var(--green)">--</span>
     </div>
   </div>
-
-  <div class="sel-info" id="sel-info">// drag the slider above to watch the matrix fill up game by game. click any cell to highlight that team.</div>
+  <div class="sel-info" id="sel-info">// loading...</div>
   <div class="mx-zoom-row">
-    <button class="zoom-btn" onclick="setZoom(mxZoom * 1.5)">[ + ]</button>
-    <button class="zoom-btn" onclick="setZoom(mxZoom / 1.5)">[ - ]</button>
+    <button class="zoom-btn" onclick="setZoom(mxZoom*1.5)">[ + ]</button>
+    <button class="zoom-btn" onclick="setZoom(mxZoom/1.5)">[ - ]</button>
     <button class="zoom-btn" onclick="fitZoom()">[fit]</button>
     <button class="zoom-btn" onclick="setZoom(1)">[1:1]</button>
     <span id="zoom-label">zoom: --</span>
-    &nbsp;·&nbsp; scroll to navigate · click cell to highlight team
+    &nbsp;·&nbsp; ctrl+scroll to zoom · scroll to pan · click cell to highlight
   </div>
   <div class="canvas-wrap" id="cwrap">
-    <div id="mc-scaler" style="transform-origin:top left;display:inline-block;line-height:0">
-      <canvas id="mc" role="img" aria-label="Colley Matrix heatmap"></canvas>
+    <div id="mc-scaler" style="display:inline-block;line-height:0;transform-origin:top left">
+      <canvas id="mc" role="img" aria-label="Colley Matrix"></canvas>
     </div>
   </div>
   <div class="mx-legend">
@@ -267,7 +255,7 @@
   <div class="ey">// the short version</div>
   <div class="st">What is VBI?</div>
   <div class="bt">
-    RPI is fundamentally flawed because it values schedule strength more than winning itself. Since 75% of the formula is tied to opponents' records and opponents' opponents' records, teams can climb the rankings with mediocre or even losing records simply by existing in power conferences. At that point, the system stops measuring performance and starts rewarding association and reputation.<br><br>
+    RPI is fundamentally flawed because it values schedule strength more than winning itself. Since 75% of the formula is tied to opponents’ records and opponents’ opponents’ records, teams can climb the rankings with mediocre or even losing records simply by existing in power conferences. At that point, the system stops measuring performance and starts rewarding association and reputation.<br><br>
     VBI takes a different approach. It uses the Colley Matrix — a mathematically objective system of linear equations that evaluates every team simultaneously based only on game results. No polls. The only variables are who you beat, who you lost to, and where the game was played. Instead of assuming conference strength, or applying arbitrary values to different variables, VBI forces teams to earn their rating through results on the field.
   </div>
   <div class="abt-hr"></div>
@@ -353,7 +341,6 @@ let mapInit = false;
 let aboutInit = false;
 let matrixInit = false;
 
-// ── RANKINGS ──────────────────────────────────────────────
 async function loadRankings() {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/rankings?select=*&order=rank.asc`,
@@ -397,7 +384,6 @@ function renderTable() {
   }).join("");
 }
 
-// ── TAB SWITCHING ──────────────────────────────────────────
 function showTab(tab) {
   ["matrix","rankings","map","about"].forEach(t => {
     document.getElementById(t+"-panel").style.display = t === tab ? "block" : "none";
@@ -410,7 +396,7 @@ function showTab(tab) {
   if (tab === "matrix") { if (!matrixInit) { matrixInit = true; initMatrix(); } }
 }
 
-// ── MAP ────────────────────────────────────────────────────
+// MAP
 const TEAM_COORDS = {
   "UCLA":[34.0689,-118.4452],"Southern California":[34.0224,-118.2851],"Oregon St.":[44.5646,-123.262],"Oregon":[44.0461,-123.0708],
   "Washington St.":[46.7298,-117.1817],"Washington":[47.6553,-122.3035],"Tennessee":[35.9545,-83.9282],"Vanderbilt":[36.1447,-86.8027],
@@ -484,846 +470,322 @@ function initMap() {
   });
 }
 
-// ── MATRIX ENGINE ──────────────────────────────────────────
+// ── MATRIX ─────────────────────────────────────────────────
 const MX_TEAMS = ["Alabama","Arkansas","Auburn","Florida","Georgia","Kentucky","LSU","Mississippi St.","Missouri","Ole Miss","South Carolina","Tennessee","Texas","Texas A&M","Vanderbilt","Illinois","Indiana","Iowa","Maryland","Michigan","Michigan St.","Minnesota","Nebraska","Northwestern","Ohio St.","Oregon","Oregon St.","Penn St.","Purdue","Rutgers","Southern California","UCLA","Washington","Boston College","California","Clemson","Duke","Florida St.","Georgia Tech","Louisville","Miami (FL)","NC State","North Carolina","Notre Dame","Pittsburgh","Stanford","Virginia","Virginia Tech","Wake Forest","Arizona","Arizona St.","BYU","Baylor","Cincinnati","Houston","Kansas","Kansas St.","Oklahoma","Oklahoma St.","TCU","Texas Tech","UCF","Utah","West Virginia","App State","Arkansas St.","Coastal Carolina","Ga. Southern","Georgia St.","James Madison","Little Rock","Louisiana","Marshall","Old Dominion","South Alabama","Southern Miss.","Texas St.","Troy","ULM","Air Force","Fresno St.","Nevada","New Mexico","San Diego St.","San Jose St.","UNLV","Washington St.","CSU Bakersfield","CSUN","Cal Poly","Cal St. Fullerton","Hawaii","Long Beach St.","UC Davis","UC Irvine","UC Riverside","UC San Diego","UC Santa Barbara","Gonzaga","LMU (CA)","Pacific","Pepperdine","Portland","Saint Mary's (CA)","San Diego","San Francisco","Santa Clara","Brown","Columbia","Cornell","Dartmouth","Harvard","Penn","Princeton","Yale","Charlotte","East Carolina","Fla. Atlantic","Memphis","Rice","South Fla.","Tulane","UAB","UTSA","Wichita St.","DBU","Delaware","FIU","Jacksonville St.","Kennesaw St.","Liberty","Louisiana Tech","Middle Tenn.","Missouri St.","New Mexico St.","Sam Houston","Western Ky.","Davidson","Dayton","Fordham","George Mason","George Washington","La Salle","Rhode Island","Richmond","Saint Joseph's","Saint Louis","St. Bonaventure","VCU","Col. of Charleston","Elon","Hofstra","Monmouth","Northeastern","Stony Brook","Towson","UNCW","William & Mary","Campbell","Charleston So.","Gardner-Webb","High Point","Longwood","Presbyterian","Radford","UNC Asheville","USC Upstate","Winthrop","ETSU","Mercer","Samford","The Citadel","UNC Greensboro","VMI","Western Caro.","Wofford","Eastern Ill.","Morehead St.","Murray St.","SIUE","Southeast Mo. St.","Southern Ind.","Tennessee Tech","UT Martin","Alabama A&M","Alabama St.","Alcorn","Ark.-Pine Bluff","Bethune-Cookman","Florida A&M","Grambling","Jackson St.","Mississippi Val.","Prairie View","Southern U.","Texas Southern","Abilene Christian","California Baptist","Grand Canyon","Sacramento St.","Seattle U","Tarleton St.","UT Arlington","UTRGV","Utah Tech","Utah Valley","Belmont","Bradley","Evansville","Illinois St.","Indiana St.","Southern Ill.","UIC","Valparaiso","Akron","Ball St.","Bowling Green","Central Mich.","Eastern Mich.","Kent St.","Massachusetts","Miami (OH)","NIU","Ohio","Toledo","Western Mich.","Coppin St.","Delaware St.","N.C. A&T","Norfolk St.","UMES","Mercyhurst","Milwaukee","Northern Ky.","Oakland","Wright St.","Youngstown St.","Army West Point","Bucknell","Holy Cross","Lafayette","Lehigh","Navy","Binghamton","Bryant","Central Conn. St.","FDU","LIU","Maine","Merrimack","Mount St. Mary's","NJIT","Sacred Heart","Stonehill","UAlbany","UMBC","UMass Lowell","Wagner","Austin Peay","Bellarmine","Central Ark.","Eastern Ky.","FGCU","Jacksonville","Lindenwood","Lipscomb","North Ala.","North Florida","Queens (NC)","Stetson","Butler","Creighton","Georgetown","Seton Hall","St. John's (NY)","UConn","Villanova","Xavier","North Dakota St.","Omaha","Oral Roberts","South Dakota St.","St. Thomas (MN)","Western Ill.","A&M-Corpus Christi","Houston Christian","Lamar University","McNeese","New Orleans","Nicholls","Northwestern St.","SFA","Southeastern La.","UIW","West Ga.","Canisius","Fairfield","Iona","Le Moyne","Manhattan","Marist","Niagara","Quinnipiac","Rider","Saint Peter's","Siena","Northern Colo.","New Haven"];
 
-const MX_CONF_GROUPS = [{"n":"SEC","s":0,"z":15},{"n":"Big Ten","s":15,"z":18},{"n":"ACC","s":33,"z":16},{"n":"Big 12","s":49,"z":15},{"n":"Sun Belt","s":64,"z":15},{"n":"MWC","s":79,"z":8},{"n":"Big West","s":87,"z":11},{"n":"WCC","s":98,"z":9},{"n":"Ivy","s":107,"z":8},{"n":"American","s":115,"z":10},{"n":"CUSA","s":125,"z":12},{"n":"A-10","s":137,"z":12},{"n":"CAA","s":149,"z":9},{"n":"Big South","s":158,"z":10},{"n":"SoCon","s":168,"z":8},{"n":"OVC","s":176,"z":8},{"n":"SWAC","s":184,"z":12},{"n":"WAC","s":196,"z":10},{"n":"MVC","s":206,"z":8},{"n":"MAC","s":214,"z":12},{"n":"MEAC","s":226,"z":5},{"n":"Horizon","s":231,"z":6},{"n":"Patriot","s":237,"z":6},{"n":"NEC","s":243,"z":15},{"n":"ASUN","s":258,"z":12},{"n":"Big East","s":270,"z":8},{"n":"Summit","s":278,"z":6},{"n":"Southland","s":284,"z":11},{"n":"MAAC","s":295,"z":11},{"n":"Big Sky","s":306,"z":1},{"n":"Other","s":307,"z":1}];
+const MX_CONF_GROUPS=[{"n":"SEC","s":0,"z":15},{"n":"Big Ten","s":15,"z":18},{"n":"ACC","s":33,"z":16},{"n":"Big 12","s":49,"z":15},{"n":"Sun Belt","s":64,"z":15},{"n":"MWC","s":79,"z":8},{"n":"Big West","s":87,"z":11},{"n":"WCC","s":98,"z":9},{"n":"Ivy","s":107,"z":8},{"n":"American","s":115,"z":10},{"n":"CUSA","s":125,"z":12},{"n":"A-10","s":137,"z":12},{"n":"CAA","s":149,"z":9},{"n":"Big South","s":158,"z":10},{"n":"SoCon","s":168,"z":8},{"n":"OVC","s":176,"z":8},{"n":"SWAC","s":184,"z":12},{"n":"WAC","s":196,"z":10},{"n":"MVC","s":206,"z":8},{"n":"MAC","s":214,"z":12},{"n":"MEAC","s":226,"z":5},{"n":"Horizon","s":231,"z":6},{"n":"Patriot","s":237,"z":6},{"n":"NEC","s":243,"z":15},{"n":"ASUN","s":258,"z":12},{"n":"Big East","s":270,"z":8},{"n":"Summit","s":278,"z":6},{"n":"Southland","s":284,"z":11},{"n":"MAAC","s":295,"z":11},{"n":"Big Sky","s":306,"z":1},{"n":"Other","s":307,"z":1}];
 
-const NT = 308;
-const CELL = 6;        // native canvas px per team — 1848px matrix
-const LABEL = 160;     // native px for label margin
-const TOTAL = LABEL + NT * CELL;  // full canvas = 2008px native
+const NT=308, CELL=6, LABEL=160, TOTAL=LABEL+NT*CELL;
+const MX_TEAM_IDX={};
+MX_TEAMS.forEach((t,i)=>MX_TEAM_IDX[t]=i);
 
-const MX_TEAM_IDX = {};
-MX_TEAMS.forEach((t, i) => MX_TEAM_IDX[t] = i);
+let TL_GAMES=[],TL_DATES=[],TL_IDX=0;
+let mxData=null,mxRatings=[],selTeam=-1,mxZoom=1;
 
-let TL_GAMES = [], TL_DATES = [], TL_IDX = 0;
-let mxData = null, mxRatings = [], selTeam = -1;
-let mxZoom = 1;
-
-// ── ZOOM ───────────────────────────────────────────────────
-function setZoom(z) {
-  mxZoom = Math.max(0.08, Math.min(5, z));
-  const scaler = document.getElementById("mc-scaler");
-  const scaled = Math.round(TOTAL * mxZoom);
-  scaler.style.transform = `scale(${mxZoom})`;
-  scaler.style.transformOrigin = "top left";
-  scaler.style.width  = TOTAL + "px";
-  scaler.style.height = TOTAL + "px";
-  // Expand the scroll container's content area to match scaled size
-  scaler.style.marginRight  = (scaled - TOTAL) + "px";
-  scaler.style.marginBottom = (scaled - TOTAL) + "px";
-  document.getElementById("zoom-label").textContent = `zoom: ${Math.round(mxZoom * 100)}%`;
+function setZoom(z){
+  mxZoom=Math.max(0.05,Math.min(6,z));
+  const sc=document.getElementById("mc-scaler");
+  const s=Math.round(TOTAL*mxZoom);
+  sc.style.transform=`scale(${mxZoom})`;
+  sc.style.width=TOTAL+"px"; sc.style.height=TOTAL+"px";
+  sc.style.marginRight=(s-TOTAL)+"px"; sc.style.marginBottom=(s-TOTAL)+"px";
+  document.getElementById("zoom-label").textContent=`zoom: ${Math.round(mxZoom*100)}%`;
+}
+function fitZoom(){
+  const w=document.getElementById("cwrap");
+  setZoom(Math.min(w.clientWidth/TOTAL,w.clientHeight/TOTAL));
+  w.scrollLeft=0; w.scrollTop=0;
 }
 
-function fitZoom() {
-  const wrap = document.getElementById("cwrap");
-  const z = Math.min(wrap.clientWidth / TOTAL, wrap.clientHeight / TOTAL);
-  setZoom(z);
-  wrap.scrollLeft = 0; wrap.scrollTop = 0;
-}
-
-// ── MATH ───────────────────────────────────────────────────
-function gaussSolve(A, b) {
-  const n = b.length;
-  const M = A.map((row, i) => [...row, b[i]]);
-  for (let col = 0; col < n; col++) {
-    let mx = col;
-    for (let row = col + 1; row < n; row++) if (Math.abs(M[row][col]) > Math.abs(M[mx][col])) mx = row;
-    [M[col], M[mx]] = [M[mx], M[col]];
-    if (Math.abs(M[col][col]) < 1e-12) continue;
-    for (let row = col + 1; row < n; row++) {
-      const f = M[row][col] / M[col][col];
-      for (let k = col; k <= n; k++) M[row][k] -= f * M[col][k];
-    }
+function gaussSolve(A,b){
+  const n=b.length,M=A.map((r,i)=>[...r,b[i]]);
+  for(let c=0;c<n;c++){
+    let mx=c;
+    for(let r=c+1;r<n;r++) if(Math.abs(M[r][c])>Math.abs(M[mx][c])) mx=r;
+    [M[c],M[mx]]=[M[mx],M[c]];
+    if(Math.abs(M[c][c])<1e-12) continue;
+    for(let r=c+1;r<n;r++){const f=M[r][c]/M[c][c];for(let k=c;k<=n;k++) M[r][k]-=f*M[c][k];}
   }
-  const x = new Array(n).fill(0);
-  for (let i = n - 1; i >= 0; i--) {
-    x[i] = M[i][n] / M[i][i];
-    for (let j = i - 1; j >= 0; j--) M[j][n] -= M[j][i] * x[i];
-  }
+  const x=new Array(n).fill(0);
+  for(let i=n-1;i>=0;i--){x[i]=M[i][n]/M[i][i];for(let j=i-1;j>=0;j--) M[j][n]-=M[j][i]*x[i];}
   return x;
 }
 
-function computeSlice(dateIdx) {
-  const cutoff = TL_DATES[dateIdx];
-  const games = TL_GAMES.filter(g => g.date <= cutoff);
-  const gc = new Int32Array(NT);
-  for (const g of games) {
-    const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
-    if (wi !== undefined && li !== undefined) { gc[wi]++; gc[li]++; }
+function computeSlice(di){
+  const cut=TL_DATES[di];
+  const games=TL_GAMES.filter(g=>g.date<=cut);
+  const gc=new Int32Array(NT);
+  const mx=Array.from({length:NT},()=>new Uint8Array(NT));
+  for(const g of games){
+    const wi=MX_TEAM_IDX[g.winner],li=MX_TEAM_IDX[g.loser];
+    if(wi!==undefined&&li!==undefined){gc[wi]++;gc[li]++;mx[wi][li]++;mx[li][wi]++;}
   }
-  const mx = Array.from({length: NT}, () => new Uint8Array(NT));
-  for (const g of games) {
-    const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
-    if (wi !== undefined && li !== undefined) { mx[wi][li]++; mx[li][wi]++; }
-  }
-  const qualIdx = [];
-  for (let i = 0; i < NT; i++) if (gc[i] >= 10) qualIdx.push(i);
-  const ratings = new Float64Array(NT);
-  if (qualIdx.length >= 2) {
-    const sub = {}; qualIdx.forEach((gi, si) => sub[gi] = si);
-    const qn = qualIdx.length;
-    const C = Array.from({length: qn}, () => new Array(qn).fill(0));
-    const b = new Array(qn).fill(1);
-    for (let si = 0; si < qn; si++) C[si][si] = 2;
-    for (const g of games) {
-      const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
-      if (wi === undefined || li === undefined) continue;
-      const swi = sub[wi], sli = sub[li];
-      if (swi === undefined || sli === undefined) continue;
-      const wt = g.location === 'away' ? 1.1 : g.location === 'home' ? 0.9 : 1.0;
-      C[swi][swi] += wt; C[sli][sli] += wt; C[swi][sli] -= wt; C[sli][swi] -= wt;
-      b[swi] += wt * 0.5; b[sli] -= wt * 0.5;
+  const qi=[];for(let i=0;i<NT;i++) if(gc[i]>=10) qi.push(i);
+  const ratings=new Float64Array(NT);
+  if(qi.length>=2){
+    const sub={};qi.forEach((gi,si)=>sub[gi]=si);
+    const qn=qi.length,C=Array.from({length:qn},()=>new Array(qn).fill(0)),b=new Array(qn).fill(1);
+    for(let si=0;si<qn;si++) C[si][si]=2;
+    for(const g of games){
+      const wi=MX_TEAM_IDX[g.winner],li=MX_TEAM_IDX[g.loser];
+      if(wi===undefined||li===undefined) continue;
+      const sw=sub[wi],sl=sub[li];
+      if(sw===undefined||sl===undefined) continue;
+      const wt=g.location==='away'?1.1:g.location==='home'?0.9:1.0;
+      C[sw][sw]+=wt;C[sl][sl]+=wt;C[sw][sl]-=wt;C[sl][sw]-=wt;
+      b[sw]+=wt*0.5;b[sl]-=wt*0.5;
     }
-    const r = gaussSolve(C, b);
-    qualIdx.forEach((gi, si) => ratings[gi] = r[si]);
+    const r=gaussSolve(C,b);
+    qi.forEach((gi,si)=>ratings[gi]=r[si]);
   }
-  return { mxMatrix: mx, ratings, gameCount: games.length, teamCount: qualIdx.length };
+  return{mxMatrix:mx,ratings,gameCount:games.length,teamCount:qi.length};
 }
 
-// ── DRAW — single canvas, everything in native px ──────────
-function drawMatrix() {
-  const cv = document.getElementById("mc");
-  cv.width = TOTAL; cv.height = TOTAL;
-  cv.style.width  = TOTAL + "px";
-  cv.style.height = TOTAL + "px";
-  const ctx = cv.getContext("2d");
-  ctx.fillStyle = "#0a0a0a";
-  ctx.fillRect(0, 0, TOTAL, TOTAL);
-  if (!mxData) return;
+function drawMatrix(){
+  const cv=document.getElementById("mc");
+  cv.width=TOTAL;cv.height=TOTAL;
+  cv.style.width=TOTAL+"px";cv.style.height=TOTAL+"px";
+  const ctx=cv.getContext("2d");
+  ctx.fillStyle="#0a0a0a";ctx.fillRect(0,0,TOTAL,TOTAL);
+  if(!mxData) return;
+  const hl=selTeam;
 
-  const hl = selTeam;
-
-  // ── Cells ──
-  for (let i = 0; i < NT; i++) {
-    for (let j = 0; j < NT; j++) {
-      const isDiag = i === j;
-      const isHL = hl >= 0 && (i === hl || j === hl);
-      let r = 0, g = 0, bl = 0;
-      if (isDiag) {
-        if (isHL || hl < 0) { g = 255; bl = 85; } else { g = 80; bl = 27; }
-      } else if (mxData[i][j] > 0) {
-        const intensity = Math.min(1, mxData[i][j] / 3);
-        const base = isHL ? 220 : (hl >= 0 ? 60 : 180);
-        g = Math.floor(base * intensity + 30); r = Math.floor(g * 0.05); bl = Math.floor(g * 0.15);
-        if (hl >= 0 && !isHL) { g = Math.floor(g*0.3); r = Math.floor(r*0.3); bl = Math.floor(bl*0.3); }
-      } else {
-        if (isHL) { g = 40; bl = 15; } else { r = 10; g = 10; bl = 10; }
-        if (hl >= 0 && !isHL) { r = 5; g = 5; bl = 5; }
-      }
-      ctx.fillStyle = `rgb(${r},${g},${bl})`;
-      ctx.fillRect(LABEL + j * CELL, LABEL + i * CELL, CELL, CELL);
+  // cells
+  for(let i=0;i<NT;i++) for(let j=0;j<NT;j++){
+    const isDiag=i===j,isHL=hl>=0&&(i===hl||j===hl);
+    let r=0,g=0,bl=0;
+    if(isDiag){
+      if(isHL||hl<0){g=255;bl=85;}else{g=80;bl=27;}
+    }else if(mxData[i][j]>0){
+      const intensity=Math.min(1,mxData[i][j]/3),base=isHL?220:hl>=0?60:180;
+      g=Math.floor(base*intensity+30);r=Math.floor(g*0.05);bl=Math.floor(g*0.15);
+      if(hl>=0&&!isHL){g=Math.floor(g*0.3);r=Math.floor(r*0.3);bl=Math.floor(bl*0.3);}
+    }else{
+      if(isHL){g=40;bl=15;}else{r=10;g=10;bl=10;}
+      if(hl>=0&&!isHL){r=5;g=5;bl=5;}
     }
+    ctx.fillStyle=`rgb(${r},${g},${bl})`;
+    ctx.fillRect(LABEL+j*CELL,LABEL+i*CELL,CELL,CELL);
   }
 
-  // ── Conf blocks + matrix labels ──
-  MX_CONF_GROUPS.forEach(cg => {
-    const x = LABEL + cg.s * CELL, w = cg.z * CELL;
-    ctx.strokeStyle = "#00ff5555"; ctx.lineWidth = 1;
-    ctx.strokeRect(x + 0.5, x + 0.5, w - 1, w - 1);
-    if (w >= 14) {
-      const fs = Math.min(13, Math.max(7, w * 0.13));
-      ctx.font = `bold ${fs}px 'Courier Prime','Courier New',monospace`;
-      ctx.textAlign = "center";
-      const cx2 = x + w / 2, cy2 = x + w / 2 + fs * 0.35;
-      const tw = ctx.measureText(cg.n).width;
-      ctx.fillStyle = "rgba(10,10,10,0.85)";
-      ctx.fillRect(cx2 - tw/2 - 4, cy2 - fs - 1, tw + 8, fs + 6);
-      ctx.fillStyle = "#00ff55";
-      ctx.fillText(cg.n, cx2, cy2);
+  // conf blocks + centre labels
+  MX_CONF_GROUPS.forEach(cg=>{
+    const x=LABEL+cg.s*CELL,w=cg.z*CELL;
+    ctx.strokeStyle="#00ff5550";ctx.lineWidth=1;
+    ctx.strokeRect(x+.5,x+.5,w-1,w-1);
+    if(w>=14){
+      const fs=Math.min(13,Math.max(7,w*0.13));
+      ctx.font=`bold ${fs}px 'Courier Prime','Courier New',monospace`;
+      ctx.textAlign="center";
+      const cx=x+w/2,cy=x+w/2+fs*0.35,tw=ctx.measureText(cg.n).width;
+      ctx.fillStyle="rgba(10,10,10,0.85)";ctx.fillRect(cx-tw/2-4,cy-fs-1,tw+8,fs+6);
+      ctx.fillStyle="#00ff55";ctx.fillText(cg.n,cx,cy);
     }
   });
 
-  // ── Left axis ──
-  ctx.fillStyle = "#080808"; ctx.fillRect(0, LABEL, LABEL, NT * CELL);
-  // Alternating conf bands
-  MX_CONF_GROUPS.forEach((cg, ci) => {
-    ctx.fillStyle = ci % 2 === 0 ? "#0a0f0a" : "#0d150d";
-    ctx.fillRect(0, LABEL + cg.s * CELL, LABEL, cg.z * CELL);
+  // left axis background + alternating bands
+  MX_CONF_GROUPS.forEach((cg,ci)=>{
+    ctx.fillStyle=ci%2===0?"#0a0f0a":"#0d150d";
+    ctx.fillRect(0,LABEL+cg.s*CELL,LABEL,cg.z*CELL);
   });
-  // Team names
-  ctx.textAlign = "right";
-  ctx.font = `bold 9px 'Courier Prime','Courier New',monospace`;
-  for (let i = 0; i < NT; i++) {
-    const y = LABEL + i * CELL + CELL / 2 + 3;
-    const isHL = hl >= 0 && i === hl;
-    ctx.fillStyle = isHL ? "#00ff55" : (hl >= 0 ? "#003311" : "#007722");
-    ctx.fillText(MX_TEAMS[i], LABEL - 4, y);
+  // team names left
+  ctx.textAlign="right";ctx.font=`bold 9px 'Courier Prime','Courier New',monospace`;
+  for(let i=0;i<NT;i++){
+    ctx.fillStyle=hl>=0&&i===hl?"#00ff55":hl>=0?"#003311":"#007722";
+    ctx.fillText(MX_TEAMS[i],LABEL-4,LABEL+i*CELL+CELL/2+3);
   }
-  // Conf labels + dividers on left
-  MX_CONF_GROUPS.forEach(cg => {
-    const y = LABEL + cg.s * CELL, h = cg.z * CELL;
-    ctx.strokeStyle = "#1a3318"; ctx.lineWidth = 0.5;
-    ctx.beginPath(); ctx.moveTo(0, y + 0.5); ctx.lineTo(LABEL - 1, y + 0.5); ctx.stroke();
-    if (h >= 9) {
-      const fs = Math.min(10, Math.max(7, h * 0.22));
-      ctx.font = `bold ${fs}px 'Courier Prime','Courier New',monospace`;
-      ctx.fillStyle = "#00cc44"; ctx.textAlign = "left";
-      ctx.fillText(cg.n, 3, y + h / 2 + fs * 0.35);
+  // conf name + divider left
+  MX_CONF_GROUPS.forEach(cg=>{
+    const y=LABEL+cg.s*CELL,h=cg.z*CELL;
+    ctx.strokeStyle="#1a3318";ctx.lineWidth=0.5;
+    ctx.beginPath();ctx.moveTo(0,y+.5);ctx.lineTo(LABEL-1,y+.5);ctx.stroke();
+    if(h>=9){
+      const fs=Math.min(10,Math.max(7,h*0.22));
+      ctx.font=`bold ${fs}px 'Courier Prime','Courier New',monospace`;
+      ctx.fillStyle="#00cc44";ctx.textAlign="left";
+      ctx.fillText(cg.n,3,y+h/2+fs*0.35);
     }
   });
 
-  // ── Top axis ──
-  ctx.fillStyle = "#080808"; ctx.fillRect(LABEL, 0, NT * CELL, LABEL);
-  MX_CONF_GROUPS.forEach((cg, ci) => {
-    ctx.fillStyle = ci % 2 === 0 ? "#0a0f0a" : "#0d150d";
-    ctx.fillRect(LABEL + cg.s * CELL, 0, cg.z * CELL, LABEL);
+  // top axis background + alternating bands
+  MX_CONF_GROUPS.forEach((cg,ci)=>{
+    ctx.fillStyle=ci%2===0?"#0a0f0a":"#0d150d";
+    ctx.fillRect(LABEL+cg.s*CELL,0,cg.z*CELL,LABEL);
   });
-  // Team names rotated
-  ctx.font = `bold 9px 'Courier Prime','Courier New',monospace`;
-  for (let j = 0; j < NT; j++) {
-    const x = LABEL + j * CELL + CELL / 2;
-    const isHL = hl >= 0 && j === hl;
-    ctx.fillStyle = isHL ? "#00ff55" : (hl >= 0 ? "#003311" : "#007722");
-    ctx.save(); ctx.translate(x, LABEL - 4); ctx.rotate(-Math.PI / 2);
-    ctx.textAlign = "left"; ctx.fillText(MX_TEAMS[j], 0, 0); ctx.restore();
+  // team names top (rotated)
+  ctx.font=`bold 9px 'Courier Prime','Courier New',monospace`;
+  for(let j=0;j<NT;j++){
+    ctx.fillStyle=hl>=0&&j===hl?"#00ff55":hl>=0?"#003311":"#007722";
+    ctx.save();ctx.translate(LABEL+j*CELL+CELL/2,LABEL-4);ctx.rotate(-Math.PI/2);
+    ctx.textAlign="left";ctx.fillText(MX_TEAMS[j],0,0);ctx.restore();
   }
-  // Conf labels + dividers on top
-  MX_CONF_GROUPS.forEach(cg => {
-    const x = LABEL + cg.s * CELL, w = cg.z * CELL;
-    ctx.strokeStyle = "#1a3318"; ctx.lineWidth = 0.5;
-    ctx.beginPath(); ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, LABEL - 1); ctx.stroke();
-    if (w >= 9) {
-      const fs = Math.min(10, Math.max(7, w * 0.22));
-      ctx.save(); ctx.translate(x + w / 2, LABEL - 4); ctx.rotate(-Math.PI / 2);
-      ctx.font = `bold ${fs}px 'Courier Prime','Courier New',monospace`;
-      ctx.fillStyle = "#00cc44"; ctx.textAlign = "left";
-      ctx.fillText(cg.n, 0, 0); ctx.restore();
+  // conf name + divider top
+  MX_CONF_GROUPS.forEach(cg=>{
+    const x=LABEL+cg.s*CELL,w=cg.z*CELL;
+    ctx.strokeStyle="#1a3318";ctx.lineWidth=0.5;
+    ctx.beginPath();ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,LABEL-1);ctx.stroke();
+    if(w>=9){
+      const fs=Math.min(10,Math.max(7,w*0.22));
+      ctx.save();ctx.translate(x+w/2,LABEL-4);ctx.rotate(-Math.PI/2);
+      ctx.font=`bold ${fs}px 'Courier Prime','Courier New',monospace`;
+      ctx.fillStyle="#00cc44";ctx.textAlign="left";ctx.fillText(cg.n,0,0);ctx.restore();
     }
   });
 
-  // ── Corner ──
-  ctx.fillStyle = "#080808"; ctx.fillRect(0, 0, LABEL, LABEL);
-  ctx.font = "bold 10px 'Courier Prime','Courier New',monospace";
-  ctx.fillStyle = "#007722"; ctx.textAlign = "left";
-  ctx.fillText("VBI", 6, 16); ctx.fillText("308×308", 6, 30);
+  // corner
+  ctx.fillStyle="#080808";ctx.fillRect(0,0,LABEL,LABEL);
+  ctx.font="bold 10px 'Courier Prime','Courier New',monospace";
+  ctx.fillStyle="#007722";ctx.textAlign="left";
+  ctx.fillText("VBI",6,16);ctx.fillText("308×308",6,30);
 }
 
-// ── SLIDER ─────────────────────────────────────────────────
-let raf = null;
-function onSliderChange() {
-  if (raf) cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => {
-    TL_IDX = parseInt(document.getElementById("tl-slider").value);
-    const result = computeSlice(TL_IDX);
-    if (!result) return;
-    mxData = result.mxMatrix; mxRatings = result.ratings; selTeam = -1;
-    document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
+let raf=null;
+function onSliderChange(){
+  if(raf) cancelAnimationFrame(raf);
+  raf=requestAnimationFrame(()=>{
+    TL_IDX=parseInt(document.getElementById("tl-slider").value);
+    const res=computeSlice(TL_IDX);
+    if(!res) return;
+    mxData=res.mxMatrix;mxRatings=res.ratings;selTeam=-1;
+    document.querySelectorAll(".clabel").forEach(b=>b.classList.remove("hl"));
     drawMatrix();
-    document.getElementById("tl-date-display").textContent = TL_DATES[TL_IDX];
-    document.getElementById("tl-day-num").textContent = TL_IDX + 1;
-    document.getElementById("tl-games-to-date").textContent = result.gameCount.toLocaleString();
-    document.getElementById("tl-teams-active").textContent = result.teamCount;
-    document.getElementById("mx-dim").textContent = `${NT} × ${NT}`;
-    document.getElementById("mx-game-count").textContent = result.gameCount.toLocaleString();
-    document.getElementById("mx-team-count").textContent = result.teamCount;
-    document.getElementById("mx-cells").textContent = (NT * NT).toLocaleString();
-    let topTeam = "--", topR = -Infinity;
-    for (let i = 0; i < NT; i++) if (mxRatings[i] > topR) { topR = mxRatings[i]; topTeam = MX_TEAMS[i]; }
-    document.getElementById("tl-top1").textContent = topTeam;
-    document.getElementById("sel-info").innerHTML = "// use [ + ] [ - ] to zoom · scroll to pan · click any cell to highlight that team";
+    document.getElementById("tl-date-display").textContent=TL_DATES[TL_IDX];
+    document.getElementById("tl-day-num").textContent=TL_IDX+1;
+    document.getElementById("tl-games-to-date").textContent=res.gameCount.toLocaleString();
+    document.getElementById("tl-teams-active").textContent=res.teamCount;
+    document.getElementById("mx-dim").textContent=`${NT} × ${NT}`;
+    document.getElementById("mx-game-count").textContent=res.gameCount.toLocaleString();
+    document.getElementById("mx-team-count").textContent=res.teamCount;
+    document.getElementById("mx-cells").textContent=(NT*NT).toLocaleString();
+    let top="--",topR=-Infinity;
+    for(let i=0;i<NT;i++) if(mxRatings[i]>topR){topR=mxRatings[i];top=MX_TEAMS[i];}
+    document.getElementById("tl-top1").textContent=top;
+    document.getElementById("sel-info").innerHTML="// [ + ][ - ] to zoom · scroll to pan · click any cell to highlight that team";
   });
 }
 
-async function initMatrix() {
-  try {
-    const res = await fetch("games.json");
-    TL_GAMES = await res.json();
-  } catch(e) {
-    document.getElementById("tl-loading").textContent = "// error: could not load games.json"; return;
-  }
-  TL_DATES = [...new Set(TL_GAMES.map(g => g.date))].sort();
-  const lastIdx = TL_DATES.length - 1;
-  document.getElementById("tl-loading").style.display = "none";
-  document.getElementById("tl-wrap").style.display = "block";
-  const slider = document.getElementById("tl-slider");
-  slider.max = lastIdx; slider.value = lastIdx;
-  document.getElementById("tl-end-date").textContent = TL_DATES[lastIdx];
-  document.getElementById("tl-total-days").textContent = TL_DATES.length;
+async function initMatrix(){
+  try{const res=await fetch("games.json");TL_GAMES=await res.json();}
+  catch(e){document.getElementById("tl-loading").textContent="// error: could not load games.json";return;}
+  TL_DATES=[...new Set(TL_GAMES.map(g=>g.date))].sort();
+  const last=TL_DATES.length-1;
+  document.getElementById("tl-loading").style.display="none";
+  document.getElementById("tl-wrap").style.display="block";
+  const sl=document.getElementById("tl-slider");
+  sl.max=last;sl.value=last;
+  document.getElementById("tl-end-date").textContent=TL_DATES[last];
+  document.getElementById("tl-total-days").textContent=TL_DATES.length;
 
-  // Legend
-  const bar = document.getElementById("lbar");
-  if (!bar.children.length) {
-    for (let i = 0; i < 20; i++) {
-      const s = document.createElement("div"); s.style.flex = "1";
-      s.style.background = `rgb(${Math.floor(i*0.5)},${Math.floor(i*11)},${Math.floor(i*3)})`;
-      bar.appendChild(s);
-    }
-  }
+  const bar=document.getElementById("lbar");
+  if(!bar.children.length) for(let i=0;i<20;i++){const s=document.createElement("div");s.style.flex="1";s.style.background=`rgb(${Math.floor(i*.5)},${Math.floor(i*11)},${Math.floor(i*3)})`;bar.appendChild(s);}
 
-  // Conf buttons — clicking scrolls to that block
-  const cl = document.getElementById("conf-labels");
-  if (!cl.children.length) {
-    MX_CONF_GROUPS.forEach(cg => {
-      const btn = document.createElement("div"); btn.className = "clabel"; btn.textContent = cg.n;
-      btn.onclick = () => {
-        document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl")); btn.classList.add("hl");
-        selTeam = cg.s + Math.floor(cg.z / 2); drawMatrix();
-        const wrap = document.getElementById("cwrap");
-        const blockCenter = (LABEL + (cg.s + cg.z / 2) * CELL) * mxZoom;
-        wrap.scrollLeft = Math.max(0, blockCenter - wrap.clientWidth  / 2);
-        wrap.scrollTop  = Math.max(0, blockCenter - wrap.clientHeight / 2);
-        document.getElementById("sel-info").innerHTML = `// highlighted: <span>${cg.n}</span> (${cg.z} teams)`;
-      };
-      cl.appendChild(btn);
-    });
-  }
+  const cl=document.getElementById("conf-labels");
+  if(!cl.children.length) MX_CONF_GROUPS.forEach(cg=>{
+    const btn=document.createElement("div");btn.className="clabel";btn.textContent=cg.n;
+    btn.onclick=()=>{
+      document.querySelectorAll(".clabel").forEach(b=>b.classList.remove("hl"));btn.classList.add("hl");
+      selTeam=cg.s+Math.floor(cg.z/2);drawMatrix();
+      const wrap=document.getElementById("cwrap");
+      const bc=(LABEL+(cg.s+cg.z/2)*CELL)*mxZoom;
+      wrap.scrollLeft=Math.max(0,bc-wrap.clientWidth/2);
+      wrap.scrollTop=Math.max(0,bc-wrap.clientHeight/2);
+      document.getElementById("sel-info").innerHTML=`// highlighted: <span>${cg.n}</span> (${cg.z} teams)`;
+    };
+    cl.appendChild(btn);
+  });
 
-  slider.addEventListener("input", onSliderChange);
+  sl.addEventListener("input",onSliderChange);
 
-  // Ctrl+scroll = zoom centered on cursor
-  const wrap = document.getElementById("cwrap");
-  wrap.addEventListener("wheel", e => {
-    if (!e.ctrlKey && !e.metaKey) return;
+  // ctrl+scroll zoom
+  const wrap=document.getElementById("cwrap");
+  wrap.addEventListener("wheel",e=>{
+    if(!e.ctrlKey&&!e.metaKey) return;
     e.preventDefault();
-    const rect = wrap.getBoundingClientRect();
-    const cursorX = e.clientX - rect.left + wrap.scrollLeft;
-    const cursorY = e.clientY - rect.top  + wrap.scrollTop;
-    const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
-    const newZoom = Math.max(0.08, Math.min(5, mxZoom * factor));
-    const ratio = newZoom / mxZoom;
-    setZoom(newZoom);
-    wrap.scrollLeft = cursorX * ratio - (e.clientX - rect.left);
-    wrap.scrollTop  = cursorY * ratio - (e.clientY - rect.top);
-  }, { passive: false });
+    const rect=wrap.getBoundingClientRect();
+    const cx=e.clientX-rect.left+wrap.scrollLeft;
+    const cy=e.clientY-rect.top+wrap.scrollTop;
+    const factor=e.deltaY<0?1.15:1/1.15;
+    const nz=Math.max(0.05,Math.min(6,mxZoom*factor));
+    const ratio=nz/mxZoom;
+    setZoom(nz);
+    wrap.scrollLeft=cx*ratio-(e.clientX-rect.left);
+    wrap.scrollTop=cy*ratio-(e.clientY-rect.top);
+  },{passive:false});
 
-  // Canvas click — select team
-  const cv = document.getElementById("mc");
-  const tip = document.getElementById("tip");
-  cv.addEventListener("click", e => {
-    if (!mxData) return;
-    const rect = cv.getBoundingClientRect();
-    // rect already accounts for CSS transform scale
-    const px = (e.clientX - rect.left) * (TOTAL / rect.width);
-    const py = (e.clientY - rect.top)  * (TOTAL / rect.height);
-    const j = Math.floor((px - LABEL) / CELL);
-    const i = Math.floor((py - LABEL) / CELL);
-    if (i < 0 || i >= NT || j < 0 || j >= NT) { selTeam = -1; drawMatrix(); return; }
-    if (selTeam === i) {
-      selTeam = -1;
-      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-      document.getElementById("sel-info").innerHTML = "// use [ + ] [ - ] to zoom · scroll to pan · click any cell to highlight that team";
-    } else {
-      selTeam = i;
-      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-      const ci = MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z);
-      if (ci >= 0) document.querySelectorAll(".clabel")[ci]?.classList.add("hl");
-      const gp = Array.from(mxData[i]).filter(v => v > 0).length;
-      const rating = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "not yet qualified";
-      const confName = MX_CONF_GROUPS[MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z)]?.n || "?";
-      document.getElementById("sel-info").innerHTML = `// selected: <span>${MX_TEAMS[i]}</span> (${confName}) — <span>${gp}</span> opponents · rating: <span>${rating}</span> · click again to deselect`;
+  // click + hover on canvas
+  const cv=document.getElementById("mc");
+  const tip=document.getElementById("tip");
+  cv.addEventListener("click",e=>{
+    if(!mxData) return;
+    const rect=cv.getBoundingClientRect();
+    const px=(e.clientX-rect.left)*(TOTAL/rect.width);
+    const py=(e.clientY-rect.top)*(TOTAL/rect.height);
+    const j=Math.floor((px-LABEL)/CELL),i=Math.floor((py-LABEL)/CELL);
+    if(i<0||i>=NT||j<0||j>=NT){selTeam=-1;drawMatrix();return;}
+    if(selTeam===i){
+      selTeam=-1;document.querySelectorAll(".clabel").forEach(b=>b.classList.remove("hl"));
+      document.getElementById("sel-info").innerHTML="// [ + ][ - ] to zoom · scroll to pan · click any cell to highlight that team";
+    }else{
+      selTeam=i;document.querySelectorAll(".clabel").forEach(b=>b.classList.remove("hl"));
+      const ci=MX_CONF_GROUPS.findIndex(cg=>i>=cg.s&&i<cg.s+cg.z);
+      if(ci>=0) document.querySelectorAll(".clabel")[ci]?.classList.add("hl");
+      const gp=Array.from(mxData[i]).filter(v=>v>0).length;
+      const rating=mxRatings[i]>0?mxRatings[i].toFixed(4):"not yet qualified";
+      const cn=MX_CONF_GROUPS[MX_CONF_GROUPS.findIndex(cg=>i>=cg.s&&i<cg.s+cg.z)]?.n||"?";
+      document.getElementById("sel-info").innerHTML=`// selected: <span>${MX_TEAMS[i]}</span> (${cn}) — <span>${gp}</span> opponents · rating: <span>${rating}</span> · click again to deselect`;
     }
     drawMatrix();
   });
-
-  // Hover tooltip
-  cv.addEventListener("mousemove", e => {
-    if (!mxData) return;
-    const rect = cv.getBoundingClientRect();
-    const px = (e.clientX - rect.left) * (TOTAL / rect.width);
-    const py = (e.clientY - rect.top)  * (TOTAL / rect.height);
-    const j = Math.floor((px - LABEL) / CELL);
-    const i = Math.floor((py - LABEL) / CELL);
-    if (i < 0 || i >= NT || j < 0 || j >= NT) { tip.style.display = "none"; return; }
-    const hasGame = mxData[i][j] > 0;
-    const rA = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "—";
-    tip.innerHTML = i === j
-      ? `<div class="ta">${MX_TEAMS[i]}</div><div class="tc">diagonal · rating: ${rA}</div><div class="tg">C[i][i] = 2 + games played</div>`
-      : `<div class="ta">${MX_TEAMS[i]} <span style="color:#005518">vs</span> ${MX_TEAMS[j]}</div><div class="tg">${hasGame ? `played ${mxData[i][j]}x — C[i][j] = -${mxData[i][j]}` : "no games — C[i][j] = 0"}</div>`;
-    tip.style.display = "block";
-    tip.style.left = (e.clientX + 14) + "px";
-    tip.style.top  = (e.clientY - 10) + "px";
+  cv.addEventListener("mousemove",e=>{
+    if(!mxData){tip.style.display="none";return;}
+    const rect=cv.getBoundingClientRect();
+    const px=(e.clientX-rect.left)*(TOTAL/rect.width);
+    const py=(e.clientY-rect.top)*(TOTAL/rect.height);
+    const j=Math.floor((px-LABEL)/CELL),i=Math.floor((py-LABEL)/CELL);
+    if(i<0||i>=NT||j<0||j>=NT){tip.style.display="none";return;}
+    const rA=mxRatings[i]>0?mxRatings[i].toFixed(4):"—";
+    tip.innerHTML=i===j
+      ?`<div class="ta">${MX_TEAMS[i]}</div><div class="tc">diagonal · rating: ${rA}</div><div class="tg">C[i][i] = 2 + games played</div>`
+      :`<div class="ta">${MX_TEAMS[i]} <span style="color:#005518">vs</span> ${MX_TEAMS[j]}</div><div class="tg">${mxData[i][j]>0?`played ${mxData[i][j]}x — C[i][j] = -${mxData[i][j]}`:"no games — C[i][j] = 0"}</div>`;
+    tip.style.display="block";tip.style.left=(e.clientX+14)+"px";tip.style.top=(e.clientY-10)+"px";
   });
-  cv.addEventListener("mouseleave", () => { tip.style.display = "none"; });
+  cv.addEventListener("mouseleave",()=>tip.style.display="none");
 
-  TL_IDX = lastIdx;
+  TL_IDX=last;
   onSliderChange();
-  setTimeout(() => fitZoom(), 60);
+  setTimeout(fitZoom,80);
 }
-
-const NT = 308;
-const BASE_CELL = 8; // base cell size at zoom=1 — full matrix = 2464px
-const MX_TEAM_IDX = {};
-MX_TEAMS.forEach((t, i) => MX_TEAM_IDX[t] = i);
-
-// State
-let TL_GAMES = [], TL_DATES = [], TL_IDX = 0;
-let mxData = null, mxRatings = [], selTeam = -1;
-
-// Zoom/pan state
-let zoom = 0;        // will be set to fit-to-screen on init
-let panX = 0, panY = 0;
-const ZOOM_MIN = 0.05, ZOOM_MAX = 8;
-const LABEL_MARGIN = 160; // reserved px for axis labels in screen space
-
-// Gaussian elimination
-function gaussSolve(A, b) {
-  const n = b.length;
-  const M = A.map((row, i) => [...row, b[i]]);
-  for (let col = 0; col < n; col++) {
-    let maxRow = col;
-    for (let row = col + 1; row < n; row++) if (Math.abs(M[row][col]) > Math.abs(M[maxRow][col])) maxRow = row;
-    [M[col], M[maxRow]] = [M[maxRow], M[col]];
-    if (Math.abs(M[col][col]) < 1e-12) continue;
-    for (let row = col + 1; row < n; row++) {
-      const f = M[row][col] / M[col][col];
-      for (let k = col; k <= n; k++) M[row][k] -= f * M[col][k];
-    }
-  }
-  const x = new Array(n).fill(0);
-  for (let i = n - 1; i >= 0; i--) {
-    x[i] = M[i][n] / M[i][i];
-    for (let j = i - 1; j >= 0; j--) M[j][n] -= M[j][i] * x[i];
-  }
-  return x;
+// ABOUT SIM
+const SIM_TEAMS=["Musketeers","Eagles","Tigers","Highlanders"];
+let simGames=[];
+function solveSim(games){
+  const n=SIM_TEAMS.length,idx={};
+  SIM_TEAMS.forEach((t,i)=>idx[t]=i);
+  const W=new Array(n).fill(0),L=new Array(n).fill(0),M=Array.from({length:n},()=>new Array(n).fill(0));
+  games.forEach(g=>{const wi=idx[g.w],li=idx[g.l];W[wi]+=g.wt;L[li]+=g.wt;M[wi][li]+=g.wt;M[li][wi]+=g.wt;});
+  const C=Array.from({length:n},()=>new Array(n).fill(0)),b=new Array(n).fill(0);
+  for(let i=0;i<n;i++){C[i][i]=2+W[i]+L[i];b[i]=1+(W[i]-L[i])/2;for(let j=0;j<n;j++) if(i!==j) C[i][j]=-M[i][j];}
+  return{r:gaussSim(C,b,n),C,b};
 }
-
-function computeSlice(dateIdx) {
-  const cutoffDate = TL_DATES[dateIdx];
-  const games = TL_GAMES.filter(g => g.date <= cutoffDate);
-  const gameCounts = new Int32Array(NT);
-  for (const g of games) {
-    const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
-    if (wi !== undefined && li !== undefined) { gameCounts[wi]++; gameCounts[li]++; }
-  }
-  const mxMatrix = Array.from({length: NT}, () => new Uint8Array(NT));
-  for (const g of games) {
-    const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
-    if (wi !== undefined && li !== undefined) { mxMatrix[wi][li]++; mxMatrix[li][wi]++; }
-  }
-  const qualIdx = MX_TEAMS.map((_, i) => i).filter(i => gameCounts[i] >= 10);
-  const qn = qualIdx.length;
-  const ratings = new Float64Array(NT);
-  if (qn >= 2) {
-    const subIdx = {};
-    qualIdx.forEach((gi, si) => subIdx[gi] = si);
-    const C = Array.from({length: qn}, () => new Array(qn).fill(0));
-    const b = new Array(qn).fill(1);
-    for (let si = 0; si < qn; si++) C[si][si] = 2;
-    for (const g of games) {
-      const wi = MX_TEAM_IDX[g.winner], li = MX_TEAM_IDX[g.loser];
-      if (wi === undefined || li === undefined) continue;
-      const swi = subIdx[wi], sli = subIdx[li];
-      if (swi === undefined || sli === undefined) continue;
-      const wt = g.location === 'away' ? 1.1 : g.location === 'home' ? 0.9 : 1.0;
-      C[swi][swi] += wt; C[sli][sli] += wt;
-      C[swi][sli] -= wt; C[sli][swi] -= wt;
-      b[swi] += wt * 0.5; b[sli] -= wt * 0.5;
-    }
-    const r = gaussSolve(C, b);
-    qualIdx.forEach((gi, si) => ratings[gi] = r[si]);
-  }
-  return { mxMatrix, ratings, gameCount: games.length, teamCount: qualIdx.length };
+function gaussSim(A,b,n){
+  const M=A.map((row,i)=>[...row,b[i]]);
+  for(let col=0;col<n;col++){let mx=col;for(let row=col+1;row<n;row++) if(Math.abs(M[row][col])>Math.abs(M[mx][col])) mx=row;[M[col],M[mx]]=[M[mx],M[col]];for(let row=col+1;row<n;row++){const f=M[row][col]/M[col][col];for(let k=col;k<=n;k++) M[row][k]-=f*M[col][k];}}
+  const x=new Array(n).fill(0);for(let i=n-1;i>=0;i--){x[i]=M[i][n]/M[i][i];for(let j=i-1;j>=0;j--) M[j][n]-=M[j][i]*x[i];}return x;
 }
-
-// ── RENDER ──────────────────────────────────────────────────
-function render() {
-  const wrap = document.getElementById("cwrap");
-  const cv = document.getElementById("mc");
-  const W = wrap.clientWidth, H = wrap.clientHeight;
-  cv.width = W; cv.height = H;
-  cv.style.width = W + "px"; cv.style.height = H + "px";
-  if (!mxData) return;
-
-  const ctx = cv.getContext("2d");
-  ctx.fillStyle = "#0a0a0a";
-  ctx.fillRect(0, 0, W, H);
-
-  const cellPx = BASE_CELL * zoom;               // screen pixels per team cell
-  const matW = NT * cellPx;                       // total matrix width in screen px
-  const originX = LABEL_MARGIN + panX;            // screen x where matrix starts
-  const originY = LABEL_MARGIN + panY;            // screen y where matrix starts
-
-  // Clamp visible team range for perf
-  const j0 = Math.max(0, Math.floor(-panX / cellPx));
-  const j1 = Math.min(NT, Math.ceil((W - originX) / cellPx) + 1);
-  const i0 = Math.max(0, Math.floor(-panY / cellPx));
-  const i1 = Math.min(NT, Math.ceil((H - originY) / cellPx) + 1);
-
-  // ── Draw matrix cells ──
-  for (let i = i0; i < i1; i++) {
-    for (let j = j0; j < j1; j++) {
-      const sx = originX + j * cellPx;
-      const sy = originY + i * cellPx;
-      const isDiag = i === j;
-      const isHL = selTeam >= 0 && (i === selTeam || j === selTeam);
-      let r = 0, g = 0, bl = 0;
-      if (isDiag) {
-        if (isHL || selTeam < 0) { g = 255; bl = 85; }
-        else { g = 80; bl = 27; }
-      } else if (mxData[i][j] > 0) {
-        const intensity = Math.min(1, mxData[i][j] / 3);
-        const base = isHL ? 220 : (selTeam >= 0 ? 60 : 180);
-        g = Math.floor(base * intensity + 30);
-        r = Math.floor(g * 0.05); bl = Math.floor(g * 0.15);
-        if (selTeam >= 0 && !isHL) { g = Math.floor(g*0.3); r = Math.floor(r*0.3); bl = Math.floor(bl*0.3); }
-      } else {
-        if (isHL) { g = 40; bl = 15; } else { r = 10; g = 10; bl = 10; }
-        if (selTeam >= 0 && !isHL) { r = 5; g = 5; bl = 5; }
-      }
-      ctx.fillStyle = `rgb(${r},${g},${bl})`;
-      ctx.fillRect(sx, sy, cellPx + 0.5, cellPx + 0.5);
-    }
-  }
-
-  // ── Conference blocks + labels on matrix ──
-  MX_CONF_GROUPS.forEach(cg => {
-    const sx = originX + cg.s * cellPx;
-    const sy = originY + cg.s * cellPx;
-    const sw = cg.z * cellPx;
-    if (sx + sw < LABEL_MARGIN || sy + sw < LABEL_MARGIN || sx > W || sy > H) return;
-    ctx.strokeStyle = "#00ff5550";
-    ctx.lineWidth = 1;
-    ctx.strokeRect(sx + 0.5, sy + 0.5, sw - 1, sw - 1);
-    // Conf label on matrix — always visible, scales with zoom
-    if (sw > 12) {
-      const fontSize = Math.min(14, Math.max(7, sw * 0.13));
-      ctx.font = `bold ${fontSize}px 'Courier Prime','Courier New',monospace`;
-      ctx.textAlign = "center";
-      const cx2 = sx + sw / 2, cy2 = sy + sw / 2 + fontSize * 0.35;
-      if (cx2 > LABEL_MARGIN && cy2 > LABEL_MARGIN && cx2 < W && cy2 < H) {
-        const tw = ctx.measureText(cg.n).width;
-        ctx.fillStyle = "#0a0a0aCC";
-        ctx.fillRect(cx2 - tw/2 - 4, cy2 - fontSize - 1, tw + 8, fontSize + 6);
-        ctx.fillStyle = "#00ff55";
-        ctx.fillText(cg.n, cx2, cy2);
-      }
-    }
-  });
-
-  // ── Left axis (row labels) ──
-  ctx.save();
-  ctx.beginPath();
-  ctx.rect(0, LABEL_MARGIN, LABEL_MARGIN, H - LABEL_MARGIN);
-  ctx.clip();
-  ctx.fillStyle = "#0a0a0a";
-  ctx.fillRect(0, LABEL_MARGIN, LABEL_MARGIN, H - LABEL_MARGIN);
-
-  if (cellPx >= 5) {
-    // Show individual team names
-    ctx.font = `${Math.min(12, Math.max(7, cellPx * 0.7))}px 'Courier Prime','Courier New',monospace`;
-    ctx.textAlign = "right";
-    for (let i = i0; i < i1; i++) {
-      const sy = originY + i * cellPx + cellPx / 2 + 3;
-      if (sy < LABEL_MARGIN || sy > H) continue;
-      const isHL = selTeam >= 0 && i === selTeam;
-      ctx.fillStyle = isHL ? "#00ff55" : (selTeam >= 0 ? "#003311" : "#007722");
-      ctx.fillText(MX_TEAMS[i], LABEL_MARGIN - 5, sy);
-    }
-  } else {
-    // Show conference names on left axis
-    ctx.textAlign = "right";
-    MX_CONF_GROUPS.forEach(cg => {
-      const sy = originY + cg.s * cellPx;
-      const sh = cg.z * cellPx;
-      const midY = sy + sh / 2 + 4;
-      if (midY < LABEL_MARGIN || midY > H) return;
-      const fontSize = Math.min(11, Math.max(7, sh * 0.18));
-      ctx.font = `bold ${fontSize}px 'Courier Prime','Courier New',monospace`;
-      ctx.fillStyle = "#00cc44";
-      ctx.fillText(cg.n, LABEL_MARGIN - 5, midY);
-    });
-  }
-  ctx.restore();
-
-  // ── Top axis (column labels) ──
-  ctx.save();
-  ctx.beginPath();
-  ctx.rect(LABEL_MARGIN, 0, W - LABEL_MARGIN, LABEL_MARGIN);
-  ctx.clip();
-  ctx.fillStyle = "#0a0a0a";
-  ctx.fillRect(LABEL_MARGIN, 0, W - LABEL_MARGIN, LABEL_MARGIN);
-
-  if (cellPx >= 5) {
-    // Show individual team names rotated
-    const fontSize = Math.min(12, Math.max(7, cellPx * 0.7));
-    ctx.font = `${fontSize}px 'Courier Prime','Courier New',monospace`;
-    for (let j = j0; j < j1; j++) {
-      const sx = originX + j * cellPx + cellPx / 2;
-      if (sx < LABEL_MARGIN || sx > W) continue;
-      const isHL = selTeam >= 0 && j === selTeam;
-      ctx.fillStyle = isHL ? "#00ff55" : (selTeam >= 0 ? "#003311" : "#007722");
-      ctx.save();
-      ctx.translate(sx, LABEL_MARGIN - 5);
-      ctx.rotate(-Math.PI / 2);
-      ctx.textAlign = "left";
-      ctx.fillText(MX_TEAMS[j], 0, 0);
-      ctx.restore();
-    }
-  } else {
-    // Show conference names on top axis
-    MX_CONF_GROUPS.forEach(cg => {
-      const sx = originX + cg.s * cellPx;
-      const sw = cg.z * cellPx;
-      const midX = sx + sw / 2;
-      if (midX < LABEL_MARGIN || midX > W) return;
-      const fontSize = Math.min(11, Math.max(7, sw * 0.18));
-      ctx.font = `bold ${fontSize}px 'Courier Prime','Courier New',monospace`;
-      ctx.fillStyle = "#00cc44";
-      ctx.save();
-      ctx.translate(midX, LABEL_MARGIN - 5);
-      ctx.rotate(-Math.PI / 2);
-      ctx.textAlign = "left";
-      ctx.fillText(cg.n, 0, 0);
-      ctx.restore();
-    });
-  }
-  ctx.restore();
-
-  // ── Corner block ──
-  ctx.fillStyle = "#0a0a0a";
-  ctx.fillRect(0, 0, LABEL_MARGIN, LABEL_MARGIN);
-
-  // ── Zoom hint ──
-  ctx.font = "10px 'Courier Prime','Courier New',monospace";
-  ctx.fillStyle = "#003311";
-  ctx.textAlign = "left";
-  ctx.fillText(`zoom: ${zoom.toFixed(2)}x  |  scroll to zoom · drag to pan`, LABEL_MARGIN + 6, 14);
+function renderSim(){
+  const{r,C,b}=solveSim(simGames);
+  const sorted=SIM_TEAMS.map((t,i)=>({t,v:r[i]})).sort((a,b2)=>b2.v-a.v);
+  const mx=Math.max(...r)||1;
+  document.getElementById("rdisplay").innerHTML=sorted.map(s=>`<div class="tr2"><span class="tn">${s.t}</span><div class="rb"><div class="rf" style="width:${Math.max(0,((s.v/mx)*100)).toFixed(0)}%"></div></div><span class="tv">${s.v.toFixed(4)}</span></div>`).join("");
+  const n=SIM_TEAMS.length;let mh="";
+  for(let i=0;i<n;i++){let row=`<span style="color:var(--green-x)">${SIM_TEAMS[i].substring(0,4)}</span>[`;for(let j=0;j<n;j++){const v=C[i][j];const col=i===j?"#00ff55":v<0?"#dc2626":"#005518";row+=`<span style="color:${col}">${v.toFixed(1).padStart(5)}</span>${j<n-1?" ":""}`;}row+=`]=<span style="color:var(--green)">${b[i].toFixed(2)}</span><br>`;mh+=row;}
+  document.getElementById("mdisplay").innerHTML=mh;
 }
-
-// ── ZOOM / PAN EVENTS ──────────────────────────────────────
-function initZoomPan() {
-  const wrap = document.getElementById("cwrap");
-  const cv = document.getElementById("mc");
-
-  // Mouse wheel zoom
-  wrap.addEventListener("wheel", e => {
-    e.preventDefault();
-    const rect = wrap.getBoundingClientRect();
-    const mx = e.clientX - rect.left - LABEL_MARGIN;
-    const my = e.clientY - rect.top  - LABEL_MARGIN;
-    const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
-    const newZoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoom * factor));
-    // Zoom toward mouse position
-    panX = mx - (mx - panX) * (newZoom / zoom);
-    panY = my - (my - panY) * (newZoom / zoom);
-    zoom = newZoom;
-    render();
-  }, { passive: false });
-
-  // Drag to pan
-  let dragging = false, dragStartX = 0, dragStartY = 0, panStartX = 0, panStartY = 0;
-  wrap.addEventListener("mousedown", e => {
-    dragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
-    panStartX = panX; panStartY = panY;
-    wrap.classList.add("grabbing");
-  });
-  window.addEventListener("mousemove", e => {
-    if (!dragging) return;
-    panX = panStartX + (e.clientX - dragStartX);
-    panY = panStartY + (e.clientY - dragStartY);
-    render();
-  });
-  window.addEventListener("mouseup", () => { dragging = false; wrap.classList.remove("grabbing"); });
-
-  // Touch pinch/pan
-  let lastDist = 0, lastTX = 0, lastTY = 0;
-  wrap.addEventListener("touchstart", e => {
-    if (e.touches.length === 2) { lastDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); }
-    if (e.touches.length === 1) { lastTX = e.touches[0].clientX; lastTY = e.touches[0].clientY; }
-  }, { passive: true });
-  wrap.addEventListener("touchmove", e => {
-    if (e.touches.length === 2) {
-      const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-      const factor = dist / lastDist;
-      zoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoom * factor));
-      lastDist = dist; render();
-    } else if (e.touches.length === 1) {
-      panX += e.touches[0].clientX - lastTX;
-      panY += e.touches[0].clientY - lastTY;
-      lastTX = e.touches[0].clientX; lastTY = e.touches[0].clientY; render();
-    }
-  }, { passive: true });
-
-  // Click to select team
-  wrap.addEventListener("click", e => {
-    if (!mxData) return;
-    const rect = wrap.getBoundingClientRect();
-    const sx = e.clientX - rect.left - LABEL_MARGIN - panX;
-    const sy = e.clientY - rect.top  - LABEL_MARGIN - panY;
-    const j = Math.floor(sx / (BASE_CELL * zoom));
-    const i = Math.floor(sy / (BASE_CELL * zoom));
-    if (i < 0 || i >= NT || j < 0 || j >= NT) { selTeam = -1; document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl")); render(); return; }
-    if (selTeam === i) {
-      selTeam = -1;
-      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-      document.getElementById("sel-info").innerHTML = "// scroll to zoom · drag to pan · click any cell to highlight that team";
-    } else {
-      selTeam = i;
-      document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-      const confIdx = MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z);
-      if (confIdx >= 0) document.querySelectorAll(".clabel")[confIdx]?.classList.add("hl");
-      const gp = Array.from(mxData[i]).filter(v => v > 0).length;
-      const rating = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "not yet qualified";
-      document.getElementById("sel-info").innerHTML = `// selected: <span>${MX_TEAMS[i]}</span> (${MX_CONF_GROUPS[MX_CONF_GROUPS.findIndex(cg => i >= cg.s && i < cg.s + cg.z)]?.n || "?"})) — <span>${gp}</span> opponents · rating: <span>${rating}</span> · click again to deselect`;
-    }
-    render();
-  });
-
-  // Hover tooltip
-  const tip = document.getElementById("tip");
-  wrap.addEventListener("mousemove", e => {
-    if (!mxData || document.getElementById("cwrap").classList.contains("grabbing")) { tip.style.display = "none"; return; }
-    const rect = wrap.getBoundingClientRect();
-    const sx = e.clientX - rect.left - LABEL_MARGIN - panX;
-    const sy = e.clientY - rect.top  - LABEL_MARGIN - panY;
-    const j = Math.floor(sx / (BASE_CELL * zoom));
-    const i = Math.floor(sy / (BASE_CELL * zoom));
-    if (i < 0 || i >= NT || j < 0 || j >= NT || e.clientX - rect.left < LABEL_MARGIN || e.clientY - rect.top < LABEL_MARGIN) { tip.style.display = "none"; return; }
-    const tA = MX_TEAMS[i], tB = MX_TEAMS[j];
-    const hasGame = mxData[i][j] > 0;
-    const rA = mxRatings[i] > 0 ? mxRatings[i].toFixed(4) : "—";
-    if (i === j) {
-      tip.innerHTML = `<div class="ta">${tA}</div><div class="tc">diagonal · rating: ${rA}</div><div class="tg">C[i][i] = 2 + games played</div>`;
-    } else {
-      tip.innerHTML = `<div class="ta">${tA} <span style="color:#005518">vs</span> ${tB}</div><div class="tg">${hasGame ? `played ${mxData[i][j]}x — C[i][j] = -${mxData[i][j]}` : "no games — C[i][j] = 0"}</div>`;
-    }
-    tip.style.display = "block";
-    tip.style.left = (e.clientX + 14) + "px";
-    tip.style.top  = (e.clientY - 10) + "px";
-  });
-  wrap.addEventListener("mouseleave", () => { tip.style.display = "none"; });
-}
-
-// Update on slider change
-let raf = null;
-function onSliderChange() {
-  if (raf) cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => {
-    TL_IDX = parseInt(document.getElementById("tl-slider").value);
-    const result = computeSlice(TL_IDX);
-    if (!result) return;
-    mxData = result.mxMatrix;
-    mxRatings = result.ratings;
-    selTeam = -1;
-    document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl"));
-    render();
-    const date = TL_DATES[TL_IDX];
-    document.getElementById("tl-date-display").textContent = date;
-    document.getElementById("tl-day-num").textContent = TL_IDX + 1;
-    document.getElementById("tl-games-to-date").textContent = result.gameCount.toLocaleString();
-    document.getElementById("tl-teams-active").textContent = result.teamCount;
-    document.getElementById("mx-dim").textContent = `${NT} × ${NT}`;
-    document.getElementById("mx-game-count").textContent = result.gameCount.toLocaleString();
-    document.getElementById("mx-team-count").textContent = result.teamCount;
-    document.getElementById("mx-cells").textContent = (NT * NT).toLocaleString();
-    let topTeam = "--", topRating = -Infinity;
-    for (let i = 0; i < NT; i++) { if (mxRatings[i] > topRating) { topRating = mxRatings[i]; topTeam = MX_TEAMS[i]; } }
-    document.getElementById("tl-top1").textContent = topTeam;
-    document.getElementById("sel-info").innerHTML = "// scroll to zoom · drag to pan · click any cell to highlight that team";
-  });
-}
-
-async function initMatrix() {
-  try {
-    const res = await fetch("games.json");
-    TL_GAMES = await res.json();
-  } catch(e) {
-    document.getElementById("tl-loading").textContent = "// error: could not load games.json";
-    return;
-  }
-  TL_DATES = [...new Set(TL_GAMES.map(g => g.date))].sort();
-  const lastIdx = TL_DATES.length - 1;
-  document.getElementById("tl-loading").style.display = "none";
-  document.getElementById("tl-wrap").style.display = "block";
-  const slider = document.getElementById("tl-slider");
-  slider.max = lastIdx; slider.value = lastIdx;
-  document.getElementById("tl-end-date").textContent = TL_DATES[lastIdx];
-  document.getElementById("tl-total-days").textContent = TL_DATES.length;
-
-  // Legend bar
-  const bar = document.getElementById("lbar");
-  if (!bar.children.length) {
-    for (let i = 0; i < 20; i++) {
-      const s = document.createElement("div"); s.style.flex = "1";
-      s.style.background = `rgb(${Math.floor(i*0.5)},${Math.floor(i*11)},${Math.floor(i*3)})`;
-      bar.appendChild(s);
-    }
-  }
-
-  // Conf label buttons
-  const cl = document.getElementById("conf-labels");
-  if (!cl.children.length) {
-    MX_CONF_GROUPS.forEach((cg, idx) => {
-      const btn = document.createElement("div"); btn.className = "clabel"; btn.textContent = cg.n;
-      btn.onclick = () => {
-        document.querySelectorAll(".clabel").forEach(b => b.classList.remove("hl")); btn.classList.add("hl");
-        // Pan to center that conference block
-        const wrap = document.getElementById("cwrap");
-        const W = wrap.clientWidth, H = wrap.clientHeight;
-        const cellPx = BASE_CELL * zoom;
-        const blockCenterX = (cg.s + cg.z / 2) * cellPx;
-        const blockCenterY = (cg.s + cg.z / 2) * cellPx;
-        panX = (W - LABEL_MARGIN) / 2 - blockCenterX;
-        panY = (H - LABEL_MARGIN) / 2 - blockCenterY;
-        selTeam = cg.s + Math.floor(cg.z / 2);
-        render();
-        document.getElementById("sel-info").innerHTML = `// highlighted: <span>${cg.n}</span> (${cg.z} teams)`;
-      };
-      cl.appendChild(btn);
-    });
-  }
-
-  slider.addEventListener("input", onSliderChange);
-
-  // Set initial zoom to fit full matrix in viewport
-  const wrap = document.getElementById("cwrap");
-  const fitW = (wrap.clientWidth  - LABEL_MARGIN) / (NT * BASE_CELL);
-  const fitH = (wrap.clientHeight - LABEL_MARGIN) / (NT * BASE_CELL);
-  zoom = Math.min(fitW, fitH, 1);
-  panX = 0; panY = 0;
-
-  initZoomPan();
-
-  // Re-render on window resize
-  window.addEventListener("resize", () => { render(); });
-
-  TL_IDX = lastIdx;
-  onSliderChange();
-}
-
-// ── ABOUT SIM ──────────────────────────────────────────────
-const SIM_TEAMS = ["Musketeers","Eagles","Tigers","Highlanders"];
-let simGames = [];
-
-function solveSim(games) {
-  const n = SIM_TEAMS.length, idx = {};
-  SIM_TEAMS.forEach((t, i) => idx[t] = i);
-  const W = new Array(n).fill(0), L = new Array(n).fill(0), M = Array.from({length:n}, () => new Array(n).fill(0));
-  games.forEach(g => { const wi=idx[g.w],li=idx[g.l]; W[wi]+=g.wt; L[li]+=g.wt; M[wi][li]+=g.wt; M[li][wi]+=g.wt; });
-  const C = Array.from({length:n}, () => new Array(n).fill(0)), b = new Array(n).fill(0);
-  for (let i = 0; i < n; i++) { C[i][i]=2+W[i]+L[i]; b[i]=1+(W[i]-L[i])/2; for (let j=0;j<n;j++) if(i!==j) C[i][j]=-M[i][j]; }
-  return { r: gaussSim(C, b, n), C, b };
-}
-
-function gaussSim(A, b, n) {
-  const M = A.map((row, i) => [...row, b[i]]);
-  for (let col=0;col<n;col++) { let mx=col; for(let row=col+1;row<n;row++) if(Math.abs(M[row][col])>Math.abs(M[mx][col])) mx=row; [M[col],M[mx]]=[M[mx],M[col]]; for(let row=col+1;row<n;row++){const f=M[row][col]/M[col][col];for(let k=col;k<=n;k++) M[row][k]-=f*M[col][k];} }
-  const x = new Array(n).fill(0); for(let i=n-1;i>=0;i--){x[i]=M[i][n]/M[i][i];for(let j=i-1;j>=0;j--) M[j][n]-=M[j][i]*x[i];} return x;
-}
-
-function renderSim() {
-  const {r,C,b} = solveSim(simGames);
-  const sorted = SIM_TEAMS.map((t,i) => ({t,v:r[i]})).sort((a,b2) => b2.v-a.v);
-  const mx = Math.max(...r)||1;
-  document.getElementById("rdisplay").innerHTML = sorted.map(s => `<div class="tr2"><span class="tn">${s.t}</span><div class="rb"><div class="rf" style="width:${Math.max(0,((s.v/mx)*100)).toFixed(0)}%"></div></div><span class="tv">${s.v.toFixed(4)}</span></div>`).join("");
-  const n = SIM_TEAMS.length; let mh = "";
-  for (let i=0;i<n;i++){let row=`<span style="color:var(--green-x)">${SIM_TEAMS[i].substring(0,4)}</span>[`;for(let j=0;j<n;j++){const v=C[i][j];const col=i===j?"#00ff55":v<0?"#dc2626":"#005518";row+=`<span style="color:${col}">${v.toFixed(1).padStart(5)}</span>${j<n-1?" ":""}`;}row+=`]=<span style="color:var(--green)">${b[i].toFixed(2)}</span><br>`;mh+=row;}
-  document.getElementById("mdisplay").innerHTML = mh;
-}
-
-function buildSimButtons() {
+function buildSimButtons(){
   const sc=[["Tigers","Highlanders","home","LSU def. NJIT (home)"],["Eagles","Highlanders","away","BC def. NJIT (road)"],["Tigers","Eagles","home","LSU def. BC (home)"],["Musketeers","Highlanders","away","XAV def. NJIT (road)"],["Tigers","Musketeers","home","LSU def. XAV (home)"],["Eagles","Musketeers","away","BC def. XAV (road)"]];
-  const c = document.getElementById("gbuts");
-  sc.forEach(([w,l,loc,lbl]) => {
-    const btn = document.createElement("button"); btn.className="sb"; btn.textContent=`+ ${lbl}`;
-    btn.onclick = () => { const wt=loc==="away"?1.1:loc==="home"?0.9:1.0; simGames.push({w,l,loc,wt}); const log=document.getElementById("glog"); const ll=loc==="away"?"(road ×1.1)":loc==="home"?"(home ×0.9)":"(neutral)"; log.innerHTML+=`<div class="ge"><span class="gw">${w}</span> def. ${l} <span class="gx">${ll}</span></div>`; log.scrollTop=log.scrollHeight; renderSim(); btn.classList.add("pl"); btn.disabled=true; };
-    c.appendChild(btn);
-  });
-  const rb = document.createElement("button"); rb.className="sb"; rb.textContent="[reset]";
-  rb.onclick = () => { simGames=[]; document.getElementById("glog").innerHTML='<div class="ge" style="color:var(--green-x)">// no games yet.</div>'; document.querySelectorAll(".sb").forEach(b=>{b.classList.remove("pl");b.disabled=false;}); renderSim(); };
-  c.appendChild(rb);
+  const c=document.getElementById("gbuts");
+  sc.forEach(([w,l,loc,lbl])=>{const btn=document.createElement("button");btn.className="sb";btn.textContent=`+ ${lbl}`;btn.onclick=()=>{const wt=loc==="away"?1.1:loc==="home"?0.9:1.0;simGames.push({w,l,loc,wt});const log=document.getElementById("glog");const ll=loc==="away"?"(road ×1.1)":loc==="home"?"(home ×0.9)":"(neutral)";log.innerHTML+=`<div class="ge"><span class="gw">${w}</span> def. ${l} <span class="gx">${ll}</span></div>`;log.scrollTop=log.scrollHeight;renderSim();btn.classList.add("pl");btn.disabled=true;};c.appendChild(btn);});
+  const rb=document.createElement("button");rb.className="sb";rb.textContent="[reset]";rb.onclick=()=>{simGames=[];document.getElementById("glog").innerHTML='<div class="ge" style="color:var(--green-x)">// no games yet.</div>';document.querySelectorAll(".sb").forEach(b=>{b.classList.remove("pl");b.disabled=false;});renderSim();};c.appendChild(rb);
 }
 
 loadRankings();
