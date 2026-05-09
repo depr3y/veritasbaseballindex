@@ -148,25 +148,56 @@ def scrape_date(target_date, known_confs, existing_game_ids, fetch_boxes=False):
     return games, known_confs, new_stats
 
 
-def all_dates_this_season():
-    season_start = date(2026, 2, 14)
+def all_dates_this_season(refresh_days=3):
+    """
+    Returns all dates from season start to today.
+    Always includes the last `refresh_days` dates so partially-scraped
+    days (scraper ran mid-day) get filled in on the next run.
+    """
+    season_start = date(2026, 2, 13)
+
+
+def dates_to_refresh(existing_games, refresh_days=3):
+    """
+    Returns only dates that are missing or were recently scraped
+    (last refresh_days days are always re-scraped to catch late-finishing games).
+    """
     today = date.today()
-    dates = []
-    current = season_start
-    while current <= today:
-        dates.append(current)
-        current += timedelta(days=1)
-    return dates
+    existing_dates = set(g["date"] for g in existing_games)
+    season_start = date(2026, 2, 13)
+    all_d = []
+    cur = season_start
+    while cur <= today:
+        d_str = str(cur)
+        # Include if: never scraped, OR within refresh window
+        if d_str not in existing_dates or cur >= today - timedelta(days=refresh_days):
+            all_d.append(cur)
+        cur += timedelta(days=1)
+    return all_d
 
 
 def deduplicate_games(games):
-    seen = set()
+    """
+    Deduplicate using game_id when available (most reliable).
+    For older records without game_id, fall back to (winner, loser, date, home_score, away_score)
+    so that same-day doubleheaders with different scores are preserved.
+    """
+    seen_ids = set()
+    seen_keys = set()
     unique = []
     for g in games:
-        key = (g["winner"], g["loser"], g["date"])
-        if key not in seen:
-            seen.add(key)
-            unique.append(g)
+        gid = g.get("game_id", "")
+        if gid:
+            if gid not in seen_ids:
+                seen_ids.add(gid)
+                unique.append(g)
+        else:
+            # Fallback: include scores so doubleheaders aren't collapsed
+            key = (g["winner"], g["loser"], g["date"],
+                   g.get("home_score", ""), g.get("away_score", ""))
+            if key not in seen_keys:
+                seen_keys.add(key)
+                unique.append(g)
     return unique
 
 
@@ -197,16 +228,21 @@ if __name__ == "__main__":
     new_stats = []
 
     if args.full_season:
-        dates = all_dates_this_season()
-        print(f"Scraping full season: {len(dates)} dates {'(+ box scores)' if args.box_scores else '(fast mode)'}...")
+        # Smart refresh: scrape all missing dates + always re-scrape last 3 days
+        dates = dates_to_refresh(existing_games, refresh_days=3)
+        print(f"Scraping {len(dates)} dates (missing + last 3 days refreshed) {'(+ box scores)' if args.box_scores else '(fast mode)'}...")
+
         for i, d in enumerate(dates):
             print(f"  [{i+1}/{len(dates)}] {d}...", end=" ", flush=True)
             days_games, known_confs, days_stats = scrape_date(
                 d, known_confs, existing_game_ids, fetch_boxes=args.box_scores)
             print(f"{len(days_games)} games")
-            new_games.extend(days_games)
-            new_stats.extend(days_stats)
-            existing_game_ids.update(s["game_id"] for s in days_stats)
+            if days_games:
+                # Only replace existing data for this date if we got something back
+                existing_games = [g for g in existing_games if g["date"] != str(d)]
+                new_games.extend(days_games)
+                new_stats.extend(days_stats)
+                existing_game_ids.update(s["game_id"] for s in days_stats)
             time.sleep(0.5)
 
     elif args.date:
@@ -215,13 +251,21 @@ if __name__ == "__main__":
         new_games, known_confs, new_stats = scrape_date(
             target, known_confs, existing_game_ids, fetch_boxes=args.box_scores)
         print(f"  Found {len(new_games)} games")
+        if new_games:
+            existing_games = [g for g in existing_games if g["date"] != str(target)]
 
     else:
+        # Default: scrape today AND yesterday (catches games that finished after last run)
         today = date.today()
-        print(f"Scraping today ({today})...")
-        new_games, known_confs, new_stats = scrape_date(
-            today, known_confs, existing_game_ids, fetch_boxes=args.box_scores)
-        print(f"  Found {len(new_games)} games")
+        for target in [today - timedelta(days=1), today]:
+            print(f"Scraping {target}...")
+            day_games, known_confs, day_stats = scrape_date(
+                target, known_confs, existing_game_ids, fetch_boxes=args.box_scores)
+            print(f"  Found {len(day_games)} games")
+            if day_games:
+                existing_games = [g for g in existing_games if g["date"] != str(target)]
+                new_games.extend(day_games)
+                new_stats.extend(day_stats)
 
     all_games = deduplicate_games(existing_games + new_games)
     all_stats = deduplicate_stats(existing_stats + new_stats)
