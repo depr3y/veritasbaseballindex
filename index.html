@@ -22,7 +22,8 @@
     .nav-btn:hover:not(.active){color:var(--green)}
 
     /* MATRIX TAB */
-    #matrix-panel{display:block}
+    #matrix-panel{display:none}
+    #about-panel{display:block}
     .mx-header{padding:10px 20px;border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;background:var(--bg2)}
     .mx-info{font-size:11px;color:var(--green-x);letter-spacing:0.06em}
     .mx-info span{color:var(--green)}
@@ -358,7 +359,7 @@ function showTab(tab) {
     document.getElementById(t+"-panel").style.display = t === tab ? "block" : "none";
   });
   document.querySelectorAll(".nav-btn").forEach((b,i) => {
-    b.classList.toggle("active", ["matrix","rankings","map","about"][i] === tab);
+    b.classList.toggle("active", ["about","matrix","rankings","map"][i] === tab);
   });
   if (tab === "map" && !mapInit) initMap();
   if (tab === "about" && !aboutInit) { aboutInit = true; buildSimButtons(); renderSim(); }
