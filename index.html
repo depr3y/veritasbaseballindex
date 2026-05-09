@@ -436,8 +436,8 @@
       <div style="font-size:10px;color:var(--green-x);margin-top:2px;letter-spacing:0.06em">// top 16 VBI teams — projected regional hosts as of today · updated nightly</div>
     </div>
     <div style="font-size:11px;color:var(--green-x)">
-      <span style="color:var(--green-b)">⬤</span> #1-8 national seeds &nbsp;·&nbsp;
-      <span style="color:#00cc44">⬤</span> #9-16 regional hosts
+      <span style="font-family:'Courier Prime','Courier New',monospace;color:var(--green-b)">[1]–[8]</span> national seeds &nbsp;·&nbsp;
+      <span style="font-family:'Courier Prime','Courier New',monospace;color:var(--green-d)">[9]–[16]</span> regional hosts
     </div>
   </div>
   <div id="map"></div>
@@ -769,26 +769,28 @@ function initMap() {
     if (!coords) return;
 
     const isNatSeed = idx < 8;
-    const color = isNatSeed ? '#00ff55' : '#00cc44';
-    const radius = isNatSeed ? 14 : 10;
+    const color = isNatSeed ? '#00ff55' : '#007722';
+    const borderColor = isNatSeed ? '#00ff55' : '#1a3318';
+    const bgColor = isNatSeed ? '#001a0a' : '#0a0a0a';
+    const fontSize = isNatSeed ? '12' : '11';
     const seedNum = idx + 1;
 
     const icon = L.divIcon({
       className: '',
       html: `<div style="
-        width:${radius*2}px;height:${radius*2}px;
-        background:${color};
-        border:2px solid ${isNatSeed?'#fff':'#0a0a0a'};
-        border-radius:50%;
-        display:flex;align-items:center;justify-content:center;
         font-family:'Courier New',monospace;
-        font-size:${isNatSeed?'11':'10'}px;
+        font-size:${fontSize}px;
         font-weight:700;
-        color:#0a0a0a;
-        box-shadow:0 0 ${isNatSeed?'12':'6'}px ${color}80;
-      ">${seedNum}</div>`,
-      iconSize:[radius*2, radius*2],
-      iconAnchor:[radius, radius]
+        color:${color};
+        background:${bgColor};
+        border:1px solid ${borderColor};
+        padding:2px 5px;
+        white-space:nowrap;
+        letter-spacing:0.04em;
+        box-shadow:${isNatSeed?`0 0 8px #00ff5540`:''};
+      ">[${seedNum}]</div>`,
+      iconSize:null,
+      iconAnchor:[16, 12]
     });
 
     const seedDesc = isNatSeed
