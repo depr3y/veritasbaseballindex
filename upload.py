@@ -1,17 +1,23 @@
 import json
 import requests
 import os
-from datetime import date
+from datetime import datetime, timezone, timedelta
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://fcipxtdcyxerytxfrzhf.supabase.co")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "REPLACE_WITH_YOUR_KEY")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjaXB4dGRjeXhlcnl0eGZyemhmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODE4NzM3MSwiZXhwIjoyMDkzNzYzMzcxfQ.x9Hs11sVHdX_6WkIrD872EKPJ8eTk72M1BET12HnJj4")
+
+if not SUPABASE_KEY:
+    raise ValueError("SUPABASE_KEY environment variable not set")
 
 def upload_rankings():
     with open("rankings.json") as f:
         data = json.load(f)
 
     rankings = data["rankings"]
-    today = str(date.today())
+
+    # Use EST date so it always shows the correct local date
+    EST = timezone(timedelta(hours=-4))  # EDT (summer), use -5 in winter
+    today = datetime.now(EST).strftime('%Y-%m-%d')
 
     for r in rankings:
         r["updated_at"] = today
