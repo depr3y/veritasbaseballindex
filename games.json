@@ -83444,5 +83444,16 @@
     "away_team": "Illinois St.",
     "home_score": 6,
     "away_score": 7
+  },
+  {
+    "game_id": "6602442",
+    "winner": "Bucknell",
+    "loser": "Navy",
+    "location": "home",
+    "date": "2026-05-11",
+    "home_team": "Bucknell",
+    "away_team": "Navy",
+    "home_score": 6,
+    "away_score": 4
   }
 ]
