@@ -82016,6 +82016,17 @@
     "away_score": 5
   },
   {
+    "game_id": "6544571",
+    "winner": "Merrimack",
+    "loser": "Saint Peter's",
+    "location": "away",
+    "date": "2026-05-10",
+    "home_team": "Saint Peter's",
+    "away_team": "Merrimack",
+    "home_score": 3,
+    "away_score": 11
+  },
+  {
     "game_id": "6544663",
     "winner": "Niagara",
     "loser": "Manhattan",
@@ -82113,6 +82124,17 @@
     "away_team": "Utah Valley",
     "home_score": 16,
     "away_score": 6
+  },
+  {
+    "game_id": "6547167",
+    "winner": "FDU",
+    "loser": "Norfolk St.",
+    "location": "away",
+    "date": "2026-05-10",
+    "home_team": "Norfolk St.",
+    "away_team": "FDU",
+    "home_score": 8,
+    "away_score": 11
   },
   {
     "game_id": "6547844",
