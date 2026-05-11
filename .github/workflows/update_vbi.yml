@@ -1,0 +1,45 @@
+name: VBI Nightly Update
+
+on:
+  schedule:
+    - cron: '0 7 * * *'  # 3am EST (7am UTC) — after all late games finish
+  workflow_dispatch:       # allows manual trigger from GitHub Actions tab
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests numpy
+
+      - name: Scrape latest games
+        run: python scraper.py --full-season
+        # --full-season with the new scraper only fetches missing dates
+        # + re-scrapes the last 3 days to catch late-finishing games
+
+      - name: Run Colley Matrix ratings
+        run: python rate.py
+
+      - name: Upload rankings to Supabase
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python upload.py
+
+      - name: Commit updated data files
+        run: |
+          git config user.name "VBI Bot"
+          git config user.email "vbi-bot@users.noreply.github.com"
+          git add games.json rankings.json team_conferences.json
+          git diff --staged --quiet || git commit -m "nightly update $(date -u '+%Y-%m-%d')"
+          git push
