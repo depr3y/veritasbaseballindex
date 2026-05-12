@@ -81609,6 +81609,17 @@
     "away_score": 5
   },
   {
+    "game_id": "6587546",
+    "winner": "Vanderbilt",
+    "loser": "Missouri",
+    "location": "away",
+    "date": "2026-05-09",
+    "home_team": "Missouri",
+    "away_team": "Vanderbilt",
+    "home_score": 8,
+    "away_score": 11
+  },
+  {
     "game_id": "6547661",
     "winner": "NC State",
     "loser": "Stanford",
@@ -81926,6 +81937,17 @@
     "away_team": "Oklahoma St.",
     "home_score": 6,
     "away_score": 13
+  },
+  {
+    "game_id": "6542794",
+    "winner": "Sacramento St.",
+    "loser": "California Baptist",
+    "location": "away",
+    "date": "2026-05-09",
+    "home_team": "California Baptist",
+    "away_team": "Sacramento St.",
+    "home_score": 5,
+    "away_score": 6
   },
   {
     "game_id": "6545366",
@@ -83455,5 +83477,148 @@
     "away_team": "Navy",
     "home_score": 6,
     "away_score": 4
+  },
+  {
+    "game_id": "6542798",
+    "winner": "California Baptist",
+    "loser": "UC Santa Barbara",
+    "location": "away",
+    "date": "2026-05-11",
+    "home_team": "UC Santa Barbara",
+    "away_team": "California Baptist",
+    "home_score": 3,
+    "away_score": 8
+  },
+  {
+    "game_id": "6546906",
+    "winner": "Virginia",
+    "loser": "Richmond",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Virginia",
+    "away_team": "Richmond",
+    "home_score": 18,
+    "away_score": 6
+  },
+  {
+    "game_id": "6544575",
+    "winner": "Maine",
+    "loser": "Merrimack",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Maine",
+    "away_team": "Merrimack",
+    "home_score": 14,
+    "away_score": 4
+  },
+  {
+    "game_id": "6540498",
+    "winner": "Troy",
+    "loser": "UAB",
+    "location": "away",
+    "date": "2026-05-12",
+    "home_team": "UAB",
+    "away_team": "Troy",
+    "home_score": 5,
+    "away_score": 14
+  },
+  {
+    "game_id": "6541718",
+    "winner": "Fairfield",
+    "loser": "New Haven",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Fairfield",
+    "away_team": "New Haven",
+    "home_score": 13,
+    "away_score": 11
+  },
+  {
+    "game_id": "6544667",
+    "winner": "Manhattan",
+    "loser": "LIU",
+    "location": "away",
+    "date": "2026-05-12",
+    "home_team": "LIU",
+    "away_team": "Manhattan",
+    "home_score": 1,
+    "away_score": 11
+  },
+  {
+    "game_id": "6547294",
+    "winner": "Towson",
+    "loser": "UMBC",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Towson",
+    "away_team": "UMBC",
+    "home_score": 9,
+    "away_score": 8
+  },
+  {
+    "game_id": "6548500",
+    "winner": "Bryant",
+    "loser": "Stonehill",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Bryant",
+    "away_team": "Stonehill",
+    "home_score": 11,
+    "away_score": 1
+  },
+  {
+    "game_id": "6550836",
+    "winner": "Niagara",
+    "loser": "Mercyhurst",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Niagara",
+    "away_team": "Mercyhurst",
+    "home_score": 7,
+    "away_score": 5
+  },
+  {
+    "game_id": "6552175",
+    "winner": "UAlbany",
+    "loser": "Le Moyne",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "UAlbany",
+    "away_team": "Le Moyne",
+    "home_score": 20,
+    "away_score": 3
+  },
+  {
+    "game_id": "6552579",
+    "winner": "Oakland",
+    "loser": "Akron",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Oakland",
+    "away_team": "Akron",
+    "home_score": 13,
+    "away_score": 10
+  },
+  {
+    "game_id": "6546206",
+    "winner": "Kent St.",
+    "loser": "Michigan",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Kent St.",
+    "away_team": "Michigan",
+    "home_score": 5,
+    "away_score": 3
+  },
+  {
+    "game_id": "6542673",
+    "winner": "Michigan St.",
+    "loser": "Eastern Mich.",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Michigan St.",
+    "away_team": "Eastern Mich.",
+    "home_score": 5,
+    "away_score": 2
   }
 ]
