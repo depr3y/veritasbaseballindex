@@ -691,15 +691,20 @@ let matrixInit = false;
 
 async function loadRankings() {
   try {
-    const [rankRes, rpiRes] = await Promise.all([
+    const [rankRes, rpiRes, gamesRes] = await Promise.all([
       fetch(`${SUPABASE_URL}/rest/v1/rankings?select=*&order=rank.asc`,
         {headers:{"apikey":SUPABASE_KEY,"Authorization":`Bearer ${SUPABASE_KEY}`}}),
-      fetch("rpi.json").catch(() => null)
+      fetch("rpi.json").catch(() => null),
+      fetch("games.json").catch(() => null)
     ]);
     allTeams = await rankRes.json();
     if (rpiRes && rpiRes.ok) {
       const rpiData = await rpiRes.json();
       allRpi = rpiData.teams || {};
+    }
+    if (gamesRes && gamesRes.ok) {
+      TL_GAMES = await gamesRes.json();
+      TL_DATES = [...new Set(TL_GAMES.map(g=>g.date))].sort();
     }
     document.getElementById("team-count").textContent = allTeams.length;
     if (allTeams.length > 0) document.getElementById("updated").textContent = allTeams[0].updated_at;
@@ -753,11 +758,126 @@ function renderTable() {
 
 let rkSelectedTeam = null;
 
-function openRkSidebar(teamName) {
+// ── SHARED TEAM STATS PANEL ────────────────────────────────
+function buildTeamPanel(teamName) {
   const t = allTeams.find(x => x.team === teamName);
-  if (!t) return;
+  if (!t) return null;
 
-  // Highlight selected row
+  const rpi = allRpi[teamName];
+  const confTeams = allTeams.filter(x => x.conf === t.conf).sort((a,b) => a.rank-b.rank);
+  const confRank = confTeams.findIndex(x => x.team === t.team) + 1;
+  const confSize = confTeams.length;
+  const winPct = t.wins+t.losses > 0 ? (t.wins/(t.wins+t.losses)).toFixed(3) : "—";
+  const tier = t.rating>=0.65?"elite":t.rating>=0.58?"strong":t.rating>=0.52?"above avg":t.rating>=0.48?"average":"below avg";
+
+  // RPI delta
+  let rpiHtml = "—";
+  if (rpi) {
+    const diff = rpi.rpi_rank - t.rank;
+    const arrow = diff > 0 ? `<span class="delta-up">▲${diff}</span>` : diff < 0 ? `<span class="delta-dn">▼${Math.abs(diff)}</span>` : `<span class="delta-flat">—</span>`;
+    rpiHtml = `#${rpi.rpi_rank} ${arrow}`;
+  }
+
+  // Game-based stats
+  let roadW=0,roadL=0,homeW=0,homeL=0;
+  let sosSum=0,sosCount=0;
+  let bestWin=null,bestWinRank=999,worstLoss=null,worstLossRank=0;
+  let last10=[];
+  let q1W=0,q1L=0,q2W=0,q2L=0,q3W=0,q3L=0,q4W=0,q4L=0;
+  let top25W=0,top25L=0,top50W=0,top50L=0;
+
+  if (TL_GAMES && TL_GAMES.length > 0) {
+    const teamGames = TL_GAMES.filter(g => g.winner===teamName||g.loser===teamName)
+      .sort((a,b) => a.date.localeCompare(b.date));
+    last10 = teamGames.slice(-10);
+
+    for (const g of teamGames) {
+      const isWin = g.winner === teamName;
+      const opp = isWin ? g.loser : g.winner;
+      const onRoad = (isWin&&g.location==='away')||(!isWin&&g.location==='home');
+      if (isWin) { onRoad?roadW++:homeW++; } else { onRoad?roadL++:homeL++; }
+
+      const oppTeam = allTeams.find(x=>x.team===opp);
+      const oppRank = oppTeam ? oppTeam.rank : 999;
+      const oppRating = oppTeam ? oppTeam.rating : 0;
+      if (oppRating > 0) { sosSum += oppRating; sosCount++; }
+
+      // Quadrants by VBI rank
+      if (oppRank <= 25) { isWin?q1W++:q1L++; }
+      else if (oppRank <= 50) { isWin?q2W++:q2L++; }
+      else if (oppRank <= 100) { isWin?q3W++:q3L++; }
+      else { isWin?q4W++:q4L++; }
+
+      if (oppRank <= 25) { isWin?top25W++:top25L++; }
+      if (oppRank <= 50) { isWin?top50W++:top50L++; }
+
+      if (isWin && oppRank < bestWinRank) { bestWinRank=oppRank; bestWin={opp,rank:oppRank}; }
+      if (!isWin && oppRank > worstLossRank && oppTeam) { worstLossRank=oppRank; worstLoss={opp,rank:oppRank}; }
+    }
+  }
+  const sos = sosCount > 0 ? (sosSum/sosCount).toFixed(4) : "—";
+  const last10W = last10.filter(g=>g.winner===teamName).length;
+  const last10L = last10.length - last10W;
+
+  const badge = t.rank<=16
+    ? `<div class="rk-sb-row"><span class="rk-sb-lbl">STATUS</span><span class="rk-sb-val" style="color:#00ff55">● projected host</span></div>`
+    : t.rank<=25
+    ? `<div class="rk-sb-row"><span class="rk-sb-lbl">STATUS</span><span class="rk-sb-val" style="color:#00cc44">● top 25</span></div>`
+    : '';
+
+  const insightsHtml = `
+    <div class="rk-sb-row"><span class="rk-sb-lbl">RPI RANK</span><span class="rk-sb-val">${rpiHtml}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">CONF RANK</span><span class="rk-sb-val">#${confRank} of ${confSize}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">WIN %</span><span class="rk-sb-val">${winPct}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">RATING TIER</span><span class="rk-sb-val">${tier}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">LAST 10</span><span class="rk-sb-val" style="color:${last10W>=7?'#00ff55':last10W>=5?'var(--green-b)':'#ff4444'}">${last10W}-${last10L}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">ROAD</span><span class="rk-sb-val">${roadW}-${roadL}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">HOME</span><span class="rk-sb-val">${homeW}-${homeL}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">AVG OPP RATING</span><span class="rk-sb-val">${sos}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">vs TOP 25</span><span class="rk-sb-val">${top25W}-${top25L}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">vs TOP 50</span><span class="rk-sb-val">${top50W}-${top50L}</span></div>
+    <div style="font-size:9px;color:var(--green-x);letter-spacing:0.08em;padding:5px 0 2px">// quadrant record (by VBI rank)</div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">Q1 (1-25)</span><span class="rk-sb-val">${q1W}-${q1L}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">Q2 (26-50)</span><span class="rk-sb-val">${q2W}-${q2L}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">Q3 (51-100)</span><span class="rk-sb-val">${q3W}-${q3L}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">Q4 (100+)</span><span class="rk-sb-val">${q4W}-${q4L}</span></div>
+    <div style="font-size:9px;color:var(--green-x);letter-spacing:0.08em;padding:5px 0 2px">// notable games</div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">BEST WIN<div style="font-size:9px;opacity:0.6">${bestWin?bestWin.opp:"—"}</div></span><span class="rk-sb-val">${bestWin?`#${bestWin.rank}`:"—"}</span></div>
+    <div class="rk-sb-row"><span class="rk-sb-lbl">WORST LOSS<div style="font-size:9px;opacity:0.6">${worstLoss?worstLoss.opp:"—"}</div></span><span class="rk-sb-val">${worstLoss?`#${worstLoss.rank}`:"—"}</span></div>
+    ${badge}
+  `;
+
+  // Game log
+  let gameLogHtml = "";
+  if (TL_GAMES && TL_GAMES.length > 0) {
+    const teamGames = TL_GAMES.filter(g=>g.winner===teamName||g.loser===teamName)
+      .sort((a,b)=>b.date.localeCompare(a.date));
+    gameLogHtml = teamGames.map(g => {
+      const isWin = g.winner === teamName;
+      const opp = isWin ? g.loser : g.winner;
+      const onRoad = (isWin&&g.location==='away')||(!isWin&&g.location==='home');
+      const oppTeam = allTeams.find(x=>x.team===opp);
+      const oppRank = oppTeam ? `#${oppTeam.rank}` : "—";
+      const rCol = isWin ? '#00ff55' : '#ff4444';
+      const oppHighlight = oppTeam && oppTeam.rank <= 25 ? 'color:var(--green-b)' : 'color:var(--green-d)';
+      return `<div class="rk-sb-game">
+        <span style="color:var(--green-x);font-size:10px;min-width:68px">${g.date}</span>
+        <span style="font-weight:700;color:${rCol};min-width:12px">${isWin?'W':'L'}</span>
+        <span style="flex:1;${oppHighlight};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${opp}</span>
+        <span style="font-size:10px;color:var(--green-x);min-width:30px;text-align:right">${onRoad?'road':'home'}</span>
+        <span style="font-size:10px;color:var(--green-x);min-width:28px;text-align:right">${oppRank}</span>
+      </div>`;
+    }).join("");
+  }
+
+  return { t, insightsHtml, gameLogHtml };
+}
+
+function openRkSidebar(teamName) {
+  const panel = buildTeamPanel(teamName);
+  if (!panel) return;
+  const {t, insightsHtml, gameLogHtml} = panel;
+
   document.querySelectorAll("#tbody tr").forEach(r => r.classList.remove("selected"));
   document.querySelectorAll("#tbody tr").forEach(r => {
     if (r.querySelector(".td-team")?.textContent === teamName) r.classList.add("selected");
@@ -765,71 +885,15 @@ function openRkSidebar(teamName) {
 
   rkSelectedTeam = teamName;
   document.getElementById("rk-sidebar").classList.add("open");
-
-  // Header
   document.getElementById("rk-sb-name").textContent = t.team;
   document.getElementById("rk-sb-conf").textContent = t.conf || "—";
   document.getElementById("rk-sb-rating").textContent = t.rating.toFixed(4);
   document.getElementById("rk-sb-rank").textContent = `#${t.rank}`;
   document.getElementById("rk-sb-record").textContent = `${t.wins}-${t.losses}`;
-
-  // Conf rank
-  const confTeams = allTeams.filter(x => x.conf === t.conf).sort((a,b) => a.rank-b.rank);
-  const confRank = confTeams.findIndex(x => x.team === t.team) + 1;
-  const confSize = confTeams.length;
-
-  // Win% 
-  const winPct = t.wins + t.losses > 0 ? (t.wins/(t.wins+t.losses)).toFixed(3) : "—";
-
-  // Games above .500
-  const gab = t.wins - t.losses;
-  const gabStr = gab >= 0 ? `+${gab}` : `${gab}`;
-
-  // Rating tier
-  const tier = t.rating >= 0.65 ? "elite" : t.rating >= 0.58 ? "strong" : t.rating >= 0.52 ? "above avg" : t.rating >= 0.48 ? "average" : "below avg";
-
-  // Top 25 / top 16 badges
-  const badges = [];
-  if (t.rank <= 16) badges.push(`<span style="color:#00ff55;font-size:10px;font-weight:700">● projected host</span>`);
-  else if (t.rank <= 25) badges.push(`<span style="color:#00cc44;font-size:10px">● top 25</span>`);
-
-  document.getElementById("rk-sb-insights").innerHTML = `
-    <div class="rk-sb-row"><span class="rk-sb-lbl">CONF RANK</span><span class="rk-sb-val">#${confRank} of ${confSize}</span></div>
-    <div class="rk-sb-row"><span class="rk-sb-lbl">WIN %</span><span class="rk-sb-val">${winPct}</span></div>
-    <div class="rk-sb-row"><span class="rk-sb-lbl">GAMES ABOVE .500</span><span class="rk-sb-val" style="color:${gab>=0?'var(--green-b)':'#ff4444'}">${gabStr}</span></div>
-    <div class="rk-sb-row"><span class="rk-sb-lbl">RATING TIER</span><span class="rk-sb-val">${tier}</span></div>
-    ${badges.length?`<div class="rk-sb-row" style="border-bottom:none">${badges.join(' ')}</div>`:''}
-  `;
-
-  // Game log from TL_GAMES if matrix has loaded, otherwise show note
-  const gamesEl = document.getElementById("rk-sb-games");
-  const glblEl = document.getElementById("rk-sb-games-lbl");
-
-  if (TL_GAMES && TL_GAMES.length > 0) {
-    const teamGames = TL_GAMES.filter(g => g.winner === t.team || g.loser === t.team)
-      .sort((a,b) => b.date.localeCompare(a.date));
-    glblEl.textContent = `// ${teamGames.length} games this season`;
-    gamesEl.innerHTML = teamGames.map(g => {
-      const isWin = g.winner === t.team;
-      const opp = isWin ? g.loser : g.winner;
-      const onRoad = (isWin && g.location==='away') || (!isWin && g.location==='home');
-      const oppTeam = allTeams.find(x => x.team === opp);
-      const oppRating = oppTeam ? oppTeam.rating.toFixed(3) : "—";
-      const rCol = isWin ? '#00ff55' : '#ff4444';
-      return `<div class="rk-sb-game">
-        <span style="color:var(--green-x);font-size:10px;min-width:68px">${g.date}</span>
-        <span style="font-weight:700;color:${rCol};min-width:12px">${isWin?'W':'L'}</span>
-        <span style="flex:1;color:var(--green-d);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${opp}</span>
-        <span style="font-size:10px;color:var(--green-x);min-width:30px;text-align:right">${onRoad?'road':'home'}</span>
-        <span style="font-size:10px;color:var(--green-x);min-width:36px;text-align:right">${oppRating}</span>
-      </div>`;
-    }).join("") || `<div style="padding:12px 0;font-size:11px;color:var(--green-x)">no games found</div>`;
-  } else {
-    glblEl.textContent = "// game log";
-    gamesEl.innerHTML = `<div style="padding:12px 0;font-size:11px;color:var(--green-x);line-height:1.7">
-      Open the <span style="color:var(--green-b);cursor:pointer" onclick="showTab('matrix')">[matrix]</span> tab first to load game data, then come back here for the full game log.
-    </div>`;
-  }
+  document.getElementById("rk-sb-insights").innerHTML = insightsHtml;
+  document.getElementById("rk-sb-games-lbl").textContent = `// game log`;
+  document.getElementById("rk-sb-games").innerHTML = gameLogHtml ||
+    `<div style="padding:12px 0;font-size:11px;color:var(--green-x)">no games found</div>`;
 }
 
 function closeRkSidebar() {
@@ -1356,54 +1420,16 @@ function updateSidebar(i){
   const team=MX_TEAMS[i];
   const ci=MX_CONF_GROUPS.findIndex(cg=>i>=cg.s&&i<cg.s+cg.z);
   const conf=MX_CONF_GROUPS[ci]?.n||"—";
-  const rating=mxRatings[i]>0?mxRatings[i].toFixed(4):"—";
   const cutoff=TL_DATES[TL_IDX];
 
-  // Rank + conf rank
-  let rank="—", confRank="—", confSize=0;
+  let rating="—",rank="—";
   if(mxRatings[i]>0){
+    rating=mxRatings[i].toFixed(4);
     const ranked=Array.from(mxRatings).map((r,idx)=>({r,idx})).filter(x=>x.r>0).sort((a,b)=>b.r-a.r);
     const ri=ranked.findIndex(x=>x.idx===i);
     if(ri>=0) rank=`#${ri+1}`;
-    // Conference rank
-    if(ci>=0){
-      const cg=MX_CONF_GROUPS[ci];
-      confSize=cg.z;
-      const confTeams=Array.from({length:cg.z},(_,k)=>cg.s+k).filter(idx=>mxRatings[idx]>0).sort((a,b)=>mxRatings[b]-mxRatings[a]);
-      const cr=confTeams.indexOf(i);
-      if(cr>=0) confRank=`#${cr+1} of ${confSize}`;
-    }
   }
 
-  // Games through slider date
-  const teamGames=TL_GAMES.filter(g=>g.date<=cutoff&&(g.winner===team||g.loser===team));
-  const wins=teamGames.filter(g=>g.winner===team).length;
-  const losses=teamGames.filter(g=>g.loser===team).length;
-
-  // Road / home splits
-  let roadW=0,roadL=0,homeW=0,homeL=0;
-  for(const g of teamGames){
-    const isWin=g.winner===team;
-    const onRoad=(isWin&&g.location==='away')||(!isWin&&g.location==='home');
-    if(isWin){onRoad?roadW++:homeW++;}else{onRoad?roadL++:homeL++;}
-  }
-
-  // SOS — average opponent rating
-  let sosSum=0,sosCount=0;
-  let bestWin=null,bestWinR=-Infinity;
-  let worstLoss=null,worstLossR=Infinity;
-  for(const g of teamGames){
-    const isWin=g.winner===team;
-    const opp=isWin?g.loser:g.winner;
-    const oppIdx=MX_TEAM_IDX[opp];
-    const oppR=oppIdx!==undefined?mxRatings[oppIdx]:0;
-    if(oppR>0){sosSum+=oppR;sosCount++;}
-    if(isWin&&oppR>bestWinR){bestWinR=oppR;bestWin={opp,r:oppR};}
-    if(!isWin&&oppR<worstLossR&&oppR>0){worstLossR=oppR;worstLoss={opp,r:oppR};}
-  }
-  const sos=sosCount>0?(sosSum/sosCount).toFixed(4):"—";
-
-  // Trend — compare rating now vs 5 slider days ago
   let trendHtml="—";
   if(mxRatings[i]>0&&TL_IDX>=5){
     const prev=computeSlice(TL_IDX-5);
@@ -1416,69 +1442,44 @@ function updateSidebar(i){
     }
   }
 
+  const panel=buildTeamPanel(team);
   document.getElementById("sb-team-name").textContent=team;
   document.getElementById("sb-conf").textContent=conf;
   document.getElementById("sb-rating").textContent=rating;
   document.getElementById("sb-rank").textContent=rank;
-  document.getElementById("sb-record").textContent=`${wins}-${losses}`;
-  document.getElementById("sb-games-lbl").textContent=`// ${teamGames.length} games through ${cutoff}`;
 
-  // Insight block
-  document.getElementById("sb-insight").innerHTML=`
-    <div class="sb-insight-row">
-      <div><div class="sb-insight-label">CONF RANK</div></div>
-      <div><div class="sb-insight-val">${confRank}</div></div>
-    </div>
-    <div class="sb-insight-row">
-      <div><div class="sb-insight-label">ROAD</div></div>
-      <div><div class="sb-insight-val">${roadW}-${roadL}</div></div>
-    </div>
-    <div class="sb-insight-row">
-      <div><div class="sb-insight-label">HOME</div></div>
-      <div><div class="sb-insight-val">${homeW}-${homeL}</div></div>
-    </div>
-    <div class="sb-insight-row">
-      <div><div class="sb-insight-label">AVG OPP RATING</div></div>
-      <div><div class="sb-insight-val">${sos}</div></div>
-    </div>
-    <div class="sb-insight-row">
-      <div><div class="sb-insight-label">BEST WIN</div><div class="sb-insight-sub">${bestWin?bestWin.opp:"—"}</div></div>
-      <div><div class="sb-insight-val">${bestWin?bestWin.r.toFixed(4):"—"}</div></div>
-    </div>
-    <div class="sb-insight-row">
-      <div><div class="sb-insight-label">WORST LOSS</div><div class="sb-insight-sub">${worstLoss?worstLoss.opp:"—"}</div></div>
-      <div><div class="sb-insight-val">${worstLoss?worstLoss.r.toFixed(4):"—"}</div></div>
-    </div>
-    <div class="sb-insight-row">
-      <div><div class="sb-insight-label">TREND</div></div>
-      <div style="font-size:11px;text-align:right">${trendHtml}</div>
-    </div>`;
-
-  // Game log
-  const rows=teamGames.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(g=>{
-    const isWin=g.winner===team;
-    const opp=isWin?g.loser:g.winner;
-    const oppIdx=MX_TEAM_IDX[opp];
-    const oppR=oppIdx!==undefined&&mxRatings[oppIdx]>0?mxRatings[oppIdx].toFixed(3):"—";
-    const onRoad=(isWin&&g.location==='away')||(!isWin&&g.location==='home');
-    const locLabel=onRoad?'road':'home';
-    const resColor=isWin?'#00ff55':'#ff4444';
-    const oppHighlight=oppIdx!==undefined&&mxRatings[oppIdx]>0.55?' ranked':'';
-    return `<div class="sb-game">
-      <span class="sb-game-date">${g.date}</span>
-      <span class="sb-game-res" style="color:${resColor}">${isWin?'W':'L'}</span>
-      <span class="sb-game-opp${oppHighlight}">${opp}</span>
-      <span class="sb-game-wt" style="color:${onRoad?'#005518':'#003311'}">${locLabel}</span>
-      <span class="sb-game-rating">${oppR}</span>
-    </div>`;
-  });
-
-  document.getElementById("sb-games").innerHTML=rows.length
-    ?rows.join('')
-    :`<div class="sb-no-games">no games yet at this date</div>`;
+  if(panel){
+    const{t,insightsHtml,gameLogHtml}=panel;
+    document.getElementById("sb-record").textContent=`${t.wins}-${t.losses}`;
+    document.getElementById("sb-insight").innerHTML=insightsHtml+
+      `<div class="sb-insight-row"><div><div class="sb-insight-label">TREND (5d)</div></div><div style="font-size:11px;text-align:right">${trendHtml}</div></div>`;
+    const teamGames=TL_GAMES.filter(g=>g.date<=cutoff&&(g.winner===team||g.loser===team))
+      .sort((a,b)=>b.date.localeCompare(a.date));
+    document.getElementById("sb-games-lbl").textContent=`// ${teamGames.length} games through ${cutoff}`;
+    document.getElementById("sb-games").innerHTML=teamGames.map(g=>{
+      const isWin=g.winner===team;
+      const opp=isWin?g.loser:g.winner;
+      const onRoad=(isWin&&g.location==="away")||(!isWin&&g.location==="home");
+      const oppTeam=allTeams.find(x=>x.team===opp);
+      const oppRank=oppTeam?`#${oppTeam.rank}`:"—";
+      const rCol=isWin?"#00ff55":"#ff4444";
+      const oppHl=oppTeam&&oppTeam.rank<=25?"color:var(--green-b)":"color:var(--green-d)";
+      return `<div class="sb-game">
+        <span style="color:var(--green-x);min-width:72px">${g.date}</span>
+        <span style="font-weight:700;min-width:12px;color:${rCol}">${isWin?"W":"L"}</span>
+        <span style="flex:1;${oppHl};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${opp}</span>
+        <span style="font-size:10px;color:var(--green-x);min-width:36px">${onRoad?"road":"home"}</span>
+        <span style="font-weight:700;color:var(--green-x);min-width:32px;text-align:right">${oppRank}</span>
+      </div>`;
+    }).join("")||`<div class="sb-no-games">no games at this date</div>`;
+  } else {
+    document.getElementById("sb-record").textContent="—";
+    document.getElementById("sb-insight").innerHTML=`<div style="padding:8px 0;font-size:11px;color:var(--green-x)">loading...</div>`;
+    document.getElementById("sb-games-lbl").textContent="// game log";
+    document.getElementById("sb-games").innerHTML=`<div class="sb-no-games">no data</div>`;
+  }
 }
 
-let raf=null;
 function onSliderChange(){
   if(raf) cancelAnimationFrame(raf);
   raf=requestAnimationFrame(()=>{
