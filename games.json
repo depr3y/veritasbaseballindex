@@ -83455,5 +83455,16 @@
     "away_team": "Navy",
     "home_score": 6,
     "away_score": 4
+  },
+  {
+    "game_id": "6542798",
+    "winner": "California Baptist",
+    "loser": "UC Santa Barbara",
+    "location": "away",
+    "date": "2026-05-11",
+    "home_team": "UC Santa Barbara",
+    "away_team": "California Baptist",
+    "home_score": 3,
+    "away_score": 8
   }
 ]
