@@ -116,6 +116,10 @@
     .td-conf{font-size:11px}
     .td-record{text-align:right;color:var(--green-d);font-size:12px}
     .td-rating{text-align:right;font-weight:700;color:var(--green-b);font-size:12px}
+    .td-cmp{text-align:right;font-size:11px;color:var(--green-d);white-space:nowrap}
+    .delta-up{color:#00ff55;font-size:10px;font-weight:700}
+    .delta-dn{color:#ff4444;font-size:10px;font-weight:700}
+    .delta-flat{color:var(--green-x);font-size:10px}
     .chip{display:inline-block;padding:1px 6px;border:1px solid;font-size:10px;font-family:'Courier Prime','Courier New',monospace;letter-spacing:0.06em}
     .bar-wrap{display:flex;align-items:center;gap:8px;justify-content:flex-end}
     .bar-bg{width:48px;height:2px;background:#0a1a0a;border:1px solid var(--border)}
@@ -269,6 +273,8 @@
       .td-team{font-size:12px}
       .td-conf{display:none}
       .th-conf{display:none}
+      .th-rpi{display:none}
+      .td-cmp{display:none}
       .bar-bg{display:none}
       .td-rating{font-size:11px}
       .rk-sidebar.open{width:100%;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2000;height:100vh}
@@ -451,7 +457,7 @@
     <div class="rk-table-wrap">
       <div class="loading" id="loading">// loading rankings...</div>
       <table id="table" style="display:none">
-        <thead><tr><th>RK</th><th>TEAM</th><th class="th-conf">CONF</th><th class="r">W-L</th><th class="r">VBI RATING</th></tr></thead>
+        <thead><tr><th>RK</th><th>TEAM</th><th class="th-conf">CONF</th><th class="r">W-L</th><th class="r th-rpi">RPI</th><th class="r">VBI RATING</th></tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </div>
@@ -677,6 +683,7 @@ const SUPABASE_URL = "https://fcipxtdcyxerytxfrzhf.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjaXB4dGRjeXhlcnl0eGZyemhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxODczNzEsImV4cCI6MjA5Mzc2MzM3MX0.Sdtj7bAZWp6N-UaGZIXtBYz--Q_D6aP2IMkkcGYZFhw";
 
 let allTeams = [];
+let allRpi = {};
 let confFilter = "";
 let mapInit = false;
 let aboutInit = false;
@@ -684,9 +691,16 @@ let matrixInit = false;
 
 async function loadRankings() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/rankings?select=*&order=rank.asc`,
-      {headers:{"apikey":SUPABASE_KEY,"Authorization":`Bearer ${SUPABASE_KEY}`}});
-    allTeams = await res.json();
+    const [rankRes, rpiRes] = await Promise.all([
+      fetch(`${SUPABASE_URL}/rest/v1/rankings?select=*&order=rank.asc`,
+        {headers:{"apikey":SUPABASE_KEY,"Authorization":`Bearer ${SUPABASE_KEY}`}}),
+      fetch("rpi.json").catch(() => null)
+    ]);
+    allTeams = await rankRes.json();
+    if (rpiRes && rpiRes.ok) {
+      const rpiData = await rpiRes.json();
+      allRpi = rpiData.teams || {};
+    }
     document.getElementById("team-count").textContent = allTeams.length;
     if (allTeams.length > 0) document.getElementById("updated").textContent = allTeams[0].updated_at;
     document.getElementById("loading").style.display = "none";
@@ -715,11 +729,23 @@ function renderTable() {
   document.getElementById("tbody").innerHTML = filtered.map(t => {
     const pct = ((t.rating/maxRating)*100).toFixed(1);
     const top = t.rank <= 25 ? " top25" : "";
+    const rpi = allRpi[t.team];
+    let rpiCell = '<td class="td-cmp th-rpi">—</td>';
+    if (rpi) {
+      const diff = rpi.rpi_rank - t.rank;
+      const deltaHtml = diff > 0
+        ? `<span class="delta-up">▲${diff}</span>`
+        : diff < 0
+        ? `<span class="delta-dn">▼${Math.abs(diff)}</span>`
+        : `<span class="delta-flat">—</span>`;
+      rpiCell = `<td class="td-cmp th-rpi">#${rpi.rpi_rank} ${deltaHtml}</td>`;
+    }
     return `<tr class="${top}" onclick="openRkSidebar('${t.team.replace(/'/g,"\\'")}')">
       <td class="td-rank">${t.rank}</td>
       <td class="td-team">${t.team}</td>
       <td class="td-conf"><span class="chip" style="background:#0a0a0a;color:#007722;border-color:#1a3318">${(t.conf||"—").toUpperCase()}</span></td>
       <td class="td-record">${t.wins}-${t.losses}</td>
+      ${rpiCell}
       <td class="td-rating"><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>${t.rating.toFixed(4)}</div></td>
     </tr>`;
   }).join("");
