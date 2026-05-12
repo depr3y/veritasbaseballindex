@@ -83466,5 +83466,49 @@
     "away_team": "California Baptist",
     "home_score": 3,
     "away_score": 8
+  },
+  {
+    "game_id": "6546906",
+    "winner": "Virginia",
+    "loser": "Richmond",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Virginia",
+    "away_team": "Richmond",
+    "home_score": 18,
+    "away_score": 6
+  },
+  {
+    "game_id": "6544575",
+    "winner": "Maine",
+    "loser": "Merrimack",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Maine",
+    "away_team": "Merrimack",
+    "home_score": 14,
+    "away_score": 4
+  },
+  {
+    "game_id": "6552579",
+    "winner": "Oakland",
+    "loser": "Akron",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Oakland",
+    "away_team": "Akron",
+    "home_score": 13,
+    "away_score": 10
+  },
+  {
+    "game_id": "6542673",
+    "winner": "Michigan St.",
+    "loser": "Eastern Mich.",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Michigan St.",
+    "away_team": "Eastern Mich.",
+    "home_score": 5,
+    "away_score": 2
   }
 ]
