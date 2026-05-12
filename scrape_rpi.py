@@ -19,18 +19,54 @@ def normalize(name):
         name = re.sub(pat, ' ', name)
     return re.sub(r'\s+', ' ', name).strip()
 
+EXPLICIT = {
+    "UNCG": "UNC Greensboro",
+    "UTA": "UT Arlington",
+    "Army": "Army West Point",
+    "UMass": "Massachusetts",
+    "USC": "Southern California",
+    "Connecticut": "UConn",
+    "Dallas Baptist": "DBU",
+    "FAU": "Fla. Atlantic",
+    "Stephen F. Austin": "SFA",
+    "Cal State Northridge": "CSUN",
+    "Cal State Bakersfield": "CSU Bakersfield",
+    "Long Island": "LIU",
+    "Fairleigh Dickinson": "FDU",
+    "Loyola-Marymount": "LMU (CA)",
+    "Miami": "Miami (FL)",
+    "Ole Miss": "Ole Miss",
+    "Southern Miss": "Southern Miss.",
+    "SE Missouri State": "Southeast Mo. St.",
+    "Massachusetts": "Massachusetts",
+    "UNC Wilmington": "UNCW",
+    "Albany": "UAlbany",
+    "Illinois-Chicago": "UIC",
+    "Incarnate Word": "UIW",
+    "UL Monroe": "ULM",
+    "South Florida": "South Fla.",
+    "Appalachian State": "App State",
+    "Western Carolina": "Western Caro.",
+    "Florida Atlantic": "Fla. Atlantic",
+    "Bowling Green State": "Bowling Green",
+}
+
 def best_match(raw_name, vbi_names):
-    """Find the best matching VBI team name for a Warren Nolan name."""
+    raw_name = raw_name.strip()
+    # Check explicit overrides first
+    if raw_name in EXPLICIT:
+        return EXPLICIT[raw_name]
     norm_raw = normalize(raw_name)
     # Exact normalized match
     for vbi in vbi_names:
         if normalize(vbi) == norm_raw:
             return vbi
-    # One contains the other
-    for vbi in vbi_names:
-        nv = normalize(vbi)
-        if norm_raw in nv or nv in norm_raw:
-            return vbi
+    # One contains the other — but avoid short names matching substrings (e.g. USC → USC Upstate)
+    if len(raw_name) > 5:
+        for vbi in vbi_names:
+            nv = normalize(vbi)
+            if norm_raw in nv or nv in norm_raw:
+                return vbi
     # Word overlap score
     raw_words = set(norm_raw.split())
     best, best_score = None, 0
