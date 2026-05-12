@@ -1078,7 +1078,7 @@ const NT=308, CELL=12, LABEL=200, TOTAL=LABEL+NT*CELL;
 const MX_TEAM_IDX={};
 MX_TEAMS.forEach((t,i)=>MX_TEAM_IDX[t]=i);
 
-let TL_GAMES=[],TL_DATES=[],TL_IDX=0;
+let TL_GAMES=[],TL_DATES=[],TL_IDX=0,raf=null;
 let mxData=null,mxRatings=[],selTeam=-1,mxZoom=1;
 
 function setZoom(z){
@@ -1514,6 +1514,7 @@ async function initMatrix(){
     }
   }
   catch(e){document.getElementById("tl-loading").textContent="// error: could not load games.json";return;}
+  // Always recompute TL_DATES here — this is the authoritative source
   TL_DATES=[...new Set(TL_GAMES.map(g=>g.date))].sort();
   const last=TL_DATES.length-1;
   document.getElementById("tl-loading").style.display="none";
