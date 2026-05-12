@@ -4,1542 +4,990 @@
   "teams": {
     "UCLA": {
       "rpi_rank": 1,
-      "elo_rank": 1,
       "raw_name": "UCLA"
     },
     "Georgia Tech": {
       "rpi_rank": 2,
-      "elo_rank": 2,
       "raw_name": "Georgia Tech"
     },
-    "Georgia": {
-      "rpi_rank": 14,
-      "elo_rank": 3,
-      "raw_name": "Georgia"
+    "Georgia St.": {
+      "rpi_rank": 261,
+      "raw_name": "West Georgia"
     },
     "North Carolina": {
-      "rpi_rank": 5,
-      "elo_rank": 4,
-      "raw_name": "North Carolina"
+      "rpi_rank": 279,
+      "raw_name": "North Carolina A&T"
     },
     "Auburn": {
       "rpi_rank": 3,
-      "elo_rank": 5,
       "raw_name": "Auburn"
     },
     "Texas": {
-      "rpi_rank": 4,
-      "elo_rank": 6,
-      "raw_name": "Texas"
+      "rpi_rank": 43,
+      "raw_name": "Texas State"
     },
     "Mississippi St.": {
-      "rpi_rank": 12,
-      "elo_rank": 7,
-      "raw_name": "Mississippi State"
+      "rpi_rank": 298,
+      "raw_name": "Mississippi Valley State"
     },
     "Texas A&M": {
-      "rpi_rank": 10,
-      "elo_rank": 8,
-      "raw_name": "Texas A&M"
+      "rpi_rank": 199,
+      "raw_name": "Texas A&M-Corpus Christi"
     },
     "Wake Forest": {
       "rpi_rank": 17,
-      "elo_rank": 9,
       "raw_name": "Wake Forest"
     },
     "West Virginia": {
       "rpi_rank": 18,
-      "elo_rank": 10,
       "raw_name": "West Virginia"
     },
-    "Florida State": {
-      "rpi_rank": 7,
-      "elo_rank": 11,
-      "raw_name": "Florida State"
-    },
-    "Oregon St.": {
-      "rpi_rank": 16,
-      "elo_rank": 12,
-      "raw_name": "Oregon State"
-    },
-    "Arkansas": {
-      "rpi_rank": 26,
-      "elo_rank": 13,
-      "raw_name": "Arkansas"
-    },
-    "Ole Miss": {
-      "rpi_rank": 13,
-      "elo_rank": 14,
-      "raw_name": "Ole Miss"
-    },
-    "Tennessee": {
-      "rpi_rank": 31,
-      "elo_rank": 15,
-      "raw_name": "Tennessee"
-    },
-    "Alabama": {
-      "rpi_rank": 6,
-      "elo_rank": 16,
-      "raw_name": "Alabama"
-    },
-    "Kansas": {
-      "rpi_rank": 22,
-      "elo_rank": 17,
-      "raw_name": "Kansas"
-    },
-    "Florida": {
-      "rpi_rank": 11,
-      "elo_rank": 18,
-      "raw_name": "Florida"
-    },
-    "Southern California": {
-      "rpi_rank": 8,
-      "elo_rank": 19,
-      "raw_name": "USC"
+    "Florida St.": {
+      "rpi_rank": 70,
+      "raw_name": "South Florida"
     },
     "Oregon": {
       "rpi_rank": 19,
-      "elo_rank": 20,
       "raw_name": "Oregon"
     },
+    "Arkansas St.": {
+      "rpi_rank": 60,
+      "raw_name": "Arkansas State"
+    },
+    "Ole Miss": {
+      "rpi_rank": 13,
+      "raw_name": "Ole Miss"
+    },
+    "Tennessee": {
+      "rpi_rank": 237,
+      "raw_name": "Tennessee-Martin"
+    },
+    "Alabama St.": {
+      "rpi_rank": 178,
+      "raw_name": "North Alabama"
+    },
+    "Kansas St.": {
+      "rpi_rank": 254,
+      "raw_name": "Arkansas-Pine Bluff"
+    },
+    "USC Upstate": {
+      "rpi_rank": 8,
+      "raw_name": "USC"
+    },
     "Oklahoma St.": {
-      "rpi_rank": 27,
-      "elo_rank": 21,
-      "raw_name": "Oklahoma State"
+      "rpi_rank": 20,
+      "raw_name": "Oklahoma"
     },
     "TCU": {
       "rpi_rank": 44,
-      "elo_rank": 22,
       "raw_name": "TCU"
     },
     "Jacksonville St.": {
-      "rpi_rank": 32,
-      "elo_rank": 23,
-      "raw_name": "Jacksonville State"
+      "rpi_rank": 135,
+      "raw_name": "Jacksonville"
     },
     "Nebraska": {
       "rpi_rank": 15,
-      "elo_rank": 24,
       "raw_name": "Nebraska"
     },
-    "Southern Miss": {
+    "Southern Miss.": {
       "rpi_rank": 9,
-      "elo_rank": 25,
       "raw_name": "Southern Miss"
     },
     "Miami (FL)": {
-      "rpi_rank": 34,
-      "elo_rank": 26,
-      "raw_name": "Miami (FL)"
-    },
-    "Oklahoma": {
-      "rpi_rank": 20,
-      "elo_rank": 27,
-      "raw_name": "Oklahoma"
+      "rpi_rank": 41,
+      "raw_name": "Miami (OH)"
     },
     "UC Santa Barbara": {
       "rpi_rank": 28,
-      "elo_rank": 28,
       "raw_name": "UC Santa Barbara"
     },
-    "Arizona St.": {
-      "rpi_rank": 48,
-      "elo_rank": 29,
-      "raw_name": "Arizona State"
+    "Arizona": {
+      "rpi_rank": 191,
+      "raw_name": "Arizona"
     },
     "Cincinnati": {
       "rpi_rank": 21,
-      "elo_rank": 30,
       "raw_name": "Cincinnati"
-    },
-    "North Carolina State": {
-      "rpi_rank": 42,
-      "elo_rank": 31,
-      "raw_name": "North Carolina State"
     },
     "Boston College": {
       "rpi_rank": 29,
-      "elo_rank": 32,
       "raw_name": "Boston College"
     },
     "Clemson": {
       "rpi_rank": 37,
-      "elo_rank": 33,
       "raw_name": "Clemson"
     },
     "Michigan": {
-      "rpi_rank": 36,
-      "elo_rank": 34,
-      "raw_name": "Michigan"
+      "rpi_rank": 230,
+      "raw_name": "Eastern Michigan"
     },
     "Mercer": {
       "rpi_rank": 38,
-      "elo_rank": 35,
       "raw_name": "Mercer"
     },
     "LSU": {
       "rpi_rank": 57,
-      "elo_rank": 36,
       "raw_name": "LSU"
     },
     "Kentucky": {
-      "rpi_rank": 30,
-      "elo_rank": 37,
-      "raw_name": "Kentucky"
+      "rpi_rank": 259,
+      "raw_name": "Eastern Kentucky"
     },
     "Coastal Carolina": {
       "rpi_rank": 25,
-      "elo_rank": 38,
       "raw_name": "Coastal Carolina"
     },
     "Liberty": {
       "rpi_rank": 35,
-      "elo_rank": 39,
       "raw_name": "Liberty"
     },
     "Notre Dame": {
       "rpi_rank": 81,
-      "elo_rank": 40,
       "raw_name": "Notre Dame"
     },
     "Virginia Tech": {
       "rpi_rank": 39,
-      "elo_rank": 41,
       "raw_name": "Virginia Tech"
     },
     "UCF": {
       "rpi_rank": 33,
-      "elo_rank": 42,
       "raw_name": "UCF"
     },
     "Purdue": {
       "rpi_rank": 47,
-      "elo_rank": 43,
       "raw_name": "Purdue"
     },
     "Virginia": {
       "rpi_rank": 23,
-      "elo_rank": 44,
       "raw_name": "Virginia"
     },
     "Campbell": {
       "rpi_rank": 69,
-      "elo_rank": 45,
       "raw_name": "Campbell"
     },
     "Stanford": {
       "rpi_rank": 105,
-      "elo_rank": 46,
       "raw_name": "Stanford"
     },
     "Gonzaga": {
       "rpi_rank": 46,
-      "elo_rank": 47,
       "raw_name": "Gonzaga"
     },
     "UTSA": {
       "rpi_rank": 50,
-      "elo_rank": 48,
       "raw_name": "UTSA"
     },
     "Vanderbilt": {
       "rpi_rank": 73,
-      "elo_rank": 49,
       "raw_name": "Vanderbilt"
     },
     "California": {
       "rpi_rank": 56,
-      "elo_rank": 50,
       "raw_name": "California"
     },
     "Tarleton St.": {
       "rpi_rank": 61,
-      "elo_rank": 51,
       "raw_name": "Tarleton State"
     },
     "Louisiana": {
-      "rpi_rank": 49,
-      "elo_rank": 52,
-      "raw_name": "Louisiana"
+      "rpi_rank": 71,
+      "raw_name": "Southeastern Louisiana"
     },
     "Louisiana Tech": {
       "rpi_rank": 62,
-      "elo_rank": 53,
       "raw_name": "Louisiana Tech"
     },
     "South Alabama": {
       "rpi_rank": 58,
-      "elo_rank": 54,
       "raw_name": "South Alabama"
     },
     "East Carolina": {
       "rpi_rank": 52,
-      "elo_rank": 55,
       "raw_name": "East Carolina"
     },
     "Louisville": {
       "rpi_rank": 94,
-      "elo_rank": 56,
       "raw_name": "Louisville"
     },
     "Rice": {
       "rpi_rank": 68,
-      "elo_rank": 57,
       "raw_name": "Rice"
     },
     "Troy": {
       "rpi_rank": 54,
-      "elo_rank": 58,
       "raw_name": "Troy"
     },
     "High Point": {
       "rpi_rank": 40,
-      "elo_rank": 59,
       "raw_name": "High Point"
     },
     "Missouri St.": {
-      "rpi_rank": 24,
-      "elo_rank": 60,
-      "raw_name": "Missouri State"
+      "rpi_rank": 122,
+      "raw_name": "Missouri"
     },
     "Kent St.": {
       "rpi_rank": 55,
-      "elo_rank": 61,
       "raw_name": "Kent State"
-    },
-    "Miami (OH)": {
-      "rpi_rank": 41,
-      "elo_rank": 62,
-      "raw_name": "Miami (OH)"
-    },
-    "Texas State": {
-      "rpi_rank": 43,
-      "elo_rank": 63,
-      "raw_name": "Texas State"
     },
     "Pittsburgh": {
       "rpi_rank": 45,
-      "elo_rank": 64,
       "raw_name": "Pittsburgh"
     },
-    "Western Carolina": {
+    "Western Caro.": {
       "rpi_rank": 53,
-      "elo_rank": 65,
       "raw_name": "Western Carolina"
-    },
-    "Connecticut": {
-      "rpi_rank": 80,
-      "elo_rank": 66,
-      "raw_name": "Connecticut"
-    },
-    "Southeastern Louisiana": {
-      "rpi_rank": 71,
-      "elo_rank": 67,
-      "raw_name": "Southeastern Louisiana"
     },
     "California Baptist": {
       "rpi_rank": 79,
-      "elo_rank": 68,
       "raw_name": "California Baptist"
     },
     "Northeastern": {
       "rpi_rank": 112,
-      "elo_rank": 69,
       "raw_name": "Northeastern"
     },
     "Old Dominion": {
       "rpi_rank": 95,
-      "elo_rank": 70,
       "raw_name": "Old Dominion"
-    },
-    "Dallas Baptist": {
-      "rpi_rank": 75,
-      "elo_rank": 71,
-      "raw_name": "Dallas Baptist"
     },
     "The Citadel": {
       "rpi_rank": 64,
-      "elo_rank": 72,
       "raw_name": "The Citadel"
     },
     "Samford": {
       "rpi_rank": 96,
-      "elo_rank": 73,
       "raw_name": "Samford"
     },
     "Xavier": {
       "rpi_rank": 65,
-      "elo_rank": 74,
       "raw_name": "Xavier"
     },
     "Cal Poly": {
       "rpi_rank": 78,
-      "elo_rank": 75,
       "raw_name": "Cal Poly"
-    },
-    "Kansas St.": {
-      "rpi_rank": 59,
-      "elo_rank": 76,
-      "raw_name": "Kansas State"
     },
     "Kennesaw St.": {
       "rpi_rank": 82,
-      "elo_rank": 77,
       "raw_name": "Kennesaw State"
     },
     "SIUE": {
       "rpi_rank": 103,
-      "elo_rank": 78,
       "raw_name": "SIUE"
     },
-    "Appalachian State": {
+    "App State": {
       "rpi_rank": 101,
-      "elo_rank": 79,
       "raw_name": "Appalachian State"
     },
-    "Illinois": {
-      "rpi_rank": 83,
-      "elo_rank": 80,
-      "raw_name": "Illinois"
+    "Illinois St.": {
+      "rpi_rank": 231,
+      "raw_name": "Southern Illinois"
     },
-    "San Diego State": {
-      "rpi_rank": 100,
-      "elo_rank": 81,
-      "raw_name": "San Diego State"
+    "San Diego": {
+      "rpi_rank": 203,
+      "raw_name": "San Diego"
     },
     "FGCU": {
       "rpi_rank": 109,
-      "elo_rank": 82,
       "raw_name": "FGCU"
     },
     "Iowa": {
       "rpi_rank": 77,
-      "elo_rank": 83,
       "raw_name": "Iowa"
     },
     "Utah": {
       "rpi_rank": 87,
-      "elo_rank": 84,
       "raw_name": "Utah"
-    },
-    "FAU": {
-      "rpi_rank": 119,
-      "elo_rank": 85,
-      "raw_name": "FAU"
-    },
-    "Western Kentucky": {
-      "rpi_rank": 128,
-      "elo_rank": 86,
-      "raw_name": "Western Kentucky"
     },
     "Baylor": {
       "rpi_rank": 67,
-      "elo_rank": 87,
       "raw_name": "Baylor"
     },
     "Texas Tech": {
       "rpi_rank": 130,
-      "elo_rank": 88,
       "raw_name": "Texas Tech"
     },
     "Minnesota": {
       "rpi_rank": 91,
-      "elo_rank": 89,
       "raw_name": "Minnesota"
     },
     "Memphis": {
       "rpi_rank": 106,
-      "elo_rank": 90,
       "raw_name": "Memphis"
     },
     "UTRGV": {
       "rpi_rank": 90,
-      "elo_rank": 91,
       "raw_name": "UTRGV"
     },
-    "Ohio St.": {
-      "rpi_rank": 88,
-      "elo_rank": 92,
-      "raw_name": "Ohio State"
+    "Ohio": {
+      "rpi_rank": 291,
+      "raw_name": "Ohio"
     },
     "Creighton": {
       "rpi_rank": 93,
-      "elo_rank": 93,
       "raw_name": "Creighton"
-    },
-    "Southeast Missouri": {
-      "rpi_rank": 51,
-      "elo_rank": 94,
-      "raw_name": "Southeast Missouri"
     },
     "BYU": {
       "rpi_rank": 72,
-      "elo_rank": 95,
       "raw_name": "BYU"
     },
     "Charlotte": {
       "rpi_rank": 89,
-      "elo_rank": 96,
       "raw_name": "Charlotte"
     },
-    "Saint John's": {
+    "St. John's (NY)": {
       "rpi_rank": 104,
-      "elo_rank": 97,
       "raw_name": "Saint John's"
     },
-    "Charleston": {
+    "Col. of Charleston": {
       "rpi_rank": 151,
-      "elo_rank": 98,
       "raw_name": "Charleston"
     },
     "Wofford": {
       "rpi_rank": 107,
-      "elo_rank": 99,
       "raw_name": "Wofford"
     },
     "UC Davis": {
       "rpi_rank": 143,
-      "elo_rank": 100,
       "raw_name": "UC Davis"
     },
     "Duke": {
       "rpi_rank": 92,
-      "elo_rank": 101,
       "raw_name": "Duke"
     },
     "UAB": {
       "rpi_rank": 63,
-      "elo_rank": 102,
       "raw_name": "UAB"
     },
-    "East Tennessee State": {
-      "rpi_rank": 86,
-      "elo_rank": 103,
-      "raw_name": "East Tennessee State"
-    },
-    "Lamar": {
+    "Lamar University": {
       "rpi_rank": 108,
-      "elo_rank": 104,
       "raw_name": "Lamar"
     },
     "Saint Joseph's": {
       "rpi_rank": 66,
-      "elo_rank": 105,
       "raw_name": "Saint Joseph's"
     },
     "UC Irvine": {
       "rpi_rank": 121,
-      "elo_rank": 106,
       "raw_name": "UC Irvine"
     },
-    "South Florida": {
-      "rpi_rank": 70,
-      "elo_rank": 107,
-      "raw_name": "South Florida"
-    },
     "South Carolina": {
-      "rpi_rank": 111,
-      "elo_rank": 108,
-      "raw_name": "South Carolina"
+      "rpi_rank": 102,
+      "raw_name": "South Carolina Upstate"
     },
     "Hawaii": {
       "rpi_rank": 125,
-      "elo_rank": 109,
       "raw_name": "Hawaii"
     },
-    "Sacramento State": {
+    "Sacramento St.": {
       "rpi_rank": 120,
-      "elo_rank": 110,
       "raw_name": "Sacramento State"
-    },
-    "Arizona": {
-      "rpi_rank": 191,
-      "elo_rank": 111,
-      "raw_name": "Arizona"
-    },
-    "Missouri": {
-      "rpi_rank": 122,
-      "elo_rank": 112,
-      "raw_name": "Missouri"
-    },
-    "Arkansas St.": {
-      "rpi_rank": 60,
-      "elo_rank": 113,
-      "raw_name": "Arkansas State"
     },
     "Tulane": {
       "rpi_rank": 138,
-      "elo_rank": 114,
       "raw_name": "Tulane"
     },
     "Houston": {
       "rpi_rank": 110,
-      "elo_rank": 115,
       "raw_name": "Houston"
     },
     "Richmond": {
       "rpi_rank": 134,
-      "elo_rank": 116,
       "raw_name": "Richmond"
     },
     "UNCW": {
       "rpi_rank": 117,
-      "elo_rank": 117,
       "raw_name": "UNCW"
     },
     "McNeese": {
       "rpi_rank": 146,
-      "elo_rank": 118,
       "raw_name": "McNeese"
     },
     "Little Rock": {
       "rpi_rank": 98,
-      "elo_rank": 119,
       "raw_name": "Little Rock"
     },
-    "Saint Mary's College": {
-      "rpi_rank": 131,
-      "elo_rank": 120,
-      "raw_name": "Saint Mary's College"
+    "Saint Mary's (CA)": {
+      "rpi_rank": 287,
+      "raw_name": "Mount Saint Mary's"
     },
     "New Orleans": {
       "rpi_rank": 185,
-      "elo_rank": 121,
       "raw_name": "New Orleans"
     },
     "Bethune-Cookman": {
       "rpi_rank": 170,
-      "elo_rank": 122,
       "raw_name": "Bethune-Cookman"
     },
-    "Washington State": {
-      "rpi_rank": 84,
-      "elo_rank": 123,
-      "raw_name": "Washington State"
+    "Washington": {
+      "rpi_rank": 181,
+      "raw_name": "Washington"
     },
-    "Northern Illinois": {
-      "rpi_rank": 85,
-      "elo_rank": 124,
-      "raw_name": "Northern Illinois"
-    },
-    "Jacksonville": {
-      "rpi_rank": 135,
-      "elo_rank": 125,
-      "raw_name": "Jacksonville"
-    },
-    "Charleston Southern": {
+    "Charleston So.": {
       "rpi_rank": 124,
-      "elo_rank": 126,
       "raw_name": "Charleston Southern"
     },
     "North Florida": {
       "rpi_rank": 144,
-      "elo_rank": 127,
       "raw_name": "North Florida"
     },
-    "Eastern Illinois": {
+    "Eastern Ill.": {
       "rpi_rank": 74,
-      "elo_rank": 128,
       "raw_name": "Eastern Illinois"
-    },
-    "Michigan St.": {
-      "rpi_rank": 123,
-      "elo_rank": 129,
-      "raw_name": "Michigan State"
     },
     "Yale": {
       "rpi_rank": 161,
-      "elo_rank": 130,
       "raw_name": "Yale"
     },
     "UC San Diego": {
       "rpi_rank": 99,
-      "elo_rank": 131,
       "raw_name": "UC San Diego"
     },
     "Rutgers": {
       "rpi_rank": 116,
-      "elo_rank": 132,
       "raw_name": "Rutgers"
     },
-    "Indiana State": {
-      "rpi_rank": 129,
-      "elo_rank": 133,
-      "raw_name": "Indiana State"
+    "Indiana": {
+      "rpi_rank": 215,
+      "raw_name": "Southern Indiana"
     },
     "Oral Roberts": {
       "rpi_rank": 165,
-      "elo_rank": 134,
       "raw_name": "Oral Roberts"
     },
     "Abilene Christian": {
       "rpi_rank": 180,
-      "elo_rank": 135,
       "raw_name": "Abilene Christian"
     },
     "Wichita St.": {
       "rpi_rank": 162,
-      "elo_rank": 136,
       "raw_name": "Wichita State"
     },
-    "Morehead State": {
+    "Morehead St.": {
       "rpi_rank": 114,
-      "elo_rank": 137,
       "raw_name": "Morehead State"
     },
-    "Indiana": {
-      "rpi_rank": 126,
-      "elo_rank": 138,
-      "raw_name": "Indiana"
-    },
     "Maryland": {
-      "rpi_rank": 76,
-      "elo_rank": 139,
-      "raw_name": "Maryland"
-    },
-    "Georgia State": {
-      "rpi_rank": 133,
-      "elo_rank": 140,
-      "raw_name": "Georgia State"
+      "rpi_rank": 306,
+      "raw_name": "Maryland Eastern Shore"
     },
     "VCU": {
       "rpi_rank": 97,
-      "elo_rank": 141,
       "raw_name": "VCU"
     },
-    "Cal State Fullerton": {
+    "Cal St. Fullerton": {
       "rpi_rank": 113,
-      "elo_rank": 142,
       "raw_name": "Cal State Fullerton"
-    },
-    "South Carolina Upstate": {
-      "rpi_rank": 102,
-      "elo_rank": 143,
-      "raw_name": "South Carolina Upstate"
     },
     "Air Force": {
       "rpi_rank": 159,
-      "elo_rank": 144,
       "raw_name": "Air Force"
     },
     "Santa Clara": {
       "rpi_rank": 194,
-      "elo_rank": 145,
       "raw_name": "Santa Clara"
     },
     "Monmouth": {
       "rpi_rank": 136,
-      "elo_rank": 146,
       "raw_name": "Monmouth"
     },
     "George Mason": {
       "rpi_rank": 163,
-      "elo_rank": 147,
       "raw_name": "George Mason"
     },
     "Lindenwood": {
       "rpi_rank": 166,
-      "elo_rank": 148,
       "raw_name": "Lindenwood"
     },
-    "UNCG": {
-      "rpi_rank": 139,
-      "elo_rank": 149,
-      "raw_name": "UNCG"
+    "NC State": {
+      "rpi_rank": 222,
+      "raw_name": "Incarnate Word"
     },
     "Nicholls": {
       "rpi_rank": 141,
-      "elo_rank": 150,
       "raw_name": "Nicholls"
     },
     "Stetson": {
       "rpi_rank": 196,
-      "elo_rank": 151,
       "raw_name": "Stetson"
     },
     "Rider": {
       "rpi_rank": 127,
-      "elo_rank": 152,
       "raw_name": "Rider"
     },
-    "Wright State": {
+    "Wright St.": {
       "rpi_rank": 132,
-      "elo_rank": 153,
       "raw_name": "Wright State"
     },
-    "Sam Houston State": {
+    "Sam Houston": {
       "rpi_rank": 177,
-      "elo_rank": 154,
       "raw_name": "Sam Houston State"
-    },
-    "Washington": {
-      "rpi_rank": 181,
-      "elo_rank": 155,
-      "raw_name": "Washington"
     },
     "Houston Christian": {
       "rpi_rank": 168,
-      "elo_rank": 156,
       "raw_name": "Houston Christian"
     },
     "Utah Tech": {
-      "rpi_rank": 155,
-      "elo_rank": 157,
-      "raw_name": "Utah Tech"
-    },
-    "UTA": {
       "rpi_rank": 152,
-      "elo_rank": 158,
       "raw_name": "UTA"
     },
     "Northwestern": {
-      "rpi_rank": 137,
-      "elo_rank": 159,
-      "raw_name": "Northwestern"
+      "rpi_rank": 147,
+      "raw_name": "Northwestern State"
     },
     "Binghamton": {
       "rpi_rank": 140,
-      "elo_rank": 160,
       "raw_name": "Binghamton"
     },
-    "San Jose State": {
+    "San Jose St.": {
       "rpi_rank": 182,
-      "elo_rank": 161,
       "raw_name": "San Jose State"
-    },
-    "Central Arkansas": {
-      "rpi_rank": 150,
-      "elo_rank": 162,
-      "raw_name": "Central Arkansas"
-    },
-    "Illinois State": {
-      "rpi_rank": 148,
-      "elo_rank": 163,
-      "raw_name": "Illinois State"
     },
     "ULM": {
       "rpi_rank": 154,
-      "elo_rank": 164,
       "raw_name": "ULM"
     },
     "Marshall": {
       "rpi_rank": 175,
-      "elo_rank": 165,
       "raw_name": "Marshall"
     },
     "Penn St.": {
-      "rpi_rank": 189,
-      "elo_rank": 166,
-      "raw_name": "Penn State"
+      "rpi_rank": 153,
+      "raw_name": "Penn"
     },
     "Grand Canyon": {
       "rpi_rank": 212,
-      "elo_rank": 167,
       "raw_name": "Grand Canyon"
     },
     "Fairfield": {
       "rpi_rank": 188,
-      "elo_rank": 168,
       "raw_name": "Fairfield"
     },
     "UNLV": {
       "rpi_rank": 209,
-      "elo_rank": 169,
       "raw_name": "UNLV"
     },
     "Rhode Island": {
       "rpi_rank": 172,
-      "elo_rank": 170,
       "raw_name": "Rhode Island"
     },
     "Niagara": {
       "rpi_rank": 158,
-      "elo_rank": 171,
       "raw_name": "Niagara"
     },
     "Radford": {
       "rpi_rank": 164,
-      "elo_rank": 172,
       "raw_name": "Radford"
     },
     "Columbia": {
       "rpi_rank": 190,
-      "elo_rank": 173,
       "raw_name": "Columbia"
     },
     "Davidson": {
       "rpi_rank": 206,
-      "elo_rank": 174,
       "raw_name": "Davidson"
-    },
-    "Alabama State": {
-      "rpi_rank": 195,
-      "elo_rank": 175,
-      "raw_name": "Alabama State"
     },
     "UIC": {
       "rpi_rank": 240,
-      "elo_rank": 176,
       "raw_name": "UIC"
     },
-    "Murray State": {
+    "Murray St.": {
       "rpi_rank": 171,
-      "elo_rank": 177,
       "raw_name": "Murray State"
     },
     "Toledo": {
       "rpi_rank": 169,
-      "elo_rank": 178,
       "raw_name": "Toledo"
     },
     "Pepperdine": {
       "rpi_rank": 202,
-      "elo_rank": 179,
       "raw_name": "Pepperdine"
     },
-    "Penn": {
-      "rpi_rank": 153,
-      "elo_rank": 180,
-      "raw_name": "Penn"
-    },
     "New Mexico": {
-      "rpi_rank": 218,
-      "elo_rank": 181,
-      "raw_name": "New Mexico"
+      "rpi_rank": 204,
+      "raw_name": "New Mexico State"
     },
     "Stony Brook": {
       "rpi_rank": 160,
-      "elo_rank": 182,
       "raw_name": "Stony Brook"
-    },
-    "Stephen F. Austin": {
-      "rpi_rank": 186,
-      "elo_rank": 183,
-      "raw_name": "Stephen F. Austin"
     },
     "Nevada": {
       "rpi_rank": 142,
-      "elo_rank": 184,
       "raw_name": "Nevada"
     },
     "Dayton": {
       "rpi_rank": 198,
-      "elo_rank": 185,
       "raw_name": "Dayton"
     },
     "Lipscomb": {
       "rpi_rank": 200,
-      "elo_rank": 186,
       "raw_name": "Lipscomb"
     },
     "Winthrop": {
       "rpi_rank": 115,
-      "elo_rank": 187,
       "raw_name": "Winthrop"
-    },
-    "Cal State Northridge": {
-      "rpi_rank": 179,
-      "elo_rank": 188,
-      "raw_name": "Cal State Northridge"
     },
     "Pacific": {
       "rpi_rank": 250,
-      "elo_rank": 189,
       "raw_name": "Pacific"
     },
-    "Army": {
+    "Army West Point": {
       "rpi_rank": 174,
-      "elo_rank": 190,
       "raw_name": "Army"
-    },
-    "Texas A&M-Corpus Christi": {
-      "rpi_rank": 199,
-      "elo_rank": 191,
-      "raw_name": "Texas A&M-Corpus Christi"
-    },
-    "Northwestern State": {
-      "rpi_rank": 147,
-      "elo_rank": 192,
-      "raw_name": "Northwestern State"
     },
     "Portland": {
       "rpi_rank": 118,
-      "elo_rank": 193,
       "raw_name": "Portland"
     },
-    "Southern": {
-      "rpi_rank": 192,
-      "elo_rank": 194,
-      "raw_name": "Southern"
+    "Texas Southern": {
+      "rpi_rank": 289,
+      "raw_name": "Texas Southern"
     },
     "Bryant": {
       "rpi_rank": 167,
-      "elo_rank": 195,
       "raw_name": "Bryant"
     },
     "Longwood": {
       "rpi_rank": 149,
-      "elo_rank": 196,
       "raw_name": "Longwood"
     },
     "Bucknell": {
       "rpi_rank": 145,
-      "elo_rank": 197,
       "raw_name": "Bucknell"
     },
-    "New Mexico State": {
-      "rpi_rank": 204,
-      "elo_rank": 198,
-      "raw_name": "New Mexico State"
-    },
-    "Long Beach State": {
+    "Long Beach St.": {
       "rpi_rank": 245,
-      "elo_rank": 199,
       "raw_name": "Long Beach State"
     },
     "FIU": {
       "rpi_rank": 219,
-      "elo_rank": 200,
       "raw_name": "FIU"
     },
-    "Southern Illinois": {
-      "rpi_rank": 231,
-      "elo_rank": 201,
-      "raw_name": "Southern Illinois"
-    },
-    "Georgia Southern": {
-      "rpi_rank": 213,
-      "elo_rank": 202,
-      "raw_name": "Georgia Southern"
-    },
-    "Middle Tennessee": {
+    "Middle Tenn.": {
       "rpi_rank": 220,
-      "elo_rank": 203,
       "raw_name": "Middle Tennessee"
     },
     "Navy": {
       "rpi_rank": 210,
-      "elo_rank": 204,
       "raw_name": "Navy"
-    },
-    "North Alabama": {
-      "rpi_rank": 178,
-      "elo_rank": 205,
-      "raw_name": "North Alabama"
     },
     "Florida A&M": {
       "rpi_rank": 205,
-      "elo_rank": 206,
       "raw_name": "Florida A&M"
     },
     "Hofstra": {
       "rpi_rank": 157,
-      "elo_rank": 207,
       "raw_name": "Hofstra"
-    },
-    "Cal State Bakersfield": {
-      "rpi_rank": 233,
-      "elo_rank": 208,
-      "raw_name": "Cal State Bakersfield"
     },
     "Brown": {
       "rpi_rank": 193,
-      "elo_rank": 209,
       "raw_name": "Brown"
-    },
-    "Long Island": {
-      "rpi_rank": 234,
-      "elo_rank": 210,
-      "raw_name": "Long Island"
     },
     "Quinnipiac": {
       "rpi_rank": 201,
-      "elo_rank": 211,
       "raw_name": "Quinnipiac"
     },
     "Austin Peay": {
       "rpi_rank": 176,
-      "elo_rank": 212,
       "raw_name": "Austin Peay"
     },
     "James Madison": {
       "rpi_rank": 173,
-      "elo_rank": 213,
       "raw_name": "James Madison"
-    },
-    "Western Michigan": {
-      "rpi_rank": 183,
-      "elo_rank": 214,
-      "raw_name": "Western Michigan"
     },
     "Omaha": {
       "rpi_rank": 247,
-      "elo_rank": 215,
       "raw_name": "Omaha"
-    },
-    "San Diego": {
-      "rpi_rank": 203,
-      "elo_rank": 216,
-      "raw_name": "San Diego"
-    },
-    "Tennessee-Martin": {
-      "rpi_rank": 237,
-      "elo_rank": 217,
-      "raw_name": "Tennessee-Martin"
-    },
-    "Fairleigh Dickinson": {
-      "rpi_rank": 225,
-      "elo_rank": 218,
-      "raw_name": "Fairleigh Dickinson"
     },
     "Gardner-Webb": {
       "rpi_rank": 197,
-      "elo_rank": 219,
       "raw_name": "Gardner-Webb"
     },
     "Georgetown": {
       "rpi_rank": 252,
-      "elo_rank": 220,
       "raw_name": "Georgetown"
     },
     "Holy Cross": {
       "rpi_rank": 214,
-      "elo_rank": 221,
       "raw_name": "Holy Cross"
     },
     "Marist": {
       "rpi_rank": 221,
-      "elo_rank": 222,
       "raw_name": "Marist"
     },
     "Evansville": {
       "rpi_rank": 211,
-      "elo_rank": 223,
       "raw_name": "Evansville"
     },
     "Elon": {
       "rpi_rank": 226,
-      "elo_rank": 224,
       "raw_name": "Elon"
     },
     "William & Mary": {
       "rpi_rank": 217,
-      "elo_rank": 225,
       "raw_name": "William & Mary"
     },
     "VMI": {
       "rpi_rank": 184,
-      "elo_rank": 226,
       "raw_name": "VMI"
     },
     "UMBC": {
       "rpi_rank": 208,
-      "elo_rank": 227,
       "raw_name": "UMBC"
     },
     "San Francisco": {
       "rpi_rank": 253,
-      "elo_rank": 228,
       "raw_name": "San Francisco"
     },
     "Delaware": {
-      "rpi_rank": 244,
-      "elo_rank": 229,
-      "raw_name": "Delaware"
+      "rpi_rank": 304,
+      "raw_name": "Delaware State"
     },
     "Wagner": {
       "rpi_rank": 224,
-      "elo_rank": 230,
       "raw_name": "Wagner"
     },
     "Maine": {
       "rpi_rank": 156,
-      "elo_rank": 231,
       "raw_name": "Maine"
     },
     "Villanova": {
       "rpi_rank": 242,
-      "elo_rank": 232,
       "raw_name": "Villanova"
     },
-    "Southern Indiana": {
-      "rpi_rank": 215,
-      "elo_rank": 233,
-      "raw_name": "Southern Indiana"
-    },
-    "Seattle University": {
+    "Seattle U": {
       "rpi_rank": 267,
-      "elo_rank": 234,
       "raw_name": "Seattle University"
     },
     "Milwaukee": {
       "rpi_rank": 256,
-      "elo_rank": 235,
       "raw_name": "Milwaukee"
     },
     "La Salle": {
       "rpi_rank": 268,
-      "elo_rank": 236,
       "raw_name": "La Salle"
     },
     "Butler": {
       "rpi_rank": 235,
-      "elo_rank": 237,
       "raw_name": "Butler"
-    },
-    "Incarnate Word": {
-      "rpi_rank": 222,
-      "elo_rank": 238,
-      "raw_name": "Incarnate Word"
     },
     "Tennessee Tech": {
       "rpi_rank": 238,
-      "elo_rank": 239,
       "raw_name": "Tennessee Tech"
-    },
-    "Northern Kentucky": {
-      "rpi_rank": 276,
-      "elo_rank": 240,
-      "raw_name": "Northern Kentucky"
     },
     "Saint Louis": {
       "rpi_rank": 246,
-      "elo_rank": 241,
       "raw_name": "Saint Louis"
     },
     "Fordham": {
       "rpi_rank": 207,
-      "elo_rank": 242,
       "raw_name": "Fordham"
     },
-    "Central Michigan": {
-      "rpi_rank": 248,
-      "elo_rank": 243,
-      "raw_name": "Central Michigan"
-    },
-    "Ball State": {
+    "Ball St.": {
       "rpi_rank": 216,
-      "elo_rank": 244,
       "raw_name": "Ball State"
     },
     "Merrimack": {
       "rpi_rank": 223,
-      "elo_rank": 245,
       "raw_name": "Merrimack"
-    },
-    "Eastern Michigan": {
-      "rpi_rank": 230,
-      "elo_rank": 246,
-      "raw_name": "Eastern Michigan"
     },
     "UNC Asheville": {
       "rpi_rank": 263,
-      "elo_rank": 247,
       "raw_name": "UNC Asheville"
     },
-    "Queens": {
+    "Queens (NC)": {
       "rpi_rank": 243,
-      "elo_rank": 248,
       "raw_name": "Queens"
     },
     "Bellarmine": {
       "rpi_rank": 227,
-      "elo_rank": 249,
       "raw_name": "Bellarmine"
     },
-    "South Dakota State": {
+    "South Dakota St.": {
       "rpi_rank": 249,
-      "elo_rank": 250,
       "raw_name": "South Dakota State"
     },
     "UC Riverside": {
       "rpi_rank": 283,
-      "elo_rank": 251,
       "raw_name": "UC Riverside"
     },
     "Towson": {
       "rpi_rank": 236,
-      "elo_rank": 252,
       "raw_name": "Towson"
     },
-    "Grambling State": {
+    "Grambling": {
       "rpi_rank": 272,
-      "elo_rank": 253,
       "raw_name": "Grambling State"
     },
     "Bowling Green": {
       "rpi_rank": 187,
-      "elo_rank": 254,
       "raw_name": "Bowling Green"
     },
-    "Arkansas-Pine Bluff": {
-      "rpi_rank": 254,
-      "elo_rank": 255,
-      "raw_name": "Arkansas-Pine Bluff"
-    },
-    "Western Illinois": {
+    "Western Ill.": {
       "rpi_rank": 251,
-      "elo_rank": 256,
       "raw_name": "Western Illinois"
     },
     "Belmont": {
       "rpi_rank": 264,
-      "elo_rank": 257,
       "raw_name": "Belmont"
     },
     "Canisius": {
       "rpi_rank": 260,
-      "elo_rank": 258,
       "raw_name": "Canisius"
     },
     "Le Moyne": {
       "rpi_rank": 266,
-      "elo_rank": 259,
       "raw_name": "Le Moyne"
     },
     "Siena": {
       "rpi_rank": 257,
-      "elo_rank": 260,
       "raw_name": "Siena"
     },
-    "Fresno State": {
+    "Fresno St.": {
       "rpi_rank": 284,
-      "elo_rank": 261,
       "raw_name": "Fresno State"
     },
     "Harvard": {
       "rpi_rank": 228,
-      "elo_rank": 262,
       "raw_name": "Harvard"
     },
-    "UMass-Lowell": {
-      "rpi_rank": 229,
-      "elo_rank": 263,
-      "raw_name": "UMass-Lowell"
+    "UMass Lowell": {
+      "rpi_rank": 239,
+      "raw_name": "UMass"
     },
-    "Jackson State": {
+    "Jackson St.": {
       "rpi_rank": 293,
-      "elo_rank": 264,
       "raw_name": "Jackson State"
     },
-    "Northern Colorado": {
+    "Northern Colo.": {
       "rpi_rank": 297,
-      "elo_rank": 265,
       "raw_name": "Northern Colorado"
     },
     "Princeton": {
       "rpi_rank": 232,
-      "elo_rank": 266,
       "raw_name": "Princeton"
-    },
-    "UMass": {
-      "rpi_rank": 239,
-      "elo_rank": 267,
-      "raw_name": "UMass"
     },
     "George Washington": {
       "rpi_rank": 271,
-      "elo_rank": 268,
       "raw_name": "George Washington"
     },
-    "North Dakota State": {
+    "North Dakota St.": {
       "rpi_rank": 277,
-      "elo_rank": 269,
       "raw_name": "North Dakota State"
     },
     "Dartmouth": {
       "rpi_rank": 258,
-      "elo_rank": 270,
       "raw_name": "Dartmouth"
     },
     "Cornell": {
       "rpi_rank": 270,
-      "elo_rank": 271,
       "raw_name": "Cornell"
     },
     "NJIT": {
       "rpi_rank": 290,
-      "elo_rank": 272,
       "raw_name": "NJIT"
     },
     "Seton Hall": {
       "rpi_rank": 280,
-      "elo_rank": 273,
       "raw_name": "Seton Hall"
     },
     "Akron": {
       "rpi_rank": 269,
-      "elo_rank": 274,
       "raw_name": "Akron"
-    },
-    "North Carolina A&T": {
-      "rpi_rank": 279,
-      "elo_rank": 275,
-      "raw_name": "North Carolina A&T"
-    },
-    "Eastern Kentucky": {
-      "rpi_rank": 259,
-      "elo_rank": 276,
-      "raw_name": "Eastern Kentucky"
     },
     "Sacred Heart": {
       "rpi_rank": 241,
-      "elo_rank": 277,
       "raw_name": "Sacred Heart"
-    },
-    "West Georgia": {
-      "rpi_rank": 261,
-      "elo_rank": 278,
-      "raw_name": "West Georgia"
     },
     "Utah Valley": {
       "rpi_rank": 282,
-      "elo_rank": 279,
       "raw_name": "Utah Valley"
-    },
-    "Texas Southern": {
-      "rpi_rank": 289,
-      "elo_rank": 280,
-      "raw_name": "Texas Southern"
     },
     "Manhattan": {
       "rpi_rank": 275,
-      "elo_rank": 281,
       "raw_name": "Manhattan"
     },
-    "Mount Saint Mary's": {
-      "rpi_rank": 287,
-      "elo_rank": 282,
-      "raw_name": "Mount Saint Mary's"
-    },
-    "Albany": {
+    "UAlbany": {
       "rpi_rank": 265,
-      "elo_rank": 283,
       "raw_name": "Albany"
     },
-    "Presbyterian College": {
+    "Presbyterian": {
       "rpi_rank": 273,
-      "elo_rank": 284,
       "raw_name": "Presbyterian College"
     },
     "Iona": {
       "rpi_rank": 262,
-      "elo_rank": 285,
       "raw_name": "Iona"
     },
     "Lehigh": {
       "rpi_rank": 278,
-      "elo_rank": 286,
       "raw_name": "Lehigh"
-    },
-    "Loyola-Marymount": {
-      "rpi_rank": 274,
-      "elo_rank": 287,
-      "raw_name": "Loyola-Marymount"
     },
     "Stonehill": {
       "rpi_rank": 255,
-      "elo_rank": 288,
       "raw_name": "Stonehill"
     },
-    "Saint Bonaventure": {
+    "St. Bonaventure": {
       "rpi_rank": 285,
-      "elo_rank": 289,
       "raw_name": "Saint Bonaventure"
     },
-    "Saint Thomas": {
+    "St. Thomas (MN)": {
       "rpi_rank": 292,
-      "elo_rank": 290,
       "raw_name": "Saint Thomas"
     },
     "Lafayette": {
       "rpi_rank": 281,
-      "elo_rank": 291,
       "raw_name": "Lafayette"
     },
-    "Central Connecticut": {
+    "Central Conn. St.": {
       "rpi_rank": 296,
-      "elo_rank": 292,
       "raw_name": "Central Connecticut"
     },
-    "Youngstown State": {
+    "Youngstown St.": {
       "rpi_rank": 294,
-      "elo_rank": 293,
       "raw_name": "Youngstown State"
     },
-    "Norfolk State": {
+    "Norfolk St.": {
       "rpi_rank": 301,
-      "elo_rank": 294,
       "raw_name": "Norfolk State"
-    },
-    "Ohio": {
-      "rpi_rank": 291,
-      "elo_rank": 295,
-      "raw_name": "Ohio"
     },
     "Valparaiso": {
       "rpi_rank": 286,
-      "elo_rank": 296,
       "raw_name": "Valparaiso"
     },
     "Bradley": {
       "rpi_rank": 288,
-      "elo_rank": 297,
       "raw_name": "Bradley"
     },
     "Mercyhurst": {
       "rpi_rank": 299,
-      "elo_rank": 298,
       "raw_name": "Mercyhurst"
-    },
-    "Mississippi Valley State": {
-      "rpi_rank": 298,
-      "elo_rank": 299,
-      "raw_name": "Mississippi Valley State"
     },
     "Oakland": {
       "rpi_rank": 295,
-      "elo_rank": 300,
       "raw_name": "Oakland"
     },
-    "Prairie View A&M": {
+    "Prairie View": {
       "rpi_rank": 302,
-      "elo_rank": 301,
       "raw_name": "Prairie View A&M"
     },
     "New Haven": {
       "rpi_rank": 300,
-      "elo_rank": 302,
       "raw_name": "New Haven"
     },
-    "Coppin State": {
+    "Coppin St.": {
       "rpi_rank": 303,
-      "elo_rank": 303,
       "raw_name": "Coppin State"
     },
     "Alabama A&M": {
       "rpi_rank": 305,
-      "elo_rank": 304,
       "raw_name": "Alabama A&M"
     },
-    "Maryland Eastern Shore": {
-      "rpi_rank": 306,
-      "elo_rank": 305,
-      "raw_name": "Maryland Eastern Shore"
-    },
-    "Delaware State": {
-      "rpi_rank": 304,
-      "elo_rank": 306,
-      "raw_name": "Delaware State"
-    },
-    "Alcorn State": {
+    "Alcorn": {
       "rpi_rank": 307,
-      "elo_rank": 307,
       "raw_name": "Alcorn State"
     },
     "Saint Peter's": {
       "rpi_rank": 308,
-      "elo_rank": 308,
       "raw_name": "Saint Peter's"
     }
   }

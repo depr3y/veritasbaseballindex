@@ -1,127 +1,116 @@
 """
 Veritas Baseball Index — RPI Scraper
---------------------------------------
-Scrapes RPI (and ELO) rankings from WarrenNolan.com/compare-rankings.
-Saves to rpi.json for use in the VBI rankings comparison.
-
-Usage:
-    python scrape_rpi.py
+Scrapes RPI from WarrenNolan.com and auto-matches to VBI team names.
 """
-
-import requests
-import json
-import re
+import requests, json, re
 from datetime import datetime, timezone, timedelta
 
 URL = "https://www.warrennolan.com/baseball/2026/compare-rankings"
 OUTPUT = "rpi.json"
-
-HEADERS = {
-    "User-Agent": "VeritasBaseballIndex/1.0 (college baseball rating project)"
-}
-
-NAME_MAP = {
-    "UCLA": "UCLA", "Texas": "Texas", "Mississippi State": "Mississippi St.",
-    "North Carolina": "North Carolina", "Georgia Tech": "Georgia Tech",
-    "Auburn": "Auburn", "Alabama": "Alabama", "Florida State": "Florida State",
-    "Southern Miss": "Southern Miss", "USC": "Southern California",
-    "Texas A&M": "Texas A&M", "Florida": "Florida", "Ole Miss": "Ole Miss",
-    "Georgia": "Georgia", "Nebraska": "Nebraska", "Wake Forest": "Wake Forest",
-    "West Virginia": "West Virginia", "Oregon State": "Oregon St.",
-    "Oregon": "Oregon", "Cincinnati": "Cincinnati", "Oklahoma": "Oklahoma",
-    "Kansas": "Kansas", "Virginia": "Virginia", "Oklahoma State": "Oklahoma St.",
-    "Missouri State": "Missouri St.", "Coastal Carolina": "Coastal Carolina",
-    "Arkansas": "Arkansas", "UC Santa Barbara": "UC Santa Barbara",
-    "Boston College": "Boston College", "Kentucky": "Kentucky",
-    "Jacksonville State": "Jacksonville St.", "UCF": "UCF",
-    "Tennessee": "Tennessee", "Miami": "Miami", "Michigan": "Michigan",
-    "Liberty": "Liberty", "Mercer": "Mercer", "Clemson": "Clemson",
-    "Virginia Tech": "Virginia Tech", "TCU": "TCU", "High Point": "High Point",
-    "Texas State": "Texas State", "NC State": "NC State",
-    "Miami (OH)": "Miami (OH)", "Arizona State": "Arizona St.",
-    "Gonzaga": "Gonzaga", "UTSA": "UTSA", "Louisiana": "Louisiana",
-    "Pittsburgh": "Pittsburgh", "SE Missouri State": "Southeast Missouri",
-    "Purdue": "Purdue", "Western Carolina": "Western Carolina",
-    "Kent State": "Kent St.", "Troy": "Troy", "East Carolina": "East Carolina",
-    "California": "California", "LSU": "LSU", "South Alabama": "South Alabama",
-    "Arkansas State": "Arkansas St.", "Kansas State": "Kansas St.",
-    "UAB": "UAB", "Vanderbilt": "Vanderbilt", "Duke": "Duke",
-    "Notre Dame": "Notre Dame", "Stanford": "Stanford", "Rice": "Rice",
-    "Louisville": "Louisville", "Maryland": "Maryland", "Penn State": "Penn St.",
-    "Minnesota": "Minnesota", "Michigan State": "Michigan St.",
-    "Ohio State": "Ohio St.", "Illinois": "Illinois", "Iowa": "Iowa",
-    "Xavier": "Xavier", "UConn": "UConn", "Seton Hall": "Seton Hall",
-    "Georgetown": "Georgetown", "St. John's": "St. John's (NY)",
-    "Villanova": "Villanova", "Dallas Baptist": "Dallas Baptist",
-    "Sam Houston": "Sam Houston", "Kennesaw State": "Kennesaw St.",
-    "Indiana": "Indiana", "Wichita State": "Wichita St.",
-    "Tarleton State": "Tarleton St.",
-}
+GAMES_FILE = "games.json"
+HEADERS = {"User-Agent": "VeritasBaseballIndex/1.0 (college baseball rating project)"}
 
 def normalize(name):
-    name = name.strip()
-    return NAME_MAP.get(name, name)
+    """Normalize a team name for fuzzy matching."""
+    name = name.lower().strip()
+    # Remove common suffixes/prefixes that differ between sources
+    for pat in [r'\bst\.?\b', r'\bstate\b', r'\buniversity\b', r'\bcollege\b',
+                r'\(.*?\)', r'&', r'-', r"'", r'\.']:
+        name = re.sub(pat, ' ', name)
+    return re.sub(r'\s+', ' ', name).strip()
+
+def best_match(raw_name, vbi_names):
+    """Find the best matching VBI team name for a Warren Nolan name."""
+    norm_raw = normalize(raw_name)
+    # Exact normalized match
+    for vbi in vbi_names:
+        if normalize(vbi) == norm_raw:
+            return vbi
+    # One contains the other
+    for vbi in vbi_names:
+        nv = normalize(vbi)
+        if norm_raw in nv or nv in norm_raw:
+            return vbi
+    # Word overlap score
+    raw_words = set(norm_raw.split())
+    best, best_score = None, 0
+    for vbi in vbi_names:
+        vbi_words = set(normalize(vbi).split())
+        if not vbi_words: continue
+        overlap = len(raw_words & vbi_words)
+        score = overlap / max(len(raw_words), len(vbi_words))
+        if score > best_score and score >= 0.6:
+            best_score = score
+            best = vbi
+    return best
+
+def load_vbi_names():
+    try:
+        games = json.load(open(GAMES_FILE))
+        from collections import Counter
+        tc = Counter()
+        for g in games:
+            tc[g['winner']] += 1
+            tc[g['loser']] += 1
+        return set(t for t, c in tc.items() if c >= 10)
+    except:
+        return set()
 
 def scrape_rpi():
     try:
         r = requests.get(URL, headers=HEADERS, timeout=20)
         r.raise_for_status()
     except requests.RequestException as e:
-        print(f"Error fetching rankings: {e}")
+        print(f"Error: {e}")
         return None
 
     html = r.text
+    vbi_names = load_vbi_names()
     rankings = {}
-    rows = re.findall(r'<tr>(.*?)</tr>', html, re.DOTALL)
+    unmatched = []
 
+    rows = re.findall(r'<tr>(.*?)</tr>', html, re.DOTALL)
     for row in rows:
         cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
-        if len(cells) < 4:
-            continue
-        team_cell = cells[0]
-        team_match = re.search(r'>([^<]+)</a>', team_cell)
+        if len(cells) < 4: continue
+        team_match = re.search(r'>([^<]+)</a>', cells[0])
         if not team_match:
-            team_match = re.search(r'>([^<]+)<', team_cell)
-        if not team_match:
-            continue
+            team_match = re.search(r'>([^<]+)<', cells[0])
+        if not team_match: continue
         raw_name = team_match.group(1).strip()
-        if not raw_name or raw_name in ('Team', 'Record'):
-            continue
+        if not raw_name or raw_name in ('Team', 'Record'): continue
 
         def clean(cell):
             text = re.sub(r'<[^>]+>', '', cell).strip()
             return int(text) if text.isdigit() else None
 
-        elo_rank = clean(cells[2]) if len(cells) > 2 else None
         rpi_rank = clean(cells[3]) if len(cells) > 3 else None
-        if rpi_rank is None:
-            continue
+        if rpi_rank is None: continue
 
-        vbi_name = normalize(raw_name)
-        rankings[vbi_name] = {
-            "rpi_rank": rpi_rank,
-            "elo_rank": elo_rank,
-            "raw_name": raw_name
-        }
+        vbi_name = best_match(raw_name, vbi_names) if vbi_names else raw_name
+        if vbi_name:
+            rankings[vbi_name] = {"rpi_rank": rpi_rank, "raw_name": raw_name}
+        else:
+            unmatched.append(raw_name)
 
+    if unmatched:
+        print(f"  Unmatched ({len(unmatched)}): {unmatched[:10]}")
     return rankings
 
 if __name__ == "__main__":
-    print("Scraping RPI + ELO from WarrenNolan.com...")
+    print("Scraping RPI from WarrenNolan.com...")
     rankings = scrape_rpi()
     if not rankings:
-        print("Failed to scrape data")
-        exit(1)
+        print("Failed"); exit(1)
 
     EST = timezone(timedelta(hours=-4))
     today = datetime.now(EST).strftime('%Y-%m-%d')
     output = {"updated": today, "source": "warrennolan.com", "teams": rankings}
-
     with open(OUTPUT, "w") as f:
         json.dump(output, f, indent=2)
 
-    print(f"Done! Saved {len(rankings)} teams to {OUTPUT}")
-    print(f"\nTop 10 by RPI:")
+    print(f"Done! Matched {len(rankings)} teams.")
+    print("\nTop 10 by RPI:")
     top10 = sorted(rankings.items(), key=lambda x: x[1]['rpi_rank'])[:10]
     for team, data in top10:
-        print(f"  RPI #{data['rpi_rank']}  ELO #{data['elo_rank']}  {team}")
+        print(f"  RPI #{data['rpi_rank']:3d}  {team}  (raw: {data['raw_name']})")

@@ -704,7 +704,7 @@ async function loadRankings() {
     }
     if (gamesRes && gamesRes.ok) {
       TL_GAMES = await gamesRes.json();
-      TL_DATES = [...new Set(TL_GAMES.map(g=>g.date))].sort();
+      // Don't set TL_DATES here — initMatrix owns that
     }
     document.getElementById("team-count").textContent = allTeams.length;
     if (allTeams.length > 0) document.getElementById("updated").textContent = allTeams[0].updated_at;
@@ -1507,7 +1507,12 @@ function onSliderChange(){
 }
 
 async function initMatrix(){
-  try{const res=await fetch("games.json");TL_GAMES=await res.json();}
+  try{
+    if(!TL_GAMES||TL_GAMES.length===0){
+      const res=await fetch("games.json");
+      TL_GAMES=await res.json();
+    }
+  }
   catch(e){document.getElementById("tl-loading").textContent="// error: could not load games.json";return;}
   TL_DATES=[...new Set(TL_GAMES.map(g=>g.date))].sort();
   const last=TL_DATES.length-1;
