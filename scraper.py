@@ -1,277 +1,353 @@
 """
-Veritas Baseball Index — NCAA D1 Baseball Scraper
----------------------------------------------------
-Scrapes game results and conference data from ncaa-api.henrygd.me.
-Box scores are optional and only fetched with --box-scores flag.
+Veritas Baseball Index — NCAA Stats Scraper
+--------------------------------------------
+Scrapes game results from stats.ncaa.org for all D1 baseball teams.
+Correctly identifies home/away/neutral site games from the official source.
 
 Usage:
-    python scraper.py                              # scrape today (fast)
-    python scraper.py --date 2026-05-06            # scrape specific date
-    python scraper.py --full-season                # scrape entire season (fast)
-    python scraper.py --full-season --box-scores   # scrape + box scores (slow)
+    python scraper.py                  # incremental update (new games only)
+    python scraper.py --full-season    # full rebuild from scratch
+    python scraper.py --team UCLA      # scrape one team (for testing)
 """
 
-import requests
-import json
-import time
-import argparse
-from datetime import date, timedelta
-import os
+import requests, json, re, time, argparse
+from bs4 import BeautifulSoup
+from datetime import date, datetime
+from collections import defaultdict
 
-BASE_URL   = "https://ncaa-api.henrygd.me"
+# ── Config ──────────────────────────────────────────────────────────────────
 GAMES_FILE = "games.json"
 CONF_FILE  = "team_conferences.json"
-STATS_FILE = "game_stats.json"
+TEAMS_FILE = "ncaa_team_ids.json"   # cached team list so we don't refetch every run
+
+BASE        = "https://stats.ncaa.org"
+SPORT_CODE  = "MBA"
+YEAR        = "2026"
+DIVISION    = "1"
 
 HEADERS = {
-    "User-Agent": "VeritasBaseballIndex/1.0 (college baseball rating project)"
+    "User-Agent": "VeritasBaseballIndex/1.0 (veritasbaseball.vercel.app)",
+    "Accept": "text/html,application/xhtml+xml",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://stats.ncaa.org/",
 }
 
-
-def load_json(filepath, default):
-    if os.path.exists(filepath):
-        with open(filepath) as f:
+# ── Load / Save helpers ──────────────────────────────────────────────────────
+def load_json(path, default):
+    try:
+        with open(path) as f:
             return json.load(f)
-    return default
+    except:
+        return default
 
+def save_json(path, data, indent=None):
+    with open(path, "w") as f:
+        json.dump(data, f, indent=indent)
 
-def save_json(filepath, data):
-    with open(filepath, "w") as f:
-        json.dump(data, f, indent=2)
-
-
-def fetch_box_score(game_id):
-    url = f"{BASE_URL}/game/{game_id}/boxscore"
+# ── Fetch D1 team list ────────────────────────────────────────────────────────
+def fetch_team_list():
+    """Fetch all D1 baseball team IDs and names from stats.ncaa.org."""
+    url = f"{BASE}/game_upload/team_codes"
+    params = {"utf8": "✓", "sport_code": SPORT_CODE,
+              "academic_year": YEAR, "division": DIVISION}
     try:
-        r = requests.get(url, headers=HEADERS, timeout=15)
-        if r.status_code != 200:
-            return None
-        return r.json()
-    except Exception:
-        return None
-
-
-def parse_box_score(box_data, game_id, home_team, away_team, winner, loser, game_date):
-    if not box_data:
-        return None
-    try:
-        teams = box_data.get("teams", [])
-        result = {
-            "game_id": game_id, "date": game_date,
-            "home_team": home_team, "away_team": away_team,
-            "winner": winner, "loser": loser,
-        }
-        for team in teams:
-            name = team.get("team", {}).get("names", {}).get("short", "")
-            side = "home" if name == home_team else "away"
-            totals = team.get("totals", {})
-            result[f"{side}_runs"]   = totals.get("R", "")
-            result[f"{side}_hits"]   = totals.get("H", "")
-            result[f"{side}_errors"] = totals.get("E", "")
-            result[f"{side}_team"]   = name
-        return result
-    except Exception:
-        return None
-
-
-def scrape_date(target_date, known_confs, existing_game_ids, fetch_boxes=False):
-    date_str = target_date.strftime("%Y/%m/%d")
-    url = f"{BASE_URL}/scoreboard/baseball/d1/{date_str}"
-
-    try:
-        r = requests.get(url, headers=HEADERS, timeout=15)
-        if r.status_code == 404:
-            return [], known_confs, []
+        r = requests.get(url, headers=HEADERS, params=params, timeout=30)
         r.raise_for_status()
-        data = r.json()
-    except requests.RequestException as e:
-        print(f"  Error: {e}")
-        return [], known_confs, []
-    except json.JSONDecodeError:
-        return [], known_confs, []
+    except Exception as e:
+        print(f"  Error fetching team list: {e}")
+        return {}
 
-    games     = []
-    new_stats = []
+    soup = BeautifulSoup(r.text, "html.parser")
+    teams = {}
 
-    for game in data.get("games", []):
-        g       = game.get("game", {})
-        home    = g.get("home", {})
-        away    = g.get("away", {})
-        game_id = g.get("gameID", "")
+    # Try table rows
+    for row in soup.select("table tr"):
+        cells = row.select("td")
+        if len(cells) >= 2:
+            team_id = cells[0].get_text(strip=True)
+            team_name = cells[1].get_text(strip=True)
+            if team_id.isdigit() and team_name:
+                teams[team_id] = team_name
 
-        home_team  = home.get("names", {}).get("short", "")
-        away_team  = away.get("names", {}).get("short", "")
-        home_score = home.get("score", "")
-        away_score = away.get("score", "")
+    # Also try select/option format
+    if not teams:
+        for opt in soup.select("select option"):
+            val = opt.get("value", "")
+            name = opt.get_text(strip=True)
+            if val.isdigit() and name and name not in ("Select a Team", ""):
+                teams[val] = name
 
-        # Capture conferences
-        for team, side in [(home_team, home), (away_team, away)]:
-            if team and team not in known_confs:
-                confs = side.get("conferences", [])
-                real_confs = [c["conferenceSeo"] for c in confs
-                              if c.get("conferenceSeo") not in ("top-25", "")]
-                if real_confs:
-                    known_confs[team] = real_confs[0]
+    return teams
 
-        if home_score == "" or away_score == "":
+def fetch_team_list_alt():
+    """Alternative: fetch team list from the standings/rankings page."""
+    url = f"{BASE}/rankings/change_sport_year_div"
+    params = {"sport_code": SPORT_CODE, "academic_year": YEAR, "division": DIVISION}
+    try:
+        r = requests.get(url, headers=HEADERS, params=params, timeout=30)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  Error (alt): {e}")
+        return {}
+
+    soup = BeautifulSoup(r.text, "html.parser")
+    teams = {}
+    for a in soup.select("a[href*='/teams/']"):
+        href = a.get("href", "")
+        m = re.search(r"/teams/(\d+)", href)
+        if m:
+            team_id = m.group(1)
+            name = a.get_text(strip=True)
+            if name:
+                teams[team_id] = name
+    return teams
+
+# ── Fetch schedule for one team ──────────────────────────────────────────────
+def fetch_team_schedule(team_id, team_name):
+    """
+    Scrape a team's schedule from stats.ncaa.org.
+    Returns list of game dicts with correct H/A/N location.
+    """
+    url = f"{BASE}/teams/{team_id}/schedule"
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=20)
+        if r.status_code == 404:
+            return [], None
+        r.raise_for_status()
+    except Exception as e:
+        print(f"    Error: {e}")
+        return [], None
+
+    soup = BeautifulSoup(r.text, "html.parser")
+    games = []
+    conf = None
+
+    # Get conference from page
+    for span in soup.select(".conference_name, .conf_name, span.conferenceName"):
+        conf = span.get_text(strip=True)
+        break
+    # Fallback: check breadcrumb or header
+    if not conf:
+        for a in soup.select("a[href*='/conferences/']"):
+            conf = a.get_text(strip=True)
+            if conf and len(conf) > 2:
+                break
+
+    # Find schedule table
+    table = None
+    for t in soup.select("table"):
+        headers = [th.get_text(strip=True).lower() for th in t.select("th")]
+        if any(h in headers for h in ["opponent", "opp", "result"]):
+            table = t
+            break
+
+    if not table:
+        return [], conf
+
+    # Parse column indices
+    headers = [th.get_text(strip=True).lower() for th in table.select("thead th, tr:first-child th")]
+    if not headers:
+        headers = [td.get_text(strip=True).lower() for td in table.select("tr:first-child td")]
+
+    def col(names):
+        for name in names:
+            for i, h in enumerate(headers):
+                if name in h:
+                    return i
+        return -1
+
+    date_col    = col(["date"])
+    opp_col     = col(["opponent", "opp"])
+    result_col  = col(["result", "score", "w/l"])
+    site_col    = col(["site", "location", "home/away", "h/a"])
+
+    if opp_col < 0 or result_col < 0:
+        return [], conf
+
+    for row in table.select("tbody tr, tr"):
+        cells = row.select("td")
+        if not cells or len(cells) <= max(opp_col, result_col):
             continue
-        try:
-            home_score = int(home_score)
-            away_score = int(away_score)
-        except (ValueError, TypeError):
+
+        # Date
+        game_date = ""
+        if date_col >= 0 and date_col < len(cells):
+            date_text = cells[date_col].get_text(strip=True)
+            # Parse MM/DD/YYYY or similar
+            for fmt in ["%m/%d/%Y", "%m/%d/%y", "%Y-%m-%d"]:
+                try:
+                    dt = datetime.strptime(date_text.split()[0], fmt)
+                    game_date = dt.strftime("%Y-%m-%d")
+                    break
+                except:
+                    pass
+        if not game_date:
             continue
 
-        if not home_team or not away_team or home_score == away_score:
+        # Skip future games
+        if game_date > str(date.today()):
             continue
 
-        if home_score > away_score:
-            winner, loser, location = home_team, away_team, "home"
+        # Opponent
+        opp_cell = cells[opp_col]
+        opp_text = opp_cell.get_text(strip=True)
+        # Remove @ or vs from opponent name
+        opp_name = re.sub(r"^[@#\s]*(at\s+|vs\.?\s*)?", "", opp_text, flags=re.IGNORECASE).strip()
+        # Remove rank indicators like (5) or #5
+        opp_name = re.sub(r"^[\(\)#\d]+\s*", "", opp_name).strip()
+        opp_name = re.sub(r"\s*\(\d+\)\s*$", "", opp_name).strip()
+        if not opp_name:
+            continue
+
+        # Result
+        result_text = cells[result_col].get_text(strip=True).upper()
+        if not result_text or result_text in ("", "-", "PPD", "CANC", "CANC.", "CANCEL"):
+            continue
+        if not (result_text.startswith("W") or result_text.startswith("L")):
+            continue
+
+        won = result_text.startswith("W")
+
+        # Location / site
+        location = "home"  # default
+        if site_col >= 0 and site_col < len(cells):
+            site_text = cells[site_col].get_text(strip=True).lower()
+            if "neutral" in site_text or site_text in ("n", "neu"):
+                location = "neutral"
+            elif "away" in site_text or site_text in ("a", "@") or "@" in site_text:
+                location = "away"
+            elif "home" in site_text or site_text in ("h",):
+                location = "home"
         else:
-            winner, loser, location = away_team, home_team, "away"
+            # Infer from opponent text — if it has @ it's away
+            if opp_text.strip().startswith("@"):
+                location = "away"
+            elif opp_text.strip().lower().startswith("at "):
+                location = "away"
+
+        winner = team_name if won else opp_name
+        loser  = opp_name  if won else team_name
+
+        # Generate stable game_id from teams + date
+        parts = sorted([team_name, opp_name]) + [game_date]
+        game_id = "_".join(parts).replace(" ", "-").replace("/", "-")
 
         games.append({
-            "game_id": game_id, "winner": winner, "loser": loser,
-            "location": location, "date": str(target_date),
-            "home_team": home_team, "away_team": away_team,
-            "home_score": home_score, "away_score": away_score,
+            "game_id":   game_id,
+            "date":      game_date,
+            "winner":    winner,
+            "loser":     loser,
+            "location":  location,
+            "home_team": team_name if location == "home" else (opp_name if location == "away" else ""),
+            "away_team": opp_name  if location == "home" else (team_name if location == "away" else ""),
         })
 
-        # Only fetch box scores if flag is set
-        if fetch_boxes and game_id and game_id not in existing_game_ids:
-            time.sleep(0.3)
-            box_data = fetch_box_score(game_id)
-            stats = parse_box_score(box_data, game_id, home_team, away_team,
-                                    winner, loser, str(target_date))
-            if stats:
-                new_stats.append(stats)
+    return games, conf
 
-    return games, known_confs, new_stats
+# ── D1 filter ────────────────────────────────────────────────────────────────
+# Known D1 team name patterns — filter out non-D1 opponents
+# We only keep games where BOTH teams are in our D1 list
+def filter_d1_games(all_games, d1_names):
+    """Keep only games where both winner and loser are D1 teams."""
+    filtered = []
+    for g in all_games:
+        if g["winner"] in d1_names and g["loser"] in d1_names:
+            filtered.append(g)
+    return filtered
 
-
-def all_dates_this_season(refresh_days=3):
-    """
-    Returns all dates from season start to today.
-    Always includes the last `refresh_days` dates so partially-scraped
-    days (scraper ran mid-day) get filled in on the next run.
-    """
-    season_start = date(2026, 2, 13)
-
-
-def dates_to_refresh(existing_games, refresh_days=3):
-    """
-    Returns only dates that are missing or were recently scraped
-    (last refresh_days days are always re-scraped to catch late-finishing games).
-    """
-    today = date.today()
-    existing_dates = set(g["date"] for g in existing_games)
-    season_start = date(2026, 2, 13)
-    all_d = []
-    cur = season_start
-    while cur <= today:
-        d_str = str(cur)
-        # Include if: never scraped, OR within refresh window
-        if d_str not in existing_dates or cur >= today - timedelta(days=refresh_days):
-            all_d.append(cur)
-        cur += timedelta(days=1)
-    return all_d
-
-
-def deduplicate_games(games):
-    """
-    Deduplicate using game_id when available (most reliable).
-    For older records without game_id, fall back to (winner, loser, date, home_score, away_score)
-    so that same-day doubleheaders with different scores are preserved.
-    """
-    seen_ids = set()
-    seen_keys = set()
-    unique = []
+# ── Deduplication ────────────────────────────────────────────────────────────
+def dedup_games(games):
+    """Deduplicate by game_id, keeping one record per game."""
+    seen = {}
     for g in games:
         gid = g.get("game_id", "")
-        if gid:
-            if gid not in seen_ids:
-                seen_ids.add(gid)
-                unique.append(g)
-        else:
-            # Fallback: include scores so doubleheaders aren't collapsed
-            key = (g["winner"], g["loser"], g["date"],
-                   g.get("home_score", ""), g.get("away_score", ""))
-            if key not in seen_keys:
-                seen_keys.add(key)
-                unique.append(g)
-    return unique
+        if gid and gid not in seen:
+            seen[gid] = g
+        elif not gid:
+            # Fallback key
+            key = f"{sorted([g['winner'],g['loser']])}_{g['date']}"
+            if key not in seen:
+                seen[key] = g
+    return list(seen.values())
 
-
-def deduplicate_stats(stats):
-    seen = set()
-    unique = []
-    for s in stats:
-        if s["game_id"] not in seen:
-            seen.add(s["game_id"])
-            unique.append(s)
-    return unique
-
-
+# ── Main ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--date", help="Specific date (YYYY-MM-DD)")
-    parser.add_argument("--full-season", action="store_true")
-    parser.add_argument("--box-scores", action="store_true",
-                        help="Also fetch box scores (slower)")
+    parser.add_argument("--full-season", action="store_true",
+                        help="Full rebuild — ignore existing games.json")
+    parser.add_argument("--team", help="Scrape a single team by name (for testing)")
     args = parser.parse_args()
 
-    existing_games = load_json(GAMES_FILE, [])
+    # Load existing data
+    existing_games = [] if args.full_season else load_json(GAMES_FILE, [])
     known_confs    = load_json(CONF_FILE, {})
-    existing_stats = load_json(STATS_FILE, [])
-    existing_game_ids = {s["game_id"] for s in existing_stats}
+    existing_ids   = {g.get("game_id","") for g in existing_games}
 
-    new_games = []
-    new_stats = []
+    # Load or fetch team list
+    team_ids = load_json(TEAMS_FILE, {})
+    if not team_ids or args.full_season:
+        print("Fetching D1 team list from stats.ncaa.org...")
+        team_ids = fetch_team_list()
+        if not team_ids:
+            print("  Primary method failed, trying alternative...")
+            team_ids = fetch_team_list_alt()
+        if not team_ids:
+            print("  ERROR: Could not fetch team list")
+            exit(1)
+        save_json(TEAMS_FILE, team_ids)
+        print(f"  Found {len(team_ids)} teams")
 
-    if args.full_season:
-        # Smart refresh: scrape all missing dates + always re-scrape last 3 days
-        dates = dates_to_refresh(existing_games, refresh_days=3)
-        print(f"Scraping {len(dates)} dates (missing + last 3 days refreshed) {'(+ box scores)' if args.box_scores else '(fast mode)'}...")
+    d1_names = set(team_ids.values())
 
-        for i, d in enumerate(dates):
-            print(f"  [{i+1}/{len(dates)}] {d}...", end=" ", flush=True)
-            days_games, known_confs, days_stats = scrape_date(
-                d, known_confs, existing_game_ids, fetch_boxes=args.box_scores)
-            print(f"{len(days_games)} games")
-            if days_games:
-                # Only replace existing data for this date if we got something back
-                existing_games = [g for g in existing_games if g["date"] != str(d)]
-                new_games.extend(days_games)
-                new_stats.extend(days_stats)
-                existing_game_ids.update(s["game_id"] for s in days_stats)
-            time.sleep(0.5)
+    # Filter to one team if --team flag
+    if args.team:
+        team_ids = {k: v for k, v in team_ids.items() if args.team.lower() in v.lower()}
+        if not team_ids:
+            print(f"Team '{args.team}' not found")
+            exit(1)
+        print(f"Testing with: {list(team_ids.values())}")
 
-    elif args.date:
-        target = date.fromisoformat(args.date)
-        print(f"Scraping {target}...")
-        new_games, known_confs, new_stats = scrape_date(
-            target, known_confs, existing_game_ids, fetch_boxes=args.box_scores)
-        print(f"  Found {len(new_games)} games")
-        if new_games:
-            existing_games = [g for g in existing_games if g["date"] != str(target)]
+    all_new_games = []
+    teams_list = list(team_ids.items())
+    total = len(teams_list)
 
-    else:
-        # Default: scrape today AND yesterday (catches games that finished after last run)
-        today = date.today()
-        for target in [today - timedelta(days=1), today]:
-            print(f"Scraping {target}...")
-            day_games, known_confs, day_stats = scrape_date(
-                target, known_confs, existing_game_ids, fetch_boxes=args.box_scores)
-            print(f"  Found {len(day_games)} games")
-            if day_games:
-                existing_games = [g for g in existing_games if g["date"] != str(target)]
-                new_games.extend(day_games)
-                new_stats.extend(day_stats)
+    print(f"\nScraping {total} teams...")
+    for i, (team_id, team_name) in enumerate(teams_list):
+        print(f"  [{i+1:3d}/{total}] {team_name:<30}", end=" ", flush=True)
 
-    all_games = deduplicate_games(existing_games + new_games)
-    all_stats = deduplicate_stats(existing_stats + new_stats)
+        games, conf = fetch_team_schedule(team_id, team_name)
 
-    save_json(GAMES_FILE, all_games)
+        # Save conference
+        if conf and team_name not in known_confs:
+            known_confs[team_name] = conf
+
+        # Filter new games
+        new = [g for g in games if g.get("game_id","") not in existing_ids]
+        all_new_games.extend(new)
+        existing_ids.update(g.get("game_id","") for g in new)
+
+        print(f"{len(games)} games ({len(new)} new)", flush=True)
+        time.sleep(0.4)  # polite rate limit
+
+    print(f"\nTotal new games found: {len(all_new_games)}")
+
+    # Combine and deduplicate
+    combined = existing_games + all_new_games
+    combined = filter_d1_games(combined, d1_names)
+    combined = dedup_games(combined)
+    combined.sort(key=lambda g: g["date"])
+
+    # Save
+    save_json(GAMES_FILE, combined)
     save_json(CONF_FILE, known_confs)
-    save_json(STATS_FILE, all_stats)
 
-    print(f"\nDone! {len(all_games)} games, {len(known_confs)} team conferences, {len(all_stats)} box scores")
+    # Stats
+    from collections import Counter
+    locs = Counter(g["location"] for g in combined)
+    print(f"\nSaved {len(combined)} games to {GAMES_FILE}")
+    print(f"Location breakdown: {dict(locs)}")
+    print(f"Conferences: {len(known_confs)} teams mapped")
+
+    dates = sorted(set(g["date"] for g in combined))
+    if dates:
+        print(f"Date range: {dates[0]} to {dates[-1]}")
