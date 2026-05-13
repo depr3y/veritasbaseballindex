@@ -509,60 +509,78 @@
 
       <div class="ey">// veritas baseball index</div>
       <div class="st">How does VBI actually work?</div>
-      <div class="bt">Three teams. Three games. One system of equations. Watch how VBI solves for every team's rating simultaneously — no committees, no tiers, just math.</div>
+      <div class="bt">Three teams. Three games. One system of equations solved simultaneously. Change any game below and watch every number update instantly.</div>
 
-      <!-- GAME SETUP -->
-      <div id="eq-games" style="margin:14px 0">
-        <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px">// the games</div>
-        <div style="display:flex;flex-direction:column;gap:6px" id="game-list"></div>
-      </div>
+      <!-- STEP 1: THE GAMES -->
+      <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px;margin-top:14px">// step 1 — the games</div>
+      <div style="font-size:11px;color:var(--green-d);margin-bottom:8px;line-height:1.6">Click the location badge to cycle through home · road · neutral. Click <b style="color:var(--green-b)">flip</b> to change who won.</div>
+      <div id="game-list" style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px"></div>
+
+      <div class="abt-hr"></div>
+
+      <!-- STEP 2: THE B VECTOR (plain english) -->
+      <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// step 2 — each team's weighted record (b vector)</div>
+      <div style="font-size:11px;color:var(--green-d);margin-bottom:8px;line-height:1.6">Every team starts at a baseline of <b style="color:var(--green-b)">1.0</b>. Each win adds to it, each loss subtracts — but the amount depends on where the game was played.</div>
+      <div id="b-plain" style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px"></div>
 
       <div class="abt-hr"></div>
 
-      <!-- EQUATION BUILDER -->
-      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px">// the colley matrix — C · r = b</div>
-      <div style="font-size:11px;color:var(--green-d);margin-bottom:10px;line-height:1.7">Each game creates a connection between two teams. C[i][i] counts a team's total weighted games + 2. C[i][j] subtracts shared games. b[i] captures weighted wins minus losses. Solving the system gives every team's rating at once.</div>
-
-      <!-- MATRIX DISPLAY -->
-      <div style="font-family:'Courier New',monospace;font-size:11px;margin-bottom:14px">
-        <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:2px;align-items:center;margin-bottom:4px">
-          <div></div>
-          <div style="color:var(--green-x);text-align:center;font-size:10px" id="ch0">XAV</div>
-          <div style="color:var(--green-x);text-align:center;font-size:10px" id="ch1">BC</div>
-          <div style="color:var(--green-x);text-align:center;font-size:10px" id="ch2">LSU</div>
-        </div>
-        <div id="matrix-rows"></div>
-      </div>
-
-      <!-- B VECTOR -->
-      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// b vector (weighted record)</div>
-      <div id="b-vector" style="font-family:'Courier New',monospace;font-size:12px;display:flex;flex-direction:column;gap:4px;margin-bottom:14px"></div>
-
-      <!-- SOLUTION -->
-      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// solution — r = C⁻¹ · b</div>
-      <div id="solution" style="font-family:'Courier New',monospace;font-size:12px;display:flex;flex-direction:column;gap:4px;margin-bottom:14px"></div>
-
-      <!-- INSIGHT -->
-      <div id="eq-insight" style="border-left:2px solid var(--border);padding:8px 12px;font-size:11px;color:var(--green-d);line-height:1.6;margin-bottom:14px;transition:border-color 0.3s"></div>
+      <!-- STEP 3: THE EQUATIONS -->
+      <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// step 3 — the system of equations</div>
+      <div style="font-size:11px;color:var(--green-d);margin-bottom:8px;line-height:1.6">Each team gets one equation. The diagonal ties a team to its own games. The off-diagonals connect teams that played each other.</div>
+      <div id="eq-display" style="font-family:'Courier New',monospace;font-size:11px;display:flex;flex-direction:column;gap:4px;margin-bottom:12px"></div>
+      <div style="font-size:11px;color:var(--green-x);margin-bottom:16px;line-height:1.6;font-style:italic">These three equations must all be true at the same time — that's what "solving simultaneously" means.</div>
 
       <div class="abt-hr"></div>
-      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// location weights</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
-        <div style="border:1px solid var(--border);padding:8px;text-align:center">
-          <div style="font-size:16px;font-weight:700;color:#00ff55">×1.1</div>
-          <div style="font-size:9px;color:var(--green-x);margin-top:3px">ROAD WIN</div>
+
+      <!-- STEP 4: THE SOLUTION -->
+      <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// step 4 — the ratings</div>
+      <div style="font-size:11px;color:var(--green-d);margin-bottom:8px;line-height:1.6">The only set of ratings that satisfies all three equations simultaneously:</div>
+      <div id="solution" style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px"></div>
+      <div id="eq-insight" style="border-left:2px solid var(--border);padding:8px 12px;font-size:11px;color:var(--green-d);line-height:1.7;transition:border-color 0.3s;margin-bottom:16px"></div>
+
+      <div class="abt-hr"></div>
+
+      <!-- STEP 5: LOCATION WEIGHTS REFERENCE -->
+      <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px">// location weights reference</div>
+      <div style="font-family:'Courier New',monospace;font-size:11px;border:1px solid var(--border);background:var(--bg2);margin-bottom:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:8px 10px;border-right:1px solid var(--border);text-align:center">
+            <div style="color:#00ff55;font-weight:700;font-size:14px">+0.55</div>
+            <div style="color:var(--green-x);font-size:9px;margin-top:2px">ROAD WIN</div>
+            <div style="color:var(--green-x);font-size:9px">(1.1 × 0.5)</div>
+          </div>
+          <div style="padding:8px 10px;border-right:1px solid var(--border);text-align:center">
+            <div style="color:var(--green-b);font-weight:700;font-size:14px">+0.50</div>
+            <div style="color:var(--green-x);font-size:9px;margin-top:2px">NEUTRAL WIN</div>
+            <div style="color:var(--green-x);font-size:9px">(1.0 × 0.5)</div>
+          </div>
+          <div style="padding:8px 10px;text-align:center">
+            <div style="color:#fbbf24;font-weight:700;font-size:14px">+0.45</div>
+            <div style="color:var(--green-x);font-size:9px;margin-top:2px">HOME WIN</div>
+            <div style="color:var(--green-x);font-size:9px">(0.9 × 0.5)</div>
+          </div>
         </div>
-        <div style="border:1px solid var(--border);padding:8px;text-align:center">
-          <div style="font-size:16px;font-weight:700;color:var(--green-b)">×1.0</div>
-          <div style="font-size:9px;color:var(--green-x);margin-top:3px">NEUTRAL</div>
-        </div>
-        <div style="border:1px solid var(--border);padding:8px;text-align:center">
-          <div style="font-size:16px;font-weight:700;color:#fbbf24">×0.9</div>
-          <div style="font-size:9px;color:var(--green-x);margin-top:3px">HOME WIN</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr">
+          <div style="padding:8px 10px;border-right:1px solid var(--border);text-align:center">
+            <div style="color:#ff4444;font-weight:700;font-size:14px">−0.55</div>
+            <div style="color:var(--green-x);font-size:9px;margin-top:2px">HOME LOSS</div>
+            <div style="color:var(--green-x);font-size:9px">(1.1 × 0.5)</div>
+          </div>
+          <div style="padding:8px 10px;border-right:1px solid var(--border);text-align:center">
+            <div style="color:#ff6644;font-weight:700;font-size:14px">−0.50</div>
+            <div style="color:var(--green-x);font-size:9px;margin-top:2px">NEUTRAL LOSS</div>
+            <div style="color:var(--green-x);font-size:9px">(1.0 × 0.5)</div>
+          </div>
+          <div style="padding:8px 10px;text-align:center">
+            <div style="color:#ff8844;font-weight:700;font-size:14px">−0.45</div>
+            <div style="color:var(--green-x);font-size:9px;margin-top:2px">ROAD LOSS</div>
+            <div style="color:var(--green-x);font-size:9px">(0.9 × 0.5)</div>
+          </div>
         </div>
       </div>
 
-      <div style="margin-top:1rem;border:1px solid var(--border);background:var(--bg2);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div style="border:1px solid var(--border);background:var(--bg2);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:1.5rem">
         <div>
           <div style="font-size:12px;font-weight:700;color:var(--green-b);margin-bottom:2px">// see all 308 teams in the full matrix</div>
           <div style="font-size:10px;color:var(--green-x)">Every cell is a game connection. Drag the slider to watch it fill up day by day.</div>
@@ -570,7 +588,7 @@
         <button onclick="showTab('matrix')" style="font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:5px 14px;border:1px solid var(--green);background:var(--bg3);color:var(--green-b);cursor:pointer;letter-spacing:0.08em">[matrix] →</button>
       </div>
 
-      <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:10px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseball.vercel.app &nbsp;·&nbsp; updates hourly &nbsp;·&nbsp; 2026</div>
+      <div style="padding-top:1rem;border-top:1px solid var(--border);font-size:10px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseball.vercel.app &nbsp;·&nbsp; updates hourly &nbsp;·&nbsp; 2026</div>
     </div>
 <!-- RIGHT: interactive game picker -->
     <div style="height:100%;overflow:hidden;background:var(--bg2);display:flex;flex-direction:column">
@@ -1580,7 +1598,7 @@ async function initMatrix(){
 // ── EQUATION EXPLAINER ─────────────────────────────────────────────────────
 const EQ_TEAMS = ["Xavier", "Boston College", "LSU"];
 const EQ_SHORT = ["XAV", "BC", "LSU"];
-const EQ_COLORS = ["#00ff55", "#fbbf24", "#60a5fa"];
+const EQ_COLORS = ["#4a9eff", "#98002E", "#b388ff"];
 
 // Default games — can be toggled by user
 let eqGames = [
@@ -1631,90 +1649,123 @@ function eqRender() {
   const {C, b, r} = eqCalc();
   const N = 3;
 
-  // Game list
+  // ── STEP 1: Game list ───────────────────────────────────────
   const gameList = document.getElementById("game-list");
   if(gameList) {
     gameList.innerHTML = eqGames.map((g,gi) => {
       const wName = EQ_TEAMS[g.w], lName = EQ_TEAMS[g.l];
-      const locLabel = g.loc==="home"?"home":g.loc==="away"?"road":"neutral";
       const wtLabel = g.wt===1.1?"×1.1 road":g.wt===0.9?"×0.9 home":"×1.0 neutral";
       const wtColor = g.wt===1.1?"#00ff55":g.wt===0.9?"#fbbf24":"var(--green-b)";
-
-      // Toggle button cycles through locations
       return `<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);background:var(--bg2);font-family:'Courier New',monospace">
-        <span style="color:#00ff55;font-size:11px;font-weight:700;min-width:8px">W</span>
-        <span style="color:${EQ_COLORS[g.w]};font-size:12px;font-weight:700;min-width:52px">${wName}</span>
+        <span style="color:#00ff55;font-size:10px;font-weight:700">W</span>
+        <span style="color:${EQ_COLORS[g.w]};font-size:12px;font-weight:700;min-width:60px">${wName}</span>
         <span style="color:var(--green-x);font-size:10px">beat</span>
-        <span style="color:${EQ_COLORS[g.l]};font-size:12px;font-weight:700;min-width:52px">${lName}</span>
+        <span style="color:${EQ_COLORS[g.l]};font-size:12px;font-weight:700;min-width:60px">${lName}</span>
         <button onclick="eqToggleLoc(${gi})" style="font-family:'Courier New',monospace;font-size:10px;padding:2px 8px;border:1px solid ${wtColor};background:transparent;color:${wtColor};cursor:pointer;letter-spacing:0.04em;margin-left:auto">${wtLabel}</button>
         <button onclick="eqFlip(${gi})" style="font-family:'Courier New',monospace;font-size:10px;padding:2px 8px;border:1px solid var(--border);background:transparent;color:var(--green-x);cursor:pointer">flip</button>
       </div>`;
     }).join("");
   }
 
-  // Matrix rows
-  const matrixRows = document.getElementById("matrix-rows");
-  if(matrixRows) {
-    matrixRows.innerHTML = EQ_TEAMS.map((team,i) => {
-      const cells = Array.from({length:N}, (_,j) => {
-        const val = C[i][j];
-        const isDiag = i===j;
-        const color = isDiag?"#00ff55":val!==0?"#fbbf24":"var(--green-x)";
-        const bg = isDiag?"background:#001a0a":val!==0?"background:#1a0f00":"";
-        return `<div style="text-align:center;padding:6px 4px;border:1px solid var(--border);${bg}">
-          <span style="color:${color};font-weight:700;font-size:12px;transition:color 0.3s">${val.toFixed(2)}</span>
-        </div>`;
-      }).join("");
-      return `<div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:2px;align-items:center;margin-bottom:2px">
-        <div style="color:${EQ_COLORS[i]};font-size:11px;font-weight:700;padding-right:8px">${EQ_SHORT[i]}</div>
-        ${cells}
-      </div>`;
-    }).join("");
-  }
-
-  // b vector
-  const bVec = document.getElementById("b-vector");
-  if(bVec) {
-    bVec.innerHTML = EQ_TEAMS.map((team,i) => {
-      const wins_wt = eqGames.filter(g=>g.w===i).reduce((s,g)=>s+g.wt*0.5,0);
-      const loss_wt = eqGames.filter(g=>g.l===i).reduce((s,g)=>s+g.wt*0.5,0);
+  // ── STEP 2: b vector in plain English ───────────────────────
+  const bPlain = document.getElementById("b-plain");
+  if(bPlain) {
+    bPlain.innerHTML = EQ_TEAMS.map((team,i) => {
+      // Build a running tally of each game
+      let tally = `<span style="color:var(--green-b)">1.00</span> baseline`;
+      let running = 1.0;
+      for(const g of eqGames) {
+        const isWin = g.w === i;
+        const isLoss = g.l === i;
+        if(!isWin && !isLoss) continue;
+        const opp = isWin ? EQ_TEAMS[g.l] : EQ_TEAMS[g.w];
+        const oppIdx = isWin ? g.l : g.w;
+        const delta = isWin ? g.wt*0.5 : -g.wt*0.5;
+        running += delta;
+        const sign = delta >= 0 ? "+" : "";
+        const col = delta > 0 ? "#00ff55" : "#ff4444";
+        const locWord = g.wt===1.1?(isWin?"road win":"home loss"):g.wt===0.9?(isWin?"home win":"road loss"):(isWin?"neutral win":"neutral loss");
+        tally += ` <span style="color:${col}">${sign}${delta.toFixed(2)}</span> <span style="color:var(--green-x);font-size:10px">(${locWord} vs <span style="color:${EQ_COLORS[oppIdx]}">${opp}</span>)</span>`;
+      }
       const bVal = b[i];
-      return `<div style="display:flex;align-items:center;gap:8px;padding:5px 8px;border:1px solid var(--border);background:var(--bg2)">
-        <span style="color:${EQ_COLORS[i]};min-width:32px;font-weight:700">${EQ_SHORT[i]}</span>
-        <span style="color:var(--green-x);font-size:10px;min-width:90px">b[${i}] =</span>
-        <span style="color:var(--green-d);font-size:10px">1 + ${wins_wt.toFixed(2)} − ${loss_wt.toFixed(2)}</span>
-        <span style="color:var(--green-b);font-weight:700;margin-left:auto">= ${bVal.toFixed(4)}</span>
+      const bColor = bVal > 1.0 ? "#00ff55" : bVal < 1.0 ? "#ff4444" : "var(--green-b)";
+      return `<div style="padding:8px 10px;border:1px solid var(--border);background:var(--bg2);font-family:'Courier New',monospace">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span style="color:${EQ_COLORS[i]};font-weight:700;min-width:36px;font-size:12px">${EQ_SHORT[i]}</span>
+          <span style="font-size:10px;color:var(--green-x)">b[${i}] =</span>
+          <span style="font-size:11px;color:var(--green-d);flex:1">${tally}</span>
+          <span style="color:${bColor};font-weight:700;font-size:14px">= ${bVal.toFixed(4)}</span>
+        </div>
       </div>`;
     }).join("");
   }
 
-  // Solution
+  // ── STEP 3: Equations written out ───────────────────────────
+  const eqDisplay = document.getElementById("eq-display");
+  if(eqDisplay) {
+    eqDisplay.innerHTML = EQ_TEAMS.map((team,i) => {
+      const parts = EQ_TEAMS.map((t2,j) => {
+        const val = C[i][j];
+        if(Math.abs(val) < 0.001) return null;
+        const sign = j===0 ? "" : val>=0 ? " + " : " − ";
+        const absVal = Math.abs(val).toFixed(2);
+        return `${sign}<span style="color:${j===i?'#00ff55':'var(--green-d)'}">${absVal}</span>·<span style="color:${EQ_COLORS[j]}">r[${EQ_SHORT[j]}]</span>`;
+      }).filter(Boolean).join("");
+      const bVal = b[i];
+      const bColor = bVal > 1.0 ? "#00ff55" : bVal < 1.0 ? "#ff4444" : "var(--green-b)";
+      return `<div style="padding:6px 10px;border:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;gap:8px">
+        <span style="color:${EQ_COLORS[i]};font-weight:700;min-width:36px">${EQ_SHORT[i]}</span>
+        <span style="flex:1">${parts} = <span style="color:${bColor};font-weight:700">${bVal.toFixed(4)}</span></span>
+      </div>`;
+    }).join("");
+  }
+
+  // ── STEP 4: Solution ────────────────────────────────────────
   const sol = document.getElementById("solution");
   const ranked = [...r.map((v,i)=>({v,i}))].sort((a,b)=>b.v-a.v);
   if(sol) {
+    const minR = Math.min(...r), maxR = Math.max(...r);
     sol.innerHTML = ranked.map(({v,i},rank) => {
-      const bar = Math.round((v - 0.3) / 0.4 * 100);
-      return `<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid ${EQ_COLORS[i]};background:var(--bg2)">
-        <span style="color:var(--green-x);font-size:10px;min-width:20px">#${rank+1}</span>
-        <span style="color:${EQ_COLORS[i]};font-weight:700;min-width:52px">${EQ_TEAMS[i]}</span>
-        <div style="flex:1;height:6px;background:var(--border);position:relative">
-          <div style="position:absolute;left:0;top:0;height:100%;width:${Math.max(0,Math.min(100,bar))}%;background:${EQ_COLORS[i]};transition:width 0.5s ease"></div>
+      const pct = maxR > minR ? ((v-minR)/(maxR-minR)*80 + 10) : 50;
+      const roadWins = eqGames.filter(g=>g.w===i&&g.wt===1.1).length;
+      const homeWins = eqGames.filter(g=>g.w===i&&g.wt===0.9).length;
+      const neutWins = eqGames.filter(g=>g.w===i&&g.wt===1.0).length;
+      const losses   = eqGames.filter(g=>g.l===i).length;
+      const winsDesc = [
+        roadWins>0?`${roadWins} road win${roadWins>1?'s':''}`:null,
+        neutWins>0?`${neutWins} neutral win${neutWins>1?'s':''}`:null,
+        homeWins>0?`${homeWins} home win${homeWins>1?'s':''}`:null,
+      ].filter(Boolean).join(", ") || "no wins";
+      const lossDesc = losses===0?"no losses":`${losses} loss${losses>1?"es":""}`;
+      return `<div style="padding:8px 10px;border:1px solid ${EQ_COLORS[i]};background:var(--bg2)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <span style="color:var(--green-x);font-size:10px;min-width:20px">#${rank+1}</span>
+          <span style="color:${EQ_COLORS[i]};font-weight:700;font-size:13px;min-width:60px">${EQ_TEAMS[i]}</span>
+          <div style="flex:1;height:6px;background:var(--border);position:relative;border-radius:1px">
+            <div style="position:absolute;left:0;top:0;height:100%;width:${pct}%;background:${EQ_COLORS[i]};transition:width 0.5s ease"></div>
+          </div>
+          <span style="color:${EQ_COLORS[i]};font-weight:700;font-size:15px;min-width:56px;text-align:right;transition:all 0.3s">${v.toFixed(4)}</span>
         </div>
-        <span style="color:${EQ_COLORS[i]};font-weight:700;font-size:14px;min-width:60px;text-align:right;transition:all 0.3s">${v.toFixed(4)}</span>
+        <div style="font-size:10px;color:var(--green-x);padding-left:28px">${winsDesc} · ${lossDesc}</div>
       </div>`;
     }).join("");
   }
 
-  // Insight
+  // ── Insight ─────────────────────────────────────────────────
   const insight = document.getElementById("eq-insight");
   if(insight) {
     const winner = ranked[0];
     const wName = EQ_TEAMS[winner.i];
-    // Find why they're on top
     const roadWins = eqGames.filter(g=>g.w===winner.i&&g.wt===1.1).length;
-    let msg = `<b style="color:${EQ_COLORS[winner.i]}">${wName}</b> comes out on top. `;
-    if(roadWins>0) msg += `${roadWins} road win${roadWins>1?'s':''} (×1.1 weight) give${roadWins===1?'s':''} them a higher b[i] than their record alone would suggest. `;
-    msg += `The system solves all three equations simultaneously — each rating influences the others through the off-diagonal C terms.`;
+    const allSame = ranked.every(({v}) => Math.abs(v - ranked[0].v) < 0.001);
+    let msg;
+    if(allSame) {
+      msg = `All three teams are rated equally — perfectly balanced results with no location advantage.`;
+    } else {
+      msg = `<b style="color:${EQ_COLORS[winner.i]}">${wName}</b> comes out on top`;
+      if(roadWins > 0) msg += ` because ${roadWins === 1 ? 'their win came' : 'they won'} on the road (+0.55 vs +0.45 for a home win)`;
+      msg += `. All three equations were solved simultaneously — no team's rating could be calculated independently.`;
+    }
     insight.innerHTML = msg;
     insight.style.borderColor = EQ_COLORS[winner.i];
   }
