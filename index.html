@@ -1741,20 +1741,7 @@ function eqFlip(gi) {
 function initXavier() {
   setTimeout(eqRender, 50);
 }
-// Simplified 5-team Colley solver for the simulator
-// Teams: Xavier(0), Tennessee(1), Wofford(2), NJIT(3), Florida(4), UConn(5), Arkansas(6), Wright St.(7)
 
-function initXavier(){
-  // Initialize simulator
-  const state = simCalc();
-  document.getElementById("sim-rating").textContent = state.r.toFixed(4);
-  document.getElementById("sim-record").textContent=`${state.wins}-${state.losses}`;
-  document.getElementById("sim-games").textContent=simGames.length;
-  document.getElementById("sim-cii").textContent=state.cii.toFixed(2);
-  document.getElementById("sim-bi").textContent=state.bi.toFixed(4);
-  document.getElementById("sim-ri").textContent=state.r.toFixed(4);
-  simRenderChoices();
-}
 
 loadRankings();
 setTimeout(() => showTab('about'), 50);
