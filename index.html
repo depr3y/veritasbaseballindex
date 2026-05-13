@@ -503,85 +503,76 @@
   <!-- Two-column layout: text left, simulator right -->
   <div id="about-cols" style="display:grid;grid-template-columns:1fr 720px;gap:0;height:100%">
 
-    <!-- LEFT: all explanatory text (this column scrolls) -->
+        <!-- LEFT: interactive equation explainer -->
     <div style="padding:1.5rem 28px;border-right:1px solid var(--green-x);overflow-y:auto;height:100%;scrollbar-width:none;-ms-overflow-style:none">
     <style>#about-panel .abt-left::-webkit-scrollbar{display:none}</style>
 
-      <div class="ey">// Matt DePrey's VBI</div>
-      <div class="st">Why RPI, KPI, and DSR all SUCK</div>
-      <div class="bt">
-        RPI measures schedule strength more than team quality. Since 75% of the formula comes from opponent and opponent-opponent winning percentage, teams inherit value from the schedules they play rather than fully earning it on the field. The system can reward teams for simply surviving difficult schedules, even when their actual results are mediocre.<br><br>
-        KPI attempts to fix this by rewarding "quality wins," but that creates a different problem: the rankings become dependent on arbitrary cutoff tiers and constantly shifting definitions of what counts as a "good win." Teams are judged relative to constructed categories instead of the full network of games.<br><br>
-        DSR goes even further toward prediction. It incorporates win expectancy, contextual adjustments, and margin-based modeling to estimate how strong a team is going forward. That can be useful for forecasting, but predictive systems inevitably inject more assumptions into the rankings. A 10-run win becomes fundamentally different from a 1-run win, and teams begin optimizing for model behavior rather than simply winning games.<br><br>
-        VBI takes a different approach. Using the Colley Matrix, every team's rating is solved simultaneously through the entire network of wins and losses across Division I baseball. No score margin. No quality-win buckets. No predictive modeling. The system only asks:<br><br>
-        &nbsp;&nbsp;&nbsp;* Who did you play?<br>
-        &nbsp;&nbsp;&nbsp;* Did you win?<br>
-        &nbsp;&nbsp;&nbsp;* Where was the game played?<br><br>
-        Instead of hardcoding schedule strength, quality tiers, or predictive assumptions into the formula, VBI allows strength to emerge naturally from the interconnected results of the entire season. Every game matters. Every opponent matters. Every team influences every other team through the same mathematical system.
+      <div class="ey">// veritas baseball index</div>
+      <div class="st">How does VBI actually work?</div>
+      <div class="bt">Three teams. Three games. One system of equations. Watch how VBI solves for every team's rating simultaneously — no committees, no tiers, just math.</div>
+
+      <!-- GAME SETUP -->
+      <div id="eq-games" style="margin:14px 0">
+        <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px">// the games</div>
+        <div style="display:flex;flex-direction:column;gap:6px" id="game-list"></div>
       </div>
 
       <div class="abt-hr"></div>
 
-      <div class="ey">// the equation</div>
-      <div class="st">C · r = b</div>
-      <div class="bt">Three variables. One system. 308 unknowns solved simultaneously.</div>
+      <!-- EQUATION BUILDER -->
+      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px">// the colley matrix — C · r = b</div>
+      <div style="font-size:11px;color:var(--green-d);margin-bottom:10px;line-height:1.7">Each game creates a connection between two teams. C[i][i] counts a team's total weighted games + 2. C[i][j] subtracts shared games. b[i] captures weighted wins minus losses. Solving the system gives every team's rating at once.</div>
 
-      <div class="fbox">
-        <div class="feq">C &nbsp;·&nbsp; r &nbsp;=&nbsp; b</div>
-        <div class="fgrid">
-          <div class="fc">
-            <div class="fs" style="color:#60a5fa">C</div>
-            <div class="fn">the matrix</div>
-            <div class="fd">A 308×308 matrix representing every Division I team. Each team's main value is based on its weighted games played, while every matchup against another team creates a negative connection between the two teams. When the system solves the equation, all of those connections work together so every team's rating is influenced by the strength of its opponents.</div>
-          </div>
-          <div class="fc">
-            <div class="fs" style="color:#4ade80">r</div>
-            <div class="fn">the ratings</div>
-            <div class="fd">What we solve for. One number per team. Higher = better. No team's rating can be solved without knowing all others — that interdependence is the whole point.</div>
-          </div>
-          <div class="fc">
-            <div class="fs" style="color:#fbbf24">b</div>
-            <div class="fn">the record vector</div>
-            <div class="fd">The b vector measures a team's game results. It starts every team at a neutral baseline of 1, then adds weighted wins and subtracts weighted losses based on game location. Teams that win difficult games on the road build a stronger input value before the matrix adjusts for opponent strength.</div>
-          </div>
+      <!-- MATRIX DISPLAY -->
+      <div style="font-family:'Courier New',monospace;font-size:11px;margin-bottom:14px">
+        <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:2px;align-items:center;margin-bottom:4px">
+          <div></div>
+          <div style="color:var(--green-x);text-align:center;font-size:10px" id="ch0">XAV</div>
+          <div style="color:var(--green-x);text-align:center;font-size:10px" id="ch1">BC</div>
+          <div style="color:var(--green-x);text-align:center;font-size:10px" id="ch2">LSU</div>
         </div>
+        <div id="matrix-rows"></div>
       </div>
 
-      <div class="ann">
-        This is not adjusted winning percentage. Solving C·r = b creates a web of interdependence across the entire sport. Xavier's rating is shaped by Arkansas's rating, which is shaped by every team Arkansas played, and so on — simultaneously, across all 308 teams. <b>Schedule strength isn't an input. It's an output.</b>
-      </div>
+      <!-- B VECTOR -->
+      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// b vector (weighted record)</div>
+      <div id="b-vector" style="font-family:'Courier New',monospace;font-size:12px;display:flex;flex-direction:column;gap:4px;margin-bottom:14px"></div>
+
+      <!-- SOLUTION -->
+      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// solution — r = C⁻¹ · b</div>
+      <div id="solution" style="font-family:'Courier New',monospace;font-size:12px;display:flex;flex-direction:column;gap:4px;margin-bottom:14px"></div>
+
+      <!-- INSIGHT -->
+      <div id="eq-insight" style="border-left:2px solid var(--border);padding:8px 12px;font-size:11px;color:var(--green-d);line-height:1.6;margin-bottom:14px;transition:border-color 0.3s"></div>
 
       <div class="abt-hr"></div>
-
-      <div class="ey">// location weighting</div>
-      <div class="st">Where you play matters.</div>
-      <div class="bt">Every game result is multiplied by a location weight before entering the system.</div>
-      <div class="wbox">
-        <div class="wcard" style="border-color:#1a4a1a">
-          <div class="wi" style="color:var(--green-b)">×1.1</div>
-          <div class="wl" style="color:var(--green-d)">ROAD</div>
-          <div class="wd" style="color:#009933">Win away from home: +1.1 to b[i]. Lose on the road: −0.9.</div>
+      <div style="font-size:10px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// location weights</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+        <div style="border:1px solid var(--border);padding:8px;text-align:center">
+          <div style="font-size:16px;font-weight:700;color:#00ff55">×1.1</div>
+          <div style="font-size:9px;color:var(--green-x);margin-top:3px">ROAD WIN</div>
         </div>
-        <div class="wcard" style="border-color:#2a1a0a">
-          <div class="wi" style="color:#fbbf24">×0.9</div>
-          <div class="wl" style="color:#92400e">HOME</div>
-          <div class="wd" style="color:#78350f">Win at home: +0.9 to b[i]. Lose at home: −1.1.</div>
+        <div style="border:1px solid var(--border);padding:8px;text-align:center">
+          <div style="font-size:16px;font-weight:700;color:var(--green-b)">×1.0</div>
+          <div style="font-size:9px;color:var(--green-x);margin-top:3px">NEUTRAL</div>
+        </div>
+        <div style="border:1px solid var(--border);padding:8px;text-align:center">
+          <div style="font-size:16px;font-weight:700;color:#fbbf24">×0.9</div>
+          <div style="font-size:9px;color:var(--green-x);margin-top:3px">HOME WIN</div>
         </div>
       </div>
 
-
-      <div style="margin-top:1.5rem;border:1px solid var(--border);background:var(--bg2);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div style="margin-top:1rem;border:1px solid var(--border);background:var(--bg2);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
         <div>
-          <div style="font-size:13px;font-weight:700;color:var(--green-b);margin-bottom:3px">// see the full 308×308 matrix</div>
-          <div style="font-size:11px;color:var(--green-x)">Every cell is a game connection. Drag the slider to watch it fill up day by day across the 2026 season.</div>
+          <div style="font-size:12px;font-weight:700;color:var(--green-b);margin-bottom:2px">// see all 308 teams in the full matrix</div>
+          <div style="font-size:10px;color:var(--green-x)">Every cell is a game connection. Drag the slider to watch it fill up day by day.</div>
         </div>
-        <button onclick="showTab('matrix')" style="font-family:'Courier Prime','Courier New',monospace;font-size:12px;padding:6px 16px;border:1px solid var(--green);background:var(--bg3);color:var(--green-b);cursor:pointer;letter-spacing:0.08em;white-space:nowrap">[matrix] →</button>
+        <button onclick="showTab('matrix')" style="font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:5px 14px;border:1px solid var(--green);background:var(--bg3);color:var(--green-b);cursor:pointer;letter-spacing:0.08em">[matrix] →</button>
       </div>
 
-      <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseballindex.com &nbsp;·&nbsp; updates nightly at 2am est &nbsp;·&nbsp; 2026</div>
+      <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:10px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseball.vercel.app &nbsp;·&nbsp; updates hourly &nbsp;·&nbsp; 2026</div>
     </div>
-
-    <!-- RIGHT: simulator (fixed in place, parent handles containment) -->
+<!-- RIGHT: simulator (fixed in place, parent handles containment) -->
     <div style="height:100%;overflow:hidden;background:var(--bg2);display:flex;flex-direction:column">
 
       <!-- header -->
@@ -1594,336 +1585,172 @@ async function initMatrix(){
   setTimeout(fitZoom,80);
 }
 
-// ── VBI SIMULATOR ──────────────────────────────────────────
-// Simplified 5-team Colley solver for the simulator
-// Teams: Xavier(0), Tennessee(1), Wofford(2), NJIT(3), Florida(4), UConn(5), Arkansas(6), Wright St.(7)
-const SIM_TEAMS = [
-  {name:"Xavier",        conf:"Big East",  rating:0.55},
-  {name:"Tennessee",     conf:"SEC",       rating:0.72},
-  {name:"Florida",       conf:"SEC",       rating:0.68},
-  {name:"Arkansas",      conf:"SEC",       rating:0.65},
-  {name:"UConn",         conf:"Big East",  rating:0.58},
-  {name:"Georgetown",    conf:"Big East",  rating:0.51},
-  {name:"Wofford",       conf:"SoCon",     rating:0.44},
-  {name:"Wright St.",    conf:"Horizon",   rating:0.42},
-  {name:"NJIT",          conf:"NEC",       rating:0.35},
+// ── EQUATION EXPLAINER ─────────────────────────────────────────────────────
+const EQ_TEAMS = ["Xavier", "Boston College", "LSU"];
+const EQ_SHORT = ["XAV", "BC", "LSU"];
+const EQ_COLORS = ["#00ff55", "#fbbf24", "#60a5fa"];
+
+// Default games — can be toggled by user
+let eqGames = [
+  {w:0, l:1, loc:"home",    wt:0.9,  label:"Xavier beat Boston College at home"},
+  {w:2, l:0, loc:"away",    wt:1.1,  label:"LSU beat Xavier on the road"},
+  {w:1, l:2, loc:"home",    wt:0.9,  label:"Boston College beat LSU at home"},
 ];
 
-// Scenario game options — each round presents 4 choices
-const SIM_ROUNDS = [
-  // Round 1 (game 9)
-  [
-    {label:"Beat #1 Tennessee on the road",   opp:1, loc:"road", win:true},
-    {label:"Beat Georgetown at home",          opp:5, loc:"home", win:true},
-    {label:"Lose to Wofford at home",          opp:6, loc:"home", win:false},
-    {label:"Beat NJIT on the road",            opp:8, loc:"road", win:true},
-  ],
-  // Round 2 (game 10)
-  [
-    {label:"Beat Florida on the road",         opp:2, loc:"road", win:true},
-    {label:"Lose to UConn at home",            opp:4, loc:"home", win:false},
-    {label:"Beat Wright St. at home",          opp:7, loc:"home", win:true},
-    {label:"Lose to Arkansas on the road",     opp:3, loc:"road", win:false},
-  ],
-  // Round 3 (game 11)
-  [
-    {label:"Beat UConn on the road",           opp:4, loc:"road", win:true},
-    {label:"Lose to Tennessee at home",        opp:1, loc:"home", win:false},
-    {label:"Beat Wofford on the road",         opp:6, loc:"road", win:true},
-    {label:"Lose to Georgetown at home",       opp:5, loc:"home", win:false},
-  ],
-  // Round 4 (game 12)
-  [
-    {label:"Beat Arkansas on the road",        opp:3, loc:"road", win:true},
-    {label:"Lose to Florida at home",          opp:2, loc:"home", win:false},
-    {label:"Beat NJIT at home",                opp:8, loc:"home", win:true},
-    {label:"Lose to Wright St. on the road",   opp:7, loc:"road", win:false},
-  ],
-  // Round 5 (game 13)
-  [
-    {label:"Beat Tennessee at home",           opp:1, loc:"home", win:true},
-    {label:"Lose to UConn on the road",        opp:4, loc:"road", win:false},
-    {label:"Beat Georgetown on the road",      opp:5, loc:"road", win:true},
-    {label:"Lose to Wofford on the road",      opp:6, loc:"road", win:false},
-  ],
-];
+function eqCalc() {
+  const N = 3;
+  const C = Array.from({length:N}, () => new Array(N).fill(0));
+  const b = new Array(N).fill(1.0);
 
-// Simulate Colley for just Xavier in a small N-team system
-// We use Xavier's games + fixed opponent ratings as anchors
-function simSolveXavier(games) {
-  // Build a simplified system: Xavier vs each unique opponent
-  // Xavier is index 0; opponents are indices 1..8
-  const N = SIM_TEAMS.length;
-  const C = Array.from({length:N},()=>new Array(N).fill(0));
-  const b = new Array(N).fill(1);
-  for(let i=0;i<N;i++) C[i][i]=2;
+  // Base diagonal
+  for(let i=0;i<N;i++) C[i][i] = 2;
 
-  for(const g of games){
-    const wi=g.win?0:g.opp, li=g.win?g.opp:0;
-    const wt=g.loc==='road'?1.1:0.9;
-    C[wi][wi]+=wt; C[li][li]+=wt; C[wi][li]-=wt; C[li][wi]-=wt;
-    b[wi]+=wt*0.5; b[li]-=wt*0.5;
+  for(const g of eqGames) {
+    const wi = g.w, li = g.l;
+    const wt = g.wt;
+    // Winner adds to diagonal, wins to b
+    C[wi][wi] += wt; C[li][li] += wt;
+    C[wi][li] -= wt; C[li][wi] -= wt;
+    b[wi] += wt * 0.5;
+    b[li] -= wt * 0.5;
   }
-  // Anchor opponents with their known ratings via b vector adjustment
-  // For non-Xavier teams with no games yet, use their preset rating as b[i] directly
-  for(let i=1;i<N;i++){
-    const hasGames=games.some(g=>g.opp===i);
-    if(!hasGames){
-      // Pin their diagonal to make their rating come out to preset
-      // b[i] = C[i][i] * preset_rating → b[i] = 2 * preset
-      b[i] = C[i][i] * SIM_TEAMS[i].rating;
-    }
-  }
+
   // Gauss elimination
-  const M=C.map((row,i)=>[...row,b[i]]);
+  const M = C.map((row,i) => [...row, b[i]]);
   for(let col=0;col<N;col++){
     let mx=col;
     for(let r=col+1;r<N;r++) if(Math.abs(M[r][col])>Math.abs(M[mx][col])) mx=r;
     [M[col],M[mx]]=[M[mx],M[col]];
     if(Math.abs(M[col][col])<1e-12) continue;
-    for(let r=col+1;r<N;r++){const f=M[r][col]/M[col][col];for(let k=col;k<=N;k++) M[r][k]-=f*M[col][k];}
+    for(let r=col+1;r<N;r++){
+      const f=M[r][col]/M[col][col];
+      for(let k=col;k<=N;k++) M[r][k]-=f*M[col][k];
+    }
   }
   const x=new Array(N).fill(0);
-  for(let i=N-1;i>=0;i--){x[i]=M[i][N]/M[i][i];for(let j=i-1;j>=0;j--) M[j][N]-=M[j][i]*x[i];}
-  return x;
-}
-
-// State
-let simGames = [
-  // Starting 8 games — mixed results at mixed locations
-  {opp:6, loc:"road", win:true},   // W vs Wofford road
-  {opp:7, loc:"home", win:true},   // W vs Wright St. home
-  {opp:8, loc:"road", win:true},   // W vs NJIT road
-  {opp:5, loc:"home", win:true},   // W vs Georgetown home
-  {opp:1, loc:"road", win:false},  // L vs Tennessee road
-  {opp:2, loc:"home", win:false},  // L vs Florida home
-  {opp:3, loc:"road", win:false},  // L vs Arkansas road
-  {opp:4, loc:"home", win:false},  // L vs UConn home
-];
-let simRound = 0;
-let simRatingHistory = [];
-
-function simCalc() {
-  const x = simSolveXavier(simGames);
-  const r = Math.max(0.01, Math.min(0.99, x[0]));
-  const wins = simGames.filter(g=>g.win).length;
-  const losses = simGames.filter(g=>!g.win).length;
-  const wt_sum = simGames.reduce((s,g)=>{const w=g.loc==='road'?1.1:0.9; return s+(g.win?w:0);},0);
-  const lt_sum = simGames.reduce((s,g)=>{const w=g.loc==='road'?1.1:0.9; return s+(!g.win?w:0);},0);
-  const cii = 2 + simGames.reduce((s,g)=>s+(g.loc==='road'?1.1:0.9),0);
-  const bi = 1 + wt_sum*0.5 - lt_sum*0.5;
-  return {r, wins, losses, cii, bi, wt_sum, lt_sum};
-}
-
-function animateNum(el, from, to, decimals, color, duration=600) {
-  const start = performance.now();
-  function step(now) {
-    const t = Math.min((now-start)/duration, 1);
-    const ease = 1-Math.pow(1-t,3);
-    el.textContent = (from+(to-from)*ease).toFixed(decimals);
-    if(t<1) requestAnimationFrame(step);
-    else el.textContent = to.toFixed(decimals);
+  for(let i=N-1;i>=0;i--){
+    x[i]=M[i][N]/M[i][i];
+    for(let j=i-1;j>=0;j--) M[j][N]-=M[j][i]*x[i];
   }
-  el.style.color = color||'var(--green-b)';
-  requestAnimationFrame(step);
+  return {C, b, r:x};
 }
 
-function simVerdict(game, oldR, newR, state) {
-  const opp = SIM_TEAMS[game.opp];
-  const diff = newR - oldR;
-  const diffStr = (diff>=0?'+':'')+diff.toFixed(4);
-  const isRoad = game.loc === 'road';
-  const wt = isRoad ? 1.1 : 0.9;
+function eqRender() {
+  const {C, b, r} = eqCalc();
+  const N = 3;
 
-  let headline, detail;
-  if(game.win && isRoad && opp.rating > 0.60) {
-    headline = `🔥 Massive boost. Road win over a top team.`;
-    detail = `Beating ${opp.name} (rated ${opp.rating.toFixed(3)}) away from home is the best possible result for your VBI. Their high rating pulls your r[i] up through the off-diagonal C terms, and you get +${wt} to b[i]. The system rewards this heavily.`;
-  } else if(game.win && isRoad) {
-    headline = `✓ Solid gain. Road wins always help.`;
-    detail = `${opp.name} isn't elite but winning on the road still earns +1.1 to b[i]. Every road win counts more than a home win — the system treats it as the harder outcome.`;
-  } else if(game.win && !isRoad && opp.rating > 0.60) {
-    headline = `✓ Good win, but you were home.`;
-    detail = `Beating ${opp.name} (rated ${opp.rating.toFixed(3)}) at home adds +0.9 to b[i] — less than a road win. The opponent quality helps pull r[i] up through the matrix connections, but the location discount keeps the gain modest.`;
-  } else if(game.win && !isRoad) {
-    headline = `~ Mild gain. Home win over a weak opponent.`;
-    detail = `${opp.name} is rated ${opp.rating.toFixed(3)} — below average. Beating them at home adds +0.9 to b[i] but their low rating barely pulls your r[i] through the matrix. The system doesn't reward easy home wins much.`;
-  } else if(!game.win && !isRoad && opp.rating > 0.60) {
-    headline = `↓ Painful. Lost at home to a good team.`;
-    detail = `Losing to ${opp.name} (rated ${opp.rating.toFixed(3)}) at home subtracts −1.1 from b[i] — the harshest penalty. Home losses hurt most because the opponent won on the road. r[i] also gets pulled down through the matrix connection.`;
-  } else if(!game.win && !isRoad) {
-    headline = `✗ Bad loss. You lost at home to a weak team.`;
-    detail = `${opp.name} is rated ${opp.rating.toFixed(3)}. Losing to them at home is the worst possible outcome — −1.1 to b[i] AND their low rating drags your r[i] down through the matrix. This hurts more than any other result.`;
-  } else if(!game.win && isRoad && opp.rating > 0.60) {
-    headline = `~ Road loss to a great team. Not that bad.`;
-    detail = `Losing to ${opp.name} (rated ${opp.rating.toFixed(3)}) on the road subtracts only −0.9 from b[i] — the mildest penalty. The system knows road losses are expected. Their high rating also anchors your r[i] from dropping too far.`;
-  } else {
-    headline = `↓ Road loss to a weak team.`;
-    detail = `Losing to ${opp.name} (rated ${opp.rating.toFixed(3)}) on the road subtracts −0.9 from b[i]. It's the lightest penalty, but losing to a weak team means their low rating doesn't help anchor your r[i] at all.`;
+  // Game list
+  const gameList = document.getElementById("game-list");
+  if(gameList) {
+    gameList.innerHTML = eqGames.map((g,gi) => {
+      const wName = EQ_TEAMS[g.w], lName = EQ_TEAMS[g.l];
+      const locLabel = g.loc==="home"?"home":g.loc==="away"?"road":"neutral";
+      const wtLabel = g.wt===1.1?"×1.1 road":g.wt===0.9?"×0.9 home":"×1.0 neutral";
+      const wtColor = g.wt===1.1?"#00ff55":g.wt===0.9?"#fbbf24":"var(--green-b)";
+
+      // Toggle button cycles through locations
+      return `<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);background:var(--bg2);font-family:'Courier New',monospace">
+        <span style="color:#00ff55;font-size:11px;font-weight:700;min-width:8px">W</span>
+        <span style="color:${EQ_COLORS[g.w]};font-size:12px;font-weight:700;min-width:52px">${wName}</span>
+        <span style="color:var(--green-x);font-size:10px">beat</span>
+        <span style="color:${EQ_COLORS[g.l]};font-size:12px;font-weight:700;min-width:52px">${lName}</span>
+        <button onclick="eqToggleLoc(${gi})" style="font-family:'Courier New',monospace;font-size:10px;padding:2px 8px;border:1px solid ${wtColor};background:transparent;color:${wtColor};cursor:pointer;letter-spacing:0.04em;margin-left:auto">${wtLabel}</button>
+        <button onclick="eqFlip(${gi})" style="font-family:'Courier New',monospace;font-size:10px;padding:2px 8px;border:1px solid var(--border);background:transparent;color:var(--green-x);cursor:pointer">flip</button>
+      </div>`;
+    }).join("");
   }
 
-  return {headline, detail, diffStr, diff};
-}
-
-function simRenderChoices() {
-  const choicesEl = document.getElementById("sim-choices");
-  const doneEl = document.getElementById("sim-done");
-  const gameNumEl = document.getElementById("sim-game-num");
-
-  if(simRound >= SIM_ROUNDS.length) {
-    choicesEl.style.display="none";
-    doneEl.style.display="block";
-    const state = simCalc();
-    const feel = state.r > 0.60 ? "outstanding — your schedule built real value" :
-                 state.r > 0.55 ? "strong — road wins and quality opponents paid off" :
-                 state.r > 0.50 ? "solid — just above .500 with a competitive schedule" :
-                 state.r > 0.45 ? "below average — tough results on a hard schedule" :
-                                  "rough — losses to weak teams really dragged you down";
-    document.getElementById("sim-summary").innerHTML =
-      `Final rating: <b style="color:var(--green-b)">${state.r.toFixed(4)}</b> — ${feel}.<br><br>` +
-      `${state.wins} wins, ${state.losses} losses over ${simGames.length} games. ` +
-      `The math doesn't care about your record alone — it cares about <i>who</i> you beat and <i>where</i>.`;
-    return;
+  // Matrix rows
+  const matrixRows = document.getElementById("matrix-rows");
+  if(matrixRows) {
+    matrixRows.innerHTML = EQ_TEAMS.map((team,i) => {
+      const cells = Array.from({length:N}, (_,j) => {
+        const val = C[i][j];
+        const isDiag = i===j;
+        const color = isDiag?"#00ff55":val!==0?"#fbbf24":"var(--green-x)";
+        const bg = isDiag?"background:#001a0a":val!==0?"background:#1a0f00":"";
+        return `<div style="text-align:center;padding:6px 4px;border:1px solid var(--border);${bg}">
+          <span style="color:${color};font-weight:700;font-size:12px;transition:color 0.3s">${val.toFixed(2)}</span>
+        </div>`;
+      }).join("");
+      return `<div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:2px;align-items:center;margin-bottom:2px">
+        <div style="color:${EQ_COLORS[i]};font-size:11px;font-weight:700;padding-right:8px">${EQ_SHORT[i]}</div>
+        ${cells}
+      </div>`;
+    }).join("");
   }
 
-  gameNumEl.textContent = simGames.length + 1;
-  choicesEl.style.display="flex";
-  doneEl.style.display="none";
+  // b vector
+  const bVec = document.getElementById("b-vector");
+  if(bVec) {
+    bVec.innerHTML = EQ_TEAMS.map((team,i) => {
+      const wins_wt = eqGames.filter(g=>g.w===i).reduce((s,g)=>s+g.wt*0.5,0);
+      const loss_wt = eqGames.filter(g=>g.l===i).reduce((s,g)=>s+g.wt*0.5,0);
+      const bVal = b[i];
+      return `<div style="display:flex;align-items:center;gap:8px;padding:5px 8px;border:1px solid var(--border);background:var(--bg2)">
+        <span style="color:${EQ_COLORS[i]};min-width:32px;font-weight:700">${EQ_SHORT[i]}</span>
+        <span style="color:var(--green-x);font-size:10px;min-width:90px">b[${i}] =</span>
+        <span style="color:var(--green-d);font-size:10px">1 + ${wins_wt.toFixed(2)} − ${loss_wt.toFixed(2)}</span>
+        <span style="color:var(--green-b);font-weight:700;margin-left:auto">= ${bVal.toFixed(4)}</span>
+      </div>`;
+    }).join("");
+  }
 
-  const round = SIM_ROUNDS[simRound];
-  choicesEl.innerHTML = round.map((opt,oi)=>{
-    const opp = SIM_TEAMS[opt.opp];
-    const locBadge = opt.loc==='road'
-      ? `<span style="color:#00ff55;font-size:10px">ROAD ×1.1</span>`
-      : `<span style="color:#fbbf24;font-size:10px">HOME ×0.9</span>`;
-    const ratingBadge = `<span style="font-size:10px;color:var(--green-x)">opp: ${opp.rating.toFixed(3)}</span>`;
-    const resultColor = opt.win ? '#00ff55' : '#ff4444';
-    const resultLabel = opt.win ? 'WIN' : 'LOSS';
-    return `<button class="sim-choice-btn" onclick="simPick(${oi})" style="
-      font-family:'Courier Prime','Courier New',monospace;
-      text-align:left;padding:10px 12px;
-      border:1px solid var(--border);background:var(--bg2);
-      cursor:pointer;width:100%;transition:border-color 0.1s,background 0.1s">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="font-size:12px;color:var(--green-d)">${opt.label}</span>
-        <span style="font-size:11px;font-weight:700;color:${resultColor};margin-left:8px;flex-shrink:0">${resultLabel}</span>
-      </div>
-      <div style="display:flex;gap:10px">${locBadge}${ratingBadge}</div>
-    </button>`;
-  }).join("");
+  // Solution
+  const sol = document.getElementById("solution");
+  const ranked = [...r.map((v,i)=>({v,i}))].sort((a,b)=>b.v-a.v);
+  if(sol) {
+    sol.innerHTML = ranked.map(({v,i},rank) => {
+      const bar = Math.round((v - 0.3) / 0.4 * 100);
+      return `<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid ${EQ_COLORS[i]};background:var(--bg2)">
+        <span style="color:var(--green-x);font-size:10px;min-width:20px">#${rank+1}</span>
+        <span style="color:${EQ_COLORS[i]};font-weight:700;min-width:52px">${EQ_TEAMS[i]}</span>
+        <div style="flex:1;height:6px;background:var(--border);position:relative">
+          <div style="position:absolute;left:0;top:0;height:100%;width:${Math.max(0,Math.min(100,bar))}%;background:${EQ_COLORS[i]};transition:width 0.5s ease"></div>
+        </div>
+        <span style="color:${EQ_COLORS[i]};font-weight:700;font-size:14px;min-width:60px;text-align:right;transition:all 0.3s">${v.toFixed(4)}</span>
+      </div>`;
+    }).join("");
+  }
 
-  // Hover effect
-  document.querySelectorAll(".sim-choice-btn").forEach(btn=>{
-    btn.addEventListener("mouseenter",()=>{btn.style.borderColor="var(--green)";btn.style.background="var(--bg3)";});
-    btn.addEventListener("mouseleave",()=>{btn.style.borderColor="var(--border)";btn.style.background="var(--bg2)";});
-  });
+  // Insight
+  const insight = document.getElementById("eq-insight");
+  if(insight) {
+    const winner = ranked[0];
+    const wName = EQ_TEAMS[winner.i];
+    // Find why they're on top
+    const roadWins = eqGames.filter(g=>g.w===winner.i&&g.wt===1.1).length;
+    let msg = `<b style="color:${EQ_COLORS[winner.i]}">${wName}</b> comes out on top. `;
+    if(roadWins>0) msg += `${roadWins} road win${roadWins>1?'s':''} (×1.1 weight) give${roadWins===1?'s':''} them a higher b[i] than their record alone would suggest. `;
+    msg += `The system solves all three equations simultaneously — each rating influences the others through the off-diagonal C terms.`;
+    insight.innerHTML = msg;
+    insight.style.borderColor = EQ_COLORS[winner.i];
+  }
 }
 
-function simPick(optIdx) {
-  const opt = SIM_ROUNDS[simRound][optIdx];
-  const oldState = simCalc();
-  const oldR = oldState.r;
-
-  simGames.push({opp:opt.opp, loc:opt.loc, win:opt.win});
-  simRound++;
-
-  const newState = simCalc();
-  const newR = newState.r;
-  simRatingHistory.push(newR);
-
-  const verdict = simVerdict(opt, oldR, newR, newState);
-  const diff = verdict.diff;
-  const upColor = "#00ff55", dnColor = "#ff4444", neutColor = "var(--green-x)";
-  const ratingColor = diff > 0.002 ? upColor : diff < -0.002 ? dnColor : neutColor;
-
-  // Animate rating
-  animateNum(document.getElementById("sim-rating"), oldR, newR, 4, ratingColor);
-
-  // Delta flash
-  const deltaEl = document.getElementById("sim-delta");
-  deltaEl.textContent = (diff>=0?"+":"")+diff.toFixed(4);
-  deltaEl.style.color = diff>=0 ? upColor : dnColor;
-  deltaEl.style.opacity = "1";
-  setTimeout(()=>{ deltaEl.style.opacity="0"; }, 2000);
-
-  // Animate C[i][i]
-  animateNum(document.getElementById("sim-cii"), oldState.cii, newState.cii, 2, upColor);
-  // Animate b[i]
-  const biColor = newState.bi > oldState.bi ? upColor : dnColor;
-  animateNum(document.getElementById("sim-bi"), oldState.bi, newState.bi, 4, biColor);
-  // Animate r[i]
-  animateNum(document.getElementById("sim-ri"), oldR, newR, 4, ratingColor);
-
-  // Update notes
-  const wt = opt.loc==='road'?1.1:0.9;
-  document.getElementById("sim-cii-note").textContent =
-    `Now ${newState.cii.toFixed(2)}. +${wt} for this ${opt.loc} game.`;
-  const biDir = opt.win ? `+${(wt*0.5).toFixed(2)} (win)` : `−${(wt*0.5).toFixed(2)} (loss)`;
-  document.getElementById("sim-bi-note").textContent =
-    `${biDir} at ×${wt} → now ${newState.bi.toFixed(4)}.`;
-  document.getElementById("sim-ri-note").textContent =
-    `Solved with all opponent ratings. ${SIM_TEAMS[opt.opp].name} (${SIM_TEAMS[opt.opp].rating.toFixed(3)}) ${opt.win?"pulled your rating up":"dragged your rating down"} through the matrix connection.`;
-
-  // Record & games
-  document.getElementById("sim-record").textContent = `${newState.wins}-${newState.losses}`;
-  document.getElementById("sim-games").textContent = simGames.length;
-
-  // Verdict
-  const verdictEl = document.getElementById("sim-verdict");
-  verdictEl.style.borderColor = diff>0.002?upColor:diff<-0.002?dnColor:"var(--border)";
-  verdictEl.innerHTML = `<b style="color:${diff>0.002?upColor:diff<-0.002?dnColor:"var(--green-b)"}">${verdict.headline}</b><br><span style="color:var(--green-d)">${verdict.detail}</span>`;
-
-  // Game log
-  const opp = SIM_TEAMS[opt.opp];
-  const logEl = document.getElementById("sim-log");
-  const entry = document.createElement("div");
-  entry.style.cssText="display:flex;gap:8px;font-size:11px;padding:3px 0;border-bottom:1px dashed var(--border)";
-  entry.innerHTML=`
-    <span style="color:var(--green-x);min-width:48px">game ${simGames.length}</span>
-    <span style="font-weight:700;color:${opt.win?upColor:dnColor}">${opt.win?"W":"L"}</span>
-    <span style="flex:1;color:var(--green-d)">${opp.name}</span>
-    <span style="font-size:10px;color:var(--green-x)">${opt.loc}</span>
-    <span style="font-size:10px;color:${diff>=0?upColor:dnColor}">${verdict.diffStr}</span>`;
-  logEl.insertBefore(entry, logEl.firstChild);
-
-  simRenderChoices();
+function eqToggleLoc(gi) {
+  const g = eqGames[gi];
+  if(g.loc==="home")      { g.loc="away";    g.wt=1.1; g.label=`${EQ_TEAMS[g.w]} beat ${EQ_TEAMS[g.l]} on the road`; }
+  else if(g.loc==="away") { g.loc="neutral"; g.wt=1.0; g.label=`${EQ_TEAMS[g.w]} beat ${EQ_TEAMS[g.l]} at neutral site`; }
+  else                    { g.loc="home";    g.wt=0.9; g.label=`${EQ_TEAMS[g.w]} beat ${EQ_TEAMS[g.l]} at home`; }
+  eqRender();
 }
 
-function simReset() {
-  simGames = [
-    {opp:6, loc:"road", win:true},
-    {opp:7, loc:"home", win:true},
-    {opp:8, loc:"road", win:true},
-    {opp:5, loc:"home", win:true},
-    {opp:1, loc:"road", win:false},
-    {opp:2, loc:"home", win:false},
-    {opp:3, loc:"road", win:false},
-    {opp:4, loc:"home", win:false},
-  ];
-  simRound = 0;
-  simRatingHistory = [];
-  const state = simCalc();
-  document.getElementById("sim-rating").textContent = state.r.toFixed(4);
-  document.getElementById("sim-rating").style.color = "var(--green-b)";
-  document.getElementById("sim-delta").style.opacity="0";
-  document.getElementById("sim-record").textContent=`${state.wins}-${state.losses}`;
-  document.getElementById("sim-games").textContent=simGames.length;
-  document.getElementById("sim-cii").textContent=state.cii.toFixed(2);
-  document.getElementById("sim-cii").style.color="var(--green-b)";
-  document.getElementById("sim-bi").textContent=state.bi.toFixed(4);
-  document.getElementById("sim-bi").style.color="var(--green-b)";
-  document.getElementById("sim-ri").textContent=state.r.toFixed(4);
-  document.getElementById("sim-ri").style.color="var(--green-b)";
-  document.getElementById("sim-cii-note").textContent="Your anchor weight. Grows with every game — the bigger it is, the harder it is for any single result to move you.";
-  document.getElementById("sim-bi-note").textContent="Your weighted record. 4 wins, 4 losses at mixed locations currently nets zero above the baseline.";
-  document.getElementById("sim-ri-note").textContent="Solved simultaneously with all 308 teams. Opponent ratings pull this above or below your raw record.";
-  document.getElementById("sim-verdict").style.borderColor="var(--border)";
-  document.getElementById("sim-verdict").textContent="Xavier is exactly at the .500 baseline. 4 wins, 4 losses, mixed schedule. Pick a next game to see the math move.";
-  document.getElementById("sim-log").innerHTML="";
-  document.getElementById("sim-choices").style.display="flex";
-  document.getElementById("sim-done").style.display="none";
-  simRenderChoices();
+function eqFlip(gi) {
+  const g = eqGames[gi];
+  // Flip winner and loser, keep location but invert weight perspective
+  [g.w, g.l] = [g.l, g.w];
+  // Flip weight perspective
+  if(g.loc==="home")      g.wt=0.9;
+  else if(g.loc==="away") g.wt=1.1;
+  eqRender();
 }
+
+function initXavier() {
+  eqRender();
+}
+// Simplified 5-team Colley solver for the simulator
+// Teams: Xavier(0), Tennessee(1), Wofford(2), NJIT(3), Florida(4), UConn(5), Arkansas(6), Wright St.(7)
 
 function initXavier(){
   // Initialize simulator
