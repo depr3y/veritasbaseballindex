@@ -572,93 +572,85 @@
 
       <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:10px;color:var(--green-x)">// built by matt deprey &nbsp;·&nbsp; veritasbaseball.vercel.app &nbsp;·&nbsp; updates hourly &nbsp;·&nbsp; 2026</div>
     </div>
-<!-- RIGHT: simulator (fixed in place, parent handles containment) -->
+<!-- RIGHT: interactive game picker -->
     <div style="height:100%;overflow:hidden;background:var(--bg2);display:flex;flex-direction:column">
 
-      <!-- header -->
-      <div style="padding:8px 14px;border-bottom:1px solid var(--border2);flex-shrink:0">
+      <div style="padding:10px 16px;border-bottom:1px solid var(--border2);flex-shrink:0">
         <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:1px">// try it yourself</div>
-        <div style="font-size:13px;font-weight:700;color:var(--green-b)">How does one game move the needle?</div>
-        <div style="font-size:10px;color:var(--green-d);margin-top:1px">Xavier · Big East · 8 games in · pick what happens next</div>
+        <div style="font-size:14px;font-weight:700;color:var(--green-b)">Change the games. Watch the math.</div>
+        <div style="font-size:10px;color:var(--green-d);margin-top:2px">Toggle location or flip outcomes — every value updates instantly</div>
       </div>
 
-      <!-- two sub-columns -->
-      <div style="display:grid;grid-template-columns:3fr 2fr;flex:1;overflow:hidden;min-height:0">
+      <div style="flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px">
 
-        <!-- LEFT sub: equation state -->
-        <div style="padding:10px 12px;border-right:1px solid var(--border2);overflow-y:auto;display:flex;flex-direction:column;gap:8px">
-
-          <!-- rating -->
-          <div style="background:var(--bg);border:1px solid var(--border);padding:10px 12px">
-            <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:4px">VBI RATING</div>
-            <div style="display:flex;align-items:baseline;gap:10px">
-              <div id="sim-rating" style="font-size:28px;font-weight:700;color:var(--green-b);letter-spacing:0.04em;transition:color 0.3s">0.5000</div>
-              <div id="sim-delta" style="font-size:13px;font-weight:700;opacity:0;transition:opacity 0.4s"></div>
+        <!-- What each variable means -->
+        <div style="border:1px solid var(--border);background:var(--bg);padding:10px 12px">
+          <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px">// what is C · r = b?</div>
+          <div style="display:flex;flex-direction:column;gap:6px;font-family:'Courier New',monospace;font-size:11px">
+            <div style="display:flex;gap:8px;align-items:baseline">
+              <span style="color:#60a5fa;font-weight:700;min-width:14px">C</span>
+              <span style="color:var(--green-d)">308×308 matrix. C[i][i] = 2 + Σ(game weights). C[i][j] = −Σ(shared games).</span>
             </div>
-            <div style="display:flex;gap:16px;margin-top:6px;font-size:11px;color:var(--green-x)">
-              <span>record: <span id="sim-record" style="color:var(--green-b);font-weight:700">4-4</span></span>
-              <span>games: <span id="sim-games" style="color:var(--green-b);font-weight:700">8</span></span>
+            <div style="display:flex;gap:8px;align-items:baseline">
+              <span style="color:#4ade80;font-weight:700;min-width:14px">r</span>
+              <span style="color:var(--green-d)">the ratings — what we solve for. one number per team.</span>
             </div>
-          </div>
-
-          <!-- equation -->
-          <div style="border:1px solid var(--border);background:var(--bg);padding:10px 12px">
-            <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--border)">
-              <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px">
-                <span style="font-size:10px;color:var(--green-x);min-width:44px;letter-spacing:0.06em">C[i][i]</span>
-                <span id="sim-cii" style="font-size:14px;font-weight:700;color:var(--green-b);min-width:48px;transition:color 0.3s">9.60</span>
-                <span style="font-size:9px;color:var(--green-x)">= 2 + Σ(games)</span>
-              </div>
-              <div id="sim-cii-note" style="font-size:10px;color:var(--green-d);line-height:1.5;padding-left:50px">Anchor weight. Bigger = harder to move.</div>
+            <div style="display:flex;gap:8px;align-items:baseline">
+              <span style="color:#fbbf24;font-weight:700;min-width:14px">b</span>
+              <span style="color:var(--green-d)">weighted record. b[i] = 1 + Σ(win weights)/2 − Σ(loss weights)/2.</span>
             </div>
-            <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--border)">
-              <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px">
-                <span style="font-size:10px;color:var(--green-x);min-width:44px;letter-spacing:0.06em">b[i]</span>
-                <span id="sim-bi" style="font-size:14px;font-weight:700;color:var(--green-b);min-width:48px;transition:color 0.3s">0.0000</span>
-                <span style="font-size:9px;color:var(--green-x)">= 1 + Σ(W×wt) − Σ(L×wt)</span>
-              </div>
-              <div id="sim-bi-note" style="font-size:10px;color:var(--green-d);line-height:1.5;padding-left:50px">Weighted record. 4W 4L = at baseline.</div>
-            </div>
-            <div>
-              <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px">
-                <span style="font-size:10px;color:var(--green-x);min-width:44px;letter-spacing:0.06em">r[i]</span>
-                <span id="sim-ri" style="font-size:14px;font-weight:700;color:var(--green-b);min-width:48px;transition:color 0.3s">0.5000</span>
-                <span style="font-size:9px;color:var(--green-x)">= solve(C · r = b)</span>
-              </div>
-              <div id="sim-ri-note" style="font-size:10px;color:var(--green-d);line-height:1.5;padding-left:50px">Solved with all 308 teams at once.</div>
-            </div>
-          </div>
-
-          <!-- verdict -->
-          <div id="sim-verdict" style="border-left:2px solid var(--border);padding:7px 10px;font-size:11px;color:var(--green-d);line-height:1.6;transition:border-color 0.3s">
-            Pick a game to see the math move.
-          </div>
-
-          <!-- game log -->
-          <div>
-            <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:3px">// game log</div>
-            <div id="sim-log" style="border:1px solid var(--border);background:var(--bg);max-height:72px;overflow-y:auto;padding:3px 8px;font-family:'Courier Prime','Courier New',monospace"></div>
-          </div>
-
-          <button onclick="simReset()" style="font-family:'Courier Prime','Courier New',monospace;font-size:10px;padding:4px 12px;border:1px solid var(--border);background:transparent;color:var(--green-x);cursor:pointer;letter-spacing:0.06em">[reset to game 8]</button>
-        </div>
-
-        <!-- RIGHT sub: game choices -->
-        <div style="padding:10px 12px;overflow-y:auto;display:flex;flex-direction:column">
-          <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px;flex-shrink:0">// game <span id="sim-game-num">9</span> — what happens?</div>
-          <div id="sim-choices" style="display:flex;flex-direction:column;gap:6px"></div>
-          <div id="sim-done" style="display:none;border:1px solid var(--border);background:var(--bg);padding:14px;text-align:center">
-            <div style="font-size:12px;font-weight:700;color:var(--green-b);margin-bottom:5px">season simulated</div>
-            <div style="font-size:11px;color:var(--green-d);line-height:1.6" id="sim-summary"></div>
-            <button onclick="simReset()" style="margin-top:10px;font-family:'Courier Prime','Courier New',monospace;font-size:11px;padding:4px 12px;border:1px solid var(--green);background:var(--bg3);color:var(--green-b);cursor:pointer;letter-spacing:0.06em">[play again]</button>
           </div>
         </div>
 
-      </div><!-- end sub-columns -->
-    </div><!-- end right sticky -->
+        <!-- Location weight reminder -->
+        <div style="border:1px solid var(--border);background:var(--bg);padding:10px 12px">
+          <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:8px">// click the location badge on each game to cycle through</div>
+          <div style="display:flex;gap:8px;font-family:'Courier New',monospace;font-size:11px">
+            <div style="flex:1;text-align:center;padding:6px;border:1px solid #00ff55">
+              <div style="color:#00ff55;font-weight:700">×1.1</div>
+              <div style="color:var(--green-x);font-size:9px;margin-top:2px">ROAD WIN</div>
+              <div style="color:var(--green-x);font-size:9px">harder to achieve</div>
+            </div>
+            <div style="flex:1;text-align:center;padding:6px;border:1px solid var(--green-b)">
+              <div style="color:var(--green-b);font-weight:700">×1.0</div>
+              <div style="color:var(--green-x);font-size:9px;margin-top:2px">NEUTRAL</div>
+              <div style="color:var(--green-x);font-size:9px">baseline</div>
+            </div>
+            <div style="flex:1;text-align:center;padding:6px;border:1px solid #fbbf24">
+              <div style="color:#fbbf24;font-weight:700">×0.9</div>
+              <div style="color:var(--green-x);font-size:9px;margin-top:2px">HOME WIN</div>
+              <div style="color:var(--green-x);font-size:9px">crowd advantage</div>
+            </div>
+          </div>
+        </div>
 
-  </div>
-</div>
+        <!-- Why this matters -->
+        <div style="border:1px solid var(--border);background:var(--bg);padding:10px 12px">
+          <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// why simultaneous solving matters</div>
+          <div style="font-size:11px;color:var(--green-d);line-height:1.7">
+            All three ratings are solved <i style="color:var(--green-b)">at the same time</i>. LSU's rating depends on Xavier's, which depends on BC's, which depends on LSU's. There's no chicken-and-egg problem — the matrix handles all the interdependencies in one shot.
+          </div>
+        </div>
+
+        <!-- Try this -->
+        <div style="border:1px solid var(--border);background:var(--bg);padding:10px 12px">
+          <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// try this</div>
+          <div style="font-size:11px;color:var(--green-d);line-height:1.7">
+            Flip LSU's road win to a road <i style="color:#ff4444">loss</i>. Watch LSU drop and Xavier jump — even though neither team played each other in this scenario. That's the interdependence at work.
+          </div>
+        </div>
+
+        <!-- VBI vs RPI callout -->
+        <div style="border:1px solid var(--border);background:var(--bg);padding:10px 12px">
+          <div style="font-size:9px;color:var(--green-x);letter-spacing:0.1em;margin-bottom:6px">// vbi vs rpi</div>
+          <div style="font-size:11px;color:var(--green-d);line-height:1.7">
+            RPI uses 25% of your own win%, 50% opponents' win%, 25% opponents' opponents' win%. Schedule strength is an <i style="color:#ff4444">input</i>. In VBI, it's an <i style="color:#00ff55">output</i> — it emerges from the math automatically.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </div>
 <footer>
@@ -1747,7 +1739,7 @@ function eqFlip(gi) {
 }
 
 function initXavier() {
-  eqRender();
+  setTimeout(eqRender, 50);
 }
 // Simplified 5-team Colley solver for the simulator
 // Teams: Xavier(0), Tennessee(1), Wofford(2), NJIT(3), Florida(4), UConn(5), Arkansas(6), Wright St.(7)
