@@ -4,7 +4,7 @@ import os
 from datetime import datetime, timezone, timedelta
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://fcipxtdcyxerytxfrzhf.supabase.co")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjaXB4dGRjeXhlcnl0eGZyemhmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODE4NzM3MSwiZXhwIjoyMDkzNzYzMzcxfQ.x9Hs11sVHdX_6WkIrD872EKPJ8eTk72M1BET12HnJj4")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
 if not SUPABASE_KEY:
     raise ValueError("SUPABASE_KEY environment variable not set")
