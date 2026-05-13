@@ -84071,5 +84071,16 @@
     "away_team": "Saint Mary's (CA)",
     "home_score": 7,
     "away_score": 6
+  },
+  {
+    "game_id": "6541174",
+    "winner": "Canisius",
+    "loser": "Siena",
+    "location": "home",
+    "date": "2026-05-13",
+    "home_team": "Canisius",
+    "away_team": "Siena",
+    "home_score": 15,
+    "away_score": 2
   }
 ]
