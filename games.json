@@ -83677,6 +83677,17 @@
     "away_score": 2
   },
   {
+    "game_id": "6543062",
+    "winner": "Notre Dame",
+    "loser": "Dayton",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Notre Dame",
+    "away_team": "Dayton",
+    "home_score": 16,
+    "away_score": 6
+  },
+  {
     "game_id": "6543628",
     "winner": "New Mexico",
     "loser": "New Mexico St.",
@@ -83732,6 +83743,17 @@
     "away_score": 7
   },
   {
+    "game_id": "6545018",
+    "winner": "North Carolina",
+    "loser": "UNCW",
+    "location": "away",
+    "date": "2026-05-12",
+    "home_team": "UNCW",
+    "away_team": "North Carolina",
+    "home_score": 7,
+    "away_score": 13
+  },
+  {
     "game_id": "6547917",
     "winner": "Coastal Carolina",
     "loser": "The Citadel",
@@ -83741,6 +83763,17 @@
     "away_team": "The Citadel",
     "home_score": 5,
     "away_score": 3
+  },
+  {
+    "game_id": "6548566",
+    "winner": "Duke",
+    "loser": "William & Mary",
+    "location": "home",
+    "date": "2026-05-12",
+    "home_team": "Duke",
+    "away_team": "William & Mary",
+    "home_score": 14,
+    "away_score": 9
   },
   {
     "game_id": "6549124",
