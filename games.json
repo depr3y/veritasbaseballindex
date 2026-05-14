@@ -84126,5 +84126,49 @@
     "away_team": "CSUN",
     "home_score": 4,
     "away_score": 0
+  },
+  {
+    "game_id": "6603040",
+    "winner": "North Dakota St.",
+    "loser": "St. Thomas (MN)",
+    "location": "home",
+    "date": "2026-05-14",
+    "home_team": "North Dakota St.",
+    "away_team": "St. Thomas (MN)",
+    "home_score": 5,
+    "away_score": 1
+  },
+  {
+    "game_id": "6541175",
+    "winner": "Canisius",
+    "loser": "Siena",
+    "location": "home",
+    "date": "2026-05-14",
+    "home_team": "Canisius",
+    "away_team": "Siena",
+    "home_score": 13,
+    "away_score": 6
+  },
+  {
+    "game_id": "6551482",
+    "winner": "Mercyhurst",
+    "loser": "Wagner",
+    "location": "away",
+    "date": "2026-05-14",
+    "home_team": "Wagner",
+    "away_team": "Mercyhurst",
+    "home_score": 4,
+    "away_score": 6
+  },
+  {
+    "game_id": "6552177",
+    "winner": "Maine",
+    "loser": "UAlbany",
+    "location": "home",
+    "date": "2026-05-14",
+    "home_team": "Maine",
+    "away_team": "UAlbany",
+    "home_score": 12,
+    "away_score": 1
   }
 ]
