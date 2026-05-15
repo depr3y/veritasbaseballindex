@@ -84997,6 +84997,17 @@
     "away_score": 1
   },
   {
+    "game_id": "6540929",
+    "winner": "Vanderbilt",
+    "loser": "South Carolina",
+    "location": "home",
+    "date": "2026-05-14",
+    "home_team": "Vanderbilt",
+    "away_team": "South Carolina",
+    "home_score": 9,
+    "away_score": 1
+  },
+  {
     "game_id": "6541345",
     "winner": "Mississippi St.",
     "loser": "Texas A&M",
@@ -85446,6 +85457,17 @@
     "away_team": "Grand Canyon",
     "home_score": 13,
     "away_score": 9
+  },
+  {
+    "game_id": "6541568",
+    "winner": "San Diego",
+    "loser": "LMU (CA)",
+    "location": "home",
+    "date": "2026-05-14",
+    "home_team": "San Diego",
+    "away_team": "LMU (CA)",
+    "home_score": 17,
+    "away_score": 8
   },
   {
     "game_id": "6541924",
