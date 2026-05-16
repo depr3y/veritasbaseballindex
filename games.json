@@ -87109,6 +87109,17 @@
     "away_score": 12
   },
   {
+    "game_id": "6541569",
+    "winner": "San Diego",
+    "loser": "LMU (CA)",
+    "location": "home",
+    "date": "2026-05-15",
+    "home_team": "San Diego",
+    "away_team": "LMU (CA)",
+    "home_score": 7,
+    "away_score": 3
+  },
+  {
     "game_id": "6541923",
     "winner": "Gonzaga",
     "loser": "Seattle U",
@@ -87217,6 +87228,17 @@
     "away_team": "UCLA",
     "home_score": 5,
     "away_score": 6
+  },
+  {
+    "game_id": "6545918",
+    "winner": "CSUN",
+    "loser": "Hawaii",
+    "location": "away",
+    "date": "2026-05-15",
+    "home_team": "Hawaii",
+    "away_team": "CSUN",
+    "home_score": 1,
+    "away_score": 8
   },
   {
     "game_id": "6603086",
