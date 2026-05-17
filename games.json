@@ -88746,5 +88746,27 @@
     "away_team": "South Dakota St.",
     "home_score": 13,
     "away_score": 8
+  },
+  {
+    "game_id": "6603118",
+    "winner": "Lamar University",
+    "loser": "SFA",
+    "location": "away",
+    "date": "2026-05-17",
+    "home_team": "SFA",
+    "away_team": "Lamar University",
+    "home_score": 0,
+    "away_score": 11
+  },
+  {
+    "game_id": "6603124",
+    "winner": "McNeese",
+    "loser": "Southeastern La.",
+    "location": "away",
+    "date": "2026-05-17",
+    "home_team": "Southeastern La.",
+    "away_team": "McNeese",
+    "home_score": 5,
+    "away_score": 8
   }
 ]
