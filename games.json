@@ -88779,5 +88779,16 @@
     "away_team": "Eastern Ky.",
     "home_score": 4,
     "away_score": 9
+  },
+  {
+    "game_id": "6602095",
+    "winner": "Holy Cross",
+    "loser": "Bucknell",
+    "location": "away",
+    "date": "2026-05-18",
+    "home_team": "Bucknell",
+    "away_team": "Holy Cross",
+    "home_score": 2,
+    "away_score": 11
   }
 ]
