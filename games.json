@@ -88790,5 +88790,82 @@
     "away_team": "Holy Cross",
     "home_score": 2,
     "away_score": 11
+  },
+  {
+    "game_id": "6603156",
+    "winner": "Duke",
+    "loser": "NC State",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "NC State",
+    "away_team": "Duke",
+    "home_score": 12,
+    "away_score": 21
+  },
+  {
+    "game_id": "6603181",
+    "winner": "Michigan St.",
+    "loser": "Purdue",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "Purdue",
+    "away_team": "Michigan St.",
+    "home_score": 4,
+    "away_score": 8
+  },
+  {
+    "game_id": "6603213",
+    "winner": "Missouri",
+    "loser": "Ole Miss",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "Ole Miss",
+    "away_team": "Missouri",
+    "home_score": 8,
+    "away_score": 10
+  },
+  {
+    "game_id": "6602936",
+    "winner": "Bucknell",
+    "loser": "Holy Cross",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Bucknell",
+    "away_team": "Holy Cross",
+    "home_score": 9,
+    "away_score": 5
+  },
+  {
+    "game_id": "6603167",
+    "winner": "Jacksonville",
+    "loser": "Austin Peay",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Jacksonville",
+    "away_team": "Austin Peay",
+    "home_score": 7,
+    "away_score": 1
+  },
+  {
+    "game_id": "6603182",
+    "winner": "Iowa",
+    "loser": "Illinois",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Iowa",
+    "away_team": "Illinois",
+    "home_score": 10,
+    "away_score": 6
+  },
+  {
+    "game_id": "6603157",
+    "winner": "Stanford",
+    "loser": "California",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Stanford",
+    "away_team": "California",
+    "home_score": 11,
+    "away_score": 4
   }
 ]
