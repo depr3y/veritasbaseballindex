@@ -88792,17 +88792,6 @@
     "away_score": 11
   },
   {
-    "game_id": "6603429",
-    "winner": "Kansas St.",
-    "loser": "Utah",
-    "location": "away",
-    "date": "2026-05-19",
-    "home_team": "Utah",
-    "away_team": "Kansas St.",
-    "home_score": 5,
-    "away_score": 9
-  },
-  {
     "game_id": "6603156",
     "winner": "Duke",
     "loser": "NC State",
@@ -89012,6 +89001,17 @@
     "away_score": 6
   },
   {
+    "game_id": "6603171",
+    "winner": "Kansas St.",
+    "loser": "Utah",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "Utah",
+    "away_team": "Kansas St.",
+    "home_score": 5,
+    "away_score": 9
+  },
+  {
     "game_id": "6603188",
     "winner": "Washington",
     "loser": "Ohio St.",
@@ -89021,5 +89021,93 @@
     "away_team": "Washington",
     "home_score": 6,
     "away_score": 8
+  },
+  {
+    "game_id": "6603379",
+    "winner": "The Citadel",
+    "loser": "VMI",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "The Citadel",
+    "away_team": "VMI",
+    "home_score": 21,
+    "away_score": 11
+  },
+  {
+    "game_id": "6603242",
+    "winner": "Texas St.",
+    "loser": "App State",
+    "location": "away",
+    "date": "2026-05-20",
+    "home_team": "App State",
+    "away_team": "Texas St.",
+    "home_score": 5,
+    "away_score": 6
+  },
+  {
+    "game_id": "6603318",
+    "winner": "Sam Houston",
+    "loser": "Louisiana Tech",
+    "location": "away",
+    "date": "2026-05-20",
+    "home_team": "Louisiana Tech",
+    "away_team": "Sam Houston",
+    "home_score": 13,
+    "away_score": 14
+  },
+  {
+    "game_id": "6603254",
+    "winner": "Rhode Island",
+    "loser": "George Mason",
+    "location": "away",
+    "date": "2026-05-20",
+    "home_team": "George Mason",
+    "away_team": "Rhode Island",
+    "home_score": 8,
+    "away_score": 19
+  },
+  {
+    "game_id": "6603337",
+    "winner": "Fairfield",
+    "loser": "Marist",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "Fairfield",
+    "away_team": "Marist",
+    "home_score": 6,
+    "away_score": 3
+  },
+  {
+    "game_id": "6603316",
+    "winner": "Hofstra",
+    "loser": "Col. of Charleston",
+    "location": "away",
+    "date": "2026-05-20",
+    "home_team": "Col. of Charleston",
+    "away_team": "Hofstra",
+    "home_score": 0,
+    "away_score": 13
+  },
+  {
+    "game_id": "6602937",
+    "winner": "Holy Cross",
+    "loser": "Bucknell",
+    "location": "away",
+    "date": "2026-05-20",
+    "home_team": "Bucknell",
+    "away_team": "Holy Cross",
+    "home_score": 11,
+    "away_score": 14
+  },
+  {
+    "game_id": "6603264",
+    "winner": "UMass Lowell",
+    "loser": "Bryant",
+    "location": "away",
+    "date": "2026-05-20",
+    "home_team": "Bryant",
+    "away_team": "UMass Lowell",
+    "home_score": 0,
+    "away_score": 2
   }
 ]
