@@ -89023,6 +89023,17 @@
     "away_score": 8
   },
   {
+    "game_id": "6603367",
+    "winner": "Florida A&M",
+    "loser": "Texas Southern",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "Florida A&M",
+    "away_team": "Texas Southern",
+    "home_score": 8,
+    "away_score": 6
+  },
+  {
     "game_id": "6603379",
     "winner": "The Citadel",
     "loser": "VMI",
@@ -89067,6 +89078,17 @@
     "away_score": 19
   },
   {
+    "game_id": "6603297",
+    "winner": "Charleston So.",
+    "loser": "Radford",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "Charleston So.",
+    "away_team": "Radford",
+    "home_score": 8,
+    "away_score": 5
+  },
+  {
     "game_id": "6603337",
     "winner": "Fairfield",
     "loser": "Marist",
@@ -89089,6 +89111,28 @@
     "away_score": 13
   },
   {
+    "game_id": "6603347",
+    "winner": "Toledo",
+    "loser": "Ball St.",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "Toledo",
+    "away_team": "Ball St.",
+    "home_score": 8,
+    "away_score": 2
+  },
+  {
+    "game_id": "6603380",
+    "winner": "UNC Greensboro",
+    "loser": "ETSU",
+    "location": "away",
+    "date": "2026-05-20",
+    "home_team": "ETSU",
+    "away_team": "UNC Greensboro",
+    "home_score": 5,
+    "away_score": 6
+  },
+  {
     "game_id": "6602937",
     "winner": "Holy Cross",
     "loser": "Bucknell",
@@ -89107,7 +89151,84 @@
     "date": "2026-05-20",
     "home_team": "Bryant",
     "away_team": "UMass Lowell",
-    "home_score": 0,
+    "home_score": 5,
+    "away_score": 7
+  },
+  {
+    "game_id": "6603274",
+    "winner": "Wichita St.",
+    "loser": "Fla. Atlantic",
+    "location": "away",
+    "date": "2026-05-20",
+    "home_team": "Fla. Atlantic",
+    "away_team": "Wichita St.",
+    "home_score": 2,
+    "away_score": 3
+  },
+  {
+    "game_id": "6603373",
+    "winner": "Alabama St.",
+    "loser": "Grambling",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "Alabama St.",
+    "away_team": "Grambling",
+    "home_score": 10,
+    "away_score": 0
+  },
+  {
+    "game_id": "6603384",
+    "winner": "South Dakota St.",
+    "loser": "Oral Roberts",
+    "location": "away",
+    "date": "2026-05-20",
+    "home_team": "Oral Roberts",
+    "away_team": "South Dakota St.",
+    "home_score": 3,
+    "away_score": 7
+  },
+  {
+    "game_id": "6603319",
+    "winner": "Western Ky.",
+    "loser": "Middle Tenn.",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "Western Ky.",
+    "away_team": "Middle Tenn.",
+    "home_score": 8,
     "away_score": 2
+  },
+  {
+    "game_id": "6603396",
+    "winner": "Utah Tech",
+    "loser": "UT Arlington",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "Utah Tech",
+    "away_team": "UT Arlington",
+    "home_score": 4,
+    "away_score": 0
+  },
+  {
+    "game_id": "6603338",
+    "winner": "Merrimack",
+    "loser": "Canisius",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "Merrimack",
+    "away_team": "Canisius",
+    "home_score": 7,
+    "away_score": 0
+  },
+  {
+    "game_id": "6603317",
+    "winner": "UNCW",
+    "loser": "Monmouth",
+    "location": "home",
+    "date": "2026-05-20",
+    "home_team": "UNCW",
+    "away_team": "Monmouth",
+    "home_score": 5,
+    "away_score": 0
   }
 ]
