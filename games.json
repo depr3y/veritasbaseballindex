@@ -88792,6 +88792,17 @@
     "away_score": 11
   },
   {
+    "game_id": "6603429",
+    "winner": "Kansas St.",
+    "loser": "Utah",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "Utah",
+    "away_team": "Kansas St.",
+    "home_score": 5,
+    "away_score": 9
+  },
+  {
     "game_id": "6603156",
     "winner": "Duke",
     "loser": "NC State",
@@ -88858,6 +88869,17 @@
     "away_score": 6
   },
   {
+    "game_id": "6603214",
+    "winner": "Vanderbilt",
+    "loser": "Kentucky",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Vanderbilt",
+    "away_team": "Kentucky",
+    "home_score": 8,
+    "away_score": 5
+  },
+  {
     "game_id": "6603157",
     "winner": "Stanford",
     "loser": "California",
@@ -88867,5 +88889,137 @@
     "away_team": "California",
     "home_score": 11,
     "away_score": 4
+  },
+  {
+    "game_id": "6603193",
+    "winner": "Lindenwood",
+    "loser": "UT Martin",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Lindenwood",
+    "away_team": "UT Martin",
+    "home_score": 7,
+    "away_score": 4
+  },
+  {
+    "game_id": "6603217",
+    "winner": "Louisiana",
+    "loser": "Marshall",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Louisiana",
+    "away_team": "Marshall",
+    "home_score": 11,
+    "away_score": 1
+  },
+  {
+    "game_id": "6603158",
+    "winner": "Notre Dame",
+    "loser": "Clemson",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Notre Dame",
+    "away_team": "Clemson",
+    "home_score": 5,
+    "away_score": 4
+  },
+  {
+    "game_id": "6603215",
+    "winner": "Tennessee",
+    "loser": "South Carolina",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Tennessee",
+    "away_team": "South Carolina",
+    "home_score": 11,
+    "away_score": 6
+  },
+  {
+    "game_id": "6603169",
+    "winner": "Central Ark.",
+    "loser": "Stetson",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Central Ark.",
+    "away_team": "Stetson",
+    "home_score": 6,
+    "away_score": 4
+  },
+  {
+    "game_id": "6603187",
+    "winner": "Michigan",
+    "loser": "Rutgers",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "Michigan",
+    "away_team": "Rutgers",
+    "home_score": 10,
+    "away_score": 0
+  },
+  {
+    "game_id": "6603170",
+    "winner": "BYU",
+    "loser": "Texas Tech",
+    "location": "home",
+    "date": "2026-05-19",
+    "home_team": "BYU",
+    "away_team": "Texas Tech",
+    "home_score": 18,
+    "away_score": 8
+  },
+  {
+    "game_id": "6603218",
+    "winner": "Georgia St.",
+    "loser": "Old Dominion",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "Old Dominion",
+    "away_team": "Georgia St.",
+    "home_score": 1,
+    "away_score": 17
+  },
+  {
+    "game_id": "6603194",
+    "winner": "Southern Ind.",
+    "loser": "Morehead St.",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "Morehead St.",
+    "away_team": "Southern Ind.",
+    "home_score": 2,
+    "away_score": 6
+  },
+  {
+    "game_id": "6603159",
+    "winner": "Pittsburgh",
+    "loser": "Louisville",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "Louisville",
+    "away_team": "Pittsburgh",
+    "home_score": 8,
+    "away_score": 16
+  },
+  {
+    "game_id": "6603216",
+    "winner": "LSU",
+    "loser": "Oklahoma",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "Oklahoma",
+    "away_team": "LSU",
+    "home_score": 2,
+    "away_score": 6
+  },
+  {
+    "game_id": "6603188",
+    "winner": "Washington",
+    "loser": "Ohio St.",
+    "location": "away",
+    "date": "2026-05-19",
+    "home_team": "Ohio St.",
+    "away_team": "Washington",
+    "home_score": 6,
+    "away_score": 8
   }
 ]
