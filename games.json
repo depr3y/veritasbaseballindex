@@ -89419,6 +89419,17 @@
     "away_score": 5
   },
   {
+    "game_id": "6603475",
+    "winner": "Milwaukee",
+    "loser": "Wright St.",
+    "location": "away",
+    "date": "2026-05-21",
+    "home_team": "Wright St.",
+    "away_team": "Milwaukee",
+    "home_score": 1,
+    "away_score": 4
+  },
+  {
     "game_id": "6603245",
     "winner": "Troy",
     "loser": "South Alabama",
@@ -89648,5 +89659,27 @@
     "away_team": "Cincinnati",
     "home_score": 10,
     "away_score": 2
+  },
+  {
+    "game_id": "6603324",
+    "winner": "Liberty",
+    "loser": "Louisiana Tech",
+    "location": "home",
+    "date": "2026-05-22",
+    "home_team": "Liberty",
+    "away_team": "Louisiana Tech",
+    "home_score": 6,
+    "away_score": 0
+  },
+  {
+    "game_id": "6603352",
+    "winner": "Kent St.",
+    "loser": "Miami (OH)",
+    "location": "away",
+    "date": "2026-05-22",
+    "home_team": "Miami (OH)",
+    "away_team": "Kent St.",
+    "home_score": 1,
+    "away_score": 3
   }
 ]
