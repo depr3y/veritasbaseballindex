@@ -89681,5 +89681,38 @@
     "away_team": "Kent St.",
     "home_score": 1,
     "away_score": 3
+  },
+  {
+    "game_id": "6603150",
+    "winner": "North Carolina",
+    "loser": "Virginia Tech",
+    "location": "home",
+    "date": "2026-05-22",
+    "home_team": "North Carolina",
+    "away_team": "Virginia Tech",
+    "home_score": 10,
+    "away_score": 4
+  },
+  {
+    "game_id": "6603325",
+    "winner": "Jacksonville St.",
+    "loser": "Western Ky.",
+    "location": "home",
+    "date": "2026-05-22",
+    "home_team": "Jacksonville St.",
+    "away_team": "Western Ky.",
+    "home_score": 12,
+    "away_score": 11
+  },
+  {
+    "game_id": "6603353",
+    "winner": "Kent St.",
+    "loser": "Western Mich.",
+    "location": "away",
+    "date": "2026-05-22",
+    "home_team": "Western Mich.",
+    "away_team": "Kent St.",
+    "home_score": 1,
+    "away_score": 6
   }
 ]
