@@ -89661,6 +89661,17 @@
     "away_score": 2
   },
   {
+    "game_id": "6603505",
+    "winner": "UIC",
+    "loser": "Murray St.",
+    "location": "home",
+    "date": "2026-05-22",
+    "home_team": "UIC",
+    "away_team": "Murray St.",
+    "home_score": 6,
+    "away_score": 5
+  },
+  {
     "game_id": "6602955",
     "winner": "Southern California",
     "loser": "Michigan St.",
@@ -89780,5 +89791,38 @@
     "away_team": "Auburn",
     "home_score": 0,
     "away_score": 7
+  },
+  {
+    "game_id": "6603509",
+    "winner": "Rider",
+    "loser": "Fairfield",
+    "location": "away",
+    "date": "2026-05-23",
+    "home_team": "Fairfield",
+    "away_team": "Rider",
+    "home_score": 1,
+    "away_score": 6
+  },
+  {
+    "game_id": "6603304",
+    "winner": "Longwood",
+    "loser": "Winthrop",
+    "location": "away",
+    "date": "2026-05-23",
+    "home_team": "Winthrop",
+    "away_team": "Longwood",
+    "home_score": 3,
+    "away_score": 4
+  },
+  {
+    "game_id": "6603146",
+    "winner": "Georgia Tech",
+    "loser": "Miami (FL)",
+    "location": "away",
+    "date": "2026-05-23",
+    "home_team": "Miami (FL)",
+    "away_team": "Georgia Tech",
+    "home_score": 3,
+    "away_score": 9
   }
 ]
