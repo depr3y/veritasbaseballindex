@@ -89661,6 +89661,17 @@
     "away_score": 2
   },
   {
+    "game_id": "6602955",
+    "winner": "Southern California",
+    "loser": "Michigan St.",
+    "location": "home",
+    "date": "2026-05-22",
+    "home_team": "Southern California",
+    "away_team": "Michigan St.",
+    "home_score": 7,
+    "away_score": 0
+  },
+  {
     "game_id": "6603324",
     "winner": "Liberty",
     "loser": "Louisiana Tech",
@@ -89714,5 +89725,60 @@
     "away_team": "Kent St.",
     "home_score": 1,
     "away_score": 6
+  },
+  {
+    "game_id": "6603151",
+    "winner": "Pittsburgh",
+    "loser": "Florida St.",
+    "location": "away",
+    "date": "2026-05-22",
+    "home_team": "Florida St.",
+    "away_team": "Pittsburgh",
+    "home_score": 6,
+    "away_score": 8
+  },
+  {
+    "game_id": "6603207",
+    "winner": "Arkansas",
+    "loser": "Texas",
+    "location": "away",
+    "date": "2026-05-22",
+    "home_team": "Texas",
+    "away_team": "Arkansas",
+    "home_score": 1,
+    "away_score": 8
+  },
+  {
+    "game_id": "6603326",
+    "winner": "Missouri St.",
+    "loser": "DBU",
+    "location": "home",
+    "date": "2026-05-22",
+    "home_team": "Missouri St.",
+    "away_team": "DBU",
+    "home_score": 9,
+    "away_score": 8
+  },
+  {
+    "game_id": "6603160",
+    "winner": "Lamar University",
+    "loser": "McNeese",
+    "location": "home",
+    "date": "2026-05-22",
+    "home_team": "Lamar University",
+    "away_team": "McNeese",
+    "home_score": 2,
+    "away_score": 1
+  },
+  {
+    "game_id": "6603208",
+    "winner": "Auburn",
+    "loser": "Texas A&M",
+    "location": "away",
+    "date": "2026-05-22",
+    "home_team": "Texas A&M",
+    "away_team": "Auburn",
+    "home_score": 0,
+    "away_score": 7
   }
 ]
