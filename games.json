@@ -89804,6 +89804,17 @@
     "away_score": 5
   },
   {
+    "game_id": "6602958",
+    "winner": "Oregon",
+    "loser": "Washington",
+    "location": "home",
+    "date": "2026-05-23",
+    "home_team": "Oregon",
+    "away_team": "Washington",
+    "home_score": 9,
+    "away_score": 4
+  },
+  {
     "game_id": "6603304",
     "winner": "Longwood",
     "loser": "Winthrop",
