@@ -89912,5 +89912,27 @@
     "away_team": "San Francisco",
     "home_score": 7,
     "away_score": 6
+  },
+  {
+    "game_id": "6603515",
+    "winner": "Southern Miss.",
+    "loser": "Troy",
+    "location": "home",
+    "date": "2026-05-24",
+    "home_team": "Southern Miss.",
+    "away_team": "Troy",
+    "home_score": 6,
+    "away_score": 2
+  },
+  {
+    "game_id": "6603519",
+    "winner": "VCU",
+    "loser": "Rhode Island",
+    "location": "away",
+    "date": "2026-05-24",
+    "home_team": "Rhode Island",
+    "away_team": "VCU",
+    "home_score": 1,
+    "away_score": 9
   }
 ]
