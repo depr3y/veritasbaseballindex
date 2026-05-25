@@ -89967,5 +89967,16 @@
     "away_team": "Northeastern",
     "home_score": 2,
     "away_score": 3
+  },
+  {
+    "game_id": "6603526",
+    "winner": "USC Upstate",
+    "loser": "Longwood",
+    "location": "home",
+    "date": "2026-05-24",
+    "home_team": "USC Upstate",
+    "away_team": "Longwood",
+    "home_score": 8,
+    "away_score": 1
   }
 ]
