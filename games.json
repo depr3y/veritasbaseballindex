@@ -89934,5 +89934,38 @@
     "away_team": "VCU",
     "home_score": 1,
     "away_score": 9
+  },
+  {
+    "game_id": "6603513",
+    "winner": "Little Rock",
+    "loser": "Eastern Ill.",
+    "location": "home",
+    "date": "2026-05-24",
+    "home_team": "Little Rock",
+    "away_team": "Eastern Ill.",
+    "home_score": 10,
+    "away_score": 6
+  },
+  {
+    "game_id": "6603527",
+    "winner": "Cal Poly",
+    "loser": "UC San Diego",
+    "location": "home",
+    "date": "2026-05-24",
+    "home_team": "Cal Poly",
+    "away_team": "UC San Diego",
+    "home_score": 4,
+    "away_score": 3
+  },
+  {
+    "game_id": "6603522",
+    "winner": "Northeastern",
+    "loser": "Campbell",
+    "location": "away",
+    "date": "2026-05-24",
+    "home_team": "Campbell",
+    "away_team": "Northeastern",
+    "home_score": 2,
+    "away_score": 3
   }
 ]
