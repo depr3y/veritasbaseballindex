@@ -89978,5 +89978,16 @@
     "away_team": "Longwood",
     "home_score": 8,
     "away_score": 1
+  },
+  {
+    "game_id": "6603529",
+    "winner": "Washington St.",
+    "loser": "San Diego St.",
+    "location": "home",
+    "date": "2026-05-24",
+    "home_team": "Washington St.",
+    "away_team": "San Diego St.",
+    "home_score": 14,
+    "away_score": 4
   }
 ]
