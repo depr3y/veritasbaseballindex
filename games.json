@@ -90123,6 +90123,17 @@
     "away_score": 3
   },
   {
+    "game_id": "6599699",
+    "winner": "St. John's (NY)",
+    "loser": "Florida St.",
+    "location": "away",
+    "date": "2026-05-29",
+    "home_team": "Florida St.",
+    "away_team": "St. John's (NY)",
+    "home_score": 5,
+    "away_score": 6
+  },
+  {
     "game_id": "6599721",
     "winner": "Washington St.",
     "loser": "Oregon St.",
@@ -90174,19 +90185,30 @@
     "date": "2026-05-29",
     "home_team": "North Carolina",
     "away_team": "VCU",
-    "home_score": 4,
+    "home_score": 8,
     "away_score": 0
   },
   {
-    "game_id": "6599734",
-    "winner": "Georgia",
-    "loser": "LIU",
+    "game_id": "6599651",
+    "winner": "Miami (FL)",
+    "loser": "Troy",
     "location": "home",
     "date": "2026-05-29",
-    "home_team": "Georgia",
-    "away_team": "LIU",
-    "home_score": 15,
-    "away_score": 1
+    "home_team": "Miami (FL)",
+    "away_team": "Troy",
+    "home_score": 10,
+    "away_score": 5
+  },
+  {
+    "game_id": "6599679",
+    "winner": "UCF",
+    "loser": "NC State",
+    "location": "home",
+    "date": "2026-05-29",
+    "home_team": "UCF",
+    "away_team": "NC State",
+    "home_score": 9,
+    "away_score": 3
   },
   {
     "game_id": "6599693",
@@ -90196,8 +90218,8 @@
     "date": "2026-05-29",
     "home_team": "Arkansas",
     "away_team": "Missouri St.",
-    "home_score": 4,
-    "away_score": 3
+    "home_score": 9,
+    "away_score": 5
   },
   {
     "game_id": "6599714",
@@ -90207,8 +90229,8 @@
     "date": "2026-05-29",
     "home_team": "UC Santa Barbara",
     "away_team": "Tarleton St.",
-    "home_score": 1,
-    "away_score": 5
+    "home_score": 5,
+    "away_score": 11
   },
   {
     "game_id": "6599644",
@@ -90218,8 +90240,8 @@
     "date": "2026-05-29",
     "home_team": "Virginia",
     "away_team": "Jacksonville St.",
-    "home_score": 0,
-    "away_score": 4
+    "home_score": 7,
+    "away_score": 15
   },
   {
     "game_id": "6599706",
@@ -90229,7 +90251,84 @@
     "date": "2026-05-29",
     "home_team": "Alabama",
     "away_team": "Alabama St.",
-    "home_score": 3,
+    "home_score": 21,
+    "away_score": 3
+  },
+  {
+    "game_id": "6599728",
+    "winner": "Cincinnati",
+    "loser": "Louisiana",
+    "location": "home",
+    "date": "2026-05-29",
+    "home_team": "Cincinnati",
+    "away_team": "Louisiana",
+    "home_score": 12,
     "away_score": 2
+  },
+  {
+    "game_id": "6599630",
+    "winner": "Cal Poly",
+    "loser": "Virginia Tech",
+    "location": "away",
+    "date": "2026-05-29",
+    "home_team": "Virginia Tech",
+    "away_team": "Cal Poly",
+    "home_score": 2,
+    "away_score": 6
+  },
+  {
+    "game_id": "6599700",
+    "winner": "NIU",
+    "loser": "Coastal Carolina",
+    "location": "away",
+    "date": "2026-05-29",
+    "home_team": "Coastal Carolina",
+    "away_team": "NIU",
+    "home_score": 10,
+    "away_score": 12
+  },
+  {
+    "game_id": "6599720",
+    "winner": "Oregon",
+    "loser": "Yale",
+    "location": "home",
+    "date": "2026-05-29",
+    "home_team": "Oregon",
+    "away_team": "Yale",
+    "home_score": 14,
+    "away_score": 2
+  },
+  {
+    "game_id": "6599665",
+    "winner": "Texas St.",
+    "loser": "Southern California",
+    "location": "away",
+    "date": "2026-05-29",
+    "home_team": "Southern California",
+    "away_team": "Texas St.",
+    "home_score": 4,
+    "away_score": 5
+  },
+  {
+    "game_id": "6599672",
+    "winner": "Ole Miss",
+    "loser": "Arizona St.",
+    "location": "home",
+    "date": "2026-05-29",
+    "home_team": "Ole Miss",
+    "away_team": "Arizona St.",
+    "home_score": 7,
+    "away_score": 6
+  },
+  {
+    "game_id": "6599734",
+    "winner": "Georgia",
+    "loser": "LIU",
+    "location": "home",
+    "date": "2026-05-30",
+    "home_team": "Georgia",
+    "away_team": "LIU",
+    "home_score": 15,
+    "away_score": 1
   }
 ]
