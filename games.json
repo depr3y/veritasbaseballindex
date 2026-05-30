@@ -90189,6 +90189,17 @@
     "away_score": 0
   },
   {
+    "game_id": "6603549",
+    "winner": "Georgia",
+    "loser": "LIU",
+    "location": "home",
+    "date": "2026-05-29",
+    "home_team": "Georgia",
+    "away_team": "LIU",
+    "home_score": 18,
+    "away_score": 2
+  },
+  {
     "game_id": "6599651",
     "winner": "Miami (FL)",
     "loser": "Troy",
@@ -90317,8 +90328,30 @@
     "date": "2026-05-30",
     "home_team": "Georgia",
     "away_team": "LIU",
-    "home_score": 15,
-    "away_score": 1
+    "home_score": 18,
+    "away_score": 2
+  },
+  {
+    "game_id": "6599686",
+    "winner": "Oklahoma",
+    "loser": "The Citadel",
+    "location": "home",
+    "date": "2026-05-30",
+    "home_team": "Oklahoma",
+    "away_team": "The Citadel",
+    "home_score": 7,
+    "away_score": 3
+  },
+  {
+    "game_id": "6599639",
+    "winner": "Wake Forest",
+    "loser": "Binghamton",
+    "location": "away",
+    "date": "2026-05-30",
+    "home_team": "Binghamton",
+    "away_team": "Wake Forest",
+    "home_score": 0,
+    "away_score": 2
   },
   {
     "game_id": "6599679",
@@ -90330,5 +90363,16 @@
     "away_team": "NC State",
     "home_score": 9,
     "away_score": 3
+  },
+  {
+    "game_id": "6599737",
+    "winner": "Boston College",
+    "loser": "LIU",
+    "location": "away",
+    "date": "2026-05-30",
+    "home_team": "LIU",
+    "away_team": "Boston College",
+    "home_score": 0,
+    "away_score": 4
   }
 ]
