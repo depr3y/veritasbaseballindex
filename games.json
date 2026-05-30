@@ -90200,17 +90200,6 @@
     "away_score": 5
   },
   {
-    "game_id": "6599679",
-    "winner": "UCF",
-    "loser": "NC State",
-    "location": "home",
-    "date": "2026-05-29",
-    "home_team": "UCF",
-    "away_team": "NC State",
-    "home_score": 9,
-    "away_score": 3
-  },
-  {
     "game_id": "6599693",
     "winner": "Arkansas",
     "loser": "Missouri St.",
@@ -90330,5 +90319,16 @@
     "away_team": "LIU",
     "home_score": 15,
     "away_score": 1
+  },
+  {
+    "game_id": "6599679",
+    "winner": "UCF",
+    "loser": "NC State",
+    "location": "home",
+    "date": "2026-05-30",
+    "home_team": "UCF",
+    "away_team": "NC State",
+    "home_score": 9,
+    "away_score": 3
   }
 ]
