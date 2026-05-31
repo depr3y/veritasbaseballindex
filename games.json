@@ -90629,17 +90629,6 @@
     "away_score": 10
   },
   {
-    "game_id": "6599673",
-    "winner": "Ole Miss",
-    "loser": "Nebraska",
-    "location": "away",
-    "date": "2026-05-30",
-    "home_team": "Nebraska",
-    "away_team": "Ole Miss",
-    "home_score": 3,
-    "away_score": 6
-  },
-  {
     "game_id": "6599680",
     "winner": "Milwaukee",
     "loser": "UCF",
@@ -90715,5 +90704,16 @@
     "away_team": "Coastal Carolina",
     "home_score": 2,
     "away_score": 1
+  },
+  {
+    "game_id": "6599673",
+    "winner": "Ole Miss",
+    "loser": "Nebraska",
+    "location": "away",
+    "date": "2026-05-31",
+    "home_team": "Nebraska",
+    "away_team": "Ole Miss",
+    "home_score": 3,
+    "away_score": 6
   }
 ]
