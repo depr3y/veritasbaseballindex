@@ -91109,7 +91109,51 @@
     "date": "2026-06-01",
     "home_team": "Oklahoma",
     "away_team": "Georgia Tech",
+    "home_score": 8,
+    "away_score": 7
+  },
+  {
+    "game_id": "6599642",
+    "winner": "West Virginia",
+    "loser": "Kentucky",
+    "location": "home",
+    "date": "2026-06-01",
+    "home_team": "West Virginia",
+    "away_team": "Kentucky",
+    "home_score": 6,
+    "away_score": 5
+  },
+  {
+    "game_id": "6599656",
+    "winner": "Troy",
+    "loser": "Florida",
+    "location": "away",
+    "date": "2026-06-01",
+    "home_team": "Florida",
+    "away_team": "Troy",
     "home_score": 2,
-    "away_score": 0
+    "away_score": 10
+  },
+  {
+    "game_id": "6599670",
+    "winner": "Southern California",
+    "loser": "Texas A&M",
+    "location": "away",
+    "date": "2026-06-01",
+    "home_team": "Texas A&M",
+    "away_team": "Southern California",
+    "home_score": 1,
+    "away_score": 7
+  },
+  {
+    "game_id": "6599684",
+    "winner": "Auburn",
+    "loser": "Milwaukee",
+    "location": "home",
+    "date": "2026-06-01",
+    "home_team": "Auburn",
+    "away_team": "Milwaukee",
+    "home_score": 8,
+    "away_score": 3
   }
 ]
