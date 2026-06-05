@@ -91164,7 +91164,29 @@
     "date": "2026-06-05",
     "home_team": "West Virginia",
     "away_team": "Cal Poly",
-    "home_score": 11,
+    "home_score": 12,
+    "away_score": 2
+  },
+  {
+    "game_id": "6599747",
+    "winner": "Southern California",
+    "loser": "North Carolina",
+    "location": "away",
+    "date": "2026-06-05",
+    "home_team": "North Carolina",
+    "away_team": "Southern California",
+    "home_score": 5,
+    "away_score": 9
+  },
+  {
+    "game_id": "6599744",
+    "winner": "Troy",
+    "loser": "Little Rock",
+    "location": "home",
+    "date": "2026-06-05",
+    "home_team": "Troy",
+    "away_team": "Little Rock",
+    "home_score": 6,
     "away_score": 2
   }
 ]
