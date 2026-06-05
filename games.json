@@ -91155,5 +91155,16 @@
     "away_team": "Milwaukee",
     "home_score": 8,
     "away_score": 3
+  },
+  {
+    "game_id": "6599741",
+    "winner": "West Virginia",
+    "loser": "Cal Poly",
+    "location": "home",
+    "date": "2026-06-05",
+    "home_team": "West Virginia",
+    "away_team": "Cal Poly",
+    "home_score": 11,
+    "away_score": 2
   }
 ]
