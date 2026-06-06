@@ -91199,5 +91199,49 @@
     "away_team": "Ole Miss",
     "home_score": 4,
     "away_score": 6
+  },
+  {
+    "game_id": "6599762",
+    "winner": "Georgia",
+    "loser": "Mississippi St.",
+    "location": "home",
+    "date": "2026-06-06",
+    "home_team": "Georgia",
+    "away_team": "Mississippi St.",
+    "home_score": 13,
+    "away_score": 12
+  },
+  {
+    "game_id": "6599742",
+    "winner": "West Virginia",
+    "loser": "Cal Poly",
+    "location": "away",
+    "date": "2026-06-06",
+    "home_team": "Cal Poly",
+    "away_team": "West Virginia",
+    "home_score": 1,
+    "away_score": 17
+  },
+  {
+    "game_id": "6599748",
+    "winner": "North Carolina",
+    "loser": "Southern California",
+    "location": "away",
+    "date": "2026-06-06",
+    "home_team": "Southern California",
+    "away_team": "North Carolina",
+    "home_score": 0,
+    "away_score": 4
+  },
+  {
+    "game_id": "6599745",
+    "winner": "Troy",
+    "loser": "Little Rock",
+    "location": "away",
+    "date": "2026-06-06",
+    "home_team": "Little Rock",
+    "away_team": "Troy",
+    "home_score": 1,
+    "away_score": 4
   }
 ]
