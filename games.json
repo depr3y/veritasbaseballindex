@@ -91287,5 +91287,16 @@
     "away_team": "St. John's (NY)",
     "home_score": 8,
     "away_score": 0
+  },
+  {
+    "game_id": "6599763",
+    "winner": "Georgia",
+    "loser": "Mississippi St.",
+    "location": "away",
+    "date": "2026-06-07",
+    "home_team": "Mississippi St.",
+    "away_team": "Georgia",
+    "home_score": 2,
+    "away_score": 6
   }
 ]
