@@ -91301,13 +91301,13 @@
   },
   {
     "game_id": "6599749",
-    "winner": "Southern California",
-    "loser": "North Carolina",
-    "location": "away",
+    "winner": "North Carolina",
+    "loser": "Southern California",
+    "location": "home",
     "date": "2026-06-07",
     "home_team": "North Carolina",
     "away_team": "Southern California",
-    "home_score": 1,
+    "home_score": 4,
     "away_score": 3
   },
   {
@@ -91318,7 +91318,7 @@
     "date": "2026-06-07",
     "home_team": "St. John's (NY)",
     "away_team": "Alabama",
-    "home_score": 0,
-    "away_score": 2
+    "home_score": 2,
+    "away_score": 3
   }
 ]
