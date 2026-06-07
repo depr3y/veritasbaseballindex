@@ -91296,7 +91296,29 @@
     "date": "2026-06-07",
     "home_team": "Mississippi St.",
     "away_team": "Georgia",
-    "home_score": 7,
-    "away_score": 8
+    "home_score": 9,
+    "away_score": 11
+  },
+  {
+    "game_id": "6599749",
+    "winner": "Southern California",
+    "loser": "North Carolina",
+    "location": "away",
+    "date": "2026-06-07",
+    "home_team": "North Carolina",
+    "away_team": "Southern California",
+    "home_score": 1,
+    "away_score": 3
+  },
+  {
+    "game_id": "6599757",
+    "winner": "Alabama",
+    "loser": "St. John's (NY)",
+    "location": "away",
+    "date": "2026-06-07",
+    "home_team": "St. John's (NY)",
+    "away_team": "Alabama",
+    "home_score": 0,
+    "away_score": 2
   }
 ]
