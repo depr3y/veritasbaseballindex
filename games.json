@@ -91322,6 +91322,17 @@
     "away_score": 7
   },
   {
+    "game_id": "6603588",
+    "winner": "Oklahoma",
+    "loser": "Kansas",
+    "location": "home",
+    "date": "2026-06-07",
+    "home_team": "Oklahoma",
+    "away_team": "Kansas",
+    "home_score": 13,
+    "away_score": 2
+  },
+  {
     "game_id": "6599760",
     "winner": "Texas",
     "loser": "Oregon",
