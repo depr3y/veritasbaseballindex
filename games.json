@@ -91311,6 +91311,17 @@
     "away_score": 3
   },
   {
+    "game_id": "6603587",
+    "winner": "Alabama",
+    "loser": "St. John's (NY)",
+    "location": "away",
+    "date": "2026-06-07",
+    "home_team": "St. John's (NY)",
+    "away_team": "Alabama",
+    "home_score": 2,
+    "away_score": 7
+  },
+  {
     "game_id": "6599760",
     "winner": "Texas",
     "loser": "Oregon",
@@ -91340,7 +91351,7 @@
     "date": "2026-06-08",
     "home_team": "Oklahoma",
     "away_team": "Kansas",
-    "home_score": 8,
-    "away_score": 1
+    "home_score": 13,
+    "away_score": 2
   }
 ]
