@@ -91386,5 +91386,16 @@
     "away_team": "Ole Miss",
     "home_score": 6,
     "away_score": 2
+  },
+  {
+    "game_id": "6599772",
+    "winner": "Oklahoma",
+    "loser": "Alabama",
+    "location": "away",
+    "date": "2026-06-13",
+    "home_team": "Alabama",
+    "away_team": "Oklahoma",
+    "home_score": 0,
+    "away_score": 5
   }
 ]
