@@ -91375,5 +91375,16 @@
     "away_team": "Troy",
     "home_score": 7,
     "away_score": 5
+  },
+  {
+    "game_id": "6599766",
+    "winner": "Ole Miss",
+    "loser": "North Carolina",
+    "location": "away",
+    "date": "2026-06-12",
+    "home_team": "North Carolina",
+    "away_team": "Ole Miss",
+    "home_score": 0,
+    "away_score": 1
   }
 ]
