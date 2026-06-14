@@ -91419,5 +91419,16 @@
     "away_team": "Troy",
     "home_score": 8,
     "away_score": 12
+  },
+  {
+    "game_id": "6599767",
+    "winner": "North Carolina",
+    "loser": "West Virginia",
+    "location": "home",
+    "date": "2026-06-14",
+    "home_team": "North Carolina",
+    "away_team": "West Virginia",
+    "home_score": 2,
+    "away_score": 1
   }
 ]
