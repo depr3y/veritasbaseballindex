@@ -91397,5 +91397,16 @@
     "away_team": "Oklahoma",
     "home_score": 0,
     "away_score": 9
+  },
+  {
+    "game_id": "6599773",
+    "winner": "Georgia",
+    "loser": "Texas",
+    "location": "home",
+    "date": "2026-06-13",
+    "home_team": "Georgia",
+    "away_team": "Texas",
+    "home_score": 4,
+    "away_score": 1
   }
 ]
