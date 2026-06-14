@@ -91411,13 +91411,13 @@
   },
   {
     "game_id": "6599768",
-    "winner": "Ole Miss",
-    "loser": "Troy",
-    "location": "home",
+    "winner": "Troy",
+    "loser": "Ole Miss",
+    "location": "away",
     "date": "2026-06-14",
     "home_team": "Ole Miss",
     "away_team": "Troy",
-    "home_score": 4,
-    "away_score": 2
+    "home_score": 6,
+    "away_score": 9
   }
 ]
