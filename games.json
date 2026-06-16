@@ -91441,5 +91441,16 @@
     "away_team": "Alabama",
     "home_score": 14,
     "away_score": 2
+  },
+  {
+    "game_id": "6599774",
+    "winner": "Oklahoma",
+    "loser": "Georgia",
+    "location": "home",
+    "date": "2026-06-15",
+    "home_team": "Oklahoma",
+    "away_team": "Georgia",
+    "home_score": 3,
+    "away_score": 1
   }
 ]
