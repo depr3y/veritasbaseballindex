@@ -91474,5 +91474,16 @@
     "away_team": "Georgia",
     "home_score": 0,
     "away_score": 2
+  },
+  {
+    "game_id": "6599770",
+    "winner": "North Carolina",
+    "loser": "West Virginia",
+    "location": "away",
+    "date": "2026-06-17",
+    "home_team": "West Virginia",
+    "away_team": "North Carolina",
+    "home_score": 1,
+    "away_score": 10
   }
 ]

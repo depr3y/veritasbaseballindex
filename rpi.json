@@ -2,25 +2,25 @@
   "updated": "2026-06-17",
   "source": "calculated from games.json (NCAA location-weighted RPI formula)",
   "teams": {
-    "UCLA": {
-      "rpi_rank": 1,
-      "rpi_score": 0.614
-    },
     "North Carolina": {
+      "rpi_rank": 1,
+      "rpi_score": 0.61648
+    },
+    "UCLA": {
       "rpi_rank": 2,
-      "rpi_score": 0.61378
+      "rpi_score": 0.61399
     },
     "Georgia": {
       "rpi_rank": 3,
-      "rpi_score": 0.60641
+      "rpi_score": 0.6064
     },
     "Auburn": {
       "rpi_rank": 4,
-      "rpi_score": 0.60255
+      "rpi_score": 0.60254
     },
     "Georgia Tech": {
       "rpi_rank": 5,
-      "rpi_score": 0.59932
+      "rpi_score": 0.59947
     },
     "Texas": {
       "rpi_rank": 6,
@@ -28,11 +28,11 @@
     },
     "Florida": {
       "rpi_rank": 7,
-      "rpi_score": 0.59466
+      "rpi_score": 0.59465
     },
     "Alabama": {
       "rpi_rank": 8,
-      "rpi_score": 0.5899
+      "rpi_score": 0.58989
     },
     "Oregon St.": {
       "rpi_rank": 9,
@@ -44,35 +44,35 @@
     },
     "Texas A&M": {
       "rpi_rank": 11,
-      "rpi_score": 0.58219
+      "rpi_score": 0.58218
     },
     "Ole Miss": {
       "rpi_rank": 12,
-      "rpi_score": 0.57922
+      "rpi_score": 0.57925
     },
     "Southern California": {
       "rpi_rank": 13,
-      "rpi_score": 0.57765
+      "rpi_score": 0.57777
     },
     "Oklahoma": {
       "rpi_rank": 14,
-      "rpi_score": 0.57741
+      "rpi_score": 0.5774
     },
     "West Virginia": {
       "rpi_rank": 15,
-      "rpi_score": 0.57578
+      "rpi_score": 0.57623
     },
     "Southern Miss.": {
       "rpi_rank": 16,
-      "rpi_score": 0.57473
+      "rpi_score": 0.57472
     },
     "Florida St.": {
       "rpi_rank": 17,
-      "rpi_score": 0.5732
+      "rpi_score": 0.57321
     },
     "Arkansas": {
       "rpi_rank": 18,
-      "rpi_score": 0.57246
+      "rpi_score": 0.57245
     },
     "Oregon": {
       "rpi_rank": 19,
@@ -82,17 +82,17 @@
       "rpi_rank": 20,
       "rpi_score": 0.56327
     },
-    "Kansas": {
-      "rpi_rank": 21,
-      "rpi_score": 0.55763
-    },
     "UC Santa Barbara": {
-      "rpi_rank": 22,
+      "rpi_rank": 21,
       "rpi_score": 0.55757
+    },
+    "Kansas": {
+      "rpi_rank": 22,
+      "rpi_score": 0.55744
     },
     "Liberty": {
       "rpi_rank": 23,
-      "rpi_score": 0.55654
+      "rpi_score": 0.55639
     },
     "Tennessee": {
       "rpi_rank": 24,
@@ -100,59 +100,59 @@
     },
     "Virginia": {
       "rpi_rank": 25,
-      "rpi_score": 0.55169
+      "rpi_score": 0.55184
     },
     "Cincinnati": {
       "rpi_rank": 26,
-      "rpi_score": 0.55128
+      "rpi_score": 0.55107
     },
     "Wake Forest": {
       "rpi_rank": 27,
-      "rpi_score": 0.55107
+      "rpi_score": 0.55104
     },
     "Coastal Carolina": {
       "rpi_rank": 28,
-      "rpi_score": 0.55037
+      "rpi_score": 0.55041
     },
     "Jacksonville St.": {
       "rpi_rank": 29,
-      "rpi_score": 0.54894
+      "rpi_score": 0.54892
     },
     "Campbell": {
       "rpi_rank": 30,
-      "rpi_score": 0.54848
+      "rpi_score": 0.54854
     },
     "Troy": {
       "rpi_rank": 31,
-      "rpi_score": 0.54706
+      "rpi_score": 0.54696
     },
     "Oklahoma St.": {
       "rpi_rank": 32,
-      "rpi_score": 0.54388
+      "rpi_score": 0.54383
     },
     "Miami (FL)": {
       "rpi_rank": 33,
-      "rpi_score": 0.54349
+      "rpi_score": 0.5435
     },
     "Boston College": {
       "rpi_rank": 34,
-      "rpi_score": 0.54279
-    },
-    "Texas St.": {
-      "rpi_rank": 35,
-      "rpi_score": 0.54192
+      "rpi_score": 0.54295
     },
     "East Carolina": {
+      "rpi_rank": 35,
+      "rpi_score": 0.54194
+    },
+    "Texas St.": {
       "rpi_rank": 36,
-      "rpi_score": 0.54173
+      "rpi_score": 0.5419
     },
     "Kentucky": {
       "rpi_rank": 37,
-      "rpi_score": 0.54165
+      "rpi_score": 0.54148
     },
     "Arizona St.": {
       "rpi_rank": 38,
-      "rpi_score": 0.5413
+      "rpi_score": 0.54109
     },
     "Kent St.": {
       "rpi_rank": 39,
@@ -160,11 +160,11 @@
     },
     "Mercer": {
       "rpi_rank": 40,
-      "rpi_score": 0.53861
+      "rpi_score": 0.53859
     },
     "UCF": {
       "rpi_rank": 41,
-      "rpi_score": 0.53835
+      "rpi_score": 0.53814
     },
     "California Baptist": {
       "rpi_rank": 42,
@@ -172,23 +172,23 @@
     },
     "Pittsburgh": {
       "rpi_rank": 43,
-      "rpi_score": 0.53594
+      "rpi_score": 0.53607
     },
     "Louisiana": {
       "rpi_rank": 44,
-      "rpi_score": 0.53592
+      "rpi_score": 0.53591
     },
     "Miami (OH)": {
       "rpi_rank": 45,
-      "rpi_score": 0.5358
-    },
-    "Kansas St.": {
-      "rpi_rank": 46,
-      "rpi_score": 0.53271
+      "rpi_score": 0.53579
     },
     "Virginia Tech": {
+      "rpi_rank": 46,
+      "rpi_score": 0.53268
+    },
+    "Kansas St.": {
       "rpi_rank": 47,
-      "rpi_score": 0.53261
+      "rpi_score": 0.53249
     },
     "Tarleton St.": {
       "rpi_rank": 48,
@@ -198,21 +198,21 @@
       "rpi_rank": 49,
       "rpi_score": 0.53064
     },
-    "UAB": {
-      "rpi_rank": 50,
-      "rpi_score": 0.53035
-    },
     "California": {
+      "rpi_rank": 50,
+      "rpi_score": 0.53038
+    },
+    "UAB": {
       "rpi_rank": 51,
-      "rpi_score": 0.53019
+      "rpi_score": 0.53035
     },
     "Missouri St.": {
       "rpi_rank": 52,
-      "rpi_score": 0.53019
+      "rpi_score": 0.53017
     },
     "High Point": {
       "rpi_rank": 53,
-      "rpi_score": 0.53011
+      "rpi_score": 0.53016
     },
     "Michigan": {
       "rpi_rank": 54,
@@ -220,27 +220,27 @@
     },
     "LSU": {
       "rpi_rank": 55,
-      "rpi_score": 0.52912
+      "rpi_score": 0.52911
     },
     "Cal Poly": {
       "rpi_rank": 56,
-      "rpi_score": 0.52715
+      "rpi_score": 0.52705
     },
     "NC State": {
       "rpi_rank": 57,
-      "rpi_score": 0.52648
+      "rpi_score": 0.52664
     },
     "South Alabama": {
       "rpi_rank": 58,
-      "rpi_score": 0.52609
+      "rpi_score": 0.52607
     },
     "TCU": {
       "rpi_rank": 59,
-      "rpi_score": 0.5257
+      "rpi_score": 0.52548
     },
     "Clemson": {
       "rpi_rank": 60,
-      "rpi_score": 0.52483
+      "rpi_score": 0.52499
     },
     "Purdue": {
       "rpi_rank": 61,
@@ -252,7 +252,7 @@
     },
     "Baylor": {
       "rpi_rank": 63,
-      "rpi_score": 0.5237
+      "rpi_score": 0.52347
     },
     "UTSA": {
       "rpi_rank": 64,
@@ -260,11 +260,11 @@
     },
     "Arkansas St.": {
       "rpi_rank": 65,
-      "rpi_score": 0.52208
+      "rpi_score": 0.52207
     },
     "Vanderbilt": {
       "rpi_rank": 66,
-      "rpi_score": 0.52
+      "rpi_score": 0.51998
     },
     "Xavier": {
       "rpi_rank": 67,
@@ -276,7 +276,7 @@
     },
     "Notre Dame": {
       "rpi_rank": 69,
-      "rpi_score": 0.51728
+      "rpi_score": 0.51748
     },
     "Southeastern La.": {
       "rpi_rank": 70,
@@ -284,7 +284,7 @@
     },
     "BYU": {
       "rpi_rank": 71,
-      "rpi_score": 0.51576
+      "rpi_score": 0.51555
     },
     "Gonzaga": {
       "rpi_rank": 72,
@@ -292,7 +292,7 @@
     },
     "Louisiana Tech": {
       "rpi_rank": 73,
-      "rpi_score": 0.51409
+      "rpi_score": 0.51407
     },
     "Northeastern": {
       "rpi_rank": 74,
@@ -300,11 +300,11 @@
     },
     "Saint Joseph's": {
       "rpi_rank": 75,
-      "rpi_score": 0.51362
+      "rpi_score": 0.51363
     },
     "Ohio St.": {
       "rpi_rank": 76,
-      "rpi_score": 0.51358
+      "rpi_score": 0.51357
     },
     "Western Caro.": {
       "rpi_rank": 77,
@@ -312,19 +312,19 @@
     },
     "DBU": {
       "rpi_rank": 78,
-      "rpi_score": 0.5128
+      "rpi_score": 0.51278
     },
     "UNCW": {
       "rpi_rank": 79,
-      "rpi_score": 0.51031
+      "rpi_score": 0.51043
     },
     "South Fla.": {
       "rpi_rank": 80,
-      "rpi_score": 0.51021
+      "rpi_score": 0.5102
     },
     "The Citadel": {
       "rpi_rank": 81,
-      "rpi_score": 0.50968
+      "rpi_score": 0.50967
     },
     "UConn": {
       "rpi_rank": 82,
@@ -332,51 +332,51 @@
     },
     "St. John's (NY)": {
       "rpi_rank": 83,
-      "rpi_score": 0.50689
+      "rpi_score": 0.50688
     },
     "Houston": {
       "rpi_rank": 84,
-      "rpi_score": 0.50568
+      "rpi_score": 0.50545
     },
     "Minnesota": {
       "rpi_rank": 85,
-      "rpi_score": 0.5053
+      "rpi_score": 0.50529
     },
     "Duke": {
       "rpi_rank": 86,
-      "rpi_score": 0.50487
+      "rpi_score": 0.50508
     },
     "Washington St.": {
       "rpi_rank": 87,
-      "rpi_score": 0.50458
+      "rpi_score": 0.50457
     },
     "Samford": {
       "rpi_rank": 88,
-      "rpi_score": 0.50439
+      "rpi_score": 0.50438
     },
     "Stanford": {
       "rpi_rank": 89,
-      "rpi_score": 0.5042
+      "rpi_score": 0.50422
     },
     "Old Dominion": {
       "rpi_rank": 90,
-      "rpi_score": 0.50388
+      "rpi_score": 0.50387
     },
     "Lamar University": {
       "rpi_rank": 91,
-      "rpi_score": 0.50336
-    },
-    "Maryland": {
-      "rpi_rank": 92,
-      "rpi_score": 0.50267
+      "rpi_score": 0.50335
     },
     "Louisville": {
+      "rpi_rank": 92,
+      "rpi_score": 0.50265
+    },
+    "Maryland": {
       "rpi_rank": 93,
-      "rpi_score": 0.5025
+      "rpi_score": 0.50262
     },
     "Charlotte": {
       "rpi_rank": 94,
-      "rpi_score": 0.50234
+      "rpi_score": 0.5024
     },
     "Cal St. Fullerton": {
       "rpi_rank": 95,
@@ -388,7 +388,7 @@
     },
     "Kennesaw St.": {
       "rpi_rank": 97,
-      "rpi_score": 0.50002
+      "rpi_score": 0.49983
     },
     "UC Irvine": {
       "rpi_rank": 98,
@@ -400,7 +400,7 @@
     },
     "VCU": {
       "rpi_rank": 100,
-      "rpi_score": 0.49928
+      "rpi_score": 0.49939
     },
     "Little Rock": {
       "rpi_rank": 101,
@@ -412,7 +412,7 @@
     },
     "UTRGV": {
       "rpi_rank": 103,
-      "rpi_score": 0.4977
+      "rpi_score": 0.49768
     },
     "Eastern Ill.": {
       "rpi_rank": 104,
@@ -424,7 +424,7 @@
     },
     "Richmond": {
       "rpi_rank": 106,
-      "rpi_score": 0.49609
+      "rpi_score": 0.49614
     },
     "Creighton": {
       "rpi_rank": 107,
@@ -452,39 +452,39 @@
     },
     "McNeese": {
       "rpi_rank": 113,
-      "rpi_score": 0.49216
+      "rpi_score": 0.49215
     },
     "Utah": {
       "rpi_rank": 114,
-      "rpi_score": 0.49135
+      "rpi_score": 0.49128
     },
     "Col. of Charleston": {
       "rpi_rank": 115,
-      "rpi_score": 0.49126
-    },
-    "Texas Tech": {
-      "rpi_rank": 116,
-      "rpi_score": 0.49125
+      "rpi_score": 0.49127
     },
     "Memphis": {
+      "rpi_rank": 116,
+      "rpi_score": 0.49116
+    },
+    "Texas Tech": {
       "rpi_rank": 117,
-      "rpi_score": 0.49115
+      "rpi_score": 0.49103
     },
     "UC San Diego": {
       "rpi_rank": 118,
-      "rpi_score": 0.4909
+      "rpi_score": 0.49088
     },
     "Michigan St.": {
       "rpi_rank": 119,
-      "rpi_score": 0.49083
+      "rpi_score": 0.49084
     },
     "App State": {
       "rpi_rank": 120,
-      "rpi_score": 0.49041
+      "rpi_score": 0.49039
     },
     "Winthrop": {
       "rpi_rank": 121,
-      "rpi_score": 0.48898
+      "rpi_score": 0.48899
     },
     "ETSU": {
       "rpi_rank": 122,
@@ -514,17 +514,17 @@
       "rpi_rank": 128,
       "rpi_score": 0.48557
     },
-    "Western Ky.": {
-      "rpi_rank": 129,
-      "rpi_score": 0.48546
-    },
     "South Carolina": {
-      "rpi_rank": 130,
-      "rpi_score": 0.48545
+      "rpi_rank": 129,
+      "rpi_score": 0.4855
     },
     "UNC Greensboro": {
+      "rpi_rank": 130,
+      "rpi_score": 0.48544
+    },
+    "Western Ky.": {
       "rpi_rank": 131,
-      "rpi_score": 0.4854
+      "rpi_score": 0.48544
     },
     "Portland": {
       "rpi_rank": 132,
@@ -532,7 +532,7 @@
     },
     "Georgia St.": {
       "rpi_rank": 133,
-      "rpi_score": 0.48391
+      "rpi_score": 0.4839
     },
     "Wright St.": {
       "rpi_rank": 134,
@@ -540,7 +540,7 @@
     },
     "Morehead St.": {
       "rpi_rank": 135,
-      "rpi_score": 0.48284
+      "rpi_score": 0.48283
     },
     "Nicholls": {
       "rpi_rank": 136,
@@ -560,7 +560,7 @@
     },
     "Indiana": {
       "rpi_rank": 140,
-      "rpi_score": 0.4812
+      "rpi_score": 0.48136
     },
     "USC Upstate": {
       "rpi_rank": 141,
@@ -572,7 +572,7 @@
     },
     "Binghamton": {
       "rpi_rank": 143,
-      "rpi_score": 0.481
+      "rpi_score": 0.48094
     },
     "Utah Tech": {
       "rpi_rank": 144,
@@ -584,7 +584,7 @@
     },
     "CSUN": {
       "rpi_rank": 146,
-      "rpi_score": 0.47517
+      "rpi_score": 0.47516
     },
     "Northwestern St.": {
       "rpi_rank": 147,
@@ -592,7 +592,7 @@
     },
     "Arizona": {
       "rpi_rank": 148,
-      "rpi_score": 0.47354
+      "rpi_score": 0.47342
     },
     "Washington": {
       "rpi_rank": 149,
@@ -608,11 +608,11 @@
     },
     "Yale": {
       "rpi_rank": 152,
-      "rpi_score": 0.47133
+      "rpi_score": 0.47132
     },
     "ULM": {
       "rpi_rank": 153,
-      "rpi_score": 0.47119
+      "rpi_score": 0.47118
     },
     "Florida A&M": {
       "rpi_rank": 154,
@@ -620,7 +620,7 @@
     },
     "Northwestern": {
       "rpi_rank": 155,
-      "rpi_score": 0.47002
+      "rpi_score": 0.47003
     },
     "Bethune-Cookman": {
       "rpi_rank": 156,
@@ -628,11 +628,11 @@
     },
     "UT Arlington": {
       "rpi_rank": 157,
-      "rpi_score": 0.46934
+      "rpi_score": 0.46933
     },
     "Longwood": {
       "rpi_rank": 158,
-      "rpi_score": 0.46786
+      "rpi_score": 0.46791
     },
     "North Ala.": {
       "rpi_rank": 159,
@@ -648,7 +648,7 @@
     },
     "Bucknell": {
       "rpi_rank": 162,
-      "rpi_score": 0.46722
+      "rpi_score": 0.46727
     },
     "Oral Roberts": {
       "rpi_rank": 163,
@@ -660,7 +660,7 @@
     },
     "Radford": {
       "rpi_rank": 165,
-      "rpi_score": 0.46636
+      "rpi_score": 0.46637
     },
     "Stony Brook": {
       "rpi_rank": 166,
@@ -672,7 +672,7 @@
     },
     "Air Force": {
       "rpi_rank": 168,
-      "rpi_score": 0.46595
+      "rpi_score": 0.46594
     },
     "Houston Christian": {
       "rpi_rank": 169,
@@ -688,7 +688,7 @@
     },
     "Abilene Christian": {
       "rpi_rank": 172,
-      "rpi_score": 0.46438
+      "rpi_score": 0.46437
     },
     "Central Ark.": {
       "rpi_rank": 173,
@@ -696,7 +696,7 @@
     },
     "Sam Houston": {
       "rpi_rank": 174,
-      "rpi_score": 0.46399
+      "rpi_score": 0.46397
     },
     "UNLV": {
       "rpi_rank": 175,
@@ -720,7 +720,7 @@
     },
     "Stetson": {
       "rpi_rank": 180,
-      "rpi_score": 0.46114
+      "rpi_score": 0.46113
     },
     "Lipscomb": {
       "rpi_rank": 181,
@@ -728,7 +728,7 @@
     },
     "Army West Point": {
       "rpi_rank": 182,
-      "rpi_score": 0.46075
+      "rpi_score": 0.46076
     },
     "San Jose St.": {
       "rpi_rank": 183,
@@ -736,15 +736,15 @@
     },
     "Rhode Island": {
       "rpi_rank": 184,
-      "rpi_score": 0.45924
+      "rpi_score": 0.45925
     },
     "Maine": {
       "rpi_rank": 185,
-      "rpi_score": 0.45908
+      "rpi_score": 0.45909
     },
     "Grand Canyon": {
       "rpi_rank": 186,
-      "rpi_score": 0.45892
+      "rpi_score": 0.45891
     },
     "A&M-Corpus Christi": {
       "rpi_rank": 187,
@@ -762,13 +762,13 @@
       "rpi_rank": 190,
       "rpi_score": 0.45739
     },
-    "Penn St.": {
-      "rpi_rank": 191,
-      "rpi_score": 0.45694
-    },
     "Niagara": {
-      "rpi_rank": 192,
+      "rpi_rank": 191,
       "rpi_score": 0.45691
+    },
+    "Penn St.": {
+      "rpi_rank": 192,
+      "rpi_score": 0.45687
     },
     "Fairfield": {
       "rpi_rank": 193,
@@ -776,11 +776,11 @@
     },
     "Brown": {
       "rpi_rank": 194,
-      "rpi_score": 0.45586
+      "rpi_score": 0.45585
     },
     "Penn": {
       "rpi_rank": 195,
-      "rpi_score": 0.45566
+      "rpi_score": 0.45565
     },
     "Fordham": {
       "rpi_rank": 196,
@@ -788,7 +788,7 @@
     },
     "Marshall": {
       "rpi_rank": 197,
-      "rpi_score": 0.45503
+      "rpi_score": 0.45485
     },
     "New Orleans": {
       "rpi_rank": 198,
@@ -796,19 +796,19 @@
     },
     "Bryant": {
       "rpi_rank": 199,
-      "rpi_score": 0.45423
+      "rpi_score": 0.45422
     },
     "Ga. Southern": {
       "rpi_rank": 200,
-      "rpi_score": 0.45206
+      "rpi_score": 0.45188
     },
     "Murray St.": {
       "rpi_rank": 201,
-      "rpi_score": 0.45127
+      "rpi_score": 0.45126
     },
     "San Diego": {
       "rpi_rank": 202,
-      "rpi_score": 0.45112
+      "rpi_score": 0.45113
     },
     "Merrimack": {
       "rpi_rank": 203,
@@ -836,19 +836,19 @@
     },
     "UMass Lowell": {
       "rpi_rank": 209,
-      "rpi_score": 0.44603
+      "rpi_score": 0.44602
     },
     "William & Mary": {
       "rpi_rank": 210,
-      "rpi_score": 0.4459
+      "rpi_score": 0.44591
     },
     "UIW": {
       "rpi_rank": 211,
-      "rpi_score": 0.44583
+      "rpi_score": 0.44582
     },
     "Austin Peay": {
       "rpi_rank": 212,
-      "rpi_score": 0.44549
+      "rpi_score": 0.44548
     },
     "Davidson": {
       "rpi_rank": 213,
@@ -856,7 +856,7 @@
     },
     "Columbia": {
       "rpi_rank": 214,
-      "rpi_score": 0.44446
+      "rpi_score": 0.44421
     },
     "Towson": {
       "rpi_rank": 215,
@@ -864,7 +864,7 @@
     },
     "FIU": {
       "rpi_rank": 216,
-      "rpi_score": 0.44396
+      "rpi_score": 0.44395
     },
     "CSU Bakersfield": {
       "rpi_rank": 217,
@@ -872,11 +872,11 @@
     },
     "Evansville": {
       "rpi_rank": 218,
-      "rpi_score": 0.44346
+      "rpi_score": 0.44344
     },
     "Long Beach St.": {
       "rpi_rank": 219,
-      "rpi_score": 0.44247
+      "rpi_score": 0.44246
     },
     "Southern Ill.": {
       "rpi_rank": 220,
@@ -892,19 +892,19 @@
     },
     "Holy Cross": {
       "rpi_rank": 223,
-      "rpi_score": 0.44103
-    },
-    "Bowling Green": {
-      "rpi_rank": 224,
-      "rpi_score": 0.44103
+      "rpi_score": 0.44104
     },
     "LIU": {
+      "rpi_rank": 224,
+      "rpi_score": 0.44104
+    },
+    "Bowling Green": {
       "rpi_rank": 225,
       "rpi_score": 0.44103
     },
     "Elon": {
       "rpi_rank": 226,
-      "rpi_score": 0.44089
+      "rpi_score": 0.44095
     },
     "VMI": {
       "rpi_rank": 227,
@@ -916,11 +916,11 @@
     },
     "Middle Tenn.": {
       "rpi_rank": 229,
-      "rpi_score": 0.43779
+      "rpi_score": 0.43777
     },
     "Gardner-Webb": {
       "rpi_rank": 230,
-      "rpi_score": 0.43775
+      "rpi_score": 0.43776
     },
     "Georgetown": {
       "rpi_rank": 231,
@@ -928,7 +928,7 @@
     },
     "New Mexico St.": {
       "rpi_rank": 232,
-      "rpi_score": 0.43676
+      "rpi_score": 0.43674
     },
     "Marist": {
       "rpi_rank": 233,
@@ -948,15 +948,15 @@
     },
     "Butler": {
       "rpi_rank": 237,
-      "rpi_score": 0.43491
+      "rpi_score": 0.4349
     },
     "Harvard": {
       "rpi_rank": 238,
-      "rpi_score": 0.43256
+      "rpi_score": 0.43254
     },
     "UIC": {
       "rpi_rank": 239,
-      "rpi_score": 0.43233
+      "rpi_score": 0.43234
     },
     "Belmont": {
       "rpi_rank": 240,
@@ -968,7 +968,7 @@
     },
     "Saint Louis": {
       "rpi_rank": 242,
-      "rpi_score": 0.42865
+      "rpi_score": 0.42866
     },
     "Seattle U": {
       "rpi_rank": 243,
@@ -992,7 +992,7 @@
     },
     "Tennessee Tech": {
       "rpi_rank": 248,
-      "rpi_score": 0.42702
+      "rpi_score": 0.42701
     },
     "Eastern Mich.": {
       "rpi_rank": 249,
@@ -1000,7 +1000,7 @@
     },
     "N.C. A&T": {
       "rpi_rank": 250,
-      "rpi_score": 0.42549
+      "rpi_score": 0.42556
     },
     "Ark.-Pine Bluff": {
       "rpi_rank": 251,
@@ -1008,15 +1008,15 @@
     },
     "UC Riverside": {
       "rpi_rank": 252,
-      "rpi_score": 0.42404
+      "rpi_score": 0.42403
     },
     "Queens (NC)": {
       "rpi_rank": 253,
-      "rpi_score": 0.42335
+      "rpi_score": 0.42336
     },
     "Delaware": {
       "rpi_rank": 254,
-      "rpi_score": 0.423
+      "rpi_score": 0.42298
     },
     "Sacred Heart": {
       "rpi_rank": 255,
@@ -1024,7 +1024,7 @@
     },
     "Omaha": {
       "rpi_rank": 256,
-      "rpi_score": 0.42162
+      "rpi_score": 0.42161
     },
     "Iona": {
       "rpi_rank": 257,
@@ -1048,7 +1048,7 @@
     },
     "Le Moyne": {
       "rpi_rank": 262,
-      "rpi_score": 0.41778
+      "rpi_score": 0.41797
     },
     "Akron": {
       "rpi_rank": 263,
@@ -1056,7 +1056,7 @@
     },
     "UNC Asheville": {
       "rpi_rank": 264,
-      "rpi_score": 0.41683
+      "rpi_score": 0.41684
     },
     "Bellarmine": {
       "rpi_rank": 265,
@@ -1068,7 +1068,7 @@
     },
     "West Ga.": {
       "rpi_rank": 267,
-      "rpi_score": 0.41529
+      "rpi_score": 0.41528
     },
     "Western Ill.": {
       "rpi_rank": 268,
@@ -1080,7 +1080,7 @@
     },
     "Utah Valley": {
       "rpi_rank": 270,
-      "rpi_score": 0.41037
+      "rpi_score": 0.41036
     },
     "Northern Ky.": {
       "rpi_rank": 271,
@@ -1088,7 +1088,7 @@
     },
     "Manhattan": {
       "rpi_rank": 272,
-      "rpi_score": 0.40993
+      "rpi_score": 0.40992
     },
     "George Washington": {
       "rpi_rank": 273,
@@ -1096,7 +1096,7 @@
     },
     "Cornell": {
       "rpi_rank": 274,
-      "rpi_score": 0.40907
+      "rpi_score": 0.40906
     },
     "La Salle": {
       "rpi_rank": 275,
@@ -1104,7 +1104,7 @@
     },
     "Dartmouth": {
       "rpi_rank": 276,
-      "rpi_score": 0.40734
+      "rpi_score": 0.40733
     },
     "Presbyterian": {
       "rpi_rank": 277,
@@ -1112,7 +1112,7 @@
     },
     "Siena": {
       "rpi_rank": 278,
-      "rpi_score": 0.4052
+      "rpi_score": 0.40519
     },
     "Fresno St.": {
       "rpi_rank": 279,
@@ -1120,7 +1120,7 @@
     },
     "LMU (CA)": {
       "rpi_rank": 280,
-      "rpi_score": 0.40228
+      "rpi_score": 0.40227
     },
     "Lehigh": {
       "rpi_rank": 281,
@@ -1140,15 +1140,15 @@
     },
     "UAlbany": {
       "rpi_rank": 285,
-      "rpi_score": 0.39934
+      "rpi_score": 0.39933
     },
     "Youngstown St.": {
       "rpi_rank": 286,
-      "rpi_score": 0.39639
+      "rpi_score": 0.3964
     },
     "Ohio": {
       "rpi_rank": 287,
-      "rpi_score": 0.3953
+      "rpi_score": 0.39524
     },
     "Jackson St.": {
       "rpi_rank": 288,
@@ -1164,7 +1164,7 @@
     },
     "St. Bonaventure": {
       "rpi_rank": 291,
-      "rpi_score": 0.39163
+      "rpi_score": 0.39162
     },
     "Oakland": {
       "rpi_rank": 292,
@@ -1188,15 +1188,15 @@
     },
     "St. Thomas (MN)": {
       "rpi_rank": 297,
-      "rpi_score": 0.38278
+      "rpi_score": 0.38277
     },
     "Central Conn. St.": {
       "rpi_rank": 298,
-      "rpi_score": 0.38142
+      "rpi_score": 0.38143
     },
     "Mercyhurst": {
       "rpi_rank": 299,
-      "rpi_score": 0.37779
+      "rpi_score": 0.3778
     },
     "Mississippi Val.": {
       "rpi_rank": 300,
@@ -1212,7 +1212,7 @@
     },
     "Coppin St.": {
       "rpi_rank": 303,
-      "rpi_score": 0.34905
+      "rpi_score": 0.34906
     },
     "Alabama A&M": {
       "rpi_rank": 304,
@@ -1224,7 +1224,7 @@
     },
     "Delaware St.": {
       "rpi_rank": 306,
-      "rpi_score": 0.33316
+      "rpi_score": 0.33317
     },
     "Alcorn": {
       "rpi_rank": 307,
@@ -1232,7 +1232,7 @@
     },
     "UMES": {
       "rpi_rank": 308,
-      "rpi_score": 0.33028
+      "rpi_score": 0.33029
     }
   }
 }
