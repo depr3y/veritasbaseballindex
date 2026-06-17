@@ -91463,5 +91463,16 @@
     "away_team": "West Virginia",
     "home_score": 0,
     "away_score": 12
+  },
+  {
+    "game_id": "6599776",
+    "winner": "Georgia",
+    "loser": "Texas",
+    "location": "away",
+    "date": "2026-06-16",
+    "home_team": "Texas",
+    "away_team": "Georgia",
+    "home_score": 0,
+    "away_score": 2
   }
 ]
