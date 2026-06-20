@@ -1,6 +1,6 @@
 {
   "generated": "2026-06-20",
-  "total_games": 8236,
+  "total_games": 8237,
   "rankings": [
     {
       "rank": 1,
@@ -13,63 +13,63 @@
     {
       "rank": 2,
       "team": "Georgia Tech",
-      "rating": 0.9568,
+      "rating": 0.9566,
       "wins": 49,
       "losses": 11,
       "conf": "ACC"
     },
     {
       "rank": 3,
-      "team": "North Carolina",
-      "rating": 0.9511,
-      "wins": 52,
-      "losses": 11,
-      "conf": "ACC"
-    },
-    {
-      "rank": 4,
       "team": "Georgia",
-      "rating": 0.9458,
+      "rating": 0.9465,
       "wins": 53,
       "losses": 14,
       "conf": "SEC"
     },
     {
-      "rank": 5,
+      "rank": 4,
       "team": "Texas",
-      "rating": 0.9414,
+      "rating": 0.9422,
       "wins": 46,
       "losses": 15,
       "conf": "SEC"
     },
     {
+      "rank": 5,
+      "team": "North Carolina",
+      "rating": 0.9402,
+      "wins": 52,
+      "losses": 12,
+      "conf": "ACC"
+    },
+    {
       "rank": 6,
       "team": "Auburn",
-      "rating": 0.8943,
+      "rating": 0.8949,
       "wins": 41,
       "losses": 20,
       "conf": "SEC"
     },
     {
       "rank": 7,
-      "team": "Southern California",
-      "rating": 0.8828,
-      "wins": 48,
-      "losses": 17,
-      "conf": "Big Ten"
-    },
-    {
-      "rank": 8,
       "team": "Texas A&M",
-      "rating": 0.882,
+      "rating": 0.8829,
       "wins": 41,
       "losses": 16,
       "conf": "SEC"
     },
     {
+      "rank": 8,
+      "team": "Southern California",
+      "rating": 0.8823,
+      "wins": 48,
+      "losses": 17,
+      "conf": "Big Ten"
+    },
+    {
       "rank": 9,
       "team": "West Virginia",
-      "rating": 0.8789,
+      "rating": 0.8788,
       "wins": 45,
       "losses": 16,
       "conf": "Big 12"
@@ -77,7 +77,7 @@
     {
       "rank": 10,
       "team": "Mississippi St.",
-      "rating": 0.8706,
+      "rating": 0.871,
       "wins": 42,
       "losses": 19,
       "conf": "SEC"
@@ -85,7 +85,7 @@
     {
       "rank": 11,
       "team": "Alabama",
-      "rating": 0.8661,
+      "rating": 0.8672,
       "wins": 43,
       "losses": 21,
       "conf": "SEC"
@@ -93,7 +93,7 @@
     {
       "rank": 12,
       "team": "Ole Miss",
-      "rating": 0.8574,
+      "rating": 0.8577,
       "wins": 42,
       "losses": 23,
       "conf": "SEC"
@@ -101,13 +101,21 @@
     {
       "rank": 13,
       "team": "Florida",
-      "rating": 0.8525,
+      "rating": 0.8533,
       "wins": 40,
       "losses": 21,
       "conf": "SEC"
     },
     {
       "rank": 14,
+      "team": "Oklahoma",
+      "rating": 0.8516,
+      "wins": 42,
+      "losses": 23,
+      "conf": "SEC"
+    },
+    {
+      "rank": 15,
       "team": "Nebraska",
       "rating": 0.8458,
       "wins": 42,
@@ -115,25 +123,17 @@
       "conf": "Big Ten"
     },
     {
-      "rank": 15,
+      "rank": 16,
       "team": "Oregon St.",
-      "rating": 0.8447,
+      "rating": 0.8448,
       "wins": 45,
       "losses": 14,
       "conf": "Ind"
     },
     {
-      "rank": 16,
-      "team": "Oklahoma",
-      "rating": 0.8408,
-      "wins": 41,
-      "losses": 23,
-      "conf": "SEC"
-    },
-    {
       "rank": 17,
       "team": "Southern Miss.",
-      "rating": 0.8405,
+      "rating": 0.8406,
       "wins": 41,
       "losses": 16,
       "conf": "Sun Belt"
@@ -149,7 +149,7 @@
     {
       "rank": 19,
       "team": "Florida St.",
-      "rating": 0.8331,
+      "rating": 0.8328,
       "wins": 41,
       "losses": 19,
       "conf": "ACC"
@@ -157,7 +157,7 @@
     {
       "rank": 20,
       "team": "Kansas",
-      "rating": 0.8266,
+      "rating": 0.8273,
       "wins": 42,
       "losses": 19,
       "conf": "Big 12"
@@ -165,7 +165,7 @@
     {
       "rank": 21,
       "team": "Arkansas",
-      "rating": 0.8229,
+      "rating": 0.8238,
       "wins": 39,
       "losses": 21,
       "conf": "SEC"
@@ -173,7 +173,7 @@
     {
       "rank": 22,
       "team": "Jacksonville St.",
-      "rating": 0.8103,
+      "rating": 0.8104,
       "wins": 47,
       "losses": 15,
       "conf": "CUSA"
@@ -181,7 +181,7 @@
     {
       "rank": 23,
       "team": "Wake Forest",
-      "rating": 0.7895,
+      "rating": 0.7891,
       "wins": 39,
       "losses": 20,
       "conf": "ACC"
@@ -189,7 +189,7 @@
     {
       "rank": 24,
       "team": "Cincinnati",
-      "rating": 0.7851,
+      "rating": 0.7854,
       "wins": 38,
       "losses": 22,
       "conf": "Big 12"
@@ -197,7 +197,7 @@
     {
       "rank": 25,
       "team": "Tennessee",
-      "rating": 0.7819,
+      "rating": 0.7827,
       "wins": 38,
       "losses": 21,
       "conf": "SEC"
@@ -205,7 +205,7 @@
     {
       "rank": 26,
       "team": "Oklahoma St.",
-      "rating": 0.7772,
+      "rating": 0.7779,
       "wins": 39,
       "losses": 21,
       "conf": "Big 12"
@@ -221,7 +221,7 @@
     {
       "rank": 28,
       "team": "Arizona St.",
-      "rating": 0.7686,
+      "rating": 0.7692,
       "wins": 38,
       "losses": 20,
       "conf": "Big 12"
@@ -245,7 +245,7 @@
     {
       "rank": 31,
       "team": "Miami (FL)",
-      "rating": 0.7557,
+      "rating": 0.7554,
       "wins": 38,
       "losses": 20,
       "conf": "ACC"
@@ -253,7 +253,7 @@
     {
       "rank": 32,
       "team": "Kentucky",
-      "rating": 0.7505,
+      "rating": 0.7509,
       "wins": 33,
       "losses": 23,
       "conf": "SEC"
@@ -261,7 +261,7 @@
     {
       "rank": 33,
       "team": "Missouri St.",
-      "rating": 0.7445,
+      "rating": 0.7448,
       "wins": 34,
       "losses": 21,
       "conf": "CUSA"
@@ -269,7 +269,7 @@
     {
       "rank": 34,
       "team": "TCU",
-      "rating": 0.7437,
+      "rating": 0.7441,
       "wins": 33,
       "losses": 20,
       "conf": "Big 12"
@@ -277,7 +277,7 @@
     {
       "rank": 35,
       "team": "California Baptist",
-      "rating": 0.7416,
+      "rating": 0.7417,
       "wins": 43,
       "losses": 13,
       "conf": "WAC"
@@ -285,7 +285,7 @@
     {
       "rank": 36,
       "team": "Virginia",
-      "rating": 0.7409,
+      "rating": 0.7399,
       "wins": 36,
       "losses": 22,
       "conf": "ACC"
@@ -293,7 +293,7 @@
     {
       "rank": 37,
       "team": "Coastal Carolina",
-      "rating": 0.7317,
+      "rating": 0.7314,
       "wins": 36,
       "losses": 22,
       "conf": "Sun Belt"
@@ -301,7 +301,7 @@
     {
       "rank": 38,
       "team": "Louisiana",
-      "rating": 0.7312,
+      "rating": 0.7313,
       "wins": 37,
       "losses": 23,
       "conf": "Sun Belt"
@@ -309,7 +309,7 @@
     {
       "rank": 39,
       "team": "UCF",
-      "rating": 0.7277,
+      "rating": 0.7279,
       "wins": 33,
       "losses": 23,
       "conf": "Big 12"
@@ -333,47 +333,47 @@
     {
       "rank": 42,
       "team": "Texas St.",
-      "rating": 0.7166,
+      "rating": 0.7167,
       "wins": 36,
       "losses": 25,
       "conf": "Sun Belt"
     },
     {
       "rank": 43,
-      "team": "East Carolina",
-      "rating": 0.7163,
-      "wins": 35,
-      "losses": 23,
-      "conf": "American"
-    },
-    {
-      "rank": 44,
       "team": "Gonzaga",
-      "rating": 0.7157,
+      "rating": 0.7164,
       "wins": 35,
       "losses": 17,
       "conf": "WCC"
     },
     {
-      "rank": 45,
-      "team": "Boston College",
-      "rating": 0.7042,
-      "wins": 37,
+      "rank": 44,
+      "team": "East Carolina",
+      "rating": 0.7154,
+      "wins": 35,
       "losses": 23,
-      "conf": "ACC"
+      "conf": "American"
     },
     {
-      "rank": 46,
+      "rank": 45,
       "team": "Purdue",
-      "rating": 0.704,
+      "rating": 0.7039,
       "wins": 34,
       "losses": 19,
       "conf": "Big Ten"
     },
     {
+      "rank": 46,
+      "team": "Boston College",
+      "rating": 0.7033,
+      "wins": 37,
+      "losses": 23,
+      "conf": "ACC"
+    },
+    {
       "rank": 47,
       "team": "Troy",
-      "rating": 0.7027,
+      "rating": 0.7028,
       "wins": 37,
       "losses": 31,
       "conf": "Sun Belt"
@@ -381,7 +381,7 @@
     {
       "rank": 48,
       "team": "Southeast Mo. St.",
-      "rating": 0.7026,
+      "rating": 0.7027,
       "wins": 38,
       "losses": 16,
       "conf": "OVC"
@@ -389,7 +389,7 @@
     {
       "rank": 49,
       "team": "Pittsburgh",
-      "rating": 0.7025,
+      "rating": 0.7016,
       "wins": 32,
       "losses": 23,
       "conf": "ACC"
@@ -397,7 +397,7 @@
     {
       "rank": 50,
       "team": "Michigan",
-      "rating": 0.7012,
+      "rating": 0.7011,
       "wins": 33,
       "losses": 22,
       "conf": "Big Ten"
@@ -405,26 +405,26 @@
     {
       "rank": 51,
       "team": "Vanderbilt",
-      "rating": 0.6918,
+      "rating": 0.6928,
       "wins": 33,
       "losses": 24,
       "conf": "SEC"
     },
     {
       "rank": 52,
-      "team": "Campbell",
-      "rating": 0.6902,
-      "wins": 40,
-      "losses": 16,
-      "conf": "CAA"
-    },
-    {
-      "rank": 53,
       "team": "Cal Poly",
-      "rating": 0.6899,
+      "rating": 0.6898,
       "wins": 38,
       "losses": 23,
       "conf": "Big West"
+    },
+    {
+      "rank": 53,
+      "team": "Campbell",
+      "rating": 0.6897,
+      "wins": 40,
+      "losses": 16,
+      "conf": "CAA"
     },
     {
       "rank": 54,
@@ -437,31 +437,31 @@
     {
       "rank": 55,
       "team": "Kansas St.",
-      "rating": 0.6861,
+      "rating": 0.6863,
       "wins": 29,
       "losses": 26,
       "conf": "Big 12"
     },
     {
       "rank": 56,
-      "team": "Notre Dame",
-      "rating": 0.6839,
-      "wins": 31,
-      "losses": 21,
-      "conf": "ACC"
-    },
-    {
-      "rank": 57,
       "team": "LSU",
-      "rating": 0.6836,
+      "rating": 0.6847,
       "wins": 30,
       "losses": 27,
       "conf": "SEC"
     },
     {
+      "rank": 57,
+      "team": "Notre Dame",
+      "rating": 0.6828,
+      "wins": 31,
+      "losses": 21,
+      "conf": "ACC"
+    },
+    {
       "rank": 58,
       "team": "High Point",
-      "rating": 0.6829,
+      "rating": 0.6826,
       "wins": 36,
       "losses": 18,
       "conf": "Big South"
@@ -493,7 +493,7 @@
     {
       "rank": 62,
       "team": "Baylor",
-      "rating": 0.6775,
+      "rating": 0.6777,
       "wins": 29,
       "losses": 26,
       "conf": "Big 12"
@@ -509,7 +509,7 @@
     {
       "rank": 64,
       "team": "Virginia Tech",
-      "rating": 0.6728,
+      "rating": 0.6722,
       "wins": 29,
       "losses": 26,
       "conf": "ACC"
@@ -517,7 +517,7 @@
     {
       "rank": 65,
       "team": "Clemson",
-      "rating": 0.6707,
+      "rating": 0.6697,
       "wins": 31,
       "losses": 26,
       "conf": "ACC"
@@ -525,7 +525,7 @@
     {
       "rank": 66,
       "team": "NC State",
-      "rating": 0.6702,
+      "rating": 0.6692,
       "wins": 32,
       "losses": 25,
       "conf": "ACC"
@@ -533,7 +533,7 @@
     {
       "rank": 67,
       "team": "California",
-      "rating": 0.6662,
+      "rating": 0.6653,
       "wins": 29,
       "losses": 26,
       "conf": "ACC"
@@ -541,7 +541,7 @@
     {
       "rank": 68,
       "team": "Tarleton St.",
-      "rating": 0.6644,
+      "rating": 0.6645,
       "wins": 35,
       "losses": 21,
       "conf": "WAC"
@@ -549,7 +549,7 @@
     {
       "rank": 69,
       "team": "South Fla.",
-      "rating": 0.6621,
+      "rating": 0.662,
       "wins": 32,
       "losses": 21,
       "conf": "American"
@@ -557,7 +557,7 @@
     {
       "rank": 70,
       "team": "Arkansas St.",
-      "rating": 0.6587,
+      "rating": 0.6588,
       "wins": 29,
       "losses": 23,
       "conf": "Sun Belt"
@@ -565,7 +565,7 @@
     {
       "rank": 71,
       "team": "Louisiana Tech",
-      "rating": 0.6517,
+      "rating": 0.6519,
       "wins": 33,
       "losses": 25,
       "conf": "CUSA"
@@ -573,7 +573,7 @@
     {
       "rank": 72,
       "team": "DBU",
-      "rating": 0.6512,
+      "rating": 0.6518,
       "wins": 32,
       "losses": 26,
       "conf": "CUSA"
@@ -581,7 +581,7 @@
     {
       "rank": 73,
       "team": "Western Caro.",
-      "rating": 0.651,
+      "rating": 0.6509,
       "wins": 35,
       "losses": 21,
       "conf": "SoCon"
@@ -589,7 +589,7 @@
     {
       "rank": 74,
       "team": "Minnesota",
-      "rating": 0.6445,
+      "rating": 0.6446,
       "wins": 30,
       "losses": 23,
       "conf": "Big Ten"
@@ -597,7 +597,7 @@
     {
       "rank": 75,
       "team": "Southeastern La.",
-      "rating": 0.6408,
+      "rating": 0.6412,
       "wins": 32,
       "losses": 20,
       "conf": "Southland"
@@ -605,7 +605,7 @@
     {
       "rank": 76,
       "team": "BYU",
-      "rating": 0.6378,
+      "rating": 0.638,
       "wins": 28,
       "losses": 28,
       "conf": "Big 12"
@@ -613,7 +613,7 @@
     {
       "rank": 77,
       "team": "Louisville",
-      "rating": 0.636,
+      "rating": 0.635,
       "wins": 30,
       "losses": 27,
       "conf": "ACC"
@@ -621,7 +621,7 @@
     {
       "rank": 78,
       "team": "The Citadel",
-      "rating": 0.6343,
+      "rating": 0.6346,
       "wins": 33,
       "losses": 26,
       "conf": "SoCon"
@@ -629,7 +629,7 @@
     {
       "rank": 79,
       "team": "Stanford",
-      "rating": 0.6265,
+      "rating": 0.6261,
       "wins": 28,
       "losses": 25,
       "conf": "ACC"
@@ -645,7 +645,7 @@
     {
       "rank": 81,
       "team": "Utah",
-      "rating": 0.6184,
+      "rating": 0.6187,
       "wins": 26,
       "losses": 25,
       "conf": "Big 12"
@@ -653,7 +653,7 @@
     {
       "rank": 82,
       "team": "Saint Joseph's",
-      "rating": 0.6078,
+      "rating": 0.6076,
       "wins": 35,
       "losses": 17,
       "conf": "A-10"
@@ -677,7 +677,7 @@
     {
       "rank": 85,
       "team": "Washington St.",
-      "rating": 0.6038,
+      "rating": 0.604,
       "wins": 29,
       "losses": 27,
       "conf": "MWC"
@@ -685,7 +685,7 @@
     {
       "rank": 86,
       "team": "Kennesaw St.",
-      "rating": 0.6021,
+      "rating": 0.6022,
       "wins": 25,
       "losses": 28,
       "conf": "CUSA"
@@ -693,7 +693,7 @@
     {
       "rank": 87,
       "team": "Illinois",
-      "rating": 0.6017,
+      "rating": 0.6016,
       "wins": 27,
       "losses": 26,
       "conf": "Big Ten"
@@ -701,7 +701,7 @@
     {
       "rank": 88,
       "team": "App State",
-      "rating": 0.6002,
+      "rating": 0.6001,
       "wins": 30,
       "losses": 23,
       "conf": "Sun Belt"
@@ -709,7 +709,7 @@
     {
       "rank": 89,
       "team": "Duke",
-      "rating": 0.5962,
+      "rating": 0.595,
       "wins": 26,
       "losses": 30,
       "conf": "ACC"
@@ -717,7 +717,7 @@
     {
       "rank": 90,
       "team": "Texas Tech",
-      "rating": 0.594,
+      "rating": 0.5945,
       "wins": 27,
       "losses": 28,
       "conf": "Big 12"
@@ -725,7 +725,7 @@
     {
       "rank": 91,
       "team": "Samford",
-      "rating": 0.5911,
+      "rating": 0.5912,
       "wins": 28,
       "losses": 25,
       "conf": "SoCon"
@@ -733,7 +733,7 @@
     {
       "rank": 92,
       "team": "Eastern Ill.",
-      "rating": 0.5905,
+      "rating": 0.5906,
       "wins": 31,
       "losses": 20,
       "conf": "OVC"
@@ -741,7 +741,7 @@
     {
       "rank": 93,
       "team": "Little Rock",
-      "rating": 0.5905,
+      "rating": 0.5906,
       "wins": 34,
       "losses": 27,
       "conf": "OVC"
@@ -757,7 +757,7 @@
     {
       "rank": 95,
       "team": "Wofford",
-      "rating": 0.5893,
+      "rating": 0.5892,
       "wins": 34,
       "losses": 20,
       "conf": "SoCon"
@@ -765,7 +765,7 @@
     {
       "rank": 96,
       "team": "Charlotte",
-      "rating": 0.5884,
+      "rating": 0.5881,
       "wins": 27,
       "losses": 28,
       "conf": "American"
@@ -773,7 +773,7 @@
     {
       "rank": 97,
       "team": "Lamar University",
-      "rating": 0.5877,
+      "rating": 0.5879,
       "wins": 31,
       "losses": 27,
       "conf": "Southland"
@@ -781,7 +781,7 @@
     {
       "rank": 98,
       "team": "Saint Mary's (CA)",
-      "rating": 0.5876,
+      "rating": 0.5877,
       "wins": 34,
       "losses": 26,
       "conf": "WCC"
@@ -789,7 +789,7 @@
     {
       "rank": 99,
       "team": "Houston",
-      "rating": 0.5872,
+      "rating": 0.5874,
       "wins": 24,
       "losses": 30,
       "conf": "Big 12"
@@ -797,7 +797,7 @@
     {
       "rank": 100,
       "team": "Northeastern",
-      "rating": 0.5852,
+      "rating": 0.5851,
       "wins": 36,
       "losses": 22,
       "conf": "CAA"
@@ -813,7 +813,7 @@
     {
       "rank": 102,
       "team": "Creighton",
-      "rating": 0.5793,
+      "rating": 0.5794,
       "wins": 29,
       "losses": 25,
       "conf": "Big East"
@@ -821,7 +821,7 @@
     {
       "rank": 103,
       "team": "Western Ky.",
-      "rating": 0.579,
+      "rating": 0.5791,
       "wins": 30,
       "losses": 27,
       "conf": "CUSA"
@@ -845,7 +845,7 @@
     {
       "rank": 106,
       "team": "Maryland",
-      "rating": 0.5749,
+      "rating": 0.5748,
       "wins": 27,
       "losses": 29,
       "conf": "Big Ten"
@@ -853,7 +853,7 @@
     {
       "rank": 107,
       "team": "Utah Tech",
-      "rating": 0.5744,
+      "rating": 0.5745,
       "wins": 32,
       "losses": 21,
       "conf": "WAC"
@@ -861,7 +861,7 @@
     {
       "rank": 108,
       "team": "Winthrop",
-      "rating": 0.5741,
+      "rating": 0.574,
       "wins": 33,
       "losses": 23,
       "conf": "Big South"
@@ -877,7 +877,7 @@
     {
       "rank": 110,
       "team": "Fla. Atlantic",
-      "rating": 0.5727,
+      "rating": 0.5725,
       "wins": 28,
       "losses": 28,
       "conf": "American"
@@ -885,7 +885,7 @@
     {
       "rank": 111,
       "team": "SIUE",
-      "rating": 0.5714,
+      "rating": 0.5715,
       "wins": 32,
       "losses": 22,
       "conf": "OVC"
@@ -893,7 +893,7 @@
     {
       "rank": 112,
       "team": "Missouri",
-      "rating": 0.5704,
+      "rating": 0.5714,
       "wins": 24,
       "losses": 30,
       "conf": "SEC"
@@ -933,7 +933,7 @@
     {
       "rank": 117,
       "team": "ETSU",
-      "rating": 0.5615,
+      "rating": 0.5614,
       "wins": 30,
       "losses": 23,
       "conf": "SoCon"
@@ -941,7 +941,7 @@
     {
       "rank": 118,
       "team": "Old Dominion",
-      "rating": 0.5603,
+      "rating": 0.5601,
       "wins": 29,
       "losses": 26,
       "conf": "Sun Belt"
@@ -949,7 +949,7 @@
     {
       "rank": 119,
       "team": "UTRGV",
-      "rating": 0.5551,
+      "rating": 0.5553,
       "wins": 26,
       "losses": 28,
       "conf": "Southland"
@@ -965,7 +965,7 @@
     {
       "rank": 121,
       "team": "Charleston So.",
-      "rating": 0.5538,
+      "rating": 0.5536,
       "wins": 30,
       "losses": 21,
       "conf": "Big South"
@@ -973,7 +973,7 @@
     {
       "rank": 122,
       "team": "VCU",
-      "rating": 0.5532,
+      "rating": 0.5526,
       "wins": 35,
       "losses": 24,
       "conf": "A-10"
@@ -981,7 +981,7 @@
     {
       "rank": 123,
       "team": "Michigan St.",
-      "rating": 0.5526,
+      "rating": 0.5524,
       "wins": 23,
       "losses": 32,
       "conf": "Big Ten"
@@ -997,7 +997,7 @@
     {
       "rank": 125,
       "team": "Rutgers",
-      "rating": 0.5512,
+      "rating": 0.551,
       "wins": 26,
       "losses": 29,
       "conf": "Big Ten"
@@ -1005,13 +1005,29 @@
     {
       "rank": 126,
       "team": "Jacksonville",
-      "rating": 0.5471,
+      "rating": 0.547,
       "wins": 30,
       "losses": 24,
       "conf": "ASUN"
     },
     {
       "rank": 127,
+      "team": "McNeese",
+      "rating": 0.5464,
+      "wins": 28,
+      "losses": 25,
+      "conf": "Southland"
+    },
+    {
+      "rank": 128,
+      "team": "Sacramento St.",
+      "rating": 0.5464,
+      "wins": 27,
+      "losses": 30,
+      "conf": "WAC"
+    },
+    {
+      "rank": 129,
       "team": "Morehead St.",
       "rating": 0.5463,
       "wins": 31,
@@ -1019,25 +1035,9 @@
       "conf": "OVC"
     },
     {
-      "rank": 128,
-      "team": "Sacramento St.",
-      "rating": 0.5463,
-      "wins": 27,
-      "losses": 30,
-      "conf": "WAC"
-    },
-    {
-      "rank": 129,
-      "team": "McNeese",
-      "rating": 0.5461,
-      "wins": 28,
-      "losses": 25,
-      "conf": "Southland"
-    },
-    {
       "rank": 130,
       "team": "Portland",
-      "rating": 0.5433,
+      "rating": 0.5434,
       "wins": 27,
       "losses": 25,
       "conf": "WCC"
@@ -1045,7 +1045,7 @@
     {
       "rank": 131,
       "team": "Indiana",
-      "rating": 0.5429,
+      "rating": 0.5424,
       "wins": 23,
       "losses": 31,
       "conf": "Big Ten"
@@ -1053,7 +1053,7 @@
     {
       "rank": 132,
       "team": "UC Davis",
-      "rating": 0.5422,
+      "rating": 0.5423,
       "wins": 26,
       "losses": 28,
       "conf": "Big West"
@@ -1085,7 +1085,7 @@
     {
       "rank": 136,
       "team": "South Carolina",
-      "rating": 0.5356,
+      "rating": 0.5358,
       "wins": 22,
       "losses": 35,
       "conf": "SEC"
@@ -1100,27 +1100,27 @@
     },
     {
       "rank": 138,
-      "team": "UNCW",
-      "rating": 0.5327,
-      "wins": 29,
-      "losses": 27,
-      "conf": "CAA"
-    },
-    {
-      "rank": 139,
       "team": "Oral Roberts",
-      "rating": 0.5326,
+      "rating": 0.5332,
       "wins": 32,
       "losses": 24,
       "conf": "Summit"
     },
     {
-      "rank": 140,
+      "rank": 139,
       "team": "Northwestern St.",
-      "rating": 0.5317,
+      "rating": 0.532,
       "wins": 26,
       "losses": 24,
       "conf": "Southland"
+    },
+    {
+      "rank": 140,
+      "team": "UNCW",
+      "rating": 0.532,
+      "wins": 29,
+      "losses": 27,
+      "conf": "CAA"
     },
     {
       "rank": 141,
@@ -1133,7 +1133,7 @@
     {
       "rank": 142,
       "team": "Richmond",
-      "rating": 0.524,
+      "rating": 0.5237,
       "wins": 33,
       "losses": 22,
       "conf": "A-10"
@@ -1141,7 +1141,7 @@
     {
       "rank": 143,
       "team": "Air Force",
-      "rating": 0.5206,
+      "rating": 0.5207,
       "wins": 25,
       "losses": 26,
       "conf": "MWC"
@@ -1149,7 +1149,7 @@
     {
       "rank": 144,
       "team": "Central Ark.",
-      "rating": 0.52,
+      "rating": 0.5202,
       "wins": 31,
       "losses": 25,
       "conf": "ASUN"
@@ -1157,7 +1157,7 @@
     {
       "rank": 145,
       "team": "UNLV",
-      "rating": 0.5195,
+      "rating": 0.5196,
       "wins": 30,
       "losses": 25,
       "conf": "MWC"
@@ -1173,7 +1173,7 @@
     {
       "rank": 147,
       "team": "New Mexico",
-      "rating": 0.5136,
+      "rating": 0.5138,
       "wins": 28,
       "losses": 22,
       "conf": "MWC"
@@ -1181,7 +1181,7 @@
     {
       "rank": 148,
       "team": "Northwestern",
-      "rating": 0.5125,
+      "rating": 0.5124,
       "wins": 21,
       "losses": 30,
       "conf": "Big Ten"
@@ -1197,7 +1197,7 @@
     {
       "rank": 150,
       "team": "Wright St.",
-      "rating": 0.5069,
+      "rating": 0.507,
       "wins": 25,
       "losses": 26,
       "conf": "Horizon"
@@ -1213,7 +1213,7 @@
     {
       "rank": 152,
       "team": "Col. of Charleston",
-      "rating": 0.5043,
+      "rating": 0.504,
       "wins": 28,
       "losses": 28,
       "conf": "CAA"
@@ -1221,7 +1221,7 @@
     {
       "rank": 153,
       "team": "Santa Clara",
-      "rating": 0.5002,
+      "rating": 0.5007,
       "wins": 25,
       "losses": 29,
       "conf": "WCC"
@@ -1229,7 +1229,7 @@
     {
       "rank": 154,
       "team": "Nicholls",
-      "rating": 0.5002,
+      "rating": 0.5004,
       "wins": 21,
       "losses": 25,
       "conf": "Southland"
@@ -1237,7 +1237,7 @@
     {
       "rank": 155,
       "team": "Sam Houston",
-      "rating": 0.4968,
+      "rating": 0.497,
       "wins": 25,
       "losses": 33,
       "conf": "CUSA"
@@ -1245,7 +1245,7 @@
     {
       "rank": 156,
       "team": "Nevada",
-      "rating": 0.4967,
+      "rating": 0.4968,
       "wins": 22,
       "losses": 27,
       "conf": "MWC"
@@ -1253,7 +1253,7 @@
     {
       "rank": 157,
       "team": "Yale",
-      "rating": 0.496,
+      "rating": 0.4959,
       "wins": 28,
       "losses": 15,
       "conf": "Ivy"
@@ -1261,7 +1261,7 @@
     {
       "rank": 158,
       "team": "Longwood",
-      "rating": 0.4957,
+      "rating": 0.4954,
       "wins": 30,
       "losses": 27,
       "conf": "Big South"
@@ -1269,7 +1269,7 @@
     {
       "rank": 159,
       "team": "Monmouth",
-      "rating": 0.493,
+      "rating": 0.4929,
       "wins": 30,
       "losses": 22,
       "conf": "CAA"
@@ -1285,7 +1285,7 @@
     {
       "rank": 161,
       "team": "Western Mich.",
-      "rating": 0.4916,
+      "rating": 0.4915,
       "wins": 26,
       "losses": 25,
       "conf": "MAC"
@@ -1293,7 +1293,7 @@
     {
       "rank": 162,
       "team": "Arizona",
-      "rating": 0.4911,
+      "rating": 0.4914,
       "wins": 19,
       "losses": 34,
       "conf": "Big 12"
@@ -1309,7 +1309,7 @@
     {
       "rank": 164,
       "team": "UNC Greensboro",
-      "rating": 0.4905,
+      "rating": 0.4902,
       "wins": 23,
       "losses": 31,
       "conf": "SoCon"
@@ -1317,13 +1317,21 @@
     {
       "rank": 165,
       "team": "Bethune-Cookman",
-      "rating": 0.4893,
+      "rating": 0.4894,
       "wins": 37,
       "losses": 19,
       "conf": "SWAC"
     },
     {
       "rank": 166,
+      "team": "North Ala.",
+      "rating": 0.4876,
+      "wins": 28,
+      "losses": 26,
+      "conf": "ASUN"
+    },
+    {
+      "rank": 167,
       "team": "San Jose St.",
       "rating": 0.4876,
       "wins": 24,
@@ -1331,17 +1339,9 @@
       "conf": "MWC"
     },
     {
-      "rank": 167,
-      "team": "North Ala.",
-      "rating": 0.4875,
-      "wins": 28,
-      "losses": 26,
-      "conf": "ASUN"
-    },
-    {
       "rank": 168,
       "team": "SFA",
-      "rating": 0.48,
+      "rating": 0.4802,
       "wins": 27,
       "losses": 26,
       "conf": "Southland"
@@ -1349,7 +1349,7 @@
     {
       "rank": 169,
       "team": "Abilene Christian",
-      "rating": 0.4795,
+      "rating": 0.4797,
       "wins": 25,
       "losses": 30,
       "conf": "WAC"
@@ -1365,31 +1365,31 @@
     {
       "rank": 171,
       "team": "Binghamton",
-      "rating": 0.4748,
+      "rating": 0.4747,
       "wins": 28,
       "losses": 22,
       "conf": "America East"
     },
     {
       "rank": 172,
-      "team": "Marshall",
-      "rating": 0.4737,
-      "wins": 23,
-      "losses": 32,
-      "conf": "Sun Belt"
-    },
-    {
-      "rank": 173,
       "team": "Houston Christian",
-      "rating": 0.4735,
+      "rating": 0.4737,
       "wins": 23,
       "losses": 29,
       "conf": "Southland"
     },
     {
+      "rank": 173,
+      "team": "Marshall",
+      "rating": 0.4736,
+      "wins": 23,
+      "losses": 32,
+      "conf": "Sun Belt"
+    },
+    {
       "rank": 174,
       "team": "Radford",
-      "rating": 0.4733,
+      "rating": 0.4731,
       "wins": 25,
       "losses": 25,
       "conf": "Big South"
@@ -1397,7 +1397,7 @@
     {
       "rank": 175,
       "team": "Lipscomb",
-      "rating": 0.4727,
+      "rating": 0.4728,
       "wins": 26,
       "losses": 26,
       "conf": "ASUN"
@@ -1405,7 +1405,7 @@
     {
       "rank": 176,
       "team": "Grand Canyon",
-      "rating": 0.4704,
+      "rating": 0.4706,
       "wins": 21,
       "losses": 30,
       "conf": "MWC"
@@ -1413,7 +1413,7 @@
     {
       "rank": 177,
       "team": "UT Arlington",
-      "rating": 0.4661,
+      "rating": 0.4665,
       "wins": 19,
       "losses": 31,
       "conf": "WAC"
@@ -1421,7 +1421,7 @@
     {
       "rank": 178,
       "team": "Rider",
-      "rating": 0.4646,
+      "rating": 0.4645,
       "wins": 30,
       "losses": 19,
       "conf": "MAAC"
@@ -1429,7 +1429,7 @@
     {
       "rank": 179,
       "team": "Southern Ind.",
-      "rating": 0.4638,
+      "rating": 0.4639,
       "wins": 28,
       "losses": 27,
       "conf": "OVC"
@@ -1437,7 +1437,7 @@
     {
       "rank": 180,
       "team": "Dayton",
-      "rating": 0.4626,
+      "rating": 0.4624,
       "wins": 31,
       "losses": 23,
       "conf": "A-10"
@@ -1445,7 +1445,7 @@
     {
       "rank": 181,
       "team": "Hofstra",
-      "rating": 0.4582,
+      "rating": 0.458,
       "wins": 22,
       "losses": 27,
       "conf": "CAA"
@@ -1461,7 +1461,7 @@
     {
       "rank": 183,
       "team": "Middle Tenn.",
-      "rating": 0.4561,
+      "rating": 0.4562,
       "wins": 26,
       "losses": 31,
       "conf": "CUSA"
@@ -1469,7 +1469,7 @@
     {
       "rank": 184,
       "team": "New Orleans",
-      "rating": 0.4529,
+      "rating": 0.453,
       "wins": 24,
       "losses": 30,
       "conf": "Southland"
@@ -1477,7 +1477,7 @@
     {
       "rank": 185,
       "team": "James Madison",
-      "rating": 0.4492,
+      "rating": 0.449,
       "wins": 21,
       "losses": 32,
       "conf": "Sun Belt"
@@ -1485,7 +1485,7 @@
     {
       "rank": 186,
       "team": "Brown",
-      "rating": 0.4467,
+      "rating": 0.4466,
       "wins": 22,
       "losses": 18,
       "conf": "Ivy"
@@ -1493,7 +1493,7 @@
     {
       "rank": 187,
       "team": "Army West Point",
-      "rating": 0.4457,
+      "rating": 0.4455,
       "wins": 28,
       "losses": 20,
       "conf": "Patriot"
@@ -1509,7 +1509,7 @@
     {
       "rank": 189,
       "team": "Alabama St.",
-      "rating": 0.4434,
+      "rating": 0.4436,
       "wins": 31,
       "losses": 23,
       "conf": "SWAC"
@@ -1517,7 +1517,7 @@
     {
       "rank": 190,
       "team": "George Mason",
-      "rating": 0.4427,
+      "rating": 0.4425,
       "wins": 28,
       "losses": 25,
       "conf": "A-10"
@@ -1525,7 +1525,7 @@
     {
       "rank": 191,
       "team": "Stetson",
-      "rating": 0.4423,
+      "rating": 0.4424,
       "wins": 23,
       "losses": 32,
       "conf": "ASUN"
@@ -1533,7 +1533,7 @@
     {
       "rank": 192,
       "team": "Penn",
-      "rating": 0.4399,
+      "rating": 0.4398,
       "wins": 20,
       "losses": 21,
       "conf": "Ivy"
@@ -1541,7 +1541,7 @@
     {
       "rank": 193,
       "team": "Austin Peay",
-      "rating": 0.4351,
+      "rating": 0.4352,
       "wins": 24,
       "losses": 31,
       "conf": "ASUN"
@@ -1549,7 +1549,7 @@
     {
       "rank": 194,
       "team": "Pacific",
-      "rating": 0.4333,
+      "rating": 0.4334,
       "wins": 23,
       "losses": 28,
       "conf": "WCC"
@@ -1557,7 +1557,7 @@
     {
       "rank": 195,
       "team": "Milwaukee",
-      "rating": 0.432,
+      "rating": 0.4321,
       "wins": 26,
       "losses": 33,
       "conf": "Horizon"
@@ -1565,7 +1565,7 @@
     {
       "rank": 196,
       "team": "A&M-Corpus Christi",
-      "rating": 0.4294,
+      "rating": 0.4296,
       "wins": 23,
       "losses": 28,
       "conf": "Southland"
@@ -1573,7 +1573,7 @@
     {
       "rank": 197,
       "team": "Navy",
-      "rating": 0.4287,
+      "rating": 0.4285,
       "wins": 30,
       "losses": 19,
       "conf": "Patriot"
@@ -1581,7 +1581,7 @@
     {
       "rank": 198,
       "team": "Gardner-Webb",
-      "rating": 0.4263,
+      "rating": 0.4262,
       "wins": 25,
       "losses": 30,
       "conf": "Big South"
@@ -1589,7 +1589,7 @@
     {
       "rank": 199,
       "team": "CSU Bakersfield",
-      "rating": 0.4241,
+      "rating": 0.4242,
       "wins": 21,
       "losses": 32,
       "conf": "Big West"
@@ -1597,7 +1597,7 @@
     {
       "rank": 200,
       "team": "Penn St.",
-      "rating": 0.4215,
+      "rating": 0.4214,
       "wins": 16,
       "losses": 34,
       "conf": "Big Ten"
@@ -1613,31 +1613,31 @@
     {
       "rank": 202,
       "team": "Ball St.",
-      "rating": 0.4204,
+      "rating": 0.4203,
       "wins": 23,
       "losses": 29,
       "conf": "MAC"
     },
     {
       "rank": 203,
-      "team": "Bryant",
-      "rating": 0.4169,
-      "wins": 27,
-      "losses": 25,
-      "conf": "America East"
-    },
-    {
-      "rank": 204,
       "team": "Ga. Southern",
-      "rating": 0.4168,
+      "rating": 0.4167,
       "wins": 16,
       "losses": 40,
       "conf": "Sun Belt"
     },
     {
+      "rank": 204,
+      "team": "Bryant",
+      "rating": 0.4167,
+      "wins": 27,
+      "losses": 25,
+      "conf": "America East"
+    },
+    {
       "rank": 205,
       "team": "Bucknell",
-      "rating": 0.4159,
+      "rating": 0.4156,
       "wins": 27,
       "losses": 24,
       "conf": "Patriot"
@@ -1645,31 +1645,31 @@
     {
       "rank": 206,
       "team": "Florida A&M",
-      "rating": 0.4154,
+      "rating": 0.4155,
       "wins": 28,
       "losses": 22,
       "conf": "SWAC"
     },
     {
       "rank": 207,
-      "team": "UMBC",
-      "rating": 0.415,
-      "wins": 28,
-      "losses": 22,
-      "conf": "America East"
-    },
-    {
-      "rank": 208,
       "team": "New Mexico St.",
-      "rating": 0.4146,
+      "rating": 0.415,
       "wins": 18,
       "losses": 34,
       "conf": "CUSA"
     },
     {
+      "rank": 208,
+      "team": "UMBC",
+      "rating": 0.4149,
+      "wins": 28,
+      "losses": 22,
+      "conf": "America East"
+    },
+    {
       "rank": 209,
       "team": "UIW",
-      "rating": 0.4115,
+      "rating": 0.4117,
       "wins": 19,
       "losses": 29,
       "conf": "Southland"
@@ -1677,7 +1677,7 @@
     {
       "rank": 210,
       "team": "Stony Brook",
-      "rating": 0.4114,
+      "rating": 0.4113,
       "wins": 21,
       "losses": 30,
       "conf": "CAA"
@@ -1685,7 +1685,7 @@
     {
       "rank": 211,
       "team": "Niagara",
-      "rating": 0.4112,
+      "rating": 0.4111,
       "wins": 26,
       "losses": 19,
       "conf": "MAAC"
@@ -1693,21 +1693,13 @@
     {
       "rank": 212,
       "team": "Southern U.",
-      "rating": 0.4106,
+      "rating": 0.4107,
       "wins": 24,
       "losses": 21,
       "conf": "SWAC"
     },
     {
       "rank": 213,
-      "team": "Maine",
-      "rating": 0.4091,
-      "wins": 21,
-      "losses": 30,
-      "conf": "America East"
-    },
-    {
-      "rank": 214,
       "team": "Evansville",
       "rating": 0.4091,
       "wins": 20,
@@ -1715,9 +1707,17 @@
       "conf": "MVC"
     },
     {
+      "rank": 214,
+      "team": "Maine",
+      "rating": 0.4088,
+      "wins": 21,
+      "losses": 30,
+      "conf": "America East"
+    },
+    {
       "rank": 215,
       "team": "VMI",
-      "rating": 0.407,
+      "rating": 0.4069,
       "wins": 28,
       "losses": 27,
       "conf": "SoCon"
@@ -1725,7 +1725,7 @@
     {
       "rank": 216,
       "team": "UT Martin",
-      "rating": 0.405,
+      "rating": 0.4051,
       "wins": 25,
       "losses": 29,
       "conf": "OVC"
@@ -1741,7 +1741,7 @@
     {
       "rank": 218,
       "team": "Omaha",
-      "rating": 0.4016,
+      "rating": 0.4019,
       "wins": 21,
       "losses": 25,
       "conf": "Summit"
@@ -1749,7 +1749,7 @@
     {
       "rank": 219,
       "team": "Pepperdine",
-      "rating": 0.4011,
+      "rating": 0.4012,
       "wins": 20,
       "losses": 33,
       "conf": "WCC"
@@ -1757,7 +1757,7 @@
     {
       "rank": 220,
       "team": "Fairfield",
-      "rating": 0.3991,
+      "rating": 0.399,
       "wins": 28,
       "losses": 22,
       "conf": "MAAC"
@@ -1781,26 +1781,26 @@
     {
       "rank": 223,
       "team": "Rhode Island",
-      "rating": 0.3861,
+      "rating": 0.386,
       "wins": 24,
       "losses": 30,
       "conf": "A-10"
     },
     {
       "rank": 224,
-      "team": "Georgetown",
-      "rating": 0.3854,
-      "wins": 28,
-      "losses": 28,
-      "conf": "Big East"
-    },
-    {
-      "rank": 225,
       "team": "Long Beach St.",
-      "rating": 0.3853,
+      "rating": 0.3854,
       "wins": 17,
       "losses": 35,
       "conf": "Big West"
+    },
+    {
+      "rank": 225,
+      "team": "Georgetown",
+      "rating": 0.3853,
+      "wins": 28,
+      "losses": 28,
+      "conf": "Big East"
     },
     {
       "rank": 226,
@@ -1813,7 +1813,7 @@
     {
       "rank": 227,
       "team": "Davidson",
-      "rating": 0.3833,
+      "rating": 0.3831,
       "wins": 25,
       "losses": 27,
       "conf": "A-10"
@@ -1829,7 +1829,7 @@
     {
       "rank": 229,
       "team": "South Dakota St.",
-      "rating": 0.3756,
+      "rating": 0.3758,
       "wins": 19,
       "losses": 32,
       "conf": "Summit"
@@ -1837,7 +1837,7 @@
     {
       "rank": 230,
       "team": "Central Mich.",
-      "rating": 0.375,
+      "rating": 0.3749,
       "wins": 22,
       "losses": 29,
       "conf": "MAC"
@@ -1845,7 +1845,7 @@
     {
       "rank": 231,
       "team": "Villanova",
-      "rating": 0.3686,
+      "rating": 0.3685,
       "wins": 18,
       "losses": 29,
       "conf": "Big East"
@@ -1853,7 +1853,7 @@
     {
       "rank": 232,
       "team": "Delaware",
-      "rating": 0.367,
+      "rating": 0.3671,
       "wins": 19,
       "losses": 35,
       "conf": "CUSA"
@@ -1861,7 +1861,7 @@
     {
       "rank": 233,
       "team": "William & Mary",
-      "rating": 0.3668,
+      "rating": 0.3664,
       "wins": 21,
       "losses": 32,
       "conf": "CAA"
@@ -1869,7 +1869,7 @@
     {
       "rank": 234,
       "team": "Holy Cross",
-      "rating": 0.3641,
+      "rating": 0.364,
       "wins": 25,
       "losses": 30,
       "conf": "Patriot"
@@ -1877,7 +1877,7 @@
     {
       "rank": 235,
       "team": "Elon",
-      "rating": 0.3624,
+      "rating": 0.3619,
       "wins": 20,
       "losses": 33,
       "conf": "CAA"
@@ -1885,7 +1885,7 @@
     {
       "rank": 236,
       "team": "UMass Lowell",
-      "rating": 0.3619,
+      "rating": 0.3618,
       "wins": 21,
       "losses": 29,
       "conf": "America East"
@@ -1893,7 +1893,7 @@
     {
       "rank": 237,
       "team": "Fordham",
-      "rating": 0.3611,
+      "rating": 0.3609,
       "wins": 25,
       "losses": 30,
       "conf": "A-10"
@@ -1901,7 +1901,7 @@
     {
       "rank": 238,
       "team": "Bowling Green",
-      "rating": 0.3607,
+      "rating": 0.3606,
       "wins": 17,
       "losses": 34,
       "conf": "MAC"
@@ -1909,7 +1909,7 @@
     {
       "rank": 239,
       "team": "Belmont",
-      "rating": 0.3574,
+      "rating": 0.3575,
       "wins": 21,
       "losses": 34,
       "conf": "MVC"
@@ -1917,7 +1917,7 @@
     {
       "rank": 240,
       "team": "Seattle U",
-      "rating": 0.3508,
+      "rating": 0.3509,
       "wins": 16,
       "losses": 30,
       "conf": "WCC"
@@ -1925,7 +1925,7 @@
     {
       "rank": 241,
       "team": "Merrimack",
-      "rating": 0.3462,
+      "rating": 0.346,
       "wins": 27,
       "losses": 27,
       "conf": "MAAC"
@@ -1933,7 +1933,7 @@
     {
       "rank": 242,
       "team": "FDU",
-      "rating": 0.3452,
+      "rating": 0.3451,
       "wins": 33,
       "losses": 18,
       "conf": "NEC"
@@ -1949,7 +1949,7 @@
     {
       "rank": 244,
       "team": "Tennessee Tech",
-      "rating": 0.34,
+      "rating": 0.3401,
       "wins": 18,
       "losses": 37,
       "conf": "OVC"
@@ -1957,7 +1957,7 @@
     {
       "rank": 245,
       "team": "Quinnipiac",
-      "rating": 0.338,
+      "rating": 0.3379,
       "wins": 23,
       "losses": 27,
       "conf": "MAAC"
@@ -1965,7 +1965,7 @@
     {
       "rank": 246,
       "team": "Towson",
-      "rating": 0.3377,
+      "rating": 0.3375,
       "wins": 22,
       "losses": 32,
       "conf": "CAA"
@@ -1973,7 +1973,7 @@
     {
       "rank": 247,
       "team": "Bellarmine",
-      "rating": 0.3361,
+      "rating": 0.3362,
       "wins": 19,
       "losses": 34,
       "conf": "ASUN"
@@ -1989,7 +1989,7 @@
     {
       "rank": 249,
       "team": "Princeton",
-      "rating": 0.3312,
+      "rating": 0.3309,
       "wins": 15,
       "losses": 27,
       "conf": "Ivy"
@@ -1997,7 +1997,7 @@
     {
       "rank": 250,
       "team": "Utah Valley",
-      "rating": 0.328,
+      "rating": 0.3281,
       "wins": 15,
       "losses": 35,
       "conf": "WAC"
@@ -2005,7 +2005,7 @@
     {
       "rank": 251,
       "team": "Ark.-Pine Bluff",
-      "rating": 0.3271,
+      "rating": 0.3273,
       "wins": 23,
       "losses": 32,
       "conf": "SWAC"
@@ -2013,7 +2013,7 @@
     {
       "rank": 252,
       "team": "UNC Asheville",
-      "rating": 0.3204,
+      "rating": 0.3203,
       "wins": 21,
       "losses": 34,
       "conf": "Big South"
@@ -2021,7 +2021,7 @@
     {
       "rank": 253,
       "team": "Eastern Ky.",
-      "rating": 0.3188,
+      "rating": 0.3189,
       "wins": 17,
       "losses": 37,
       "conf": "ASUN"
@@ -2029,7 +2029,7 @@
     {
       "rank": 254,
       "team": "UC Riverside",
-      "rating": 0.3185,
+      "rating": 0.3186,
       "wins": 15,
       "losses": 37,
       "conf": "Big West"
@@ -2037,7 +2037,7 @@
     {
       "rank": 255,
       "team": "Harvard",
-      "rating": 0.3081,
+      "rating": 0.308,
       "wins": 11,
       "losses": 26,
       "conf": "Ivy"
@@ -2045,7 +2045,7 @@
     {
       "rank": 256,
       "team": "Saint Louis",
-      "rating": 0.3072,
+      "rating": 0.3071,
       "wins": 20,
       "losses": 33,
       "conf": "A-10"
@@ -2053,7 +2053,7 @@
     {
       "rank": 257,
       "team": "LIU",
-      "rating": 0.307,
+      "rating": 0.3069,
       "wins": 28,
       "losses": 23,
       "conf": "NEC"
@@ -2061,7 +2061,7 @@
     {
       "rank": 258,
       "team": "Seton Hall",
-      "rating": 0.3054,
+      "rating": 0.3053,
       "wins": 16,
       "losses": 30,
       "conf": "Big East"
@@ -2069,7 +2069,7 @@
     {
       "rank": 259,
       "team": "Akron",
-      "rating": 0.3039,
+      "rating": 0.3038,
       "wins": 20,
       "losses": 34,
       "conf": "MAC"
@@ -2077,7 +2077,7 @@
     {
       "rank": 260,
       "team": "Fresno St.",
-      "rating": 0.3002,
+      "rating": 0.3003,
       "wins": 14,
       "losses": 38,
       "conf": "MWC"
@@ -2085,7 +2085,7 @@
     {
       "rank": 261,
       "team": "Queens (NC)",
-      "rating": 0.2982,
+      "rating": 0.2981,
       "wins": 16,
       "losses": 38,
       "conf": "ASUN"
@@ -2093,7 +2093,7 @@
     {
       "rank": 262,
       "team": "Canisius",
-      "rating": 0.297,
+      "rating": 0.2969,
       "wins": 21,
       "losses": 25,
       "conf": "MAAC"
@@ -2101,7 +2101,7 @@
     {
       "rank": 263,
       "team": "Massachusetts",
-      "rating": 0.2966,
+      "rating": 0.2965,
       "wins": 18,
       "losses": 29,
       "conf": "MAC"
@@ -2109,7 +2109,7 @@
     {
       "rank": 264,
       "team": "North Dakota St.",
-      "rating": 0.2908,
+      "rating": 0.2911,
       "wins": 13,
       "losses": 32,
       "conf": "Summit"
@@ -2125,7 +2125,7 @@
     {
       "rank": 266,
       "team": "Wagner",
-      "rating": 0.2903,
+      "rating": 0.2902,
       "wins": 28,
       "losses": 23,
       "conf": "NEC"
@@ -2141,7 +2141,7 @@
     {
       "rank": 268,
       "team": "LMU (CA)",
-      "rating": 0.2792,
+      "rating": 0.2794,
       "wins": 12,
       "losses": 44,
       "conf": "WCC"
@@ -2149,7 +2149,7 @@
     {
       "rank": 269,
       "team": "Northern Colo.",
-      "rating": 0.279,
+      "rating": 0.2792,
       "wins": 17,
       "losses": 36,
       "conf": "Summit"
@@ -2157,7 +2157,7 @@
     {
       "rank": 270,
       "team": "Dartmouth",
-      "rating": 0.2782,
+      "rating": 0.2781,
       "wins": 15,
       "losses": 25,
       "conf": "Ivy"
@@ -2165,7 +2165,7 @@
     {
       "rank": 271,
       "team": "Grambling",
-      "rating": 0.2757,
+      "rating": 0.2758,
       "wins": 21,
       "losses": 30,
       "conf": "SWAC"
@@ -2173,7 +2173,7 @@
     {
       "rank": 272,
       "team": "La Salle",
-      "rating": 0.2747,
+      "rating": 0.2745,
       "wins": 24,
       "losses": 31,
       "conf": "A-10"
@@ -2197,7 +2197,7 @@
     {
       "rank": 275,
       "team": "Jackson St.",
-      "rating": 0.2673,
+      "rating": 0.2674,
       "wins": 23,
       "losses": 26,
       "conf": "SWAC"
@@ -2205,7 +2205,7 @@
     {
       "rank": 276,
       "team": "N.C. A&T",
-      "rating": 0.2637,
+      "rating": 0.2632,
       "wins": 14,
       "losses": 38,
       "conf": "CAA"
@@ -2213,7 +2213,7 @@
     {
       "rank": 277,
       "team": "Texas Southern",
-      "rating": 0.2617,
+      "rating": 0.2618,
       "wins": 19,
       "losses": 22,
       "conf": "SWAC"
@@ -2221,7 +2221,7 @@
     {
       "rank": 278,
       "team": "Presbyterian",
-      "rating": 0.2503,
+      "rating": 0.2502,
       "wins": 12,
       "losses": 44,
       "conf": "Big South"
@@ -2237,7 +2237,7 @@
     {
       "rank": 280,
       "team": "Siena",
-      "rating": 0.2458,
+      "rating": 0.2457,
       "wins": 20,
       "losses": 30,
       "conf": "MAAC"
@@ -2245,7 +2245,7 @@
     {
       "rank": 281,
       "team": "Cornell",
-      "rating": 0.2427,
+      "rating": 0.2425,
       "wins": 11,
       "losses": 26,
       "conf": "Ivy"
@@ -2261,7 +2261,7 @@
     {
       "rank": 283,
       "team": "St. Thomas (MN)",
-      "rating": 0.2392,
+      "rating": 0.2394,
       "wins": 12,
       "losses": 38,
       "conf": "Summit"
@@ -2269,7 +2269,7 @@
     {
       "rank": 284,
       "team": "Sacred Heart",
-      "rating": 0.2387,
+      "rating": 0.2386,
       "wins": 17,
       "losses": 32,
       "conf": "MAAC"
@@ -2277,7 +2277,7 @@
     {
       "rank": 285,
       "team": "George Washington",
-      "rating": 0.2371,
+      "rating": 0.2369,
       "wins": 18,
       "losses": 35,
       "conf": "A-10"
@@ -2285,7 +2285,7 @@
     {
       "rank": 286,
       "team": "Le Moyne",
-      "rating": 0.2314,
+      "rating": 0.2307,
       "wins": 22,
       "losses": 25,
       "conf": "NEC"
@@ -2293,7 +2293,7 @@
     {
       "rank": 287,
       "team": "Iona",
-      "rating": 0.2263,
+      "rating": 0.2262,
       "wins": 19,
       "losses": 28,
       "conf": "MAAC"
@@ -2301,7 +2301,7 @@
     {
       "rank": 288,
       "team": "Manhattan",
-      "rating": 0.2182,
+      "rating": 0.2181,
       "wins": 20,
       "losses": 31,
       "conf": "MAAC"
@@ -2309,7 +2309,7 @@
     {
       "rank": 289,
       "team": "UAlbany",
-      "rating": 0.2142,
+      "rating": 0.2141,
       "wins": 15,
       "losses": 34,
       "conf": "America East"
@@ -2317,7 +2317,7 @@
     {
       "rank": 290,
       "team": "NJIT",
-      "rating": 0.2118,
+      "rating": 0.2117,
       "wins": 16,
       "losses": 31,
       "conf": "America East"
@@ -2325,7 +2325,7 @@
     {
       "rank": 291,
       "team": "Lehigh",
-      "rating": 0.1977,
+      "rating": 0.1975,
       "wins": 14,
       "losses": 31,
       "conf": "Patriot"
@@ -2333,7 +2333,7 @@
     {
       "rank": 292,
       "team": "Stonehill",
-      "rating": 0.1951,
+      "rating": 0.195,
       "wins": 21,
       "losses": 28,
       "conf": "NEC"
@@ -2341,7 +2341,7 @@
     {
       "rank": 293,
       "team": "St. Bonaventure",
-      "rating": 0.1912,
+      "rating": 0.191,
       "wins": 13,
       "losses": 36,
       "conf": "A-10"
@@ -2357,7 +2357,7 @@
     {
       "rank": 295,
       "team": "Ohio",
-      "rating": 0.1903,
+      "rating": 0.1902,
       "wins": 11,
       "losses": 43,
       "conf": "MAC"
@@ -2365,7 +2365,7 @@
     {
       "rank": 296,
       "team": "Lafayette",
-      "rating": 0.1742,
+      "rating": 0.1739,
       "wins": 11,
       "losses": 33,
       "conf": "Patriot"
@@ -2373,7 +2373,7 @@
     {
       "rank": 297,
       "team": "Mississippi Val.",
-      "rating": 0.1156,
+      "rating": 0.1157,
       "wins": 12,
       "losses": 36,
       "conf": "SWAC"
@@ -2381,7 +2381,7 @@
     {
       "rank": 298,
       "team": "Prairie View",
-      "rating": 0.1124,
+      "rating": 0.1126,
       "wins": 12,
       "losses": 35,
       "conf": "SWAC"
@@ -2397,7 +2397,7 @@
     {
       "rank": 300,
       "team": "Norfolk St.",
-      "rating": 0.0986,
+      "rating": 0.0985,
       "wins": 19,
       "losses": 31,
       "conf": "NEC"
@@ -2421,7 +2421,7 @@
     {
       "rank": 303,
       "team": "Alabama A&M",
-      "rating": 0.0169,
+      "rating": 0.017,
       "wins": 7,
       "losses": 43,
       "conf": "SWAC"
@@ -2429,7 +2429,7 @@
     {
       "rank": 304,
       "team": "Alcorn",
-      "rating": -0.026,
+      "rating": -0.0259,
       "wins": 4,
       "losses": 42,
       "conf": "SWAC"
@@ -2437,7 +2437,7 @@
     {
       "rank": 305,
       "team": "Coppin St.",
-      "rating": -0.0283,
+      "rating": -0.0278,
       "wins": 11,
       "losses": 37,
       "conf": "NEC"
@@ -2445,7 +2445,7 @@
     {
       "rank": 306,
       "team": "Saint Peter's",
-      "rating": -0.0604,
+      "rating": -0.0605,
       "wins": 5,
       "losses": 47,
       "conf": "MAAC"
@@ -2453,7 +2453,7 @@
     {
       "rank": 307,
       "team": "Delaware St.",
-      "rating": -0.083,
+      "rating": -0.0831,
       "wins": 8,
       "losses": 41,
       "conf": "NEC"
@@ -2461,7 +2461,7 @@
     {
       "rank": 308,
       "team": "UMES",
-      "rating": -0.091,
+      "rating": -0.0911,
       "wins": 9,
       "losses": 39,
       "conf": "NEC"
