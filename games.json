@@ -91510,13 +91510,13 @@
   },
   {
     "game_id": "6599780",
-    "winner": "Oklahoma",
-    "loser": "North Carolina",
-    "location": "home",
+    "winner": "North Carolina",
+    "loser": "Oklahoma",
+    "location": "away",
     "date": "2026-06-21",
     "home_team": "Oklahoma",
     "away_team": "North Carolina",
     "home_score": 2,
-    "away_score": 0
+    "away_score": 4
   }
 ]
