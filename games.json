@@ -91518,5 +91518,16 @@
     "away_team": "North Carolina",
     "home_score": 2,
     "away_score": 6
+  },
+  {
+    "game_id": "6599781",
+    "winner": "Oklahoma",
+    "loser": "North Carolina",
+    "location": "away",
+    "date": "2026-06-22",
+    "home_team": "North Carolina",
+    "away_team": "Oklahoma",
+    "home_score": 0,
+    "away_score": 2
   }
 ]
